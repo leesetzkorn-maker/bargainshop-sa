@@ -3,7 +3,7 @@
  *
  * These are deliberate placeholders, not photographs: the real store must upload
  * genuine photos of the actual second-hand items. Run with:
- *   npx tsx scripts/generate-placeholders.ts
+ *   npx tsx scripts/maintenance/generate-placeholders.ts
  */
 
 import { mkdir, writeFile } from "node:fs/promises";

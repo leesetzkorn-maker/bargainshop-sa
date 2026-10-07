@@ -1,8 +1,8 @@
 /**
  * Inspect (and optionally fix) the six helmet listings:
  *
- *   node scripts/check-helmets.ts          report price / status / images / tag detection
- *   node scripts/check-helmets.ts --apply  set R799, qty 1, black out detected tags, activate
+ *   node scripts/audit/check-helmets.ts          report price / status / images / tag detection
+ *   node scripts/audit/check-helmets.ts --apply  set R799, qty 1, black out detected tags, activate
  *
  * The originals are never touched: before anything is written the current
  * public copy is copied to data/backup/helmets-<timestamp>/.
@@ -10,10 +10,10 @@
 import fs from "node:fs";
 import path from "node:path";
 import sharp from "sharp";
-import { prisma } from "../src/lib/db";
-import { detectPriceTagBoxes, padBox, type PriceTagBox } from "../src/lib/photo-blackout/detect";
-import { renderBlackout } from "../src/lib/photo-blackout/render";
-import { readText } from "../src/lib/intake/ocr";
+import { prisma } from "../../src/lib/db";
+import { detectPriceTagBoxes, padBox, type PriceTagBox } from "../../src/lib/photo-blackout/detect";
+import { renderBlackout } from "../../src/lib/photo-blackout/render";
+import { readText } from "../../src/lib/intake/ocr";
 
 const ITEM_IDS = ["2DS-0081", "2DS-0082", "2DS-0083", "2DS-0084", "2DS-0085", "2DS-0086"];
 const HELMET_PRICE_CENTS = 79900;

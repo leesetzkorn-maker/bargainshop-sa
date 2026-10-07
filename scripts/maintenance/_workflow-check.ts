@@ -8,11 +8,11 @@
  * back.
  */
 import { PrismaClient } from "@prisma/client";
-import { markItemsUnavailable, refundAdminOrder, updateAdminOrder } from "../src/lib/dal/admin";
-import { prisma as appPrisma } from "../src/lib/db";
-import type { FulfillmentStatus, OrderStatus, PaymentStatus } from "../src/lib/enums";
-import { ORDER_STATUS_TO_FULFILLMENT } from "../src/lib/enums";
-import type { OrderUpdateInput } from "../src/lib/validation";
+import { markItemsUnavailable, refundAdminOrder, updateAdminOrder } from "../../src/lib/dal/admin";
+import { prisma as appPrisma } from "../../src/lib/db";
+import type { FulfillmentStatus, OrderStatus, PaymentStatus } from "../../src/lib/enums";
+import { ORDER_STATUS_TO_FULFILLMENT } from "../../src/lib/enums";
+import type { OrderUpdateInput } from "../../src/lib/validation";
 
 const db = new PrismaClient();
 

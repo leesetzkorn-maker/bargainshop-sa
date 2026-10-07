@@ -10,10 +10,10 @@
  *  3. Move legacy workflow values onto the new pawn-shop vocabulary
  *     (PROCESSING -> CHECKING_STOCK, PACKED -> ITEM_SECURED).
  *
- * Run with: npx tsx scripts/migrate-house-data.ts
+ * Run with: npx tsx scripts/maintenance/migrate-house-data.ts
  */
 import { PrismaClient } from "@prisma/client";
-import { CATEGORY_SLUGS, CATEGORY_TREE } from "../src/lib/category-tree";
+import { CATEGORY_SLUGS, CATEGORY_TREE } from "../../src/lib/category-tree";
 
 const prisma = new PrismaClient();
 

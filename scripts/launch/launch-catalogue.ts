@@ -3,9 +3,9 @@ import { PrismaClient } from "@prisma/client";
 import { readFile, writeFile, mkdir, copyFile, access } from "node:fs/promises";
 import path from "node:path";
 import { createHash } from "node:crypto";
-import { catalogueFlags, productReadinessIssues } from "../src/lib/product-readiness";
-import { DELIVERY_ESTIMATE } from "../src/lib/shipping/policy";
-import { pricingBreakdown, parsePricingTiers, type PricingSettings } from "../src/lib/pricing";
+import { catalogueFlags, productReadinessIssues } from "../../src/lib/product-readiness";
+import { DELIVERY_ESTIMATE } from "../../src/lib/shipping/policy";
+import { pricingBreakdown, parsePricingTiers, type PricingSettings } from "../../src/lib/pricing";
 
 const db = new PrismaClient();
 const apply = process.argv.includes("--apply");

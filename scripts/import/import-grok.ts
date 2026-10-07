@@ -1,8 +1,8 @@
 /** Usage: npm run catalogue:import -- <grok.json> [--apply]. Default is review only. */
 import { PrismaClient } from "@prisma/client";
 import { readFile, mkdir, writeFile, copyFile } from "node:fs/promises";
-import { grokIntakeSchema, grokDraftDescription } from "../src/lib/grok-intake";
-import { parsePricingTiers, pricingBreakdown, type PricingSettings } from "../src/lib/pricing";
+import { grokIntakeSchema, grokDraftDescription } from "../../src/lib/grok-intake";
+import { parsePricingTiers, pricingBreakdown, type PricingSettings } from "../../src/lib/pricing";
 
 const db = new PrismaClient();
 async function main() {

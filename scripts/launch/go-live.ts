@@ -36,20 +36,20 @@
  *
  * It will not overwrite a real measurement. Packed weights and box sizes are
  * applied only where they are missing, and the provenance of every figure is
- * recorded (see scripts/apply-shipping-facts.ts).
+ * recorded (see scripts/shipping/apply-shipping-facts.ts).
  *
  * A copy of the database is taken before anything is written.
  *
  * Usage:
- *   npx tsx scripts/go-live.ts            # report only, change nothing
- *   npx tsx scripts/go-live.ts --yes      # do it
- *   npx tsx scripts/go-live.ts --yes --no-publish
+ *   npx tsx scripts/launch/go-live.ts            # report only, change nothing
+ *   npx tsx scripts/launch/go-live.ts --yes      # do it
+ *   npx tsx scripts/launch/go-live.ts --yes --no-publish
  */
 
 import { copyFile, mkdir, readFile } from "node:fs/promises";
 import { join } from "node:path";
 import { PrismaClient } from "@prisma/client";
-import { productReadinessIssues, readinessInput, readinessSelect } from "../src/lib/product-readiness";
+import { productReadinessIssues, readinessInput, readinessSelect } from "../../src/lib/product-readiness";
 
 const prisma = new PrismaClient();
 

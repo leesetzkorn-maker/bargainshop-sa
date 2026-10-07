@@ -30,7 +30,7 @@
  * the old URL, so a bad result is always reversible.
  *
  * Run it with the preload that maps `server-only` to an empty module:
- *   tsx --require ./scripts/_preload.cjs scripts/remove-price-tags.ts
+ *   tsx --require ./scripts/maintenance/_preload.cjs scripts/cleanup/remove-price-tags.ts
  *
  * FLAGS
  *   --apply           promote each candidate and update the database

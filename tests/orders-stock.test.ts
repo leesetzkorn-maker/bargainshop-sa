@@ -10,7 +10,7 @@ test("checkout prevents double purchase and charges shipping, using an isolated 
   const database = path.join(directory, "test.sqlite");
   try {
     await copyFile(path.resolve("prisma/dev.db"), database);
-    const result = spawnSync(process.execPath, ["--require", "./scripts/_preload.cjs", "--import", "tsx", "tests/orders-stock.worker.ts"], {
+    const result = spawnSync(process.execPath, ["--require", "./scripts/maintenance/_preload.cjs", "--import", "tsx", "tests/orders-stock.worker.ts"], {
       cwd: process.cwd(), encoding: "utf8", timeout: 60000,
       env: { ...process.env, DATABASE_URL: `file:${database.replace(/\\/g, "/")}`, PAYMENT_PROVIDER: "offline", NODE_ENV: "test" },
     });

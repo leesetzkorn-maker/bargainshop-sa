@@ -16,11 +16,11 @@
  *
  *   data/internal/ezpawn-intake.json   the owner's own sheet: cost, selling
  *                                       price, condition, testing notes
- *   scripts/import-ezpawn-folder.ts    copies the real photos
- *   scripts/apply-ezpawn-intake.ts     writes the products, as DRAFT
- *   scripts/apply-shipping-facts.ts    packed weight and box size, with a
+ *   scripts/import/import-ezpawn-folder.ts    copies the real photos
+ *   scripts/catalogue/apply-ezpawn-intake.ts     writes the products, as DRAFT
+ *   scripts/shipping/apply-shipping-facts.ts    packed weight and box size, with a
  *                                       MEASURED / ESTIMATED label
- *   scripts/go-live.ts                 publishes what is genuinely ready
+ *   scripts/launch/go-live.ts                 publishes what is genuinely ready
  *
  * This seed refuses to report success if the storefront is empty, because an
  * empty shop and a fake shop are both a broken shop. It never invents stock to

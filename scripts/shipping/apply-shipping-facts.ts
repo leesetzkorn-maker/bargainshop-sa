@@ -30,9 +30,9 @@
  * measure cannot quietly undo their work. Pass --force to do that on purpose.
  *
  * Usage:
- *   npx tsx scripts/apply-shipping-facts.ts           # fill in the blanks only
- *   npx tsx scripts/apply-shipping-facts.ts --force   # overwrite everything
- *   npx tsx scripts/apply-shipping-facts.ts --dry-run # print, write nothing
+ *   npx tsx scripts/shipping/apply-shipping-facts.ts           # fill in the blanks only
+ *   npx tsx scripts/shipping/apply-shipping-facts.ts --force   # overwrite everything
+ *   npx tsx scripts/shipping/apply-shipping-facts.ts --dry-run # print, write nothing
  */
 
 import { readFile } from "node:fs/promises";

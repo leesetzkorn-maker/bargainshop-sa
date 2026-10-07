@@ -7,7 +7,7 @@ const crypto=require('node:crypto');
 const prisma=new PrismaClient();
 async function main(){
   const [itemId,sourceUrl,candidatePath]=process.argv.slice(2);
-  if(!itemId||!sourceUrl||!candidatePath)throw new Error('Usage: node scripts/release-photo.cjs <itemId> <originalUrl> <reviewedCandidate>');
+  if(!itemId||!sourceUrl||!candidatePath)throw new Error('Usage: node scripts/cleanup/release-photo.cjs <itemId> <originalUrl> <reviewedCandidate>');
   if(!sourceUrl.startsWith('/uploads/products/'))throw new Error('Unexpected original URL');
   const candidateAbsolute=path.resolve(candidatePath);
   if(!candidateAbsolute.startsWith(path.resolve('data/internal/photo-review')+path.sep))throw new Error('Candidate outside review directory');

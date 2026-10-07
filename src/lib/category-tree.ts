@@ -1,7 +1,7 @@
 /**
  * The house category tree. Single source of truth.
  *
- * This list is imported by `prisma/seed.ts`, by `scripts/migrate-house-data.ts`,
+ * This list is imported by `prisma/seed.ts`, by `scripts/maintenance/migrate-house-data.ts`,
  * and it is what the admin category form is checked against. It used to be
  * duplicated in two files, which is how a fresh `db:seed` quietly produced a
  * different taxonomy from the live database.

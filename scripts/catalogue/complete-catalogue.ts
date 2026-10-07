@@ -1,7 +1,7 @@
 /** Apply recorded owner facts; keep unresolved items in draft and originals intact. */
 import { PrismaClient } from "@prisma/client";
 import { readFile, writeFile, mkdir, copyFile } from "node:fs/promises";
-import { parsePricingTiers, sellingPriceFromCost, type PricingSettings } from "../src/lib/pricing";
+import { parsePricingTiers, sellingPriceFromCost, type PricingSettings } from "../../src/lib/pricing";
 
 const prisma = new PrismaClient();
 const APPLY = process.argv.includes("--apply");

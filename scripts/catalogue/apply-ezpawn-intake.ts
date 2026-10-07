@@ -17,7 +17,7 @@ import {
   sellingPriceFromCost,
   tierForCost,
   type PricingSettings,
-} from "../src/lib/pricing";
+} from "../../src/lib/pricing";
 
 const prisma = new PrismaClient();
 

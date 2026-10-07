@@ -6,7 +6,7 @@
 import { readFile, writeFile } from "node:fs/promises";
 import { join } from "node:path";
 import { PrismaClient } from "@prisma/client";
-import { DEFAULT_PRICING_SETTINGS, sellingPriceFromCost, tierForCost } from "../src/lib/pricing";
+import { DEFAULT_PRICING_SETTINGS, sellingPriceFromCost, tierForCost } from "../../src/lib/pricing";
 
 const prisma = new PrismaClient();
 
