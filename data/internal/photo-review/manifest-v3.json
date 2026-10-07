@@ -1,0 +1,52 @@
+[
+  {
+    "itemId": "2DS-0062",
+    "output": "data/internal/photo-review/candidates/2ds-0062-sample-v3.png",
+    "parts": [
+      {
+        "file": "2ds-0062-label-generated-v2.png",
+        "left": 675,
+        "top": 2850,
+        "width": 1000,
+        "height": 780,
+        "points": "145,260 850,445 790,728 485,670 175,600 105,520"
+      },
+      {
+        "file": "2ds-0062-hanging-generated-v2.png",
+        "left": 1560,
+        "top": 2070,
+        "width": 600,
+        "height": 780,
+        "points": "176,70 523,245 567,295 574,392 540,640 450,677 114,452 90,390 136,320 161,230 161,140"
+      },
+      {
+        "file": "2ds-0062-generated.png",
+        "left": 0,
+        "top": 0,
+        "width": 2160,
+        "height": 3840,
+        "points": "798,1970 928,1978 916,2145 782,2140"
+      }
+    ],
+    "changedOutside": 0,
+    "status": "PENDING_VISUAL_REVIEW",
+    "caution": "Hidden surfaces are AI reconstructions. They require comparison with the physical item before acceptance; no product image reference has changed."
+  },
+  {
+    "itemId": "2DS-0060",
+    "output": "data/internal/photo-review/candidates/2ds-0060-sample-v3.png",
+    "parts": [
+      {
+        "file": "2ds-0060-tag-generated-v2.png",
+        "left": 500,
+        "top": 2250,
+        "width": 1600,
+        "height": 1590,
+        "points": "352,236 718,222 854,253 949,464 831,1568 657,1589 114,1298 249,1178 351,432 227,742 213,563 226,384"
+      }
+    ],
+    "changedOutside": 0,
+    "status": "PENDING_VISUAL_REVIEW",
+    "caution": "Hidden surfaces are AI reconstructions. They require comparison with the physical item before acceptance; no product image reference has changed."
+  }
+]

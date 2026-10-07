@@ -1,0 +1,27 @@
+{
+  "index": 41,
+  "item": {
+    "itemId": "2DS-0074",
+    "name": "Ingco 180A inverter welder with cables",
+    "imageId": "cmuldrnc4001itjd0qy6zsaiu",
+    "url": "/uploads/products/2ds-0074-ingco-180a-inverter-welder-with-cables.webp"
+  },
+  "original": "public\\uploads\\products\\2ds-0074-ingco-180a-inverter-welder-with-cables.webp",
+  "areas": [
+    {
+      "left": 1477,
+      "top": 737,
+      "width": 540,
+      "height": 361
+    }
+  ],
+  "crop": {
+    "left": 1277,
+    "top": 537,
+    "width": 883,
+    "height": 761
+  },
+  "candidate": "data/internal/photo-review/candidates/41-clean.png",
+  "changedOutside": 0,
+  "status": "NEEDS_VISUAL_REVIEW"
+}

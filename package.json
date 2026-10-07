@@ -1,26 +1,52 @@
 {
-  "name": "store",
-  "version": "0.1.0",
+  "name": "2de-store",
+  "version": "1.0.0",
   "private": true,
+  "description": "South African online second-hand bargain store",
   "scripts": {
     "dev": "next dev",
-    "build": "next build",
+    "build": "prisma generate && next build",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "eslint .",
+    "typecheck": "tsc --noEmit",
+    "typegen": "next typegen",
+    "db:generate": "prisma generate",
+    "db:push": "prisma db push",
+    "db:migrate": "prisma migrate dev",
+    "db:migrate:deploy": "prisma migrate deploy",
+    "db:seed": "tsx prisma/seed.ts",
+    "db:reset": "prisma migrate reset --force",
+    "db:studio": "prisma studio",
+    "setup": "prisma generate && prisma migrate deploy && npm run db:seed",
+    "photos:clean": "tsx --require ./scripts/_preload.cjs scripts/remove-price-tags.ts",
+    "test": "tsx --test tests/money.test.ts tests/shipping.test.ts tests/pricing.test.ts tests/readiness.test.ts tests/payfast.test.ts tests/price-tag-removal.test.ts tests/storage-keys.test.ts tests/orders-stock.test.ts tests/price-blackout.test.ts tests/intake-price-read.test.ts tests/intake-identify.test.ts tests/intake-market.test.ts tests/intake-draft.test.ts tests/intake-photos.test.ts tests/intake-originals.test.ts",
+    "catalogue:audit": "tsx scripts/launch-catalogue.ts",
+    "catalogue:import": "tsx scripts/import-grok.ts",
+    "test:e2e": "node scripts/test-store-e2e.cjs"
   },
   "dependencies": {
+    "@prisma/client": "6.19.3",
+    "bcryptjs": "^3.0.2",
     "next": "16.3.6",
     "react": "19.2.8",
-    "react-dom": "19.2.8"
+    "react-dom": "19.2.8",
+    "server-only": "^0.0.1",
+    "sharp": "^0.35.5",
+    "tesseract.js": "^7.0.0",
+    "zod": "^4.1.12"
   },
   "devDependencies": {
+    "@playwright/test": "^1.63.0",
     "@tailwindcss/postcss": "^4",
+    "@types/bcryptjs": "^3.0.0",
     "@types/node": "^20",
     "@types/react": "^19",
     "@types/react-dom": "^19",
     "eslint": "^9",
     "eslint-config-next": "16.3.6",
+    "prisma": "6.19.3",
     "tailwindcss": "^4",
+    "tsx": "^4.20.6",
     "typescript": "^5"
   }
 }

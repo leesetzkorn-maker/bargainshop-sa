@@ -1,0 +1,24 @@
+{
+  "index": 38,
+  "item": {
+    "itemId": "2DS-0072",
+    "name": "Stramm sheet sander",
+    "imageId": "cmuldrb7r001btjd07vh1g2zb",
+    "url": "/uploads/products/2ds-0072-stramm-sheet-sander-3.webp"
+  },
+  "original": "public\\uploads\\products\\2ds-0072-stramm-sheet-sander-3.webp",
+  "areas": [
+    {
+      "left": 429,
+      "top": 1651,
+      "width": 875,
+      "height": 1590
+    }
+  ],
+  "crop": {
+    "left": 229,
+    "top": 1451,
+    "width": 1275,
+    "height": 1990
+  }
+}

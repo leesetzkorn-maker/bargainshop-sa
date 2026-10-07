@@ -1,0 +1,1 @@
+ALTER TABLE "ShippingSetting" ADD COLUMN "volumetricDivisor" INTEGER NOT NULL DEFAULT 5000;

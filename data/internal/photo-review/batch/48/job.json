@@ -1,0 +1,24 @@
+{
+  "index": 48,
+  "item": {
+    "itemId": "2DS-0076",
+    "name": "Ryobi hammer drill in case",
+    "imageId": "cmuldrxx8001ttjd0ndg3lfqb",
+    "url": "/uploads/products/2ds-0076-ryobi-hammer-drill-in-case.webp"
+  },
+  "original": "public\\uploads\\products\\2ds-0076-ryobi-hammer-drill-in-case.webp",
+  "areas": [
+    {
+      "left": 956,
+      "top": 652,
+      "width": 432,
+      "height": 246
+    }
+  ],
+  "crop": {
+    "left": 756,
+    "top": 452,
+    "width": 832,
+    "height": 646
+  }
+}

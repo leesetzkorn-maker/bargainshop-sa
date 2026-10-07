@@ -1,0 +1,27 @@
+{
+  "index": 51,
+  "item": {
+    "itemId": "2DS-0077",
+    "name": "Bosch cordless drill with extra battery and charger",
+    "imageId": "cmulds40u001ytjd0jzlcmkvi",
+    "url": "/uploads/products/2ds-0077-bosch-cordless-drill-with-extra-battery-and-charger-2.webp"
+  },
+  "original": "public\\uploads\\products\\2ds-0077-bosch-cordless-drill-with-extra-battery-and-charger-2.webp",
+  "areas": [
+    {
+      "left": 840,
+      "top": 1113,
+      "width": 690,
+      "height": 1360
+    }
+  ],
+  "crop": {
+    "left": 640,
+    "top": 913,
+    "width": 1090,
+    "height": 1760
+  },
+  "candidate": "data/internal/photo-review/candidates/51-clean.png",
+  "changedOutside": 0,
+  "status": "NEEDS_VISUAL_REVIEW"
+}

@@ -1,0 +1,24 @@
+{
+  "index": 30,
+  "item": {
+    "itemId": "2DS-0068",
+    "name": "Ryobi AJP-1480 high pressure washer",
+    "imageId": "cmuldqv93000vtjd0xkh8ww45",
+    "url": "/uploads/products/2ds-0068-ryobi-ajp-1480-high-pressure-washer.webp"
+  },
+  "original": "public\\uploads\\products\\2ds-0068-ryobi-ajp-1480-high-pressure-washer.webp",
+  "areas": [
+    {
+      "left": 719,
+      "top": 1374,
+      "width": 754,
+      "height": 388
+    }
+  ],
+  "crop": {
+    "left": 519,
+    "top": 1174,
+    "width": 1154,
+    "height": 788
+  }
+}

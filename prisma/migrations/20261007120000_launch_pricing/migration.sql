@@ -1,0 +1,6 @@
+ALTER TABLE "PricingSetting" ADD COLUMN "handlingAllowanceCents" INTEGER NOT NULL DEFAULT 2500;
+ALTER TABLE "PricingSetting" ADD COLUMN "packagingAllowanceCents" INTEGER NOT NULL DEFAULT 1500;
+ALTER TABLE "PricingSetting" ADD COLUMN "minimumProfitCents" INTEGER NOT NULL DEFAULT 7500;
+ALTER TABLE "PricingSetting" ADD COLUMN "paymentFeePercent" REAL NOT NULL DEFAULT 3;
+ALTER TABLE "PricingSetting" ADD COLUMN "paymentFeeFixedCents" INTEGER NOT NULL DEFAULT 0;
+ALTER TABLE "PricingSetting" ADD COLUMN "roundingMode" TEXT NOT NULL DEFAULT 'UP';

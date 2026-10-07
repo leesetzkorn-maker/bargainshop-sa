@@ -1,0 +1,619 @@
+// 2de Store — data model
+//
+// Notes for future maintainers:
+// * Money is stored as INTEGER minor units (cents, ZAR). Never use Float for money.
+// * Status / condition / role columns are String, not enum, because SQLite has no
+//   enum type. The allowed values live in src/lib/enums.ts and are enforced by
+//   zod at every boundary. This keeps the schema portable to PostgreSQL unchanged.
+// * Fields prefixed with nothing special but described as PRIVATE are only ever
+//   selected by code under src/app/admin or src/lib/dal/admin*. They must never
+//   be included in a storefront query. See src/lib/dal/catalog.ts, which uses an
+//   explicit `select` allow-list rather than `include`.
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+// ---------------------------------------------------------------------------
+// Admin users / staff
+// ---------------------------------------------------------------------------
+model User {
+  id           String    @id @default(cuid())
+  email        String    @unique
+  name         String
+  passwordHash String
+  role         String    @default("ADMIN") // OWNER | ADMIN | STAFF
+  isActive     Boolean   @default(true)
+  lastLoginAt  DateTime?
+  createdAt    DateTime  @default(now())
+  updatedAt    DateTime  @updatedAt
+
+  notes AdminNote[]
+
+  @@index([isActive])
+}
+
+// ---------------------------------------------------------------------------
+// Catalogue
+// ---------------------------------------------------------------------------
+model Category {
+  id          String   @id @default(cuid())
+  name        String
+  slug        String   @unique
+  description String?
+  imageUrl    String?
+  sortOrder   Int      @default(0)
+  isActive    Boolean  @default(true)
+
+  // Two-level tree: the eight "main" categories sit at the top and the more
+  // specific ones (battery drills, air fryers, ...) hang off them. A null
+  // parent means the category is a main one and appears in the primary nav.
+  parentId String?
+  parent   Category?  @relation("CategoryTree", fields: [parentId], references: [id], onDelete: SetNull)
+  children Category[] @relation("CategoryTree")
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  products Product[]
+
+  @@index([isActive, sortOrder])
+  @@index([parentId, sortOrder])
+}
+
+model Product {
+  id    String @id @default(cuid())
+  /// Human-facing unique item id, e.g. "2DS-0042". Shown on receipts + packing slips.
+  itemId String @unique
+  sku    String @unique
+
+  name        String
+  slug        String  @unique
+  description String
+  brand String @default("")
+  model String @default("")
+  modelSourceUrl String @default("")
+  specsConfirmed Boolean @default(false)
+  itemReviewConfirmed Boolean @default(false)
+  cleanImageLicense String @default("")
+  researchNotes String @default("")
+  specifications String @default("")
+  includedItems String @default("")
+  priceManualOverride Boolean @default(true)
+
+  categoryId String
+  category   Category @relation(fields: [categoryId], references: [id])
+
+  /// VERY_GOOD | GOOD | USED | AS_IS
+  condition String
+
+  /// Customer-facing note for this exact item. Empty falls back to the grade blurb.
+  conditionNote String?
+
+  /// NOT_TESTED | TESTED_AND_WORKING.
+  ///
+  /// A separate field from `condition` on purpose. The grade says how it looks;
+  /// this says whether anyone actually switched it on. A grade of VERY_GOOD does
+  /// NOT imply "tested" — keeping them apart stops a cosmetic grade from being
+  /// read as a functional claim. Only the seller sets this, by hand, after a
+  /// real physical check.
+  testingStatus String @default("NOT_TESTED")
+  /// When the seller physically tested this exact item.
+  testedAt      DateTime?
+
+  /// Selling price in cents (ZAR).
+  priceCents Int
+
+  // ---- PRIVATE ADMIN ONLY ----
+  /// What we paid to source this item, in cents. Never exposed publicly.
+  sourceCostCents Int?
+  /// Where we bought it. Never exposed publicly.
+  supplierNotes String?
+  // ---- /PRIVATE ADMIN ONLY ----
+
+  // ---- SMART PRODUCT INTAKE (private) ----
+  /// CONFIRMED | NEEDS_CONFIRMATION — how sure we are that `sourceCostCents`
+  /// is really the tag price, rather than a guess. A low-confidence read never
+  /// publishes on its own.
+  sourceConfidence String?
+  /// LOW_MARGIN | GOOD_MARGIN | HIGH_PRICE_REVIEW | MARKET_CHECK_NEEDED.
+  marketFlag String?
+  /// PUBLISH | HOLD | BUNDLE | DO_NOT_BUY — what Lee decided to do with it.
+  disposition String?
+  /// What the pricing engine recommended at intake time, in cents. Kept so a
+  /// later manual override can be compared against it.
+  recommendedPriceCents Int?
+  // ---- /SMART PRODUCT INTAKE ----
+
+  // Weights in grams, dimensions in centimetres.
+  productWeightGrams Int
+  packageWeightGrams Int                @default(0)
+  packageLengthCm    Float
+  packageWidthCm     Float
+  packageHeightCm    Float
+  lockerAllowed Boolean @default(true)
+  courierAllowed Boolean @default(true)
+
+  /// MEASURED | ESTIMATED
+  ///
+  /// Where the packed weight and size above came from. This is not cosmetic: a
+  /// courier price is a real quote the store has to honour, so "we put this on a
+  /// scale" and "we estimated this from the product's published specification"
+  /// are different promises. MEASURED means someone put the packed item on a
+  /// scale and a tape measure. ESTIMATED means the figures were derived and the
+  /// shipping engine has already added its safety uplift to protect the store.
+  /// The storefront says which it is, and the admin list can filter on it.
+  measurementSource String @default("MEASURED")
+
+  /// Most used items default to 1 (one-of-a-kind).
+  stockQty Int @default(1)
+
+  /// DRAFT | ACTIVE | RESERVED | SOLD_OUT | UNAVAILABLE | ARCHIVED
+  /// Second-hand stock is one-of-a-kind, so the status is the single source of
+  /// truth for "can this still be bought". See PRODUCT_STATUSES in src/lib/enums.ts.
+  status     String  @default("ACTIVE")
+  isFeatured Boolean @default(false)
+
+  // ---- PRIVATE ADMIN ONLY ----
+  adminNotes String?
+  // ---- /PRIVATE ADMIN ONLY ----
+
+  soldAt   DateTime?
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+
+  images     ProductImage[]
+  orderItems OrderItem[]
+  notes      AdminNote[]
+
+  @@index([status, isFeatured])
+  @@index([status, createdAt])
+  @@index([categoryId, status])
+  @@index([priceCents])
+}
+
+model ProductImage {
+  id        String  @id @default(cuid())
+  productId String
+  product   Product @relation(fields: [productId], references: [id], onDelete: Cascade)
+
+  url       String
+  alt       String?
+  sortOrder Int     @default(0)
+
+  // ---- SMART PRODUCT INTAKE ----
+  /// Where the untouched upload lives, outside `public/`. Private admin
+  /// reference only — the storefront never sees this path.
+  originalKey String?
+  /// NONE | AUTO_MASK | MANUAL_MASK | AI_REMOVED
+  ///
+  /// How the retailer price tag was dealt with on the PUBLIC copy above.
+  coverMode String?
+  /// Normalised boxes (0..1 of the frame) painted over the tag, as JSON.
+  maskBoxes String?
+
+  createdAt DateTime @default(now())
+
+  @@index([productId, sortOrder])
+}
+
+// ---------------------------------------------------------------------------
+// Customers
+// ---------------------------------------------------------------------------
+model Customer {
+  id    String @id @default(cuid())
+  email String @unique
+  fullName String
+  phone    String
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  addresses Address[]
+  orders    Order[]
+
+  @@index([createdAt])
+}
+
+model Address {
+  id         String   @id @default(cuid())
+  customerId String
+  customer   Customer @relation(fields: [customerId], references: [id], onDelete: Cascade)
+
+  fullName   String
+  phone      String
+  line1      String
+  line2      String?
+  suburb     String
+  city       String
+  /// ISO 3166-2 subdivision code, e.g. "GP", "WC", "KZN".
+  province   String
+  postalCode String
+  country    String   @default("ZA")
+
+  isDefault Boolean @default(false)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([customerId])
+}
+
+// ---------------------------------------------------------------------------
+// Orders
+// ---------------------------------------------------------------------------
+model Order {
+  id          String @id @default(cuid())
+  /// Customer-facing order number, e.g. "2DE-2026-000137".
+  orderNumber String @unique
+
+  customerId String
+  customer   Customer @relation(fields: [customerId], references: [id])
+
+  // ---- Delivery snapshot. Deliberately denormalised so a later edit to the
+  // ---- customer's address can never rewrite history on a packing slip.
+  deliveryFullName    String
+  deliveryPhone       String
+  deliveryEmail       String
+  deliveryLine1       String
+  deliveryLine2       String?
+  deliverySuburb      String
+  deliveryCity        String
+  deliveryProvince    String
+  deliveryPostalCode  String
+  deliveryCountry     String  @default("ZA")
+  /// LOCKER | COURIER
+  deliveryMethod      String
+  deliveryNotes       String?
+  /// Admin-only: the customer's own order notes plus any internal dispatch note.
+  internalNotes       String?
+
+  // Money, all cents (ZAR).
+  subtotalCents  Int
+  shippingCents  Int
+  discountCents  Int   @default(0)
+  totalCents     Int
+  currency       String @default("ZAR")
+
+  /// PENDING_PAYMENT | PAID | CHECKING_STOCK | ITEM_SECURED | PREPARING_SHIPMENT | SHIPPED | DELIVERED | CANCELLED | REFUNDED
+  status            String @default("PENDING_PAYMENT")
+  /// UNPAID | PENDING | AUTHORISED | PAID | FAILED | PARTIALLY_REFUNDED | REFUNDED
+  paymentStatus     String @default("UNPAID")
+  /// NOT_FULFILLED | CHECKING_STOCK | ITEM_SECURED | PREPARING_SHIPMENT | DISPATCHED | DELIVERED | RETURNED
+  fulfillmentStatus String @default("NOT_FULFILLED")
+  /// Why the order was closed, in wording the customer can be shown. This is
+  /// the ONLY close reason that leaves the admin area: it is surfaced on the
+  /// refund/cancellation email. Keep it free of supplier names, shop numbers and
+  /// anything else the customer has no business seeing. Internal commentary
+  /// belongs in internalNotes or an AdminNote.
+  cancelReason      String?
+
+  /// Snapshot of the shipping calculation that produced shippingCents.
+  shippingQuote Json?
+
+  placedAt     DateTime  @default(now())
+  paidAt       DateTime?
+  /// When the owner confirmed the item was still on the shelf at the shop.
+  stockCheckedAt DateTime?
+  /// When the owner actually paid the shop and took the item off the floor.
+  securedAt      DateTime?
+  shippedAt      DateTime?
+  deliveredAt    DateTime?
+  cancelledAt    DateTime?
+  refundedAt     DateTime?
+  updatedAt  DateTime  @updatedAt
+
+  items     OrderItem[]
+  payments  Payment[]
+  shipments Shipment[]
+  emails    EmailLog[]
+  notes     AdminNote[]
+
+  @@index([status, placedAt])
+  @@index([paymentStatus])
+  @@index([fulfillmentStatus])
+  @@index([customerId])
+  @@index([placedAt])
+}
+
+model OrderItem {
+  id      String @id @default(cuid())
+  orderId String
+  order   Order  @relation(fields: [orderId], references: [id], onDelete: Cascade)
+
+  productId String
+  product   Product @relation(fields: [productId], references: [id])
+
+  /// Snapshots, so the order stays readable even if the product is renamed or archived.
+  itemIdSnapshot    String
+  skuSnapshot       String
+  nameSnapshot      String
+  imageUrlSnapshot  String?
+  conditionSnapshot String
+
+  unitPriceCents Int
+  quantity       Int
+  lineTotalCents Int
+
+  /// Set when the shop no longer had this item and the customer is refunded.
+  unavailableReason String?
+
+  // Shipping-relevant weights captured at time of sale.
+  unitProductWeightGrams Int
+  unitPackageWeightGrams Int
+  packageLengthCm        Float
+  packageWidthCm         Float
+  packageHeightCm        Float
+
+  // ---- PRIVATE ADMIN ONLY: cost snapshot drives profit reporting ----
+  unitSourceCostCents Int?
+  // ---- /PRIVATE ADMIN ONLY ----
+
+  @@index([orderId])
+  @@index([productId])
+}
+
+// ---------------------------------------------------------------------------
+// Payments (provider-agnostic; no gateway credentials in this repo)
+// ---------------------------------------------------------------------------
+model Payment {
+  id      String @id @default(cuid())
+  orderId String
+  order   Order  @relation(fields: [orderId], references: [id], onDelete: Cascade)
+
+  /// Module key of the provider that created this payment, e.g. "offline".
+  provider   String
+  /// Gateway's own reference / checkout id, once a real gateway is configured.
+  providerRef String?
+
+  amountCents Int
+  currency    String @default("ZAR")
+
+  /// INITIATED | PENDING | AUTHORISED | PAID | FAILED | CANCELLED | REFUNDED
+  status String @default("INITIATED")
+
+  /// Who/what settled it: "customer" | "admin:<userId>" | "webhook"
+  settledBy String?
+
+  // ---- PRIVATE ADMIN ONLY: raw gateway payload, never returned to customers ----
+  rawPayload Json?
+  // ---- /PRIVATE ADMIN ONLY ----
+
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+  settledAt   DateTime?
+
+  @@index([orderId])
+  @@index([provider, providerRef])
+}
+
+// ---------------------------------------------------------------------------
+// Shipments / courier tracking (provider-agnostic)
+// ---------------------------------------------------------------------------
+model Shipment {
+  id      String @id @default(cuid())
+  orderId String
+  order   Order  @relation(fields: [orderId], references: [id], onDelete: Cascade)
+
+  /// Module key of the courier integration, e.g. "manual".
+  courier          String
+  courierName      String?
+  /// The tracking number the customer is shown.
+  trackingNumber   String?
+  trackingUrl      String?
+
+  /// Parcel facts recorded at dispatch, useful for claims later.
+  parcelWeightGrams Int?
+  parcelLengthCm    Float?
+  parcelWidthCm     Float?
+  parcelHeightCm    Float?
+
+  /// PENDING | LABEL_CREATED | DISPATCHED | IN_TRANSIT | DELIVERED | FAILED | RETURNED
+  status      String   @default("PENDING")
+  dispatchedAt DateTime?
+  deliveredAt  DateTime?
+  // ---- PRIVATE ADMIN ONLY ----
+  notes       String?
+  // ---- /PRIVATE ADMIN ONLY ----
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([orderId])
+  @@index([trackingNumber])
+}
+
+// ---------------------------------------------------------------------------
+// Pricing configuration
+// ---------------------------------------------------------------------------
+/// Singleton row (id = 1) holding how a source/acquisition cost becomes a
+/// selling price. This used to live nowhere: admins typed the selling price and
+/// the source cost as two independent numbers, so the two could disagree with
+/// each other and there was no way to change the rule in one place.
+model PricingSetting {
+  id Int @id @default(1)
+
+  isActive Boolean @default(true)
+
+  /// Legacy single percent. Tier rules in `tiersJson` are what the calculator uses.
+  markupPercent Int @default(60)
+
+  /// JSON array of { minCostCents, belowCostCents, markupPercent }.
+  /// belowCostCents null means this tier has no ceiling.
+  /// Costs are internal. Customers never see this column.
+  tiersJson String @default("[]")
+
+  /// Selling prices are rounded to the nearest multiple of this many cents.
+  /// 1000 = nearest R10. 100 = nearest rand. 0 leaves the exact amount.
+  roundingIncrementCents Int @default(1000)
+
+  /// Never list below this, however good the deal. 0 disables the floor.
+  minPriceCents Int @default(0)
+  handlingAllowanceCents Int @default(2500)
+  packagingAllowanceCents Int @default(1500)
+  minimumProfitCents Int @default(7500)
+  paymentFeePercent Float @default(3)
+  paymentFeeFixedCents Int @default(0)
+  roundingMode String @default("UP")
+  targetMarginPercent Float @default(25)
+
+  /// Automatically applied by the pricing helper when an admin changes the
+  /// markup, so a rule change can be previewed before it hits live products.
+  autoApplyToDrafts Boolean @default(false)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+// ---------------------------------------------------------------------------
+// Shipping configuration
+// ---------------------------------------------------------------------------
+/// Singleton row (id = 1) holding the global knobs an admin can tune.
+model ShippingSetting {
+  id Int @id @default(1)
+
+  isActive Boolean @default(true)
+  ratesConfirmed Boolean @default(false)
+  volumetricDivisor Int @default(5000)
+
+  lockerEnabled       Boolean @default(true)
+  /// Locker eligibility ceiling for a single parcel, in grams.
+  lockerMaxWeightGrams Int   @default(2000)
+  /// Longest single dimension allowed by the locker, cm.
+  lockerMaxLengthCm    Float  @default(35)
+  lockerMaxWidthCm     Float  @default(30)
+  lockerMaxHeightCm    Float  @default(20)
+  /// Sum of all three dimensions allowed by the locker, cm.
+  lockerMaxSumCm       Float  @default(60)
+
+  courierEnabled      Boolean @default(true)
+  /// Above this parcel weight the courier is mandatory (kg x 1000).
+  courierMinWeightForLockerBlockGrams Int @default(0)
+
+  /// Flat amount added to the shipping price at checkout.
+  deliverySurchargeCents Int @default(0)
+  /// Orders at or above this subtotal ship free. 0 disables.
+  freeShippingAboveCents Int @default(0)
+  /// Packing / handling fee, shown as its own line.
+  handlingFeeCents       Int @default(0)
+
+  /// Where parcels are dispatched from (used for copy + future courier APIs).
+  dispatchPostalCode String @default("0000")
+  dispatchProvince   String @default("GP")
+  dispatchCity       String @default("Johannesburg")
+
+  /// Estimated transit days, used purely for customer-facing copy.
+  lockerEtaMinDays   Int @default(1)
+  lockerEtaMaxDays   Int @default(3)
+  courierEtaMinDays  Int @default(2)
+  courierEtaMaxDays  Int @default(5)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+/// One price bracket. A parcel matches the first ACTIVE rule of its method
+/// where minWeight <= weight <= maxWeight (maxWeight 0 means "no upper bound").
+model ShippingRule {
+  id   String @id @default(cuid())
+  name String
+
+  /// LOCKER | COURIER
+  method String
+
+  minWeightGrams Int  @default(0)
+  /// 0 = no upper bound.
+  maxWeightGrams Int  @default(0)
+
+  priceCents Int
+
+  /// Lower runs first. Ties resolve by this, then by creation time.
+  sortOrder Int     @default(0)
+  isActive  Boolean @default(true)
+
+  notes String?
+  provinceCodes String @default("")
+  postalCodePrefixes String @default("")
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([method, isActive, sortOrder])
+  @@index([method, minWeightGrams, maxWeightGrams])
+}
+
+// ---------------------------------------------------------------------------
+// Outbound email log
+// ---------------------------------------------------------------------------
+/// Every notification attempt is recorded, including the ones that were NOT
+/// sent. This is what lets the admin see "no email provider is configured"
+/// instead of the app quietly pretending a message went out.
+model EmailLog {
+  id      String  @id @default(cuid())
+  orderId String?
+  order   Order?  @relation(fields: [orderId], references: [id], onDelete: SetNull)
+
+  /// NEW_ORDER_OWNER | ORDER_CONFIRMED | ORDER_SHIPPED | ORDER_CANCELLED | ORDER_REFUNDED
+  template String
+  to       String
+  subject  String
+  /// Module key of the mail provider, e.g. "log" or "resend".
+  provider String
+
+  /// SENT | FAILED | SKIPPED_NOT_CONFIGURED | SKIPPED_NO_RECIPIENT
+  status    String
+  error     String?
+  providerRef String?
+
+  createdAt DateTime @default(now())
+
+  @@index([orderId])
+  @@index([createdAt])
+  @@index([status])
+}
+
+// ---------------------------------------------------------------------------
+// Internal notes (never customer-visible)
+// ---------------------------------------------------------------------------
+model AdminNote {
+  id String @id @default(cuid())
+
+  /// A note can hang off a product, an order, or both.
+  productId String?
+  product   Product? @relation(fields: [productId], references: [id], onDelete: Cascade)
+
+  orderId String?
+  order   Order?   @relation(fields: [orderId], references: [id], onDelete: Cascade)
+
+  authorId String?
+  author   User?   @relation(fields: [authorId], references: [id], onDelete: SetNull)
+
+  body String
+
+  createdAt DateTime @default(now())
+
+  @@index([productId])
+  @@index([orderId])
+}
+
+// ---------------------------------------------------------------------------
+// Audit trail
+// ---------------------------------------------------------------------------
+model AuditLog {
+  id       String  @id @default(cuid())
+  actorId  String?
+  action   String
+  entity   String
+  entityId String?
+  meta     Json?
+
+  createdAt DateTime @default(now())
+
+  @@index([entity, entityId])
+  @@index([createdAt])
+}

@@ -1,0 +1,27 @@
+{
+  "index": 35,
+  "item": {
+    "itemId": "2DS-0071",
+    "name": "Ryobi HID-10 hammer drill",
+    "imageId": "cmuldr5dt0016tjd0fxi2a21i",
+    "url": "/uploads/products/2ds-0071-ryobi-hid-10-hammer-drill-2.webp"
+  },
+  "original": "public\\uploads\\products\\2ds-0071-ryobi-hid-10-hammer-drill-2.webp",
+  "areas": [
+    {
+      "left": 706,
+      "top": 2115,
+      "width": 1303,
+      "height": 1126
+    }
+  ],
+  "crop": {
+    "left": 506,
+    "top": 1915,
+    "width": 1654,
+    "height": 1526
+  },
+  "candidate": "data/internal/photo-review/candidates/35-clean.png",
+  "changedOutside": 0,
+  "status": "NEEDS_VISUAL_REVIEW"
+}

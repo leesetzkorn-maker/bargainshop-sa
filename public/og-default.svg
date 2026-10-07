@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" width="1200" height="630" role="img" aria-label="2DE BARGAINS">
+  <rect width="1200" height="630" fill="#102E28"/>
+  <circle cx="980" cy="120" r="220" fill="#E6A317" fill-opacity="0.16"/>
+  <circle cx="160" cy="560" r="180" fill="#2AA886" fill-opacity="0.18"/>
+  <rect x="80" y="210" width="96" height="96" rx="22" fill="#F6F1E8"/>
+  <text x="128" y="278" text-anchor="middle" font-family="Arial Black, Arial, sans-serif" font-size="58" font-weight="900" fill="#123F36">2</text>
+  <rect x="100" y="282" width="56" height="8" rx="4" fill="#E6A317"/>
+  <text x="200" y="278" font-family="Arial Black, Arial, sans-serif" font-size="64" font-weight="900" fill="#F6F1E8">2DE <tspan fill="#E6A317">BARGAINS</tspan></text>
+  <text x="80" y="380" font-family="Arial, Helvetica, sans-serif" font-size="36" font-weight="700" fill="#F6F1E8">Tested bargains. Better prices.</text>
+  <text x="80" y="440" font-family="Arial, Helvetica, sans-serif" font-size="24" fill="#D6F0E7">Quality second-hand finds, delivered across South Africa</text>
+</svg>

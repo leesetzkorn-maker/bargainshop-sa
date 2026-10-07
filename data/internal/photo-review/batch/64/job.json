@@ -1,0 +1,30 @@
+{
+  "index": 64,
+  "item": {
+    "itemId": "2DS-0085",
+    "name": "Vega motorcycle helmet, size XL",
+    "imageId": "cmuldssf8002rtjd0zy7q5s1f",
+    "url": "/uploads/products/2ds-0085-vega-motorcycle-helmet-size-xl.webp"
+  },
+  "original": "public\\uploads\\products\\2ds-0085-vega-motorcycle-helmet-size-xl.webp",
+  "areas": [
+    {
+      "left": 1720,
+      "top": 125,
+      "width": 454,
+      "height": 655
+    },
+    {
+      "left": 272,
+      "top": 2064,
+      "width": 354,
+      "height": 96
+    }
+  ],
+  "crop": {
+    "left": 72,
+    "top": 0,
+    "width": 2302,
+    "height": 2160
+  }
+}

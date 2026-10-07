@@ -1,41 +1,63 @@
-# See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
+node_modules/
+.next/
+out/
+build/
+dist/
 
-# dependencies
-/node_modules
-/.pnp
-.pnp.*
-.yarn/*
-!.yarn/patches
-!.yarn/plugins
-!.yarn/releases
-!.yarn/versions
+# env
+.env
+.env*.local
+!.env.example
 
-# testing
-/coverage
+# prisma local db
+prisma/*.db
+prisma/*.db-journal
+prisma/*.db-shm
+prisma/*.db-wal
 
-# next.js
-/.next/
-/out/
+# uploaded product images (runtime asset store, not source)
+public/uploads/products/*
+!public/uploads/products/.gitkeep
 
-# production
-/build
+# unreviewed AI edit candidates (regenerated on demand, never source)
+public/uploads/ai/
 
-# misc
-.DS_Store
-*.pem
+# Private operational backups and full-resolution photo originals
+data/internal/backups/
+data/internal/photo-originals/
+data/internal/photo-review/originals/
+data/internal/photo-review/candidates/
+# Pristine copies that the mask editor renders from (regenerated on demand;
+# the ORIGINAL archives are never involved in masking)
+data/masks-clean/
+.env.bak
 
-# debug
+# logs
+*.log
 npm-debug.log*
-yarn-debug.log*
 yarn-error.log*
-.pnpm-debug.log*
 
-# env files (can opt-in for committing if needed)
-.env*
+# os
+.DS_Store
+Thumbs.db
+desktop.ini
 
-# vercel
-.vercel
+# editors
+.vscode/*
+!.vscode/extensions.json
+.idea/
 
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# Local launch database backups
+backups/
+data/backup/
+
+# OCR model cache (tesseract.js downloads its own copy at runtime)
+eng.traineddata
+
+# Local browser regression artifacts
+test-artifacts/
+audit-latest.json

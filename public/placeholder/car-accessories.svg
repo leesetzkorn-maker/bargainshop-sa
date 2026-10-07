@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 600" width="600" height="600" role="img" aria-label="Car accessory placeholder">
+  <defs>
+    <linearGradient id="g" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="hsl(222 42% 96%)"/>
+      <stop offset="100%" stop-color="hsl(222 34% 90%)"/>
+    </linearGradient>
+  </defs>
+  <rect width="600" height="600" fill="url(#g)"/>
+  <circle cx="300" cy="290" r="176" fill="#ffffff" opacity="0.55"/>
+  <g><path d="M64 178h204a12 12 0 0 0 11-8l14-44a12 12 0 0 0-11-16H98a12 12 0 0 0-11 8l-14 44a12 12 0 0 0-9 16Z" fill="none" stroke="hsl(222 26% 34%)" stroke-width="9" stroke-linejoin="round"/><path d="M118 110l24-34h48l26 34" fill="none" stroke="hsl(222 26% 34%)" stroke-width="9" stroke-linejoin="round"/><circle cx="104" cy="190" r="18" fill="none" stroke="hsl(222 26% 34%)" stroke-width="9"/><circle cx="228" cy="190" r="18" fill="none" stroke="hsl(222 26% 34%)" stroke-width="9"/></g>
+  <g>
+    <rect x="180" y="482" width="240" height="40" rx="20" fill="hsl(222 40% 88%)"/>
+    <text x="300" y="507" text-anchor="middle" font-family="ui-sans-serif, system-ui, sans-serif" font-size="17" font-weight="600" fill="hsl(222 32% 26%)">Car accessory</text>
+  </g>
+  <text x="300" y="556" text-anchor="middle" font-family="ui-sans-serif, system-ui, sans-serif" font-size="14" fill="hsl(222 32% 26%)" opacity="0.7">Placeholder image 11</text>
+</svg>

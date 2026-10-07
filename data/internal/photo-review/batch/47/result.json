@@ -1,0 +1,27 @@
+{
+  "index": 47,
+  "item": {
+    "itemId": "2DS-0075",
+    "name": "Ryobi ED-500 rotary hammer in case",
+    "imageId": "cmuldrtfv001qtjd003ojkw6s",
+    "url": "/uploads/products/2ds-0075-ryobi-ed-500-rotary-hammer-in-case-3.webp"
+  },
+  "original": "public\\uploads\\products\\2ds-0075-ryobi-ed-500-rotary-hammer-in-case-3.webp",
+  "areas": [
+    {
+      "left": 501,
+      "top": 1605,
+      "width": 858,
+      "height": 811
+    }
+  ],
+  "crop": {
+    "left": 301,
+    "top": 1405,
+    "width": 1258,
+    "height": 1211
+  },
+  "candidate": "data/internal/photo-review/candidates/47-clean.png",
+  "changedOutside": 0,
+  "status": "NEEDS_VISUAL_REVIEW"
+}

@@ -1,0 +1,105 @@
+{
+  "researchedOn": "2026-10-07",
+  "note": "Matches use existing structured intake, not new photo analysis. Manufacturer specifications do not prove physical stock, accessories, testing or parcel measurements. No manufacturer image is licensed for reuse merely because it is publicly accessible.",
+  "items": [
+    {
+      "itemId": "2DS-0046", "brand": "Xiaomi Redmi", "model": "Redmi A3x",
+      "source": "https://www.mi.com/ng/product/redmi-a3x/specs/",
+      "additionalSources": ["https://www.mi.com/global/support/faq/details/KA-170993/"],
+      "specifications": "Unisoc T603; 6.71-inch 1650 x 720 display, up to 90Hz; 5000mAh typical battery; 10W charging; USB-C; 8MP rear and 5MP front camera; 3.5mm audio jack.",
+      "dimensions": "168.4 x 76.3 x 8.3mm (manufacturer dimensions).",
+      "weight": "Manufacturer support lists 202g. The existing intake has a 200g handset measurement; confirm the actual packed weight separately.",
+      "compatibility": "Dual SIM plus microSD; 4G; 2.4GHz Wi-Fi; Bluetooth 4.2. Region and actual RAM configuration need confirmation; recorded storage is 64GB.",
+      "originalAccessories": "New retail contents vary by region; USB-C cable, SIM tool and paperwork are listed, with an adapter in some regions. This used listing does not promise those accessories.",
+      "packaged": "No verified packaged dimensions or weight located. Existing shipping figures are separate operational entries.",
+      "reviewed": true
+    },
+    {
+      "itemId": "2DS-0053", "brand": "Sony PlayStation", "model": "PULSE 3D",
+      "source": "https://blog.playstation.com/2020/11/09/ps5-the-ultimate-faq/comment-page-30/",
+      "additionalSources": ["https://www.playstation.com/en-nz/support/hardware/pair-headset-with-playstation/"],
+      "specifications": "Dual microphones, USB-C charging, game/chat balance and mic monitoring. Published battery endurance is up to 12 hours when new; used battery life is untested.",
+      "dimensions": "Approximately 213 x 190 x 91mm.", "weight": "Approximately 292g for the headset alone.",
+      "compatibility": "PS5, PS4 and compatible Windows/macOS devices via the matching USB wireless adapter; compatible analog devices via a 3.5mm cable. Confirm the adapter is present before promising wireless use. Manufacturer support identifies CFI-ZWH1; the unit label still requires checking.",
+      "originalAccessories": "USB wireless adapter, charging cable and audio cable. Actual included accessories remain subject to item review.",
+      "packaged": "Verified retail parcel dimensions and weight not located.", "reviewed": true
+    },
+    {
+      "itemId": "2DS-0054", "brand": "VANKYO", "model": "Leisure 495W",
+      "source": "https://ivankyo.com/blogs/tech/tagged/tips-tricks",
+      "specifications": "Manufacturer identifies native 1080p LCD projection, Dolby audio and dual-band 2.4/5GHz Wi-Fi screen mirroring.",
+      "dimensions": "Not verified from the manufacturer source.", "weight": "Not verified from the manufacturer source.",
+      "compatibility": "Check the manual and connected device for supported inputs and protected-content playback. Do not promise direct streaming-app support from screen-mirroring features.",
+      "originalAccessories": "Manufacturer article mentions an HD cable; this does not prove it is included with this used item.",
+      "packaged": "Not verified. Measure the actual packed item.", "reviewed": false,
+      "remaining": "Obtain the exact manual and verify dimensions, weight, input compatibility and accessories."
+    },
+    {
+      "itemId": "2DS-0055", "brand": "Dell", "model": "Latitude E7470",
+      "source": "https://www.dell.com/support/manuals/en-my/latitude-e7470-ultrabook/late_e7470_om/specifications?guid=guid-5a37743b-091b-4716-9574-f99f29e7bf1c&lang=en-us",
+      "specifications": "Manufacturer lists configurable processors, memory and storage. This item's CPU, RAM, SSD, screen variant, operating system and battery health must be checked; no configuration is inferred.",
+      "dimensions": "334 x 232mm footprint. Front/rear height: 17.2/19.4mm non-touch or 18.2/21.8mm touch.",
+      "weight": "With a 3-cell battery: 1.51kg non-touch or 1.65kg touch. Actual configuration and charger add weight.",
+      "compatibility": "Published connectors include HDMI, mini DisplayPort, Ethernet and USB. Confirm actual ports and charger rating on this unit.",
+      "originalAccessories": "Manufacturer lists 65W and 90W AC adapter options at 19.5V DC. Recorded intake includes a charger; rating and functionality are unconfirmed.",
+      "packaged": "No verified parcel specification located; measure laptop plus charger in the actual carton.", "reviewed": false,
+      "remaining": "Verify service tag and installed configuration before completing specifications."
+    },
+    {
+      "itemId": "2DS-0065", "brand": "INGCO", "model": "CAGLI7601",
+      "source": "https://www.ingco.com/mx-en/product/cordless-mini-cut-off-tool/CAGLI7601",
+      "specifications": "20V cordless mini cut-off tool; 19500rpm no-load speed; 76mm disc diameter; M6 spindle thread; left-hand disc position.",
+      "dimensions": "Overall tool dimensions not published in the located source.", "weight": "Not published in the located source.",
+      "compatibility": "Use the correct compatible battery, charger and 76mm accessories with the specified fitting and adequate speed rating. Recorded intake mentions a 2.0Ah battery; its inclusion must be checked.",
+      "originalAccessories": "New tool lists four cutting discs, two grinding discs, one wet diamond disc and one hex key; battery and charger are sold separately. These factory accessories are not automatically included in this used sale.",
+      "packaged": "Manufacturer states color-box packaging without verified dimensions or weight.", "reviewed": false,
+      "remaining": "Confirm missing physical specifications and actual accessories. Cost remains unknown."
+    },
+    {
+      "itemId": "2DS-0068", "brand": "Ryobi", "model": "AJP-1480",
+      "source": "https://ryobi.co.za/wp-content/uploads/2019/01/ryobi_final_hr_smaller.pdf",
+      "specifications": "1600W; maximum 115bar; rated flow 5L/min; 5m high-pressure hose and mains cable; automatic stop.",
+      "dimensions": "Not verified in the manufacturer catalogue.", "weight": "Manufacturer net weight: 6.2kg.",
+      "compatibility": "Catalogue inlet water range is 0–40°C. Check the unit rating plate and manual before connecting power or water.",
+      "originalAccessories": "Spray gun, adjustable fan-nozzle lance, trigger lock and detergent bottle are factory-listed; actual accessory completeness needs checking.",
+      "packaged": "Not published in the located manufacturer entry; measure the parcel.", "reviewed": false,
+      "remaining": "Confirm dimensions, parcel data and actual accessories."
+    },
+    {
+      "itemId": "2DS-0070", "brand": "Ryobi", "model": "HG-2000",
+      "source": "https://ryobi.co.za/wp-content/uploads/2019/01/ryobi_final_hr_smaller.pdf",
+      "specifications": "2000W; low setting 450°C at 300L/min; high setting 600°C at 500L/min; thermal overload protection.",
+      "dimensions": "Not verified in the manufacturer entry.", "weight": "Manufacturer net weight: 0.8kg.",
+      "compatibility": "Mains-powered heat gun. Confirm rating-plate voltage before use; the HG-2000K accessory kit is a different model.",
+      "originalAccessories": "No accessory kit is asserted for HG-2000; the separate HG-2000K kit must not be substituted.",
+      "packaged": "Not verified. Measure the actual parcel.", "reviewed": false,
+      "remaining": "Dimensions and parcel measurements needed; cost is missing."
+    },
+    {
+      "itemId": "2DS-0073", "brand": "Red Rhino", "model": "RT-D20V",
+      "source": "https://redrhino.co.za/products/red-rhino-impact-drill-20v",
+      "specifications": "20V Li-ion; 0–400/0–1500rpm; 0–6000/0–22500 impacts/min; 30Nm torque; 10mm keyless chuck. Published capacities: wood 20mm, metal 10mm and concrete 6mm.",
+      "dimensions": "Not published in the located source.", "weight": "Not published in the located source.",
+      "compatibility": "Confirm the matching Red Rhino battery and charger, rather than assuming cross-brand 20V compatibility.",
+      "originalAccessories": "Factory listing: belt clip and screw, 0.5A charger, 20V/1.3Ah battery and two 50mm CRV bits. Recorded used sale includes battery and charger; other accessories are unconfirmed.",
+      "packaged": "Not published; measure the actual parcel.", "reviewed": false,
+      "remaining": "Dimensions, weight and actual battery/charger ratings need confirmation."
+    },
+    {
+      "itemId": "2DS-0075", "brand": "Ryobi", "model": "ED-500",
+      "source": "https://ryobi.co.za/wp-content/uploads/2019/04/ED-500-Manual-01.pdf",
+      "specifications": "230V 50Hz; 500W; 1.5J impact energy; 0–1000rpm; 0–3900 impacts/min; SDS-plus shank.",
+      "dimensions": "Overall dimensions not verified in the located manual.", "weight": "Manual net weight: 2.3kg.",
+      "compatibility": "SDS-plus tools. Conventional cylindrical-shank bits require a suitable adapter/chuck for non-hammer drilling. Auxiliary handle is required for safe operation.",
+      "originalAccessories": "Manual lists 6, 8 and 10mm x 150mm bits; actual included case, bits, handle and depth stop must be checked.",
+      "packaged": "Not verified. Measure the actual parcel.", "reviewed": false,
+      "remaining": "Dimensions, parcel data, accessories and acquisition cost need confirmation."
+    }
+  ],
+  "unresolvedExactModels": [
+    {"itemId":"2DS-0066","model":"AEG BSE 9.6","reason":"No suitable manufacturer source located; do not substitute a newer AEG model."},
+    {"itemId":"2DS-0071","model":"Ryobi HID-10","reason":"No exact manufacturer documentation located. Secondary 550W references are not adopted."},
+    {"itemId":"2DS-0074","model":"INGCO ING-MMA18059N","reason":"Official ING-MMA18059 source lacks the N suffix; equivalence not confirmed, so no substitute specifications adopted."},
+    {"itemId":"2DS-0095","model":"Toyang TY1068","reason":"No exact manufacturer documentation located. Unrelated TY1068 products rejected."}
+  ]
+}

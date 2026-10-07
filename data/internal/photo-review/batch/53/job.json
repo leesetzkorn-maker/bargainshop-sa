@@ -1,0 +1,24 @@
+{
+  "index": 53,
+  "item": {
+    "itemId": "2DS-0078",
+    "name": "Mac Africa welding machine with leads",
+    "imageId": "cmulds6340022tjd0pzidznb9",
+    "url": "/uploads/products/2ds-0078-mac-africa-welding-machine-with-leads.webp"
+  },
+  "original": "public\\uploads\\products\\2ds-0078-mac-africa-welding-machine-with-leads.webp",
+  "areas": [
+    {
+      "left": 1123,
+      "top": 1194,
+      "width": 301,
+      "height": 527
+    }
+  ],
+  "crop": {
+    "left": 923,
+    "top": 994,
+    "width": 701,
+    "height": 927
+  }
+}

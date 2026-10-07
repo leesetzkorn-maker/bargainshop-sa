@@ -1,0 +1,24 @@
+{
+  "index": 65,
+  "item": {
+    "itemId": "2DS-0086",
+    "name": "Black motorcycle helmet",
+    "imageId": "cmuldsuf3002utjd02ygejj3t",
+    "url": "/uploads/products/2ds-0086-black-motorcycle-helmet.webp"
+  },
+  "original": "public\\uploads\\products\\2ds-0086-black-motorcycle-helmet.webp",
+  "areas": [
+    {
+      "left": 1321,
+      "top": 1689,
+      "width": 618,
+      "height": 373
+    }
+  ],
+  "crop": {
+    "left": 1121,
+    "top": 1489,
+    "width": 1018,
+    "height": 773
+  }
+}

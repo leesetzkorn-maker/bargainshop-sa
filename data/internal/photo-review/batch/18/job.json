@@ -1,0 +1,24 @@
+{
+  "index": 18,
+  "item": {
+    "itemId": "2DS-0060",
+    "name": "Ingco 20V cordless drill with charger and battery",
+    "imageId": "cmuldq75e0003tjd0nru5nuot",
+    "url": "/uploads/products/2ds-0060-ingco-20v-cordless-drill-with-charger-and-battery-2.webp"
+  },
+  "original": "public\\uploads\\products\\2ds-0060-ingco-20v-cordless-drill-with-charger-and-battery-2.webp",
+  "areas": [
+    {
+      "left": 0,
+      "top": 2592,
+      "width": 843,
+      "height": 1191
+    }
+  ],
+  "crop": {
+    "left": 0,
+    "top": 2392,
+    "width": 1043,
+    "height": 1448
+  }
+}

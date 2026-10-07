@@ -1,0 +1,27 @@
+{
+  "index": 57,
+  "item": {
+    "itemId": "2DS-0080",
+    "name": "Grip toolbox with tools",
+    "imageId": "cmuldse71002atjd03g6dfl61",
+    "url": "/uploads/products/2ds-0080-grip-toolbox-with-tools-2.webp"
+  },
+  "original": "public\\uploads\\products\\2ds-0080-grip-toolbox-with-tools-2.webp",
+  "areas": [
+    {
+      "left": 1059,
+      "top": 451,
+      "width": 1064,
+      "height": 737
+    }
+  ],
+  "crop": {
+    "left": 859,
+    "top": 251,
+    "width": 1464,
+    "height": 1057
+  },
+  "candidate": "data/internal/photo-review/candidates/57-clean.png",
+  "changedOutside": 0,
+  "status": "NEEDS_VISUAL_REVIEW"
+}

@@ -1,0 +1,2 @@
+ALTER TABLE "Product" ADD COLUMN "lockerAllowed" BOOLEAN NOT NULL DEFAULT true;
+ALTER TABLE "Product" ADD COLUMN "courierAllowed" BOOLEAN NOT NULL DEFAULT true;

@@ -1,0 +1,50 @@
+{
+  "index": 26,
+  "item": {
+    "itemId": "2DS-0066",
+    "name": "AEG BSE 9.6 cordless drill",
+    "imageId": "cmuldqpbu000ntjd08y4uo55u",
+    "url": "/uploads/products/2ds-0066-aeg-bse-9-6-cordless-drill.webp"
+  },
+  "original": "public\\uploads\\products\\2ds-0066-aeg-bse-9-6-cordless-drill.webp",
+  "areas": [
+    {
+      "left": 853,
+      "top": 2553,
+      "width": 806,
+      "height": 761,
+      "points": [
+        [
+          866,
+          3009
+        ],
+        [
+          1556,
+          2578
+        ],
+        [
+          1641,
+          2709
+        ],
+        [
+          1631,
+          2981
+        ],
+        [
+          1003,
+          3291
+        ]
+      ]
+    }
+  ],
+  "crop": {
+    "left": 653,
+    "top": 2353,
+    "width": 1206,
+    "height": 1161
+  },
+  "feather": 18,
+  "candidate": "data/internal/photo-review/candidates/26-clean.png",
+  "changedOutside": 0,
+  "status": "NEEDS_VISUAL_REVIEW"
+}

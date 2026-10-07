@@ -1,0 +1,27 @@
+{
+  "index": 28,
+  "item": {
+    "itemId": "2DS-0067",
+    "name": "Steco 1000W power station with charger",
+    "imageId": "cmuldqt9p000rtjd0s3orbu5i",
+    "url": "/uploads/products/2ds-0067-steco-1000w-power-station-with-charger.webp"
+  },
+  "original": "public\\uploads\\products\\2ds-0067-steco-1000w-power-station-with-charger.webp",
+  "areas": [
+    {
+      "left": 2380,
+      "top": 157,
+      "width": 638,
+      "height": 329
+    }
+  ],
+  "crop": {
+    "left": 2180,
+    "top": 0,
+    "width": 1038,
+    "height": 686
+  },
+  "candidate": "data/internal/photo-review/candidates/28-clean.png",
+  "changedOutside": 0,
+  "status": "NEEDS_VISUAL_REVIEW"
+}

@@ -1,0 +1,125 @@
+{
+  "records": [
+    {
+      "itemId": "2DS-0060",
+      "imageId": "cmuldq75e0002tjd0x1phoktr",
+      "originalUrl": "/uploads/products/2ds-0060-ingco-20v-cordless-drill-with-charger-and-battery.webp",
+      "originalSha256": "bcb9bfee6a60819834374a6bb99b7c693e51086d24d403a62a62f0951b370fb7",
+      "candidate": "data/internal/photo-review/candidates/2ds-0060-sample-v3.png",
+      "newUrl": "/uploads/products/2ds-0060-clean-40db8b719c2cf3f2.webp",
+      "at": "2026-10-03T16:55:54.101Z",
+      "dbBackup": "data/internal/backups/photo-release/pre-1791046553992.db",
+      "review": "Assistant visual review; owner authorized completing batch and applying edits"
+    },
+    {
+      "itemId": "2DS-0062",
+      "imageId": "cmuldqbd70009tjd0qkwuz946",
+      "originalUrl": "/uploads/products/2ds-0062-black-decker-cordless-drill-with-charger.webp",
+      "originalSha256": "a0a8de3e1049fc109fdb15d35da2503d5313ac6b7914a82efc6610e2fae391b5",
+      "candidate": "data/internal/photo-review/candidates/2ds-0062-sample-v3.png",
+      "newUrl": "/uploads/products/2ds-0062-clean-c69174a97eea8c52.webp",
+      "at": "2026-10-03T16:56:04.182Z",
+      "dbBackup": "data/internal/backups/photo-release/pre-1791046564067.db",
+      "review": "Assistant visual review; owner authorized completing batch and applying edits"
+    },
+    {
+      "itemId": "2DS-0067",
+      "imageId": "cmuldqt9p000rtjd0s3orbu5i",
+      "originalUrl": "/uploads/products/2ds-0067-steco-1000w-power-station-with-charger.webp",
+      "originalSha256": "82919c14d4c7bdbdd8106f0a3f3fb136367270009d2a26cb24e6832986262148",
+      "candidate": "data/internal/photo-review/candidates/28-clean.png",
+      "newUrl": "/uploads/products/2ds-0067-clean-e537db348de074b8.webp",
+      "at": "2026-10-03T17:12:19.836Z",
+      "dbBackup": "data/internal/backups/photo-release/pre-1791047539573.db",
+      "review": "Assistant visual review; owner authorized completing batch and applying edits"
+    },
+    {
+      "itemId": "2DS-0066",
+      "imageId": "cmuldqpbu000ntjd08y4uo55u",
+      "originalUrl": "/uploads/products/2ds-0066-aeg-bse-9-6-cordless-drill.webp",
+      "originalSha256": "589f8f9b9d207743ff5e658a17b9df2228b8a576019b3420b6700d0baabf7399",
+      "candidate": "data/internal/photo-review/candidates/26-clean.png",
+      "newUrl": "/uploads/products/2ds-0066-clean-af7db7ccd9b0fd7b.webp",
+      "at": "2026-10-04T11:14:05.461Z",
+      "dbBackup": "data/internal/backups/photo-release/pre-1791112445436.db",
+      "review": "Assistant visual review; owner authorized completing batch and applying edits"
+    },
+    {
+      "itemId": "2DS-0067",
+      "imageId": "cmuldqt9p000stjd0zlueixha",
+      "originalUrl": "/uploads/products/2ds-0067-steco-1000w-power-station-with-charger-2.webp",
+      "originalSha256": "420a86bc33eee59c72ab180bc80d62796a6e9c35f856dd5b3adc482b8d1980f1",
+      "candidate": "data/internal/photo-review/candidates/29-clean.png",
+      "newUrl": "/uploads/products/2ds-0067-clean-1d276662bee8a9ac.webp",
+      "at": "2026-10-04T11:26:29.772Z",
+      "dbBackup": "data/internal/backups/photo-release/pre-1791113189749.db",
+      "review": "Assistant visual review; owner authorized completing batch and applying edits"
+    },
+    {
+      "itemId": "2DS-0068",
+      "imageId": "cmuldqv93000vtjd0xkh8ww45",
+      "originalUrl": "/uploads/products/2ds-0068-ryobi-ajp-1480-high-pressure-washer.webp",
+      "originalSha256": "5c9c80927317a626cec9a415c84d81168bbe84c57aba20f6eee67ca6bcdc6085",
+      "candidate": "data/internal/photo-review/candidates/30-clean.png",
+      "newUrl": "/uploads/products/2ds-0068-clean-92a2c093e8167af0.webp",
+      "at": "2026-10-04T11:26:41.700Z",
+      "dbBackup": "data/internal/backups/photo-release/pre-1791113201599.db",
+      "review": "Assistant visual review; owner authorized completing batch and applying edits"
+    },
+    {
+      "itemId": "2DS-0071",
+      "imageId": "cmuldr5dt0016tjd0fxi2a21i",
+      "originalUrl": "/uploads/products/2ds-0071-ryobi-hid-10-hammer-drill-2.webp",
+      "originalSha256": "1f222ec128fc9c44aa5243203adb635e9dbf996e392d10f5e935fa3828897d37",
+      "candidate": "data/internal/photo-review/candidates/35-clean.png",
+      "newUrl": "/uploads/products/2ds-0071-clean-74546f890411bb20.webp",
+      "at": "2026-10-04T11:26:52.402Z",
+      "dbBackup": "data/internal/backups/photo-release/pre-1791113212375.db",
+      "review": "Assistant visual review; owner authorized completing batch and applying edits"
+    },
+    {
+      "itemId": "2DS-0072",
+      "imageId": "cmuldrb7r001btjd07vh1g2zb",
+      "originalUrl": "/uploads/products/2ds-0072-stramm-sheet-sander-3.webp",
+      "originalSha256": "eab8027814ccca632544a02dc24ec4e76bf66937774f98b6cb922cf2111bb853",
+      "candidate": "data/internal/photo-review/candidates/38-clean.png",
+      "newUrl": "/uploads/products/2ds-0072-clean-43bb240d6a1b93bc.webp",
+      "at": "2026-10-04T11:27:02.145Z",
+      "dbBackup": "data/internal/backups/photo-release/pre-1791113222036.db",
+      "review": "Assistant visual review; owner authorized completing batch and applying edits"
+    },
+    {
+      "itemId": "2DS-0074",
+      "imageId": "cmuldrnc4001itjd0qy6zsaiu",
+      "originalUrl": "/uploads/products/2ds-0074-ingco-180a-inverter-welder-with-cables.webp",
+      "originalSha256": "5e962543df67cf9f53dbfd3dd62c8a4adbc060e785ad571fb48bce72ad4ddb73",
+      "candidate": "data/internal/photo-review/candidates/41-clean.png",
+      "newUrl": "/uploads/products/2ds-0074-clean-5e489880caf54b8f.webp",
+      "at": "2026-10-04T11:27:11.853Z",
+      "dbBackup": "data/internal/backups/photo-release/pre-1791113231749.db",
+      "review": "Assistant visual review; owner authorized completing batch and applying edits"
+    },
+    {
+      "itemId": "2DS-0074",
+      "imageId": "cmuldrnc4001ltjd03a7o3dbe",
+      "originalUrl": "/uploads/products/2ds-0074-ingco-180a-inverter-welder-with-cables-4.webp",
+      "originalSha256": "c07e05321dee3e1d62226933b7d67b396e131aeedc6aebeea4cd750a563ff455",
+      "candidate": "data/internal/photo-review/candidates/44-clean.png",
+      "newUrl": "/uploads/products/2ds-0074-clean-68d526e654491c9a.webp",
+      "at": "2026-10-04T11:27:20.498Z",
+      "dbBackup": "data/internal/backups/photo-release/pre-1791113240471.db",
+      "review": "Assistant visual review; owner authorized completing batch and applying edits"
+    },
+    {
+      "itemId": "2DS-0075",
+      "imageId": "cmuldrtfv001qtjd003ojkw6s",
+      "originalUrl": "/uploads/products/2ds-0075-ryobi-ed-500-rotary-hammer-in-case-3.webp",
+      "originalSha256": "9c4a472870f334dd398f4fd99334005adf445e0a64fa92def832f7586073d41e",
+      "candidate": "data/internal/photo-review/candidates/47-clean.png",
+      "newUrl": "/uploads/products/2ds-0075-clean-9a1cc4ac9673f763.webp",
+      "at": "2026-10-04T11:27:30.702Z",
+      "dbBackup": "data/internal/backups/photo-release/pre-1791113250673.db",
+      "review": "Assistant visual review; owner authorized completing batch and applying edits"
+    }
+  ]
+}

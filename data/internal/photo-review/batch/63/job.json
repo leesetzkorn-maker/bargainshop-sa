@@ -1,0 +1,30 @@
+{
+  "index": 63,
+  "item": {
+    "itemId": "2DS-0084",
+    "name": "Black off-road motorcycle helmet",
+    "imageId": "cmuldsqe4002otjd0nvveflmd",
+    "url": "/uploads/products/2ds-0084-black-off-road-motorcycle-helmet.webp"
+  },
+  "original": "public\\uploads\\products\\2ds-0084-black-off-road-motorcycle-helmet.webp",
+  "areas": [
+    {
+      "left": 2983,
+      "top": 300,
+      "width": 457,
+      "height": 493
+    },
+    {
+      "left": 0,
+      "top": 1676,
+      "width": 427,
+      "height": 484
+    }
+  ],
+  "crop": {
+    "left": 0,
+    "top": 100,
+    "width": 3640,
+    "height": 2060
+  }
+}
