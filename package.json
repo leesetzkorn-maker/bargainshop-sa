@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "next dev",
     "build": "prisma generate && next build",
-    "start": "prisma migrate deploy && npm run db:seed && next start",
+    "start": "node scripts/check-production-db.cjs && prisma migrate deploy && next start",
     "lint": "eslint .",
     "typecheck": "tsc --noEmit",
     "typegen": "next typegen",
