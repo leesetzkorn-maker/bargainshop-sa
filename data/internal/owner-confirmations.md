@@ -11,21 +11,29 @@ Stuur die werklike aankoopprys in rand vir elke item. Ek sal die winsopslag bo-o
 | Item | Produk | Aankoopprys benodig |
 | --- | --- | --- |
 | 2DS-0056 | George Foreman-grill | R… |
-| 2DS-0059 | Puma-horlosie | R… |
-| 2DS-0061 | Geel polisher | R… |
-| 2DS-0065 | Ingco-mini-grinder | R… |
-| 2DS-0070 | Ryobi HG-2000-hittepistool | R… |
-| 2DS-0075 | Ryobi ED-500 rotary hammer | R… |
-| 2DS-0079 | Harden 77-stuk toolbox | R… |
-| 2DS-0089 | O'Neal-kinderboots | R… |
-| 2DS-0097 | Ryobi 18V-boorstel | R… |
+
+2DS-0089 O'Neal-kinderboots: verkoopprys R356 vir albei stewels saam as een paar. Hoeveelheid is 1 paar. R356 is nie die aankoopprys nie en nie 'n prys per stewel nie. Die aankoopprys is steeds onbekend. Aflewering bly apart en word deur die klant betaal.
+
+2DS-0097 Ryobi 18V-boorstel: aankoopprys R999, verkoopprys R1468. Die winsopslag mag hierdie verkoopprys nie vervang nie. Aflewering bly apart en word deur die klant betaal.
+
+2DS-0061 Geel polisher met pad en battery: aankoopprys R455 voor die winkelprys. Die prys-enjin het die verkoopprys as R750 bereken. Aflewering bly apart en word deur die klant betaal.
+
+2DS-0065 Ingco 20V 76mm mini angle grinder: EZ Pawn-aankoopprys R700. Die prys-enjin het die verkoopprys as R1 060 bereken. Aflewering bly apart en word deur die klant betaal.
+
+2DS-0079 Harden 77-stuk toolbox: aankoopprys R1 400 is deur die eienaar bevestig op 8 Oktober 2026. Die prys-enjin het die verkoopprys as R2 000 bereken. Aflewering bly apart en word deur die klant betaal.
+
+2DS-0075 Ryobi ED-500 rotary hammer: aankoopprys R795 is op 8 Oktober 2026 bevestig. Die prys-enjin het die verkoopprys as R1 190 bereken. Aflewering bly apart en word deur die klant betaal.
+
+2DS-0070 Ryobi HG-2000 heat gun: aankoopprys R200 is op 8 Oktober 2026 bevestig. Die prys-enjin het die verkoopprys as R360 bereken. Aflewering bly apart en word deur die klant betaal.
+
+2DS-0059 Black Puma wristwatch: aankoopprys R565 is op 8 Oktober 2026 bevestig. Die prys-enjin het die verkoopprys as R860 bereken. Aflewering bly apart en word deur die klant betaal.
 
 Die verkooppryse vir helms 2DS-0082 en 2DS-0083 is reeds R699 volgens die eienaar se nota. Hul aankooppryse ontbreek steeds, dus kan die wins daarop nog nie bevestig word nie.
 
 ## Produkte en beskrywings
 
 - Bevestig besit en een beskikbare item per inskrywing.
-- Bevestig werklike funksietoetse per item. Outomaties ingevoerde toetsmerkers is vervang met 'n eerlike 'nog nie bevestig'-status.
+- Die eienaar het op 8 Oktober 2026 bevestig dat al 52 huidige winkelitems persoonlik fisies getoets is en 100% werk. Toetsstatus is TESTED_AND_WORKING; kosmetiese toestand bly soos aangeteken.
 - 2DS-0047: Die intake sê iCloud-gesluit. Is dit steeds gesluit? Is die pouch en charger werklik ingesluit? Verkoopprys volgens die vasgelegde koste en opslag: R700; die item bly in konsep.
 - Bevestig bykomstighede wat slegs deur die winkel se etiket beskryf is en nie duidelik op die foto verskyn nie (veral charger/battery/bag by 2DS-0096).
 - Bevestig presiese modelnommers, kapasiteite, groottes en elektriese spesifikasies waar die beskrywings hulle nie reeds met bewyse kan vermeld nie. Dit is nie uitgedink nie.
@@ -45,3 +53,8 @@ Die verkooppryse vir helms 2DS-0082 en 2DS-0083 is reeds R699 volgens die eienaa
 - Kontakbesonderhede, regte besigheidsidentiteit, openbare domein, hosting en betalingsopsie is steeds nodig om verkope te begin.
 
 Die volledige beskrywings en pryse is in `catalogue-review.json`. Die databasisrugsteun en die presiese voor/na-veranderings is in `backups/catalogue-1791041317857/`.
+
+
+## Owner physical testing confirmation ? 8 October 2026
+
+All 52 current real store products were personally physically tested by the owner and confirmed working 100%. Testing is recorded as TESTED_AND_WORKING. Cosmetic condition, identities, prices, source costs, images, stock and publication status were preserved. The exact physical test date was not supplied; this is the confirmation date. Future imports require their own confirmation.

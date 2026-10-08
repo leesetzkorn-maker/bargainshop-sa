@@ -1,0 +1,1825 @@
+{
+  "reviewedOn": "2026-10-07T22:57:56.328Z",
+  "method": "Visual review of public copies; exact tag outlines. No product identification or catalogue edits.",
+  "images": [
+    {
+      "imageId": "cmul6ntso0002tjycwu1yxqaz",
+      "itemId": "2DS-0045",
+      "url": "/uploads/products/2ds-0045-red-canister-vacuum-cleaner.webp",
+      "sha256": "3d1248e61329ac4985f8a9530e06e11ab6f33b90a4b96ff74715213a25ea5239",
+      "decision": "clean",
+      "polygons": [],
+      "note": "Visually checked for retailer price tags; manufacturer labels and condition retained."
+    },
+    {
+      "imageId": "cmuldtkzb003vtjd0d9d4uq4d",
+      "itemId": "2DS-0046",
+      "url": "/uploads/products/2ds-0046-redmi-a3x-64gb-smartphone-front.webp",
+      "sha256": "35706fbde633cae9c7d4cc25b211bd3008f1f8fa0319e8d60cd0ac9410b022bb",
+      "decision": "clean",
+      "polygons": [],
+      "note": "Visually checked for retailer price tags; manufacturer labels and condition retained."
+    },
+    {
+      "imageId": "cmul6nuij0005tjyci7hv5sx9",
+      "itemId": "2DS-0046",
+      "url": "/uploads/products/2ds-0046-redmi-a3x-64gb-smartphone.webp",
+      "sha256": "98715586ce08965b13ba331dd281830de391b34e21cc1dcfd8b10acbe0071fec",
+      "decision": "clean",
+      "polygons": [],
+      "note": "Visually checked for retailer price tags; manufacturer labels and condition retained."
+    },
+    {
+      "imageId": "cmul6nv350008tjycvj7rf707",
+      "itemId": "2DS-0047",
+      "url": "/uploads/products/2ds-0047-ipad-16gb-with-pouch-and-charger.webp",
+      "sha256": "ccad16e05e8ba4fee22f14767130feb72b8e29e4b24478ee9a7a0e4e131b4d45",
+      "decision": "clean",
+      "polygons": [],
+      "note": "Visually checked for retailer price tags; manufacturer labels and condition retained."
+    },
+    {
+      "imageId": "cmul6nvpn000btjyczdqwpgy4",
+      "itemId": "2DS-0048",
+      "url": "/uploads/products/2ds-0048-playstation-4-console-with-one-controller.webp",
+      "sha256": "8453d88115d98a9193aa31621088cff60bcef1b0f7616173f589a359c59795fc",
+      "decision": "clean",
+      "polygons": [],
+      "note": "Visually checked for retailer price tags; manufacturer labels and condition retained."
+    },
+    {
+      "imageId": "cmul6nwhq000etjyczfqyrmek",
+      "itemId": "2DS-0049",
+      "url": "/uploads/products/2ds-0049-titan-ps4-wireless-controller-and-wired-headset.webp",
+      "sha256": "64ae25487dcd2c9839263c0d2b8a9bad21930ef46f6aa40c3bf7633891090c7a",
+      "decision": "clean",
+      "polygons": [],
+      "note": "Visually checked for retailer price tags; manufacturer labels and condition retained."
+    },
+    {
+      "imageId": "cmul6nx6f000htjyc3xdbbs6b",
+      "itemId": "2DS-0050",
+      "url": "/uploads/products/2ds-0050-xbox-one-s-all-digital-with-controller-and-cables.webp",
+      "sha256": "aca11cdb54eadbfcde9eb3aa7722406b7710d82277c9b2452670f8885f0fc85a",
+      "decision": "clean",
+      "polygons": [],
+      "note": "Visually checked for retailer price tags; manufacturer labels and condition retained."
+    },
+    {
+      "imageId": "cmul6nxv4000ktjycp5ji6cur",
+      "itemId": "2DS-0051",
+      "url": "/uploads/products/2ds-0051-playstation-4-console-with-portrait-skin-and-one-controller.webp",
+      "sha256": "423af02df9a8112bd4a5a8f0ce9491dae5dd5726b7e20172063d6bdd724f476b",
+      "decision": "clean",
+      "polygons": [],
+      "note": "Visually checked for retailer price tags; manufacturer labels and condition retained."
+    },
+    {
+      "imageId": "cmul6nyj8000ntjycnr89f9bx",
+      "itemId": "2DS-0052",
+      "url": "/uploads/products/2ds-0052-xbox-one-console-with-two-controllers.webp",
+      "sha256": "ac81103ffa2bac9cf3cfa868206bbd88009e7143b8166fbead46db98ca5b99b9",
+      "decision": "clean",
+      "polygons": [],
+      "note": "Visually checked for retailer price tags; manufacturer labels and condition retained."
+    },
+    {
+      "imageId": "cmul6nz55000qtjycrgeepryc",
+      "itemId": "2DS-0053",
+      "url": "/uploads/products/2ds-0053-playstation-pulse-3d-wireless-headset.webp",
+      "sha256": "0852071be1c8e908b6b2d4f601ce4e9e744227e0778f4ca0684eac937f1c796b",
+      "decision": "clean",
+      "polygons": [],
+      "note": "Visually checked for retailer price tags; manufacturer labels and condition retained."
+    },
+    {
+      "imageId": "cmul6nzyu000ttjycet2imaln",
+      "itemId": "2DS-0054",
+      "url": "/uploads/products/2ds-0054-vankyo-leisure-495w-projector.webp",
+      "sha256": "91428f7f0a19b8d2257c46ab01c44dd2039e4bdaab187f6537f47958b4b23a5f",
+      "decision": "clean",
+      "polygons": [],
+      "note": "Visually checked for retailer price tags; manufacturer labels and condition retained."
+    },
+    {
+      "imageId": "cmul6o0l1000wtjycdwmhf94y",
+      "itemId": "2DS-0055",
+      "url": "/uploads/products/2ds-0055-dell-latitude-e7470-laptop-with-charger.webp",
+      "sha256": "08430e023ce5d5bff03574452ce30a4a5eea8e8b79b6c07572e039b041ae2033",
+      "decision": "clean",
+      "polygons": [],
+      "note": "Visually checked for retailer price tags; manufacturer labels and condition retained."
+    },
+    {
+      "imageId": "cmul6o19q000ztjycn67t09zf",
+      "itemId": "2DS-0056",
+      "url": "/uploads/products/2ds-0056-george-foreman-lean-mean-fat-grilling-machine.webp",
+      "sha256": "0ac7281e550cbe80f1cfa8cba8fa20ab2e86978e17b8c403989778ce03aaea65",
+      "decision": "clean",
+      "polygons": [],
+      "note": "Visually checked for retailer price tags; manufacturer labels and condition retained."
+    },
+    {
+      "imageId": "cmul6o20o0012tjychc7emyyp",
+      "itemId": "2DS-0057",
+      "url": "/uploads/products/2ds-0057-bosch-capsule-coffee-machine.webp",
+      "sha256": "9ec056d33ecc9868970d34be7fce9e1cc3dffe75aefdd09bdc6ddf749c61ad75",
+      "decision": "clean",
+      "polygons": [],
+      "note": "Visually checked for retailer price tags; manufacturer labels and condition retained."
+    },
+    {
+      "imageId": "cmul6o4pr0015tjyczww91plf",
+      "itemId": "2DS-0058",
+      "url": "/uploads/products/2ds-0058-silver-folding-knife.webp",
+      "sha256": "5c1aacf97c5d28b4d485ef6341019ed0a5c960e84bc0f2ce3d5ff8deb98262e7",
+      "decision": "clean",
+      "polygons": [],
+      "note": "Visually checked for retailer price tags; manufacturer labels and condition retained."
+    },
+    {
+      "imageId": "cmul6o4pr0016tjycckyp8exq",
+      "itemId": "2DS-0058",
+      "url": "/uploads/products/2ds-0058-silver-folding-knife-2.webp",
+      "sha256": "d3a88e6f96bc5b304a2a272ebe3092017cef3e946e0ec81522c88948215551eb",
+      "decision": "clean",
+      "polygons": [],
+      "note": "Visually checked for retailer price tags; manufacturer labels and condition retained."
+    },
+    {
+      "imageId": "cmul6o5br0019tjycyo5d9lyu",
+      "itemId": "2DS-0059",
+      "url": "/uploads/products/2ds-0059-black-puma-wristwatch.webp",
+      "sha256": "8a4794f3ebd262db3435ea72713e1536bcf3b7265f5df942cdc8520bf9c637a2",
+      "decision": "clean",
+      "polygons": [],
+      "note": "Visually checked for retailer price tags; manufacturer labels and condition retained."
+    },
+    {
+      "imageId": "cmuldq75e0002tjd0x1phoktr",
+      "itemId": "2DS-0060",
+      "url": "/uploads/products/2ds-0060-clean-40db8b719c2cf3f2.webp",
+      "sha256": "40db8b719c2cf3f2420318b366d7290e055e44fb95042b25ab212404ec93b71f",
+      "decision": "clean",
+      "polygons": [],
+      "note": "Visually checked for retailer price tags; manufacturer labels and condition retained."
+    },
+    {
+      "imageId": "cmuldq75e0003tjd0nru5nuot",
+      "itemId": "2DS-0060",
+      "url": "/uploads/products/2ds-0060-clean-aa882997bc36a263.webp",
+      "sha256": "aa882997bc36a26319a16d7be974af0475e350a08a43243b114b1e26f4209b0e",
+      "decision": "clean",
+      "polygons": [],
+      "note": "Visually checked for retailer price tags; manufacturer labels and condition retained."
+    },
+    {
+      "imageId": "cmuydlcf20001tjv02te1a18g",
+      "itemId": "2DS-0060",
+      "url": "/uploads/products/2ds-0060-ingco-20v-cordless-drill-with-charger-and-battery.webp",
+      "sha256": "bcb9bfee6a60819834374a6bb99b7c693e51086d24d403a62a62f0951b370fb7",
+      "decision": "mask",
+      "polygons": [
+        [
+          [
+            0.415,
+            0.6940928270042194
+          ],
+          [
+            0.6025,
+            0.7116736990154712
+          ],
+          [
+            0.5425,
+            0.9563994374120957
+          ],
+          [
+            0.35625,
+            0.9170182841068917
+          ]
+        ]
+      ],
+      "note": "Visually checked for retailer price tags; manufacturer labels and condition retained."
+    },
+    {
+      "imageId": "cmuldq9a20006tjd0fzaavxlc",
+      "itemId": "2DS-0061",
+      "url": "/uploads/products/2ds-0061-yellow-cordless-polisher-with-pad-and-battery.webp",
+      "sha256": "4a2071622bbd3499c9004611e6d291ef8f2fa4efd1f3fd7d94deeb79e98e061c",
+      "decision": "clean",
+      "polygons": [],
+      "note": "Visually checked for retailer price tags; manufacturer labels and condition retained."
+    },
+    {
+      "imageId": "cmuldqbd70009tjd0qkwuz946",
+      "itemId": "2DS-0062",
+      "url": "/uploads/products/2ds-0062-clean-c69174a97eea8c52.webp",
+      "sha256": "c69174a97eea8c529391a56f8b531cffc33eaa41c3fb53f58367464c5ed576e8",
+      "decision": "needs-review",
+      "polygons": [],
+      "note": "Tiny partly obscured background price label beside the yellow tool; needs closer review."
+    },
+    {
+      "imageId": "cmuydlcg20003tjv08dui1s20",
+      "itemId": "2DS-0062",
+      "url": "/uploads/products/2ds-0062-black-decker-cordless-drill-with-charger.webp",
+      "sha256": "a0a8de3e1049fc109fdb15d35da2503d5313ac6b7914a82efc6610e2fae391b5",
+      "decision": "mask",
+      "polygons": [
+        [
+          [
+            0.3825,
+            0.8136427566807314
+          ],
+          [
+            0.7,
+            0.8586497890295358
+          ],
+          [
+            0.6575,
+            0.9282700421940928
+          ],
+          [
+            0.3675,
+            0.8804500703234881
+          ]
+        ],
+        [
+          [
+            0.7975,
+            0.5942334739803095
+          ],
+          [
+            0.96875,
+            0.620253164556962
+          ],
+          [
+            0.9725,
+            0.6891701828410689
+          ],
+          [
+            0.79375,
+            0.6589310829817159
+          ]
+        ],
+        [
+          [
+            0.39375,
+            0.5147679324894515
+          ],
+          [
+            0.44125,
+            0.5140646976090014
+          ],
+          [
+            0.4325,
+            0.5583684950773559
+          ],
+          [
+            0.38875,
+            0.5555555555555556
+          ]
+        ]
+      ],
+      "note": "Visually checked for retailer price tags; manufacturer labels and condition retained."
+    },
+    {
+      "imageId": "cmuldqdkn000ctjd0c4fmvrau",
+      "itemId": "2DS-0063",
+      "url": "/uploads/products/2ds-0063-ryobi-cordless-drill-with-charger.webp",
+      "sha256": "117dd8e9da90bfe3b4caf5bac41c8455c87c4a5547ea6f055b6d9aa3f02d8379",
+      "decision": "mask",
+      "polygons": [
+        [
+          [
+            0.66875,
+            0.3691983122362869
+          ],
+          [
+            0.955,
+            0.41068917018284107
+          ],
+          [
+            0.93875,
+            0.48874824191279886
+          ],
+          [
+            0.63125,
+            0.44585091420534456
+          ]
+        ]
+      ],
+      "note": "Visually checked for retailer price tags; manufacturer labels and condition retained."
+    },
+    {
+      "imageId": "cmuldqfhi000ftjd0l7wwqxt3",
+      "itemId": "2DS-0064",
+      "url": "/uploads/products/2ds-0064-tork-craft-20v-angle-grinder-with-battery-and-charger.webp",
+      "sha256": "8efdd864f80972307000ddb5272b73aa9d247a5f16d5b3ce6b4c1e2b15c3757e",
+      "decision": "mask",
+      "polygons": [
+        [
+          [
+            0.6475,
+            0.39662447257383965
+          ],
+          [
+            0.76,
+            0.39029535864978904
+          ],
+          [
+            0.81875,
+            0.48945147679324896
+          ],
+          [
+            0.71125,
+            0.49929676511954996
+          ]
+        ],
+        [
+          [
+            0.215,
+            0.8973277074542897
+          ],
+          [
+            0.61,
+            0.9247538677918424
+          ],
+          [
+            0.5975,
+            0.9634317862165963
+          ],
+          [
+            0.24375,
+            0.9423347398030942
+          ]
+        ]
+      ],
+      "note": "Visually checked for retailer price tags; manufacturer labels and condition retained."
+    },
+    {
+      "imageId": "cmuldql5b000itjd0cqz7t0by",
+      "itemId": "2DS-0065",
+      "url": "/uploads/products/2ds-0065-ingco-20v-76mm-mini-angle-grinder.webp",
+      "sha256": "71e0b83aeb4c53b1643f998dad54b1f974fcd4e07f40638d81eb5e4b7c280c1a",
+      "decision": "clean",
+      "polygons": [],
+      "note": "Visually checked for retailer price tags; manufacturer labels and condition retained."
+    },
+    {
+      "imageId": "cmuldql5b000jtjd02qccqllt",
+      "itemId": "2DS-0065",
+      "url": "/uploads/products/2ds-0065-ingco-20v-76mm-mini-angle-grinder-2.webp",
+      "sha256": "ebd7bffa6d645128d2d86c399da11fe4cb365b52fe7bf06c80689f6056e2bea2",
+      "decision": "clean",
+      "polygons": [],
+      "note": "Visually checked for retailer price tags; manufacturer labels and condition retained."
+    },
+    {
+      "imageId": "cmuldql5b000ktjd0esss1x4u",
+      "itemId": "2DS-0065",
+      "url": "/uploads/products/2ds-0065-ingco-20v-76mm-mini-angle-grinder-3.webp",
+      "sha256": "b113ae6e88046ff03129e5966945ffbd5c329cfc661b49eb6a5b1a99f6c44f55",
+      "decision": "clean",
+      "polygons": [],
+      "note": "Visually checked for retailer price tags; manufacturer labels and condition retained."
+    },
+    {
+      "imageId": "cmuldqpbu000ntjd08y4uo55u",
+      "itemId": "2DS-0066",
+      "url": "/uploads/products/2ds-0066-clean-af7db7ccd9b0fd7b.webp",
+      "sha256": "af7db7ccd9b0fd7b5d58bcd6df9eb6977efa0e52bd23e95ce0dde38cc14404c1",
+      "decision": "clean",
+      "polygons": [],
+      "note": "Visually checked for retailer price tags; manufacturer labels and condition retained."
+    },
+    {
+      "imageId": "cmuldqpbu000otjd0zfyb2o1s",
+      "itemId": "2DS-0066",
+      "url": "/uploads/products/2ds-0066-aeg-bse-9-6-cordless-drill-2.webp",
+      "sha256": "b7ec51271cb40cb254458937cce51fc6546a19af11a169606bea87cebfaf87bb",
+      "decision": "clean",
+      "polygons": [],
+      "note": "Visually checked for retailer price tags; manufacturer labels and condition retained."
+    },
+    {
+      "imageId": "cmuydlchr0005tjv007278f8r",
+      "itemId": "2DS-0066",
+      "url": "/uploads/products/2ds-0066-aeg-bse-9-6-cordless-drill.webp",
+      "sha256": "589f8f9b9d207743ff5e658a17b9df2228b8a576019b3420b6700d0baabf7399",
+      "decision": "mask",
+      "polygons": [
+        [
+          [
+            0.40375,
+            0.7855133614627285
+          ],
+          [
+            0.71875,
+            0.6729957805907173
+          ],
+          [
+            0.765,
+            0.7313642756680732
+          ],
+          [
+            0.74875,
+            0.7742616033755274
+          ],
+          [
+            0.4675,
+            0.8579465541490858
+          ]
+        ]
+      ],
+      "note": "Visually checked for retailer price tags; manufacturer labels and condition retained."
+    },
+    {
+      "imageId": "cmuldqt9p000rtjd0s3orbu5i",
+      "itemId": "2DS-0067",
+      "url": "/uploads/products/2ds-0067-clean-e537db348de074b8.webp",
+      "sha256": "e537db348de074b8b83fa49ee55bd99e55b786e94d78361a0a8f29437efd0397",
+      "decision": "clean",
+      "polygons": [],
+      "note": "Visually checked for retailer price tags; manufacturer labels and condition retained."
+    },
+    {
+      "imageId": "cmuldqt9p000stjd0zlueixha",
+      "itemId": "2DS-0067",
+      "url": "/uploads/products/2ds-0067-clean-1d276662bee8a9ac.webp",
+      "sha256": "1d276662bee8a9ac7670c7fb79e2fb60b909a47787466ef83a68b15c6143230f",
+      "decision": "clean",
+      "polygons": [],
+      "note": "Visually checked for retailer price tags; manufacturer labels and condition retained."
+    },
+    {
+      "imageId": "cmuydlcig0007tjv06ql3r2wq",
+      "itemId": "2DS-0067",
+      "url": "/uploads/products/2ds-0067-steco-1000w-power-station-with-charger.webp",
+      "sha256": "82919c14d4c7bdbdd8106f0a3f3fb136367270009d2a26cb24e6832986262148",
+      "decision": "mask",
+      "polygons": [
+        [
+          [
+            0.62,
+            0.08222222222222222
+          ],
+          [
+            0.78375,
+            0.08222222222222222
+          ],
+          [
+            0.78375,
+            0.2222222222222222
+          ],
+          [
+            0.62,
+            0.2222222222222222
+          ]
+        ]
+      ],
+      "note": "Visually checked for retailer price tags; manufacturer labels and condition retained."
+    },
+    {
+      "imageId": "cmuydlcih0009tjv0bo1sgaxc",
+      "itemId": "2DS-0067",
+      "url": "/uploads/products/2ds-0067-steco-1000w-power-station-with-charger-2.webp",
+      "sha256": "420a86bc33eee59c72ab180bc80d62796a6e9c35f856dd5b3adc482b8d1980f1",
+      "decision": "mask",
+      "polygons": [
+        [
+          [
+            0.005,
+            0.26230661040787623
+          ],
+          [
+            0.86625,
+            0.2630098452883263
+          ],
+          [
+            0.87375,
+            0.45147679324894513
+          ],
+          [
+            0.8375,
+            0.47890295358649787
+          ],
+          [
+            0.65,
+            0.4880450070323488
+          ],
+          [
+            0.0925,
+            0.48874824191279886
+          ],
+          [
+            0.0125,
+            0.4760900140646976
+          ]
+        ]
+      ],
+      "note": "Visually checked for retailer price tags; manufacturer labels and condition retained."
+    },
+    {
+      "imageId": "cmuldqv93000vtjd0xkh8ww45",
+      "itemId": "2DS-0068",
+      "url": "/uploads/products/2ds-0068-clean-92a2c093e8167af0.webp",
+      "sha256": "92a2c093e8167af0656d08af28fbe12901fa88e5d3b8ecfae5d89da3901f5dcd",
+      "decision": "clean",
+      "polygons": [],
+      "note": "Visually checked for retailer price tags; manufacturer labels and condition retained."
+    },
+    {
+      "imageId": "cmuydlcj3000btjv0a3in3afi",
+      "itemId": "2DS-0068",
+      "url": "/uploads/products/2ds-0068-ryobi-ajp-1480-high-pressure-washer.webp",
+      "sha256": "5c9c80927317a626cec9a415c84d81168bbe84c57aba20f6eee67ca6bcdc6085",
+      "decision": "mask",
+      "polygons": [
+        [
+          [
+            0.35125,
+            0.3649789029535865
+          ],
+          [
+            0.6675,
+            0.3755274261603376
+          ],
+          [
+            0.675,
+            0.4542897327707454
+          ],
+          [
+            0.33875,
+            0.44866385372714485
+          ]
+        ]
+      ],
+      "note": "Visually checked for retailer price tags; manufacturer labels and condition retained."
+    },
+    {
+      "imageId": "cmuldqxfp000ytjd09q68drck",
+      "itemId": "2DS-0069",
+      "url": "/uploads/products/2ds-0069-ryobi-circular-saw.webp",
+      "sha256": "ae275cfb8cc0101cab1edb07a27c494eadb00c4a86b72a016638314580e55eb1",
+      "decision": "mask",
+      "polygons": [
+        [
+          [
+            0.34625,
+            0.5506329113924051
+          ],
+          [
+            0.4375,
+            0.549929676511955
+          ],
+          [
+            0.42,
+            0.7081575246132208
+          ],
+          [
+            0.30375,
+            0.70042194092827
+          ]
+        ],
+        [
+          [
+            0.51375,
+            0.21026722925457103
+          ],
+          [
+            0.7025,
+            0.22081575246132207
+          ],
+          [
+            0.68875,
+            0.2609001406469761
+          ],
+          [
+            0.50125,
+            0.2517580872011252
+          ]
+        ]
+      ],
+      "note": "Visually checked for retailer price tags; manufacturer labels and condition retained."
+    },
+    {
+      "imageId": "cmuldr1bb0011tjd0bn4equwy",
+      "itemId": "2DS-0070",
+      "url": "/uploads/products/2ds-0070-ryobi-hg-2000-heat-gun.webp",
+      "sha256": "c0527c1d250e7f3fea0bea30c18a7629845f75daa668404d5235a5075cbb7335",
+      "decision": "needs-review",
+      "polygons": [],
+      "note": "Partially obscured retailer-style labels behind the shelf; price extent cannot be verified."
+    },
+    {
+      "imageId": "cmuldr1bb0012tjd0ok7oyu8e",
+      "itemId": "2DS-0070",
+      "url": "/uploads/products/2ds-0070-ryobi-hg-2000-heat-gun-2.webp",
+      "sha256": "3cdeb13def4a345735a5cccc3ceea0a9584f1ed49103e883201581152814d5f4",
+      "decision": "clean",
+      "polygons": [],
+      "note": "Visually checked for retailer price tags; manufacturer labels and condition retained."
+    },
+    {
+      "imageId": "cmuldr5dt0015tjd0zlhvf2dy",
+      "itemId": "2DS-0071",
+      "url": "/uploads/products/2ds-0071-ryobi-hid-10-hammer-drill.webp",
+      "sha256": "e71d63168a9ba316b173f8ec08ee0091c8f08e13da6e187785f95c08bf30514e",
+      "decision": "needs-review",
+      "polygons": [],
+      "note": "Faint curved label on the background green tool; needs closer review before masking."
+    },
+    {
+      "imageId": "cmuldr5dt0016tjd0fxi2a21i",
+      "itemId": "2DS-0071",
+      "url": "/uploads/products/2ds-0071-clean-74546f890411bb20.webp",
+      "sha256": "74546f890411bb201d9aa3931a6ea40c217c09eb4a1178997bba77fb3d4f503e",
+      "decision": "clean",
+      "polygons": [],
+      "note": "Visually checked for retailer price tags; manufacturer labels and condition retained."
+    },
+    {
+      "imageId": "cmuydlcma000dtjv017oykixz",
+      "itemId": "2DS-0071",
+      "url": "/uploads/products/2ds-0071-ryobi-hid-10-hammer-drill-2.webp",
+      "sha256": "1f222ec128fc9c44aa5243203adb635e9dbf996e392d10f5e935fa3828897d37",
+      "decision": "mask",
+      "polygons": [
+        [
+          [
+            0.47625,
+            0.5548523206751055
+          ],
+          [
+            0.90625,
+            0.7158931082981715
+          ],
+          [
+            0.78,
+            0.8389592123769339
+          ],
+          [
+            0.33375,
+            0.6575246132208158
+          ]
+        ]
+      ],
+      "note": "Visually checked for retailer price tags; manufacturer labels and condition retained."
+    },
+    {
+      "imageId": "cmuldrb7r0019tjd017ouhp1y",
+      "itemId": "2DS-0072",
+      "url": "/uploads/products/2ds-0072-stramm-sheet-sander.webp",
+      "sha256": "89c73629f2b4e787282572aac1d56df69277030f739d68b4fccc18669202695c",
+      "decision": "clean",
+      "polygons": [],
+      "note": "Visually checked for retailer price tags; manufacturer labels and condition retained."
+    },
+    {
+      "imageId": "cmuldrb7r001atjd0p5hqn603",
+      "itemId": "2DS-0072",
+      "url": "/uploads/products/2ds-0072-stramm-sheet-sander-2.webp",
+      "sha256": "2dfb43bc5ba064205236e2450a79bdb6d6b96efb5e1fc80a39e7b01d0870d165",
+      "decision": "needs-review",
+      "polygons": [],
+      "note": "Clipped retailer-style paper at the top-right edge; no price visible in the remaining fragment."
+    },
+    {
+      "imageId": "cmuldrb7r001btjd07vh1g2zb",
+      "itemId": "2DS-0072",
+      "url": "/uploads/products/2ds-0072-clean-43bb240d6a1b93bc.webp",
+      "sha256": "43bb240d6a1b93bc5b2b912b83d335e683b0a1e9001cb64e9bc01c508a945bfc",
+      "decision": "clean",
+      "polygons": [],
+      "note": "Visually checked for retailer price tags; manufacturer labels and condition retained."
+    },
+    {
+      "imageId": "cmuydlcmw000ftjv0en6r2qeq",
+      "itemId": "2DS-0072",
+      "url": "/uploads/products/2ds-0072-stramm-sheet-sander-3.webp",
+      "sha256": "eab8027814ccca632544a02dc24ec4e76bf66937774f98b6cb922cf2111bb853",
+      "decision": "mask",
+      "polygons": [
+        [
+          [
+            0.285,
+            0.4437412095639944
+          ],
+          [
+            0.4875,
+            0.43952180028129395
+          ],
+          [
+            0.59,
+            0.4781997187060478
+          ],
+          [
+            0.54,
+            0.8417721518987342
+          ],
+          [
+            0.215,
+            0.8277074542897328
+          ],
+          [
+            0.2175,
+            0.6645569620253164
+          ],
+          [
+            0.29375,
+            0.6652601969057665
+          ]
+        ]
+      ],
+      "note": "Visually checked for retailer price tags; manufacturer labels and condition retained."
+    },
+    {
+      "imageId": "cmuldrf9g001etjd00irr2tbv",
+      "itemId": "2DS-0073",
+      "url": "/uploads/products/2ds-0073-red-rhino-rt-d20v-cordless-drill-with-battery-and-charger.webp",
+      "sha256": "20186f0d02f2320655591a1e03c05941feecf9b7b425ece0512cb9ae221f3229",
+      "decision": "mask",
+      "polygons": [
+        [
+          [
+            0.45625,
+            0.2088888888888889
+          ],
+          [
+            0.55,
+            0.18666666666666668
+          ],
+          [
+            0.55875,
+            0.37333333333333335
+          ],
+          [
+            0.47,
+            0.4
+          ]
+        ]
+      ],
+      "note": "Visually checked for retailer price tags; manufacturer labels and condition retained."
+    },
+    {
+      "imageId": "cmuldrf9g001ftjd0l0lolrgv",
+      "itemId": "2DS-0073",
+      "url": "/uploads/products/2ds-0073-red-rhino-rt-d20v-cordless-drill-with-battery-and-charger-2.webp",
+      "sha256": "c0f008367e2af9b15bb97b67cd77d3b19c17727838f7271355de3cd7cd884517",
+      "decision": "mask",
+      "polygons": [
+        [
+          [
+            0.45375,
+            0.54
+          ],
+          [
+            0.5425,
+            0.54
+          ],
+          [
+            0.5425,
+            0.88
+          ],
+          [
+            0.45375,
+            0.88
+          ]
+        ]
+      ],
+      "note": "Visually checked for retailer price tags; manufacturer labels and condition retained."
+    },
+    {
+      "imageId": "cmuldrnc4001itjd0qy6zsaiu",
+      "itemId": "2DS-0074",
+      "url": "/uploads/products/2ds-0074-clean-5e489880caf54b8f.webp",
+      "sha256": "5e489880caf54b8f71746660e1e788214de65b3372708f5933644be211e9972c",
+      "decision": "clean",
+      "polygons": [],
+      "note": "Visually checked for retailer price tags; manufacturer labels and condition retained."
+    },
+    {
+      "imageId": "cmuldrnc4001jtjd0wpi4fnic",
+      "itemId": "2DS-0074",
+      "url": "/uploads/products/2ds-0074-ingco-180a-inverter-welder-with-cables-2.webp",
+      "sha256": "51b5b24443e001707b35e5a2824cfdedcad654d5034e667f5fd9f06055ba55e2",
+      "decision": "mask",
+      "polygons": [
+        [
+          [
+            0.22625,
+            0.10888888888888888
+          ],
+          [
+            0.2975,
+            0.10888888888888888
+          ],
+          [
+            0.26375,
+            0.28
+          ],
+          [
+            0.18625,
+            0.2777777777777778
+          ]
+        ]
+      ],
+      "note": "Visually checked for retailer price tags; manufacturer labels and condition retained."
+    },
+    {
+      "imageId": "cmuldrnc4001ktjd0sg306vz0",
+      "itemId": "2DS-0074",
+      "url": "/uploads/products/2ds-0074-ingco-180a-inverter-welder-with-cables-3.webp",
+      "sha256": "5c6000c3c1291a341d95b3bf72bec9f8df79e4b6ce300e834f8fb722ed4f0f2e",
+      "decision": "clean",
+      "polygons": [],
+      "note": "Visually checked for retailer price tags; manufacturer labels and condition retained."
+    },
+    {
+      "imageId": "cmuldrnc4001ltjd03a7o3dbe",
+      "itemId": "2DS-0074",
+      "url": "/uploads/products/2ds-0074-clean-68d526e654491c9a.webp",
+      "sha256": "68d526e654491c9ae8e9f89e9b18f46cb474a9b6b8d8cfd88b78cea1f7e8f757",
+      "decision": "clean",
+      "polygons": [],
+      "note": "Visually checked for retailer price tags; manufacturer labels and condition retained."
+    },
+    {
+      "imageId": "cmuydlcnz000htjv0lq4sdzyu",
+      "itemId": "2DS-0074",
+      "url": "/uploads/products/2ds-0074-ingco-180a-inverter-welder-with-cables.webp",
+      "sha256": "5e962543df67cf9f53dbfd3dd62c8a4adbc060e785ad571fb48bce72ad4ddb73",
+      "decision": "clean",
+      "polygons": [],
+      "note": "Blank torn sticker remnant retained as actual condition; no retailer price visible."
+    },
+    {
+      "imageId": "cmuydlco2000jtjv0aokkrxsf",
+      "itemId": "2DS-0074",
+      "url": "/uploads/products/2ds-0074-ingco-180a-inverter-welder-with-cables-4.webp",
+      "sha256": "c07e05321dee3e1d62226933b7d67b396e131aeedc6aebeea4cd750a563ff455",
+      "decision": "mask",
+      "polygons": [
+        [
+          [
+            0.28625,
+            0.33263009845288327
+          ],
+          [
+            0.7875,
+            0.3291139240506329
+          ],
+          [
+            0.8125,
+            0.4571026722925457
+          ],
+          [
+            0.29375,
+            0.4676511954992968
+          ]
+        ]
+      ],
+      "note": "Visually checked for retailer price tags; manufacturer labels and condition retained."
+    },
+    {
+      "imageId": "cmuldrtfv001otjd0r8ksuhiw",
+      "itemId": "2DS-0075",
+      "url": "/uploads/products/2ds-0075-ryobi-ed-500-rotary-hammer-in-case.webp",
+      "sha256": "d2cf517f9396f74bfb29ea6dba9bb79c84b76a9c50de1b18d28bb75a601eb53b",
+      "decision": "clean",
+      "polygons": [],
+      "note": "Visually checked for retailer price tags; manufacturer labels and condition retained."
+    },
+    {
+      "imageId": "cmuldrtfv001ptjd09k2cap2e",
+      "itemId": "2DS-0075",
+      "url": "/uploads/products/2ds-0075-ryobi-ed-500-rotary-hammer-in-case-2.webp",
+      "sha256": "44e61c9edf54e800a84d9fc54cdb5ccf26bbbc16cfc94ea09106b05d392964f7",
+      "decision": "clean",
+      "polygons": [],
+      "note": "Visually checked for retailer price tags; manufacturer labels and condition retained."
+    },
+    {
+      "imageId": "cmuldrtfv001qtjd003ojkw6s",
+      "itemId": "2DS-0075",
+      "url": "/uploads/products/2ds-0075-clean-9a1cc4ac9673f763.webp",
+      "sha256": "9a1cc4ac9673f763221903328e16334c49cf9b8aebee2d48e4c6c96a0ec83f9c",
+      "decision": "clean",
+      "polygons": [],
+      "note": "Visually checked for retailer price tags; manufacturer labels and condition retained."
+    },
+    {
+      "imageId": "cmuydlcon000ltjv0095qmgcm",
+      "itemId": "2DS-0075",
+      "url": "/uploads/products/2ds-0075-ryobi-ed-500-rotary-hammer-in-case-3.webp",
+      "sha256": "9c4a472870f334dd398f4fd99334005adf445e0a64fa92def832f7586073d41e",
+      "decision": "mask",
+      "polygons": [
+        [
+          [
+            0.24375,
+            0.4360056258790436
+          ],
+          [
+            0.30125,
+            0.4282700421940928
+          ],
+          [
+            0.38125,
+            0.4247538677918425
+          ],
+          [
+            0.50875,
+            0.4338959212376934
+          ],
+          [
+            0.6225,
+            0.4549929676511955
+          ],
+          [
+            0.62125,
+            0.6223628691983122
+          ],
+          [
+            0.25125,
+            0.6075949367088608
+          ]
+        ]
+      ],
+      "note": "Visually checked for retailer price tags; manufacturer labels and condition retained."
+    },
+    {
+      "imageId": "cmuldrxx8001ttjd0ndg3lfqb",
+      "itemId": "2DS-0076",
+      "url": "/uploads/products/2ds-0076-ryobi-hammer-drill-in-case.webp",
+      "sha256": "6345d7a661c1256e0eb78bfbdd7d5ab86d12af834036e1f18723ea8c6d4d8522",
+      "decision": "mask",
+      "polygons": [
+        [
+          [
+            0.46,
+            0.18073136427566808
+          ],
+          [
+            0.635,
+            0.17369901547116737
+          ],
+          [
+            0.62,
+            0.22433192686357242
+          ],
+          [
+            0.45,
+            0.22925457102672292
+          ]
+        ]
+      ],
+      "note": "Visually checked for retailer price tags; manufacturer labels and condition retained."
+    },
+    {
+      "imageId": "cmuldrxx8001utjd0m12w0qwr",
+      "itemId": "2DS-0076",
+      "url": "/uploads/products/2ds-0076-ryobi-hammer-drill-in-case-2.webp",
+      "sha256": "b2420720591f782dc4e3ca3d28bd0260cec8d0bd1e241f1725e9013bac0715ed",
+      "decision": "mask",
+      "polygons": [
+        [
+          [
+            0.52625,
+            0.7022222222222222
+          ],
+          [
+            0.69875,
+            0.6733333333333333
+          ],
+          [
+            0.7225,
+            0.8311111111111111
+          ],
+          [
+            0.53875,
+            0.8622222222222222
+          ]
+        ]
+      ],
+      "note": "Visually checked for retailer price tags; manufacturer labels and condition retained."
+    },
+    {
+      "imageId": "cmulds40u001xtjd0www0i1fp",
+      "itemId": "2DS-0077",
+      "url": "/uploads/products/2ds-0077-bosch-cordless-drill-with-extra-battery-and-charger.webp",
+      "sha256": "f2e2d9e5bdefdab2450f8f2b40eb5f87f321990485ba56533f1a4bbc15e689a3",
+      "decision": "mask",
+      "polygons": [
+        [
+          [
+            0.6175,
+            0.1877637130801688
+          ],
+          [
+            0.7925,
+            0.22151898734177214
+          ],
+          [
+            0.79375,
+            0.2651195499296765
+          ],
+          [
+            0.61,
+            0.23066104078762306
+          ]
+        ],
+        [
+          [
+            0.26125,
+            0.48523206751054854
+          ],
+          [
+            0.37125,
+            0.4929676511954993
+          ],
+          [
+            0.36625,
+            0.6209563994374121
+          ],
+          [
+            0.25,
+            0.6195499296765119
+          ]
+        ]
+      ],
+      "note": "Visually checked for retailer price tags; manufacturer labels and condition retained."
+    },
+    {
+      "imageId": "cmulds40u001ytjd0jzlcmkvi",
+      "itemId": "2DS-0077",
+      "url": "/uploads/products/2ds-0077-bosch-cordless-drill-with-extra-battery-and-charger-2.webp",
+      "sha256": "68470ae7bc93d9a6d242b1d391dfa95fe215facc4389d96c416fb7c463847552",
+      "decision": "mask",
+      "polygons": [
+        [
+          [
+            0.39375,
+            0.29887482419127986
+          ],
+          [
+            0.6775,
+            0.2974683544303797
+          ],
+          [
+            0.6975,
+            0.6350210970464135
+          ],
+          [
+            0.40125,
+            0.6371308016877637
+          ]
+        ]
+      ],
+      "note": "Visually checked for retailer price tags; manufacturer labels and condition retained."
+    },
+    {
+      "imageId": "cmulds40u001ztjd0qa9z8exh",
+      "itemId": "2DS-0077",
+      "url": "/uploads/products/2ds-0077-bosch-cordless-drill-with-extra-battery-and-charger-3.webp",
+      "sha256": "592ba7f0388b08c6148a35782d9d7fc87cb7094073cd4ed1a7c21ddfe04b47b0",
+      "decision": "mask",
+      "polygons": [
+        [
+          [
+            0.02125,
+            0.5428973277074542
+          ],
+          [
+            0.28625,
+            0.5330520393811533
+          ],
+          [
+            0.30125,
+            0.5977496483825597
+          ],
+          [
+            0.02125,
+            0.6139240506329114
+          ]
+        ]
+      ],
+      "note": "Visually checked for retailer price tags; manufacturer labels and condition retained."
+    },
+    {
+      "imageId": "cmulds6340022tjd0pzidznb9",
+      "itemId": "2DS-0078",
+      "url": "/uploads/products/2ds-0078-mac-africa-welding-machine-with-leads.webp",
+      "sha256": "a07b42c480e8a533fa5f0c7b1380d5e434780f2e6c1a791f07290427feb24386",
+      "decision": "mask",
+      "polygons": [
+        [
+          [
+            0.525,
+            0.31575246132208157
+          ],
+          [
+            0.62375,
+            0.3171589310829817
+          ],
+          [
+            0.65125,
+            0.44233473980309423
+          ],
+          [
+            0.5575,
+            0.4451476793248945
+          ]
+        ]
+      ],
+      "note": "Visually checked for retailer price tags; manufacturer labels and condition retained."
+    },
+    {
+      "imageId": "cmuldsa7y0025tjd0db77dzg2",
+      "itemId": "2DS-0079",
+      "url": "/uploads/products/2ds-0079-harden-77-piece-toolbox.webp",
+      "sha256": "faa00a8e5b4398837ab65ca0525b471c46c3d7d5cf4254b19d4bc29e83726be2",
+      "decision": "mask",
+      "polygons": [
+        [
+          [
+            0.19625,
+            0.0379746835443038
+          ],
+          [
+            0.2475,
+            0.03727144866385373
+          ],
+          [
+            0.24125,
+            0.0850914205344585
+          ],
+          [
+            0.19,
+            0.08649789029535865
+          ]
+        ]
+      ],
+      "note": "Visually checked for retailer price tags; manufacturer labels and condition retained."
+    },
+    {
+      "imageId": "cmuldsa7y0026tjd0h8ojabze",
+      "itemId": "2DS-0079",
+      "url": "/uploads/products/2ds-0079-harden-77-piece-toolbox-2.webp",
+      "sha256": "e22d5ce0c6e539a786e4eb5466c97a81028c5270461f2aab21966634a6486c2f",
+      "decision": "mask",
+      "polygons": [
+        [
+          [
+            0.37375,
+            0.59985935302391
+          ],
+          [
+            0.9175,
+            0.59985935302391
+          ],
+          [
+            0.93125,
+            0.7524613220815752
+          ],
+          [
+            0.8875,
+            0.7777777777777778
+          ],
+          [
+            0.37125,
+            0.7482419127988749
+          ]
+        ]
+      ],
+      "note": "Visually checked for retailer price tags; manufacturer labels and condition retained."
+    },
+    {
+      "imageId": "cmuldse710029tjd0e01oa6ed",
+      "itemId": "2DS-0080",
+      "url": "/uploads/products/2ds-0080-grip-toolbox-with-tools.webp",
+      "sha256": "6e8268dd3a82b5ccdd975439b9f42b9b060f03a5e9e3c7ca61446de6849b0bd1",
+      "decision": "clean",
+      "polygons": [],
+      "note": "Visually checked for retailer price tags; manufacturer labels and condition retained."
+    },
+    {
+      "imageId": "cmuldse71002atjd03g6dfl61",
+      "itemId": "2DS-0080",
+      "url": "/uploads/products/2ds-0080-grip-toolbox-with-tools-2.webp",
+      "sha256": "4d75c4f6c618e2c8ba61f088e47933f4db13e07bf5246bbb6a12f2c87abfe715",
+      "decision": "mask",
+      "polygons": [
+        [
+          [
+            0.2825,
+            0.27111111111111114
+          ],
+          [
+            0.54,
+            0.28888888888888886
+          ],
+          [
+            0.53875,
+            0.5
+          ],
+          [
+            0.28,
+            0.49333333333333335
+          ]
+        ]
+      ],
+      "note": "Visually checked for retailer price tags; manufacturer labels and condition retained."
+    },
+    {
+      "imageId": "cmuldsiby002dtjd0qh7z2t43",
+      "itemId": "2DS-0081",
+      "url": "/uploads/products/2ds-0081-yohe-motorcycle-helmet-size-l.webp",
+      "sha256": "a117f966ced7e895bb302ee018be85ff6d0ae0d6af512d7241939b0c30244aa9",
+      "decision": "mask",
+      "polygons": [
+        [
+          [
+            0.33375,
+            0.379746835443038
+          ],
+          [
+            0.62375,
+            0.379746835443038
+          ],
+          [
+            0.62375,
+            0.46343178621659636
+          ],
+          [
+            0.33375,
+            0.46343178621659636
+          ]
+        ]
+      ],
+      "note": "Visually checked for retailer price tags; manufacturer labels and condition retained."
+    },
+    {
+      "imageId": "cmuldsiby002etjd0azkfmvtw",
+      "itemId": "2DS-0081",
+      "url": "/uploads/products/2ds-0081-yohe-motorcycle-helmet-size-l-2.webp",
+      "sha256": "ebc9b58fbed442884624f250239c77ee70e0c72855f40455f27f3e6f9ff78b02",
+      "decision": "clean",
+      "polygons": [],
+      "note": "Visually checked for retailer price tags; manufacturer labels and condition retained."
+    },
+    {
+      "imageId": "cmuldsm7o002htjd0vmvs2s5f",
+      "itemId": "2DS-0082",
+      "url": "/uploads/products/2ds-0082-grey-motorcycle-helmet.webp",
+      "sha256": "d6f15c16c74d7790ffe4105cd2067ad4d0be59cd7255724d5212632d0727b351",
+      "decision": "clean",
+      "polygons": [],
+      "note": "Visually checked for retailer price tags; manufacturer labels and condition retained."
+    },
+    {
+      "imageId": "cmuldsm7o002itjd0zthox0ww",
+      "itemId": "2DS-0082",
+      "url": "/uploads/products/2ds-0082-grey-motorcycle-helmet-2.webp",
+      "sha256": "e912243777531d6950d8284298831c7e9e17ae9536dfd482d3c35379fbc915ee",
+      "decision": "clean",
+      "polygons": [],
+      "note": "Visually checked for retailer price tags; manufacturer labels and condition retained."
+    },
+    {
+      "imageId": "cmuldso9l002ltjd01lkthag3",
+      "itemId": "2DS-0083",
+      "url": "/uploads/products/2ds-0083-green-graphic-motorcycle-helmet.webp",
+      "sha256": "da8985e374fbbf9fe7375c535e34807779c917dc3be7b6e102b1034b5eb9aff5",
+      "decision": "clean",
+      "polygons": [],
+      "note": "Visually checked for retailer price tags; manufacturer labels and condition retained."
+    },
+    {
+      "imageId": "cmuldsqe4002otjd0nvveflmd",
+      "itemId": "2DS-0084",
+      "url": "/uploads/products/2ds-0084-black-off-road-motorcycle-helmet.webp",
+      "sha256": "38f74e7b35297d2e1f869db4bd39b9d3147e18b2a34462eb59a7c2bc3a4697a3",
+      "decision": "mask",
+      "polygons": [
+        [
+          [
+            0.7925,
+            0.14222222222222222
+          ],
+          [
+            0.86375,
+            0.18444444444444444
+          ],
+          [
+            0.895,
+            0.36
+          ],
+          [
+            0.8,
+            0.3622222222222222
+          ]
+        ],
+        [
+          [
+            0,
+            0.7688888888888888
+          ],
+          [
+            0.105,
+            0.7911111111111111
+          ],
+          [
+            0.13125,
+            0.9244444444444444
+          ],
+          [
+            0.1175,
+            1
+          ],
+          [
+            0,
+            1
+          ]
+        ]
+      ],
+      "note": "Visually checked for retailer price tags; manufacturer labels and condition retained."
+    },
+    {
+      "imageId": "cmuldssf8002rtjd0zy7q5s1f",
+      "itemId": "2DS-0085",
+      "url": "/uploads/products/2ds-0085-vega-motorcycle-helmet-size-xl.webp",
+      "sha256": "ba6b1b4dac793c0d181e47ac987c62b4b2c301d63055bfc6a47c8ddbb0f6d655",
+      "decision": "mask",
+      "polygons": [
+        [
+          [
+            0.4575,
+            0.08444444444444445
+          ],
+          [
+            0.55125,
+            0.06444444444444444
+          ],
+          [
+            0.5625,
+            0.33555555555555555
+          ],
+          [
+            0.455,
+            0.35333333333333333
+          ]
+        ]
+      ],
+      "note": "Visually checked for retailer price tags; manufacturer labels and condition retained."
+    },
+    {
+      "imageId": "cmuldsuf3002utjd02ygejj3t",
+      "itemId": "2DS-0086",
+      "url": "/uploads/products/2ds-0086-black-motorcycle-helmet.webp",
+      "sha256": "96720a38b726dc0a3242f6dfe56ba367f27c6f6a6d08ac938cfce37c7a045003",
+      "decision": "clean",
+      "polygons": [],
+      "note": "Visually checked for retailer price tags; manufacturer labels and condition retained."
+    },
+    {
+      "imageId": "cmuldswbu002xtjd00cvdik3f",
+      "itemId": "2DS-0087",
+      "url": "/uploads/products/2ds-0087-silver-crest-air-fryer.webp",
+      "sha256": "0dfe108548b8fb1fc2ad69b721e5273876922da1d5673699156837181b740775",
+      "decision": "mask",
+      "polygons": [
+        [
+          [
+            0.43,
+            0.6736990154711674
+          ],
+          [
+            0.58375,
+            0.6779184247538678
+          ],
+          [
+            0.5725,
+            0.8030942334739803
+          ],
+          [
+            0.43375,
+            0.79957805907173
+          ]
+        ],
+        [
+          [
+            0.71875,
+            0.008438818565400843
+          ],
+          [
+            0.90875,
+            0.01969057665260197
+          ],
+          [
+            0.88625,
+            0.07876230661040788
+          ],
+          [
+            0.70625,
+            0.06751054852320675
+          ]
+        ]
+      ],
+      "note": "Visually checked for retailer price tags; manufacturer labels and condition retained."
+    },
+    {
+      "imageId": "cmuldsya60030tjd0big440p4",
+      "itemId": "2DS-0088",
+      "url": "/uploads/products/2ds-0088-goldair-air-fryer.webp",
+      "sha256": "cbb9b8329adf3f0a16a0c3f9fc918f05a02de416260e119751e61c0ed844ba8d",
+      "decision": "mask",
+      "polygons": [
+        [
+          [
+            0.39875,
+            0.8115330520393812
+          ],
+          [
+            0.555,
+            0.8087201125175809
+          ],
+          [
+            0.56125,
+            0.9275668073136427
+          ],
+          [
+            0.41125,
+            0.9374120956399438
+          ]
+        ]
+      ],
+      "note": "Visually checked for retailer price tags; manufacturer labels and condition retained."
+    },
+    {
+      "imageId": "cmuldt0980033tjd0suuhl7pk",
+      "itemId": "2DS-0089",
+      "url": "/uploads/products/2ds-0089-o-neal-kids-motorbike-boots.webp",
+      "sha256": "164d70995cb0bc0b1178031b9bdc389d8e1e4b22cde3dc84b2f87525bdcb1d41",
+      "decision": "mask",
+      "polygons": [
+        [
+          [
+            0.14,
+            0.5745428973277075
+          ],
+          [
+            0.24375,
+            0.5724331926863573
+          ],
+          [
+            0.25625,
+            0.7285513361462729
+          ],
+          [
+            0.13125,
+            0.729957805907173
+          ]
+        ],
+        [
+          [
+            0.6975,
+            0.5288326300984529
+          ],
+          [
+            0.8425,
+            0.5407876230661041
+          ],
+          [
+            0.8125,
+            0.6814345991561181
+          ],
+          [
+            0.6875,
+            0.6694796061884669
+          ]
+        ]
+      ],
+      "note": "Visually checked for retailer price tags; manufacturer labels and condition retained."
+    },
+    {
+      "imageId": "cmuldt4680036tjd0onwf7x1u",
+      "itemId": "2DS-0090",
+      "url": "/uploads/products/2ds-0090-red-petrol-chainsaw.webp",
+      "sha256": "84bfab249c73f6147a3879e6d740f0f765491dc6a05d6d3fb0c032aca9dfe8ea",
+      "decision": "mask",
+      "polygons": [
+        [
+          [
+            0.45625,
+            0.3389592123769339
+          ],
+          [
+            0.66125,
+            0.350210970464135
+          ],
+          [
+            0.6575,
+            0.3860759493670886
+          ],
+          [
+            0.45375,
+            0.3790436005625879
+          ]
+        ],
+        [
+          [
+            0.81625,
+            0.34739803094233473
+          ],
+          [
+            0.9275,
+            0.3438818565400844
+          ],
+          [
+            0.93,
+            0.37834036568213786
+          ],
+          [
+            0.855,
+            0.38115330520393814
+          ]
+        ]
+      ],
+      "note": "Visually checked for retailer price tags; manufacturer labels and condition retained."
+    },
+    {
+      "imageId": "cmuldt4680037tjd0h895zc6p",
+      "itemId": "2DS-0090",
+      "url": "/uploads/products/2ds-0090-red-petrol-chainsaw-2.webp",
+      "sha256": "1f6d3364dead4e92e325fcfbff73daeb34146b6a0945403f0eb43608294c4d05",
+      "decision": "mask",
+      "polygons": [
+        [
+          [
+            0.18125,
+            0.6441631504922645
+          ],
+          [
+            0.47625,
+            0.60056258790436
+          ],
+          [
+            0.73125,
+            0.629395218002813
+          ],
+          [
+            0.73875,
+            0.6694796061884669
+          ],
+          [
+            0.7275,
+            0.7081575246132208
+          ],
+          [
+            0.45625,
+            0.7088607594936709
+          ],
+          [
+            0.2,
+            0.7187060478199718
+          ]
+        ]
+      ],
+      "note": "Visually checked for retailer price tags; manufacturer labels and condition retained."
+    },
+    {
+      "imageId": "cmuldt87v003dtjd01yh057jd",
+      "itemId": "2DS-0092",
+      "url": "/uploads/products/2ds-0092-blue-high-pressure-washer.webp",
+      "sha256": "d470d6ba9f299e4da7de44150247bc732f73d054d59d8490298b2ff7c8de031e",
+      "decision": "clean",
+      "polygons": [],
+      "note": "Visually checked for retailer price tags; manufacturer labels and condition retained."
+    },
+    {
+      "imageId": "cmusjr9sl0001tj081jpgpy5k",
+      "itemId": "2DS-0092",
+      "url": "/uploads/products/2ds-0091-pool-pump.webp",
+      "sha256": "d37b1639cd4d5a7ff141c9c85594c7a2dac99a8f29d1512632fedcbfb62c8de7",
+      "decision": "mask",
+      "polygons": [
+        [
+          [
+            0.53625,
+            0.3832630098452883
+          ],
+          [
+            0.645,
+            0.41139240506329117
+          ],
+          [
+            0.51,
+            0.5358649789029536
+          ],
+          [
+            0.4075,
+            0.5049226441631505
+          ]
+        ]
+      ],
+      "note": "Visually checked for retailer price tags; manufacturer labels and condition retained."
+    },
+    {
+      "imageId": "cmuldt97r003gtjd0rss1r03o",
+      "itemId": "2DS-0093",
+      "url": "/uploads/products/2ds-0093-heavy-duty-bench-grinder.webp",
+      "sha256": "79187bc7aa907ab70c7b7795b41a3697ea5cc20bffd5e591b0065e048ef25e0e",
+      "decision": "mask",
+      "polygons": [
+        [
+          [
+            0.45125,
+            0.32978723404255317
+          ],
+          [
+            0.59375,
+            0.32978723404255317
+          ],
+          [
+            0.59375,
+            0.46382978723404256
+          ],
+          [
+            0.45125,
+            0.46382978723404256
+          ]
+        ],
+        [
+          [
+            0.39875,
+            0.8978723404255319
+          ],
+          [
+            0.57375,
+            0.8404255319148937
+          ],
+          [
+            0.59,
+            0.9765957446808511
+          ],
+          [
+            0.42125,
+            1
+          ]
+        ]
+      ],
+      "note": "Visually checked for retailer price tags; manufacturer labels and condition retained."
+    },
+    {
+      "imageId": "cmuldta6x003jtjd0gxsvjpsi",
+      "itemId": "2DS-0094",
+      "url": "/uploads/products/2ds-0094-silver-bench-grinder.webp",
+      "sha256": "4e2b9ee02637b67fd98f9e6bbf8fd3b1663d4088fce32c14f4c425b3054106bd",
+      "decision": "mask",
+      "polygons": [
+        [
+          [
+            0.2875,
+            0.6756756756756757
+          ],
+          [
+            0.47375,
+            0.6756756756756757
+          ],
+          [
+            0.47375,
+            0.8558558558558559
+          ],
+          [
+            0.2875,
+            0.8558558558558559
+          ]
+        ],
+        [
+          [
+            0.39875,
+            0.07882882882882883
+          ],
+          [
+            0.57,
+            0
+          ],
+          [
+            0.59,
+            0.17117117117117117
+          ],
+          [
+            0.42125,
+            0.22297297297297297
+          ]
+        ]
+      ],
+      "note": "Visually checked for retailer price tags; manufacturer labels and condition retained."
+    },
+    {
+      "imageId": "cmuldtb42003mtjd0rqpdpofq",
+      "itemId": "2DS-0095",
+      "url": "/uploads/products/2ds-0095-toyang-ty1068-bench-grinder.webp",
+      "sha256": "5dead5302c4180528e06b322f9ae9ed641f7788775dddd64a609fee7642e3fdd",
+      "decision": "mask",
+      "polygons": [
+        [
+          [
+            0.2875,
+            0
+          ],
+          [
+            0.4725,
+            0
+          ],
+          [
+            0.4725,
+            0.15402843601895735
+          ],
+          [
+            0.2875,
+            0.15402843601895735
+          ]
+        ]
+      ],
+      "note": "Visually checked for retailer price tags; manufacturer labels and condition retained."
+    },
+    {
+      "imageId": "cmuldtd40003ptjd090f50pve",
+      "itemId": "2DS-0096",
+      "url": "/uploads/products/2ds-0096-dca-12v-cordless-ratchet-wrench.webp",
+      "sha256": "ccd2ea374ab2cf389a898c04b4bec91a1f4d696b2f983732a52ea6a8c8304619",
+      "decision": "mask",
+      "polygons": [
+        [
+          [
+            0.615,
+            0.31333333333333335
+          ],
+          [
+            0.8075,
+            0.32222222222222224
+          ],
+          [
+            0.8225,
+            0.4911111111111111
+          ],
+          [
+            0.61875,
+            0.5044444444444445
+          ]
+        ]
+      ],
+      "note": "Dangling background label at the top edge; cannot determine whether it contains a price.",
+      "manualReview": "Dangling background label at the top edge; cannot determine whether it contains a price."
+    },
+    {
+      "imageId": "cmuldthav003stjd08leogmfz",
+      "itemId": "2DS-0097",
+      "url": "/uploads/products/2ds-0097-ryobi-18v-cordless-impact-drill-with-charger-and-three-batteries.webp",
+      "sha256": "414d29ddf317bdcece002e1d6cb51eff004443fe1ff5431be5c574e1b797677f",
+      "decision": "needs-review",
+      "polygons": [],
+      "note": "Retailer item/reference label partly obscured by cables; no visible price to mask."
+    },
+    {
+      "imageId": "cmuldthav003ttjd0ao4bfnrv",
+      "itemId": "2DS-0097",
+      "url": "/uploads/products/2ds-0097-ryobi-18v-cordless-impact-drill-with-charger-and-three-batteries-2.webp",
+      "sha256": "c12da41e62f415aa9733ff22541cfaed750834a8a2b3063c75bd90f832851dc9",
+      "decision": "needs-review",
+      "polygons": [],
+      "note": "Retailer item/reference label partly obscured by cables; no visible price to mask."
+    },
+    {
+      "imageId": "cmuldt65i003atjd07bf0vjef",
+      "itemId": "2DS-0091",
+      "url": "/uploads/products/2ds-0091-pool-pump.webp",
+      "sha256": "d37b1639cd4d5a7ff141c9c85594c7a2dac99a8f29d1512632fedcbfb62c8de7",
+      "decision": "mask",
+      "polygons": [
+        [
+          [
+            0.53625,
+            0.3832630098452883
+          ],
+          [
+            0.645,
+            0.41139240506329117
+          ],
+          [
+            0.51,
+            0.5358649789029536
+          ],
+          [
+            0.4075,
+            0.5049226441631505
+          ]
+        ]
+      ],
+      "note": "Visually checked for retailer price tags; manufacturer labels and condition retained."
+    }
+  ]
+}

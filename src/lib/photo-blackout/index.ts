@@ -167,7 +167,7 @@ export async function renderBlackout(bytes: Buffer, boxes: PriceTagBox[]): Promi
 
   return sharp(bytes)
     .composite([{ input: Buffer.from(svg), top: 0, left: 0 }])
-    .webp({ quality: 86, effort: 4 })
+    .webp({ lossless: true, effort: 4 })
     .toBuffer();
 }
 

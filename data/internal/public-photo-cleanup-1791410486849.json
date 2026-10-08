@@ -1,0 +1,745 @@
+{
+  "checkedOn": "2026-10-07T21:58:13.446Z",
+  "applied": false,
+  "outcomes": [
+    {
+      "productId": "cmul6ntsn0001tjycjmtz17nq",
+      "imageId": "cmul6ntso0002tjycwu1yxqaz",
+      "itemId": "2DS-0045",
+      "url": "/uploads/products/2ds-0045-red-canister-vacuum-cleaner.webp",
+      "outcome": "clean"
+    },
+    {
+      "productId": "cmul6nuii0004tjyczzkv1r52",
+      "imageId": "cmuldtkzb003vtjd0d9d4uq4d",
+      "itemId": "2DS-0046",
+      "url": "/uploads/products/2ds-0046-redmi-a3x-64gb-smartphone-front.webp",
+      "outcome": "clean"
+    },
+    {
+      "productId": "cmul6nuii0004tjyczzkv1r52",
+      "imageId": "cmul6nuij0005tjyci7hv5sx9",
+      "itemId": "2DS-0046",
+      "url": "/uploads/products/2ds-0046-redmi-a3x-64gb-smartphone.webp",
+      "outcome": "clean"
+    },
+    {
+      "productId": "cmul6nv350007tjychgplftlf",
+      "imageId": "cmul6nv350008tjycvj7rf707",
+      "itemId": "2DS-0047",
+      "url": "/uploads/products/2ds-0047-ipad-16gb-with-pouch-and-charger.webp",
+      "outcome": "clean"
+    },
+    {
+      "productId": "cmul6nvpn000atjycz3axtfq0",
+      "imageId": "cmul6nvpn000btjyczdqwpgy4",
+      "itemId": "2DS-0048",
+      "url": "/uploads/products/2ds-0048-playstation-4-console-with-one-controller.webp",
+      "outcome": "clean"
+    },
+    {
+      "productId": "cmul6nwhq000dtjyc6b8bgzpb",
+      "imageId": "cmul6nwhq000etjyczfqyrmek",
+      "itemId": "2DS-0049",
+      "url": "/uploads/products/2ds-0049-titan-ps4-wireless-controller-and-wired-headset.webp",
+      "outcome": "clean"
+    },
+    {
+      "productId": "cmul6nx6f000gtjyc55n24p6v",
+      "imageId": "cmul6nx6f000htjyc3xdbbs6b",
+      "itemId": "2DS-0050",
+      "url": "/uploads/products/2ds-0050-xbox-one-s-all-digital-with-controller-and-cables.webp",
+      "outcome": "clean"
+    },
+    {
+      "productId": "cmul6nxv4000jtjyc5njgb2qj",
+      "imageId": "cmul6nxv4000ktjycp5ji6cur",
+      "itemId": "2DS-0051",
+      "url": "/uploads/products/2ds-0051-playstation-4-console-with-portrait-skin-and-one-controller.webp",
+      "outcome": "clean"
+    },
+    {
+      "productId": "cmul6nyj8000mtjyc8bu3a0pl",
+      "imageId": "cmul6nyj8000ntjycnr89f9bx",
+      "itemId": "2DS-0052",
+      "url": "/uploads/products/2ds-0052-xbox-one-console-with-two-controllers.webp",
+      "outcome": "clean"
+    },
+    {
+      "productId": "cmul6nz55000ptjycjulvsdrd",
+      "imageId": "cmul6nz55000qtjycrgeepryc",
+      "itemId": "2DS-0053",
+      "url": "/uploads/products/2ds-0053-playstation-pulse-3d-wireless-headset.webp",
+      "outcome": "clean"
+    },
+    {
+      "productId": "cmul6nzyu000stjycfelus21z",
+      "imageId": "cmul6nzyu000ttjycet2imaln",
+      "itemId": "2DS-0054",
+      "url": "/uploads/products/2ds-0054-vankyo-leisure-495w-projector.webp",
+      "outcome": "clean"
+    },
+    {
+      "productId": "cmul6o0l1000vtjycodnr50ye",
+      "imageId": "cmul6o0l1000wtjycdwmhf94y",
+      "itemId": "2DS-0055",
+      "url": "/uploads/products/2ds-0055-dell-latitude-e7470-laptop-with-charger.webp",
+      "outcome": "clean"
+    },
+    {
+      "productId": "cmul6o19q000ytjyc9rhgx1e5",
+      "imageId": "cmul6o19q000ztjycn67t09zf",
+      "itemId": "2DS-0056",
+      "url": "/uploads/products/2ds-0056-george-foreman-lean-mean-fat-grilling-machine.webp",
+      "outcome": "clean"
+    },
+    {
+      "productId": "cmul6o20o0011tjycsq6mlp4g",
+      "imageId": "cmul6o20o0012tjychc7emyyp",
+      "itemId": "2DS-0057",
+      "url": "/uploads/products/2ds-0057-bosch-capsule-coffee-machine.webp",
+      "outcome": "clean"
+    },
+    {
+      "productId": "cmul6o4pr0014tjycftgup8ag",
+      "imageId": "cmul6o4pr0015tjyczww91plf",
+      "itemId": "2DS-0058",
+      "url": "/uploads/products/2ds-0058-silver-folding-knife.webp",
+      "outcome": "clean"
+    },
+    {
+      "productId": "cmul6o4pr0014tjycftgup8ag",
+      "imageId": "cmul6o4pr0016tjycckyp8exq",
+      "itemId": "2DS-0058",
+      "url": "/uploads/products/2ds-0058-silver-folding-knife-2.webp",
+      "outcome": "clean"
+    },
+    {
+      "productId": "cmul6o5br0018tjyck7tcb620",
+      "imageId": "cmul6o5br0019tjycyo5d9lyu",
+      "itemId": "2DS-0059",
+      "url": "/uploads/products/2ds-0059-black-puma-wristwatch.webp",
+      "outcome": "clean"
+    },
+    {
+      "productId": "cmuldq75e0001tjd079ixvbqg",
+      "imageId": "cmuldq75e0002tjd0x1phoktr",
+      "itemId": "2DS-0060",
+      "url": "/uploads/products/2ds-0060-clean-40db8b719c2cf3f2.webp",
+      "outcome": "clean"
+    },
+    {
+      "productId": "cmuldq75e0001tjd079ixvbqg",
+      "imageId": "cmuldq75e0003tjd0nru5nuot",
+      "itemId": "2DS-0060",
+      "url": "/uploads/products/2ds-0060-clean-aa882997bc36a263.webp",
+      "outcome": "clean"
+    },
+    {
+      "productId": "cmuldq75e0001tjd079ixvbqg",
+      "imageId": "cmuydlcf20001tjv02te1a18g",
+      "itemId": "2DS-0060",
+      "url": "/uploads/products/2ds-0060-ingco-20v-cordless-drill-with-charger-and-battery.webp",
+      "outcome": "clean"
+    },
+    {
+      "productId": "cmuldq9a20005tjd0rllni07s",
+      "imageId": "cmuldq9a20006tjd0fzaavxlc",
+      "itemId": "2DS-0061",
+      "url": "/uploads/products/2ds-0061-yellow-cordless-polisher-with-pad-and-battery.webp",
+      "outcome": "clean"
+    },
+    {
+      "productId": "cmuldqbd70008tjd0vzf0auog",
+      "imageId": "cmuldqbd70009tjd0qkwuz946",
+      "itemId": "2DS-0062",
+      "url": "/uploads/products/2ds-0062-clean-c69174a97eea8c52.webp",
+      "outcome": "clean"
+    },
+    {
+      "productId": "cmuldqbd70008tjd0vzf0auog",
+      "imageId": "cmuydlcg20003tjv08dui1s20",
+      "itemId": "2DS-0062",
+      "url": "/uploads/products/2ds-0062-black-decker-cordless-drill-with-charger.webp",
+      "outcome": "clean"
+    },
+    {
+      "productId": "cmuldqdkn000btjd0qxs11pfy",
+      "imageId": "cmuldqdkn000ctjd0c4fmvrau",
+      "itemId": "2DS-0063",
+      "url": "/uploads/products/2ds-0063-ryobi-cordless-drill-with-charger.webp",
+      "outcome": "clean"
+    },
+    {
+      "productId": "cmuldqfhi000etjd0okvo7sjw",
+      "imageId": "cmuldqfhi000ftjd0l7wwqxt3",
+      "itemId": "2DS-0064",
+      "url": "/uploads/products/2ds-0064-tork-craft-20v-angle-grinder-with-battery-and-charger.webp",
+      "outcome": "clean"
+    },
+    {
+      "productId": "cmuldql5b000htjd0vb5byeif",
+      "imageId": "cmuldql5b000itjd0cqz7t0by",
+      "itemId": "2DS-0065",
+      "url": "/uploads/products/2ds-0065-ingco-20v-76mm-mini-angle-grinder.webp",
+      "outcome": "clean"
+    },
+    {
+      "productId": "cmuldql5b000htjd0vb5byeif",
+      "imageId": "cmuldql5b000jtjd02qccqllt",
+      "itemId": "2DS-0065",
+      "url": "/uploads/products/2ds-0065-ingco-20v-76mm-mini-angle-grinder-2.webp",
+      "outcome": "clean"
+    },
+    {
+      "productId": "cmuldql5b000htjd0vb5byeif",
+      "imageId": "cmuldql5b000ktjd0esss1x4u",
+      "itemId": "2DS-0065",
+      "url": "/uploads/products/2ds-0065-ingco-20v-76mm-mini-angle-grinder-3.webp",
+      "outcome": "clean"
+    },
+    {
+      "productId": "cmuldqpbu000mtjd0b0nfoknl",
+      "imageId": "cmuldqpbu000ntjd08y4uo55u",
+      "itemId": "2DS-0066",
+      "url": "/uploads/products/2ds-0066-clean-af7db7ccd9b0fd7b.webp",
+      "outcome": "clean"
+    },
+    {
+      "productId": "cmuldqpbu000mtjd0b0nfoknl",
+      "imageId": "cmuldqpbu000otjd0zfyb2o1s",
+      "itemId": "2DS-0066",
+      "url": "/uploads/products/2ds-0066-aeg-bse-9-6-cordless-drill-2.webp",
+      "outcome": "clean"
+    },
+    {
+      "productId": "cmuldqpbu000mtjd0b0nfoknl",
+      "imageId": "cmuydlchr0005tjv007278f8r",
+      "itemId": "2DS-0066",
+      "url": "/uploads/products/2ds-0066-aeg-bse-9-6-cordless-drill.webp",
+      "outcome": "clean"
+    },
+    {
+      "productId": "cmuldqt9p000qtjd0jq5xwftx",
+      "imageId": "cmuldqt9p000rtjd0s3orbu5i",
+      "itemId": "2DS-0067",
+      "url": "/uploads/products/2ds-0067-clean-e537db348de074b8.webp",
+      "outcome": "clean"
+    },
+    {
+      "productId": "cmuldqt9p000qtjd0jq5xwftx",
+      "imageId": "cmuldqt9p000stjd0zlueixha",
+      "itemId": "2DS-0067",
+      "url": "/uploads/products/2ds-0067-clean-1d276662bee8a9ac.webp",
+      "outcome": "clean"
+    },
+    {
+      "productId": "cmuldqt9p000qtjd0jq5xwftx",
+      "imageId": "cmuydlcig0007tjv06ql3r2wq",
+      "itemId": "2DS-0067",
+      "url": "/uploads/products/2ds-0067-steco-1000w-power-station-with-charger.webp",
+      "outcome": "masked",
+      "boxes": [
+        {
+          "x0": 0.6099583333333334,
+          "y0": 0.06911111111111111,
+          "x1": 0.8129583333333333,
+          "y1": 0.23088888888888887
+        }
+      ],
+      "matchedText": "EZ Paw WN > A RG 4 0 ER S029437A R 1950.00"
+    },
+    {
+      "productId": "cmuldqt9p000qtjd0jq5xwftx",
+      "imageId": "cmuydlcih0009tjv0bo1sgaxc",
+      "itemId": "2DS-0067",
+      "url": "/uploads/products/2ds-0067-steco-1000w-power-station-with-charger-2.webp",
+      "outcome": "masked",
+      "boxes": [
+        {
+          "x0": 0,
+          "y0": 0.24281359906213368,
+          "x1": 0.9230833333333334,
+          "y1": 0.5027901524032825
+        }
+      ],
+      "matchedText": "EZ Pawn ECO 1000W POWERSTATION WITH CHARGER LER TER KNN S029437A R 1 950.00"
+    },
+    {
+      "productId": "cmuldqv93000utjd0817rkpem",
+      "imageId": "cmuldqv93000vtjd0xkh8ww45",
+      "itemId": "2DS-0068",
+      "url": "/uploads/products/2ds-0068-clean-92a2c093e8167af0.webp",
+      "outcome": "clean"
+    },
+    {
+      "productId": "cmuldqv93000utjd0817rkpem",
+      "imageId": "cmuydlcj3000btjv0a3in3afi",
+      "itemId": "2DS-0068",
+      "url": "/uploads/products/2ds-0068-ryobi-ajp-1480-high-pressure-washer.webp",
+      "outcome": "clean"
+    },
+    {
+      "productId": "cmuldqxfp000xtjd0ikfsfdly",
+      "imageId": "cmuldqxfp000ytjd09q68drck",
+      "itemId": "2DS-0069",
+      "url": "/uploads/products/2ds-0069-ryobi-circular-saw.webp",
+      "outcome": "clean"
+    },
+    {
+      "productId": "cmuldr1bb0010tjd0rr3bnvow",
+      "imageId": "cmuldr1bb0011tjd0bn4equwy",
+      "itemId": "2DS-0070",
+      "url": "/uploads/products/2ds-0070-ryobi-hg-2000-heat-gun.webp",
+      "outcome": "clean"
+    },
+    {
+      "productId": "cmuldr1bb0010tjd0rr3bnvow",
+      "imageId": "cmuldr1bb0012tjd0ok7oyu8e",
+      "itemId": "2DS-0070",
+      "url": "/uploads/products/2ds-0070-ryobi-hg-2000-heat-gun-2.webp",
+      "outcome": "clean"
+    },
+    {
+      "productId": "cmuldr5dt0014tjd0a1ustyvx",
+      "imageId": "cmuldr5dt0015tjd0zlhvf2dy",
+      "itemId": "2DS-0071",
+      "url": "/uploads/products/2ds-0071-ryobi-hid-10-hammer-drill.webp",
+      "outcome": "clean"
+    },
+    {
+      "productId": "cmuldr5dt0014tjd0a1ustyvx",
+      "imageId": "cmuldr5dt0016tjd0fxi2a21i",
+      "itemId": "2DS-0071",
+      "url": "/uploads/products/2ds-0071-clean-74546f890411bb20.webp",
+      "outcome": "clean"
+    },
+    {
+      "productId": "cmuldr5dt0014tjd0a1ustyvx",
+      "imageId": "cmuydlcma000dtjv017oykixz",
+      "itemId": "2DS-0071",
+      "url": "/uploads/products/2ds-0071-ryobi-hid-10-hammer-drill-2.webp",
+      "outcome": "clean"
+    },
+    {
+      "productId": "cmuldrb7r0018tjd0dt5uqgfr",
+      "imageId": "cmuldrb7r0019tjd017ouhp1y",
+      "itemId": "2DS-0072",
+      "url": "/uploads/products/2ds-0072-stramm-sheet-sander.webp",
+      "outcome": "masked",
+      "boxes": [
+        {
+          "x0": 0.27875,
+          "y0": 0,
+          "x1": 0.55875,
+          "y1": 0.09814814814814814
+        }
+      ],
+      "matchedText": "| » -— w P © sS026244A R 1a8y on"
+    },
+    {
+      "productId": "cmuldrb7r0018tjd0dt5uqgfr",
+      "imageId": "cmuldrb7r001atjd0p5hqn603",
+      "itemId": "2DS-0072",
+      "url": "/uploads/products/2ds-0072-stramm-sheet-sander-2.webp",
+      "outcome": "clean"
+    },
+    {
+      "productId": "cmuldrb7r0018tjd0dt5uqgfr",
+      "imageId": "cmuldrb7r001btjd07vh1g2zb",
+      "itemId": "2DS-0072",
+      "url": "/uploads/products/2ds-0072-clean-43bb240d6a1b93bc.webp",
+      "outcome": "clean"
+    },
+    {
+      "productId": "cmuldrb7r0018tjd0dt5uqgfr",
+      "imageId": "cmuydlcmw000ftjv0en6r2qeq",
+      "itemId": "2DS-0072",
+      "url": "/uploads/products/2ds-0072-stramm-sheet-sander-3.webp",
+      "outcome": "clean"
+    },
+    {
+      "productId": "cmuldrf9g001dtjd08ycz29vd",
+      "imageId": "cmuldrf9g001etjd00irr2tbv",
+      "itemId": "2DS-0073",
+      "url": "/uploads/products/2ds-0073-red-rhino-rt-d20v-cordless-drill-with-battery-and-charger.webp",
+      "outcome": "clean"
+    },
+    {
+      "productId": "cmuldrf9g001dtjd08ycz29vd",
+      "imageId": "cmuldrf9g001ftjd0l0lolrgv",
+      "itemId": "2DS-0073",
+      "url": "/uploads/products/2ds-0073-red-rhino-rt-d20v-cordless-drill-with-battery-and-charger-2.webp",
+      "outcome": "clean"
+    },
+    {
+      "productId": "cmuldrnc4001htjd0do66doem",
+      "imageId": "cmuldrnc4001itjd0qy6zsaiu",
+      "itemId": "2DS-0074",
+      "url": "/uploads/products/2ds-0074-clean-5e489880caf54b8f.webp",
+      "outcome": "clean"
+    },
+    {
+      "productId": "cmuldrnc4001htjd0do66doem",
+      "imageId": "cmuldrnc4001jtjd0wpi4fnic",
+      "itemId": "2DS-0074",
+      "url": "/uploads/products/2ds-0074-ingco-180a-inverter-welder-with-cables-2.webp",
+      "outcome": "clean"
+    },
+    {
+      "productId": "cmuldrnc4001htjd0do66doem",
+      "imageId": "cmuldrnc4001ktjd0sg306vz0",
+      "itemId": "2DS-0074",
+      "url": "/uploads/products/2ds-0074-ingco-180a-inverter-welder-with-cables-3.webp",
+      "outcome": "clean"
+    },
+    {
+      "productId": "cmuldrnc4001htjd0do66doem",
+      "imageId": "cmuldrnc4001ltjd03a7o3dbe",
+      "itemId": "2DS-0074",
+      "url": "/uploads/products/2ds-0074-clean-68d526e654491c9a.webp",
+      "outcome": "clean"
+    },
+    {
+      "productId": "cmuldrnc4001htjd0do66doem",
+      "imageId": "cmuydlcnz000htjv0lq4sdzyu",
+      "itemId": "2DS-0074",
+      "url": "/uploads/products/2ds-0074-ingco-180a-inverter-welder-with-cables.webp",
+      "outcome": "clean"
+    },
+    {
+      "productId": "cmuldrnc4001htjd0do66doem",
+      "imageId": "cmuydlco2000jtjv0aokkrxsf",
+      "itemId": "2DS-0074",
+      "url": "/uploads/products/2ds-0074-ingco-180a-inverter-welder-with-cables-4.webp",
+      "outcome": "masked",
+      "boxes": [
+        {
+          "x0": 0.295875,
+          "y0": 0.31505275498241503,
+          "x1": 0.8395416666666666,
+          "y1": 0.47392731535756155
+        }
+      ],
+      "matchedText": "wiki A 029227A R 1 295.00"
+    },
+    {
+      "productId": "cmuldrtfu001ntjd0xkaar168",
+      "imageId": "cmuldrtfv001otjd0r8ksuhiw",
+      "itemId": "2DS-0075",
+      "url": "/uploads/products/2ds-0075-ryobi-ed-500-rotary-hammer-in-case.webp",
+      "outcome": "clean"
+    },
+    {
+      "productId": "cmuldrtfu001ntjd0xkaar168",
+      "imageId": "cmuldrtfv001ptjd09k2cap2e",
+      "itemId": "2DS-0075",
+      "url": "/uploads/products/2ds-0075-ryobi-ed-500-rotary-hammer-in-case-2.webp",
+      "outcome": "clean"
+    },
+    {
+      "productId": "cmuldrtfu001ntjd0xkaar168",
+      "imageId": "cmuldrtfv001qtjd003ojkw6s",
+      "itemId": "2DS-0075",
+      "url": "/uploads/products/2ds-0075-clean-9a1cc4ac9673f763.webp",
+      "outcome": "clean"
+    },
+    {
+      "productId": "cmuldrtfu001ntjd0xkaar168",
+      "imageId": "cmuydlcon000ltjv0095qmgcm",
+      "itemId": "2DS-0075",
+      "url": "/uploads/products/2ds-0075-ryobi-ed-500-rotary-hammer-in-case-3.webp",
+      "outcome": "masked",
+      "boxes": [
+        {
+          "x0": 0.21670833333333334,
+          "y0": 0.4100820633059789,
+          "x1": 0.6437083333333333,
+          "y1": 0.6332942555685814
+        }
+      ],
+      "matchedText": "EZ Pawn MER DRILL IN CASE . | LKN in ,"
+    },
+    {
+      "productId": "cmuldrxx8001stjd034xbte15",
+      "imageId": "cmuldrxx8001ttjd0ndg3lfqb",
+      "itemId": "2DS-0076",
+      "url": "/uploads/products/2ds-0076-ryobi-hammer-drill-in-case.webp",
+      "outcome": "clean"
+    },
+    {
+      "productId": "cmuldrxx8001stjd034xbte15",
+      "imageId": "cmuldrxx8001utjd0m12w0qwr",
+      "itemId": "2DS-0076",
+      "url": "/uploads/products/2ds-0076-ryobi-hammer-drill-in-case-2.webp",
+      "outcome": "masked",
+      "boxes": [
+        {
+          "x0": 0.513125,
+          "y0": 0.662962962962963,
+          "x1": 0.7347916666666666,
+          "y1": 0.8703703703703703
+        }
+      ],
+      "matchedText": "\\l LRT ANN §028440A R 795.00"
+    },
+    {
+      "productId": "cmulds40u001wtjd0xrcfycz9",
+      "imageId": "cmulds40u001xtjd0www0i1fp",
+      "itemId": "2DS-0077",
+      "url": "/uploads/products/2ds-0077-bosch-cordless-drill-with-extra-battery-and-charger.webp",
+      "outcome": "masked",
+      "boxes": [
+        {
+          "x0": 0.5969583333333333,
+          "y0": 0.18168815943728017,
+          "x1": 0.8092916666666667,
+          "y1": 0.26966002344665885
+        }
+      ],
+      "matchedText": "Lf Wy I, IT 202715, , R 595 00 ("
+    },
+    {
+      "productId": "cmulds40u001wtjd0xrcfycz9",
+      "imageId": "cmulds40u001ytjd0jzlcmkvi",
+      "itemId": "2DS-0077",
+      "url": "/uploads/products/2ds-0077-bosch-cordless-drill-with-extra-battery-and-charger-2.webp",
+      "outcome": "needs-review",
+      "reason": "Price-like text reads on the frame but no confirmed tag region; mask it by hand in admin."
+    },
+    {
+      "productId": "cmulds40u001wtjd0xrcfycz9",
+      "imageId": "cmulds40u001ztjd0qa9z8exh",
+      "itemId": "2DS-0077",
+      "url": "/uploads/products/2ds-0077-bosch-cordless-drill-with-extra-battery-and-charger-3.webp",
+      "outcome": "clean"
+    },
+    {
+      "productId": "cmulds6340021tjd0v1gwdc53",
+      "imageId": "cmulds6340022tjd0pzidznb9",
+      "itemId": "2DS-0078",
+      "url": "/uploads/products/2ds-0078-mac-africa-welding-machine-with-leads.webp",
+      "outcome": "clean"
+    },
+    {
+      "productId": "cmuldsa7y0024tjd09ix8wejb",
+      "imageId": "cmuldsa7y0025tjd0db77dzg2",
+      "itemId": "2DS-0079",
+      "url": "/uploads/products/2ds-0079-harden-77-piece-toolbox.webp",
+      "outcome": "clean"
+    },
+    {
+      "productId": "cmuldsa7y0024tjd09ix8wejb",
+      "imageId": "cmuldsa7y0026tjd0h8ojabze",
+      "itemId": "2DS-0079",
+      "url": "/uploads/products/2ds-0079-harden-77-piece-toolbox-2.webp",
+      "outcome": "clean"
+    },
+    {
+      "productId": "cmuldse710028tjd0n6jacmtq",
+      "imageId": "cmuldse710029tjd0e01oa6ed",
+      "itemId": "2DS-0080",
+      "url": "/uploads/products/2ds-0080-grip-toolbox-with-tools.webp",
+      "outcome": "clean"
+    },
+    {
+      "productId": "cmuldse710028tjd0n6jacmtq",
+      "imageId": "cmuldse71002atjd03g6dfl61",
+      "itemId": "2DS-0080",
+      "url": "/uploads/products/2ds-0080-grip-toolbox-with-tools-2.webp",
+      "outcome": "masked",
+      "boxes": [
+        {
+          "x0": 0.265625,
+          "y0": 0.25244444444444447,
+          "x1": 0.5572916666666666,
+          "y1": 0.5179259259259259
+        }
+      ],
+      "matchedText": "EZ Pawn GRIP TOOL BOX WITH COMPLETE TOOLS U0 RE EET ANN S029378A R 795.00"
+    },
+    {
+      "productId": "cmuldsiby002ctjd0ef93qzxz",
+      "imageId": "cmuldsiby002dtjd0qh7z2t43",
+      "itemId": "2DS-0081",
+      "url": "/uploads/products/2ds-0081-yohe-motorcycle-helmet-size-l.webp",
+      "outcome": "clean"
+    },
+    {
+      "productId": "cmuldsiby002ctjd0ef93qzxz",
+      "imageId": "cmuldsiby002etjd0azkfmvtw",
+      "itemId": "2DS-0081",
+      "url": "/uploads/products/2ds-0081-yohe-motorcycle-helmet-size-l-2.webp",
+      "outcome": "clean"
+    },
+    {
+      "productId": "cmuldsm7o002gtjd0fvty4rdh",
+      "imageId": "cmuldsm7o002htjd0vmvs2s5f",
+      "itemId": "2DS-0082",
+      "url": "/uploads/products/2ds-0082-grey-motorcycle-helmet.webp",
+      "outcome": "clean"
+    },
+    {
+      "productId": "cmuldsm7o002gtjd0fvty4rdh",
+      "imageId": "cmuldsm7o002itjd0zthox0ww",
+      "itemId": "2DS-0082",
+      "url": "/uploads/products/2ds-0082-grey-motorcycle-helmet-2.webp",
+      "outcome": "clean"
+    },
+    {
+      "productId": "cmuldso9l002ktjd05ah26hh8",
+      "imageId": "cmuldso9l002ltjd01lkthag3",
+      "itemId": "2DS-0083",
+      "url": "/uploads/products/2ds-0083-green-graphic-motorcycle-helmet.webp",
+      "outcome": "clean"
+    },
+    {
+      "productId": "cmuldsqe4002ntjd0nnvk6k1u",
+      "imageId": "cmuldsqe4002otjd0nvveflmd",
+      "itemId": "2DS-0084",
+      "url": "/uploads/products/2ds-0084-black-off-road-motorcycle-helmet.webp",
+      "outcome": "clean"
+    },
+    {
+      "productId": "cmuldssf8002qtjd0ai2mp3dr",
+      "imageId": "cmuldssf8002rtjd0zy7q5s1f",
+      "itemId": "2DS-0085",
+      "url": "/uploads/products/2ds-0085-vega-motorcycle-helmet-size-xl.webp",
+      "outcome": "clean"
+    },
+    {
+      "productId": "cmuldsuf3002ttjd0hecl3wvb",
+      "imageId": "cmuldsuf3002utjd02ygejj3t",
+      "itemId": "2DS-0086",
+      "url": "/uploads/products/2ds-0086-black-motorcycle-helmet.webp",
+      "outcome": "clean"
+    },
+    {
+      "productId": "cmuldswbu002wtjd0orjwnvn0",
+      "imageId": "cmuldswbu002xtjd00cvdik3f",
+      "itemId": "2DS-0087",
+      "url": "/uploads/products/2ds-0087-silver-crest-air-fryer.webp",
+      "outcome": "clean"
+    },
+    {
+      "productId": "cmuldsya6002ztjd0l1yx0rtx",
+      "imageId": "cmuldsya60030tjd0big440p4",
+      "itemId": "2DS-0088",
+      "url": "/uploads/products/2ds-0088-goldair-air-fryer.webp",
+      "outcome": "clean"
+    },
+    {
+      "productId": "cmuldt0980032tjd0gsb0awoa",
+      "imageId": "cmuldt0980033tjd0suuhl7pk",
+      "itemId": "2DS-0089",
+      "url": "/uploads/products/2ds-0089-o-neal-kids-motorbike-boots.webp",
+      "outcome": "clean"
+    },
+    {
+      "productId": "cmuldt4680035tjd0nihls6rw",
+      "imageId": "cmuldt4680036tjd0onwf7x1u",
+      "itemId": "2DS-0090",
+      "url": "/uploads/products/2ds-0090-red-petrol-chainsaw.webp",
+      "outcome": "clean"
+    },
+    {
+      "productId": "cmuldt4680035tjd0nihls6rw",
+      "imageId": "cmuldt4680037tjd0h895zc6p",
+      "itemId": "2DS-0090",
+      "url": "/uploads/products/2ds-0090-red-petrol-chainsaw-2.webp",
+      "outcome": "masked",
+      "boxes": [
+        {
+          "x0": 0.15241666666666667,
+          "y0": 0.5969284876905041,
+          "x1": 0.7684166666666667,
+          "y1": 0.7242907385697538
+        }
+      ],
+      "matchedText": "MRI SO283T7T6A R 895 00"
+    },
+    {
+      "productId": "cmuldt87v003ctjd0whp45nwg",
+      "imageId": "cmuldt87v003dtjd01yh057jd",
+      "itemId": "2DS-0092",
+      "url": "/uploads/products/2ds-0092-blue-high-pressure-washer.webp",
+      "outcome": "clean"
+    },
+    {
+      "productId": "cmuldt87v003ctjd0whp45nwg",
+      "imageId": "cmusjr9sl0001tj081jpgpy5k",
+      "itemId": "2DS-0092",
+      "url": "/uploads/products/2ds-0091-pool-pump.webp",
+      "outcome": "clean"
+    },
+    {
+      "productId": "cmuldt97r003ftjd0nch4n7r4",
+      "imageId": "cmuldt97r003gtjd0rss1r03o",
+      "itemId": "2DS-0093",
+      "url": "/uploads/products/2ds-0093-heavy-duty-bench-grinder.webp",
+      "outcome": "clean"
+    },
+    {
+      "productId": "cmuldta6x003itjd00v4jn088",
+      "imageId": "cmuldta6x003jtjd0gxsvjpsi",
+      "itemId": "2DS-0094",
+      "url": "/uploads/products/2ds-0094-silver-bench-grinder.webp",
+      "outcome": "masked",
+      "boxes": [
+        {
+          "x0": 0.27562499999999995,
+          "y0": 0.6582022471910112,
+          "x1": 0.4972916666666667,
+          "y1": 0.9560299625468165
+        }
+      ],
+      "matchedText": "| EZ Pawn TO YANG BENCH GRINDER TY 1068 / 0/0 0A ny. S027095A R ssp"
+    },
+    {
+      "productId": "cmuldtb42003ltjd0551rw2ml",
+      "imageId": "cmuldtb42003mtjd0rqpdpofq",
+      "itemId": "2DS-0095",
+      "url": "/uploads/products/2ds-0095-toyang-ty1068-bench-grinder.webp",
+      "outcome": "masked",
+      "boxes": [
+        {
+          "x0": 0.27562499999999995,
+          "y0": 0,
+          "x1": 0.4972916666666667,
+          "y1": 0.25976284584980236
+        }
+      ],
+      "matchedText": "= Fawn f bY TO YANG BENCH GRINDER TY 1068 py 0/0 A OO HE Ln | S027095A R 495.0 4 = » \\"
+    },
+    {
+      "productId": "cmuldtd3z003otjd0by0ufmtp",
+      "imageId": "cmuldtd40003ptjd090f50pve",
+      "itemId": "2DS-0096",
+      "url": "/uploads/products/2ds-0096-dca-12v-cordless-ratchet-wrench.webp",
+      "outcome": "masked",
+      "boxes": [
+        {
+          "x0": 0.6023333333333334,
+          "y0": 0.3037037037037037,
+          "x1": 0.831,
+          "y1": 0.5111111111111111
+        }
+      ],
+      "matchedText": "TTT | S028915A R 1385.00"
+    },
+    {
+      "productId": "cmuldthav003rtjd0sbfteili",
+      "imageId": "cmuldthav003stjd08leogmfz",
+      "itemId": "2DS-0097",
+      "url": "/uploads/products/2ds-0097-ryobi-18v-cordless-impact-drill-with-charger-and-three-batteries.webp",
+      "outcome": "clean"
+    },
+    {
+      "productId": "cmuldthav003rtjd0sbfteili",
+      "imageId": "cmuldthav003ttjd0ao4bfnrv",
+      "itemId": "2DS-0097",
+      "url": "/uploads/products/2ds-0097-ryobi-18v-cordless-impact-drill-with-charger-and-three-batteries-2.webp",
+      "outcome": "clean"
+    }
+  ]
+}

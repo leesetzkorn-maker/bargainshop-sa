@@ -22,11 +22,22 @@ public/uploads/products/*
 # unreviewed AI edit candidates (regenerated on demand, never source)
 public/uploads/ai/
 
+# PRIVATE supplier costs — never tracked, never uploaded (real purchase prices)
+data/internal/catalogue-completion.json
+data/internal/ezpawn-intake.json
+data/internal/ezpawn-source-catalogue.json
+data/internal/launch-catalogue.json
+data/internal/grok-catalogue-reconcile-*.json
+data/internal/grok-product-audit.json
+scripts/import/import-ezpawn.ts
+scripts/import/import-ezpawn-folder.ts
+
 # Private operational backups and full-resolution photo originals
 data/internal/backups/
 data/internal/photo-originals/
 data/internal/photo-review/originals/
 data/internal/photo-review/candidates/
+data/internal/photo-cleanup-review/
 # Pristine copies that the mask editor renders from (regenerated on demand;
 # the ORIGINAL archives are never involved in masking)
 data/masks-clean/

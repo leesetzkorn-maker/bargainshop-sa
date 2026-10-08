@@ -53,13 +53,13 @@ export type TestingStatus = (typeof TESTING_STATUSES)[number];
 
 export const TESTING_STATUS_LABELS: Record<TestingStatus, string> = {
   NOT_TESTED: "Not yet tested",
-  TESTED_AND_WORKING: "Tested & working",
+  TESTED_AND_WORKING: "Tested and working",
 };
 
 /** Short badge text. Never implies more than the status does. */
 export const TESTING_STATUS_BADGE: Record<TestingStatus, string> = {
   NOT_TESTED: "Testing required",
-  TESTED_AND_WORKING: "Tested & working",
+  TESTED_AND_WORKING: "Tested and working",
 };
 
 /**
@@ -74,7 +74,7 @@ export const TESTING_STATUS_EXPLANATION: Record<TestingStatus, string> = {
   NOT_TESTED:
     "Testing required. The store has not confirmed a physical check of this item yet. It is not described as tested, refurbished, or new.",
   TESTED_AND_WORKING:
-    "Tested and confirmed working before listing. The item was tested by the seller before it was listed and dispatched. This does not mean it is refurbished, professionally serviced, guaranteed, or equivalent to a new product.",
+    "Tested and working. Pre-owned item; cosmetic wear and any recorded limitations remain as described.",
 };
 
 export function normaliseTestingStatus(value: string): TestingStatus {

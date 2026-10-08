@@ -1,0 +1,384 @@
+{
+  "checkedOn": "2026-10-08T12:31:15.418Z",
+  "pages": [
+    {
+      "itemId": "2DS-0045",
+      "route": "/product/red-canister-vacuum-cleaner",
+      "testedBadge": true,
+      "conditionNotePreserved": true
+    },
+    {
+      "itemId": "2DS-0046",
+      "route": "/product/redmi-a3x-64gb-smartphone",
+      "testedBadge": true,
+      "conditionNotePreserved": true
+    },
+    {
+      "itemId": "2DS-0047",
+      "route": "/product/ipad-16gb-with-pouch-and-charger",
+      "testedBadge": true,
+      "conditionNotePreserved": true
+    },
+    {
+      "itemId": "2DS-0048",
+      "route": "/product/playstation-4-console-with-one-controller",
+      "testedBadge": true,
+      "conditionNotePreserved": true
+    },
+    {
+      "itemId": "2DS-0049",
+      "route": "/product/titan-ps4-wireless-controller-and-wired-headset",
+      "testedBadge": true,
+      "conditionNotePreserved": true
+    },
+    {
+      "itemId": "2DS-0050",
+      "route": "/product/xbox-one-s-all-digital-with-controller-and-cables",
+      "testedBadge": true,
+      "conditionNotePreserved": true
+    },
+    {
+      "itemId": "2DS-0051",
+      "route": "/product/playstation-4-console-with-portrait-skin-and-one-controller",
+      "testedBadge": true,
+      "conditionNotePreserved": true
+    },
+    {
+      "itemId": "2DS-0052",
+      "route": "/product/xbox-one-console-with-two-controllers",
+      "testedBadge": true,
+      "conditionNotePreserved": true
+    },
+    {
+      "itemId": "2DS-0053",
+      "route": "/product/playstation-pulse-3d-wireless-headset",
+      "testedBadge": true,
+      "conditionNotePreserved": true
+    },
+    {
+      "itemId": "2DS-0054",
+      "route": "/product/vankyo-leisure-495w-projector",
+      "testedBadge": true,
+      "conditionNotePreserved": true
+    },
+    {
+      "itemId": "2DS-0055",
+      "route": "/product/dell-latitude-e7470-laptop-with-charger",
+      "testedBadge": true,
+      "conditionNotePreserved": true
+    },
+    {
+      "itemId": "2DS-0056",
+      "route": "/product/george-foreman-lean-mean-fat-grilling-machine",
+      "testedBadge": true,
+      "conditionNotePreserved": true
+    },
+    {
+      "itemId": "2DS-0057",
+      "route": "/product/bosch-capsule-coffee-machine",
+      "testedBadge": true,
+      "conditionNotePreserved": true
+    },
+    {
+      "itemId": "2DS-0058",
+      "route": "/product/silver-folding-knife",
+      "testedBadge": true,
+      "conditionNotePreserved": true
+    },
+    {
+      "itemId": "2DS-0059",
+      "route": "/product/black-puma-wristwatch",
+      "testedBadge": true,
+      "conditionNotePreserved": true
+    },
+    {
+      "itemId": "2DS-0060",
+      "route": "/product/ingco-20v-cordless-drill-with-charger-and-battery",
+      "testedBadge": true,
+      "conditionNotePreserved": true
+    },
+    {
+      "itemId": "2DS-0061",
+      "route": "/product/yellow-cordless-polisher-with-pad-and-battery",
+      "testedBadge": true,
+      "conditionNotePreserved": true
+    },
+    {
+      "itemId": "2DS-0062",
+      "route": "/product/black-decker-cordless-drill-with-charger",
+      "testedBadge": true,
+      "conditionNotePreserved": true
+    },
+    {
+      "itemId": "2DS-0063",
+      "route": "/product/ryobi-cordless-drill-with-charger",
+      "testedBadge": true,
+      "conditionNotePreserved": true
+    },
+    {
+      "itemId": "2DS-0064",
+      "route": "/product/tork-craft-20v-angle-grinder-with-battery-and-charger",
+      "testedBadge": true,
+      "conditionNotePreserved": true
+    },
+    {
+      "itemId": "2DS-0065",
+      "route": "/product/ingco-20v-76mm-mini-angle-grinder",
+      "testedBadge": true,
+      "conditionNotePreserved": true
+    },
+    {
+      "itemId": "2DS-0066",
+      "route": "/product/aeg-bse-9-6-cordless-drill",
+      "testedBadge": true,
+      "conditionNotePreserved": true
+    },
+    {
+      "itemId": "2DS-0067",
+      "route": "/product/steco-1000w-power-station-with-charger",
+      "testedBadge": true,
+      "conditionNotePreserved": true
+    },
+    {
+      "itemId": "2DS-0068",
+      "route": "/product/ryobi-ajp-1480-high-pressure-washer",
+      "testedBadge": true,
+      "conditionNotePreserved": true
+    },
+    {
+      "itemId": "2DS-0069",
+      "route": "/product/ryobi-circular-saw",
+      "testedBadge": true,
+      "conditionNotePreserved": true
+    },
+    {
+      "itemId": "2DS-0070",
+      "route": "/product/ryobi-hg-2000-heat-gun",
+      "testedBadge": true,
+      "conditionNotePreserved": true
+    },
+    {
+      "itemId": "2DS-0071",
+      "route": "/product/ryobi-hid-10-hammer-drill",
+      "testedBadge": true,
+      "conditionNotePreserved": true
+    },
+    {
+      "itemId": "2DS-0072",
+      "route": "/product/stramm-sheet-sander",
+      "testedBadge": true,
+      "conditionNotePreserved": true
+    },
+    {
+      "itemId": "2DS-0073",
+      "route": "/product/red-rhino-rt-d20v-cordless-drill-with-battery-and-charger",
+      "testedBadge": true,
+      "conditionNotePreserved": true
+    },
+    {
+      "itemId": "2DS-0074",
+      "route": "/product/ingco-180a-inverter-welder-with-cables",
+      "testedBadge": true,
+      "conditionNotePreserved": true
+    },
+    {
+      "itemId": "2DS-0075",
+      "route": "/product/ryobi-ed-500-rotary-hammer-in-case",
+      "testedBadge": true,
+      "conditionNotePreserved": true
+    },
+    {
+      "itemId": "2DS-0076",
+      "route": "/product/ryobi-hammer-drill-in-case",
+      "testedBadge": true,
+      "conditionNotePreserved": true
+    },
+    {
+      "itemId": "2DS-0077",
+      "route": "/product/bosch-cordless-drill-with-extra-battery-and-charger",
+      "testedBadge": true,
+      "conditionNotePreserved": true
+    },
+    {
+      "itemId": "2DS-0078",
+      "route": "/product/mac-africa-welding-machine-with-leads",
+      "testedBadge": true,
+      "conditionNotePreserved": true
+    },
+    {
+      "itemId": "2DS-0079",
+      "route": "/product/harden-77-piece-toolbox",
+      "testedBadge": true,
+      "conditionNotePreserved": true
+    },
+    {
+      "itemId": "2DS-0080",
+      "route": "/product/grip-toolbox-with-tools",
+      "testedBadge": true,
+      "conditionNotePreserved": true
+    },
+    {
+      "itemId": "2DS-0081",
+      "route": "/product/yohe-motorcycle-helmet-size-l",
+      "testedBadge": true,
+      "conditionNotePreserved": true
+    },
+    {
+      "itemId": "2DS-0082",
+      "route": "/product/grey-motorcycle-helmet",
+      "testedBadge": true,
+      "conditionNotePreserved": true
+    },
+    {
+      "itemId": "2DS-0083",
+      "route": "/product/green-graphic-motorcycle-helmet",
+      "testedBadge": true,
+      "conditionNotePreserved": true
+    },
+    {
+      "itemId": "2DS-0084",
+      "route": "/product/black-off-road-motorcycle-helmet",
+      "testedBadge": true,
+      "conditionNotePreserved": true
+    },
+    {
+      "itemId": "2DS-0085",
+      "route": "/product/vega-motorcycle-helmet-size-xl",
+      "testedBadge": true,
+      "conditionNotePreserved": true
+    },
+    {
+      "itemId": "2DS-0086",
+      "route": "/product/black-motorcycle-helmet",
+      "testedBadge": true,
+      "conditionNotePreserved": true
+    },
+    {
+      "itemId": "2DS-0087",
+      "route": "/product/silver-crest-air-fryer",
+      "testedBadge": true,
+      "conditionNotePreserved": true
+    },
+    {
+      "itemId": "2DS-0088",
+      "route": "/product/goldair-air-fryer",
+      "testedBadge": true,
+      "conditionNotePreserved": true
+    },
+    {
+      "itemId": "2DS-0089",
+      "route": "/product/o-neal-kids-motorbike-boots",
+      "testedBadge": true,
+      "conditionNotePreserved": true
+    },
+    {
+      "itemId": "2DS-0090",
+      "route": "/product/red-petrol-chainsaw",
+      "testedBadge": true,
+      "conditionNotePreserved": true
+    },
+    {
+      "itemId": "2DS-0092",
+      "route": "/product/blue-high-pressure-washer",
+      "testedBadge": true,
+      "conditionNotePreserved": true
+    },
+    {
+      "itemId": "2DS-0093",
+      "route": "/product/heavy-duty-bench-grinder",
+      "testedBadge": true,
+      "conditionNotePreserved": true
+    },
+    {
+      "itemId": "2DS-0094",
+      "route": "/product/silver-bench-grinder",
+      "testedBadge": true,
+      "conditionNotePreserved": true
+    },
+    {
+      "itemId": "2DS-0095",
+      "route": "/product/toyang-ty1068-bench-grinder",
+      "testedBadge": true,
+      "conditionNotePreserved": true
+    },
+    {
+      "itemId": "2DS-0096",
+      "route": "/product/dca-12v-cordless-ratchet-wrench",
+      "testedBadge": true,
+      "conditionNotePreserved": true
+    },
+    {
+      "itemId": "2DS-0097",
+      "route": "/product/ryobi-18v-cordless-impact-drill-with-charger-and-three-batteries",
+      "testedBadge": true,
+      "conditionNotePreserved": true
+    },
+    {
+      "route": "/",
+      "noTestingWarnings": true
+    },
+    {
+      "route": "/shop",
+      "noTestingWarnings": true
+    },
+    {
+      "route": "/shop?page=2",
+      "noTestingWarnings": true
+    },
+    {
+      "route": "/shop?page=3",
+      "noTestingWarnings": true
+    },
+    {
+      "route": "/shop?page=4",
+      "noTestingWarnings": true
+    },
+    {
+      "route": "/shop?page=5",
+      "noTestingWarnings": true
+    }
+  ],
+  "mobile": [
+    {
+      "width": 320,
+      "route": "/shop",
+      "overflow": false
+    },
+    {
+      "width": 320,
+      "route": "/product/red-canister-vacuum-cleaner",
+      "overflow": false
+    },
+    {
+      "width": 360,
+      "route": "/shop",
+      "overflow": false
+    },
+    {
+      "width": 360,
+      "route": "/product/red-canister-vacuum-cleaner",
+      "overflow": false
+    },
+    {
+      "width": 390,
+      "route": "/shop",
+      "overflow": false
+    },
+    {
+      "width": 390,
+      "route": "/product/red-canister-vacuum-cleaner",
+      "overflow": false
+    },
+    {
+      "width": 430,
+      "route": "/shop",
+      "overflow": false
+    },
+    {
+      "width": 430,
+      "route": "/product/red-canister-vacuum-cleaner",
+      "overflow": false
+    }
+  ],
+  "errors": []
+}

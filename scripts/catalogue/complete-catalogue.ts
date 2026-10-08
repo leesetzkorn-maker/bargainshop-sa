@@ -2,6 +2,7 @@
 import { PrismaClient } from "@prisma/client";
 import { readFile, writeFile, mkdir, copyFile } from "node:fs/promises";
 import { parsePricingTiers, sellingPriceFromCost, type PricingSettings } from "../../src/lib/pricing";
+import { OWNER_TESTED_TEXT } from "../../src/lib/owner-testing";
 
 const prisma = new PrismaClient();
 const APPLY = process.argv.includes("--apply");
@@ -14,14 +15,16 @@ async function main() {
   const products = await prisma.product.findMany({ include: { images: true }, orderBy: { itemId: "asc" } });
   const changes: Array<{ itemId: string; before: unknown; after: unknown }> = [];
   const missingCosts: Array<{ itemId: string; name: string }> = [];
-  const updates: Array<{ id: string; data: { name: string; description: string; conditionNote: string; testingStatus: string; testedAt: null; sourceCostCents: number | null; priceCents: number; status: string; measurementSource: string } }> = [];
+  const updates: Array<{ id: string; data: { name: string; description: string; conditionNote: string; testingStatus: string; testedAt: Date | null; sourceCostCents: number | null; priceCents: number; status: string; measurementSource: string } }> = [];
   for (const d of intake.drafts) {
     const p = products.find(p => p.itemId === d.itemId);
     if (!p) throw new Error(`Missing product ${d.itemId}`);
     const cost = d.sourceCostCents;
+    const ownerTested = p.testingStatus === "TESTED_AND_WORKING";
     const calculated = sellingPriceFromCost(cost, pricing);
-    // Preserve every explicitly recorded owner price override (vacuum and helmets).
-    const price = p.priceCents > 0 ? p.priceCents : calculated ?? 0;
+    // Preserve every explicitly recorded owner price override (vacuum, helmets, and the Ryobi kit).
+    const ownerLocked = d.sellingPriceCents > 0 && /owner set the selling price/i.test(d.markup ?? "");
+    const price = ownerLocked ? d.sellingPriceCents : p.priceCents > 0 ? p.priceCents : calculated ?? 0;
     if (calculated == null) missingCosts.push({ itemId: d.itemId, name: d.name });
     const clean = (value: string) => value
       .replace(/Tested and confirmed working before listing\.?\s*/gi, "")
@@ -45,15 +48,15 @@ async function main() {
       .join(" ")
       .trim();
     const condition = clean(p.conditionNote || "Used; refer to the item photographs for cosmetic condition.");
-    const description = [overview, `Condition: ${condition}`, spec ? `Recorded model information: ${spec}` : "", "Included items: Accessories explicitly described above are part of the recorded listing. Other products visible in the background are not included. Accessory availability must be confirmed before sale.", d.itemId === "2DS-0047" ? "Important: The owner’s intake record says this iPad is iCloud locked. It cannot be offered as an unrestricted working iPad. Lock status and the intended sale condition require confirmation." : "", "Testing: Physical test results are awaiting owner confirmation; functionality is not confirmed by these photographs.", "Delivery: The Courier Guy. Estimated delivery typically 1–3 working days depending on destination and courier service. Processing time may apply before dispatch."].filter(Boolean).join("\n\n");
-    const data = { name: d.name, description, conditionNote: condition, testingStatus: "NOT_TESTED", testedAt: null, sourceCostCents: cost, priceCents: price, status: "DRAFT", measurementSource: /estimate/i.test(d.weightNote || "") ? "ESTIMATED" : p.measurementSource };
+    const description = [overview, `Condition: ${condition}`, spec ? `Recorded model information: ${spec}` : "", "Included items: Accessories explicitly described above are part of the recorded listing. Other products visible in the background are not included. Accessory availability must be confirmed before sale.", d.itemId === "2DS-0047" ? "Important: The owner’s intake record says this iPad is iCloud locked. It cannot be offered as an unrestricted working iPad. Lock status and the intended sale condition require confirmation." : "", ownerTested ? OWNER_TESTED_TEXT : "Testing: Physical test results are awaiting owner confirmation; functionality is not confirmed by these photographs.", "Delivery: The Courier Guy. Estimated delivery typically 1–3 working days depending on destination and courier service. Processing time may apply before dispatch."].filter(Boolean).join("\n\n");
+    const data = { name: d.name, description, conditionNote: condition, testingStatus: ownerTested ? "TESTED_AND_WORKING" : "NOT_TESTED", testedAt: p.testedAt, sourceCostCents: cost, priceCents: price, status: "DRAFT", measurementSource: /estimate/i.test(d.weightNote || "") ? "ESTIMATED" : p.measurementSource };
     updates.push({ id: p.id, data });
     changes.push({ itemId: p.itemId, before: { name:p.name, description:p.description, conditionNote:p.conditionNote, testingStatus:p.testingStatus, testedAt:p.testedAt, sourceCostCents:p.sourceCostCents, priceCents:p.priceCents, status:p.status, measurementSource:p.measurementSource }, after: data });
   }
   const duplicates = products.filter(p=>p.itemId === "2DS-0091");
   // Recorded owner correction: 0091's motor close-up belongs to 0092, not a second pump.
   const examples = products.filter(p=>p.images.length && p.images.every(im=>im.url.startsWith("/placeholder/")));
-  const report = { at: new Date().toISOString(), applied: APPLY, pricing, missingCosts, changes, archivedDuplicates: duplicates.map(p=>({id:p.id,itemId:p.itemId,status:p.status})), archivedExamples: examples.map(p=>({id:p.id,itemId:p.itemId,status:p.status})), note:"No product or order history is deleted. Drafts await physical testing, shipping rates and photo review." };
+  const report = { at: new Date().toISOString(), applied: APPLY, pricing, missingCosts, changes, archivedDuplicates: duplicates.map(p=>({id:p.id,itemId:p.itemId,status:p.status})), archivedExamples: examples.map(p=>({id:p.id,itemId:p.itemId,status:p.status})), note:"No product or order history is deleted. Existing physical-testing confirmations are preserved. Drafts await remaining shipping rates and photo review." };
   if (APPLY) {
     const backup = `data/internal/backups/catalogue-${Date.now()}`;
     await mkdir(backup,{recursive:true});

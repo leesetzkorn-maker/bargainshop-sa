@@ -7,7 +7,7 @@ Private operational report. Flags overlap. No listings published; final selling 
 - NEEDS REVIEW: 52
 - NEEDS IMAGE: 43
 - NEEDS SPECS: 50
-- NEEDS PRICE: 11
+- NEEDS PRICE: 4
 
 | Item | Product | Flags | Manufacturer evidence |
 | --- | --- | --- | --- |
@@ -25,27 +25,27 @@ Private operational report. Flags overlap. No listings published; final selling 
 | 2DS-0056 | George Foreman Lean Mean Fat Grilling Machine | NEEDS PRICE, NEEDS REVIEW, NEEDS SPECS, NEEDS IMAGE | Exact model / source needed |
 | 2DS-0057 | Bosch capsule coffee machine | NEEDS REVIEW, NEEDS SPECS, NEEDS IMAGE | Exact model / source needed |
 | 2DS-0058 | Silver folding knife | NEEDS REVIEW, NEEDS SPECS, NEEDS IMAGE | Exact model / source needed |
-| 2DS-0059 | Black Puma wristwatch | NEEDS PRICE, NEEDS REVIEW, NEEDS SPECS, NEEDS IMAGE | Exact model / source needed |
+| 2DS-0059 | Black Puma wristwatch | NEEDS REVIEW, NEEDS SPECS, NEEDS IMAGE | Exact model / source needed |
 | 2DS-0060 | Ingco 20V cordless drill with charger and battery | NEEDS REVIEW, NEEDS SPECS | Exact model / source needed |
-| 2DS-0061 | Yellow cordless polisher with pad and battery | NEEDS PRICE, NEEDS REVIEW, NEEDS SPECS, NEEDS IMAGE | Exact model / source needed |
+| 2DS-0061 | Yellow cordless polisher with pad and battery | NEEDS REVIEW, NEEDS SPECS, NEEDS IMAGE | Exact model / source needed |
 | 2DS-0062 | Black & Decker cordless drill with charger | NEEDS REVIEW, NEEDS SPECS | Exact model / source needed |
 | 2DS-0063 | Ryobi cordless drill with charger | NEEDS REVIEW, NEEDS SPECS, NEEDS IMAGE | Exact model / source needed |
 | 2DS-0064 | Tork Craft 20V angle grinder with battery and charger | NEEDS REVIEW, NEEDS SPECS, NEEDS IMAGE | Exact model / source needed |
-| 2DS-0065 | Ingco 20V 76mm mini angle grinder | NEEDS PRICE, NEEDS REVIEW, NEEDS SPECS, NEEDS IMAGE | [Source](https://www.ingco.com/mx-en/product/cordless-mini-cut-off-tool/CAGLI7601) |
+| 2DS-0065 | Ingco 20V 76mm mini angle grinder | NEEDS REVIEW, NEEDS SPECS, NEEDS IMAGE | [Source](https://www.ingco.com/mx-en/product/cordless-mini-cut-off-tool/CAGLI7601) |
 | 2DS-0066 | AEG BSE 9.6 cordless drill | NEEDS REVIEW, NEEDS SPECS | Exact model / source needed |
 | 2DS-0067 | Steco 1000W power station with charger | NEEDS REVIEW, NEEDS SPECS | Exact model / source needed |
 | 2DS-0068 | Ryobi AJP-1480 high pressure washer | NEEDS REVIEW, NEEDS SPECS | [Source](https://ryobi.co.za/wp-content/uploads/2019/01/ryobi_final_hr_smaller.pdf) |
 | 2DS-0069 | Ryobi circular saw | NEEDS REVIEW, NEEDS SPECS, NEEDS IMAGE | Exact model / source needed |
-| 2DS-0070 | Ryobi HG-2000 heat gun | NEEDS PRICE, NEEDS REVIEW, NEEDS SPECS, NEEDS IMAGE | [Source](https://ryobi.co.za/wp-content/uploads/2019/01/ryobi_final_hr_smaller.pdf) |
+| 2DS-0070 | Ryobi HG-2000 heat gun | NEEDS REVIEW, NEEDS SPECS, NEEDS IMAGE | [Source](https://ryobi.co.za/wp-content/uploads/2019/01/ryobi_final_hr_smaller.pdf) |
 | 2DS-0071 | Ryobi HID-10 hammer drill | NEEDS REVIEW, NEEDS SPECS | Exact model / source needed |
 | 2DS-0072 | Stramm sheet sander | NEEDS REVIEW, NEEDS SPECS | Exact model / source needed |
 | 2DS-0073 | Red Rhino RT-D20V cordless drill with battery and charger | NEEDS REVIEW, NEEDS SPECS, NEEDS IMAGE | [Source](https://redrhino.co.za/products/red-rhino-impact-drill-20v) |
 | 2DS-0074 | Ingco 180A inverter welder with cables | NEEDS REVIEW, NEEDS SPECS | Exact model / source needed |
-| 2DS-0075 | Ryobi ED-500 rotary hammer in case | NEEDS PRICE, NEEDS REVIEW, NEEDS SPECS | [Source](https://ryobi.co.za/wp-content/uploads/2019/04/ED-500-Manual-01.pdf) |
+| 2DS-0075 | Ryobi ED-500 rotary hammer in case | NEEDS REVIEW, NEEDS SPECS | [Source](https://ryobi.co.za/wp-content/uploads/2019/04/ED-500-Manual-01.pdf) |
 | 2DS-0076 | Ryobi hammer drill in case | NEEDS REVIEW, NEEDS SPECS, NEEDS IMAGE | Exact model / source needed |
 | 2DS-0077 | Bosch cordless drill with extra battery and charger | NEEDS REVIEW, NEEDS SPECS, NEEDS IMAGE | Exact model / source needed |
 | 2DS-0078 | Mac Africa welding machine with leads | NEEDS REVIEW, NEEDS SPECS, NEEDS IMAGE | Exact model / source needed |
-| 2DS-0079 | Harden 77 piece toolbox | NEEDS PRICE, NEEDS REVIEW, NEEDS SPECS, NEEDS IMAGE | Exact model / source needed |
+| 2DS-0079 | Harden 77 piece toolbox | NEEDS REVIEW, NEEDS SPECS, NEEDS IMAGE | Exact model / source needed |
 | 2DS-0080 | Grip toolbox with tools | NEEDS REVIEW, NEEDS SPECS, NEEDS IMAGE | Exact model / source needed |
 | 2DS-0081 | Yohe motorcycle helmet, size L | NEEDS REVIEW, NEEDS SPECS, NEEDS IMAGE | Exact model / source needed |
 | 2DS-0082 | Grey motorcycle helmet | NEEDS REVIEW, NEEDS SPECS, NEEDS IMAGE, NEEDS PRICE | Exact model / source needed |
@@ -55,11 +55,11 @@ Private operational report. Flags overlap. No listings published; final selling 
 | 2DS-0086 | Black motorcycle helmet | NEEDS REVIEW, NEEDS SPECS, NEEDS IMAGE | Exact model / source needed |
 | 2DS-0087 | Silver Crest air fryer | NEEDS REVIEW, NEEDS SPECS, NEEDS IMAGE | Exact model / source needed |
 | 2DS-0088 | Goldair air fryer | NEEDS REVIEW, NEEDS SPECS, NEEDS IMAGE | Exact model / source needed |
-| 2DS-0089 | O'Neal kids motorbike boots | NEEDS PRICE, NEEDS REVIEW, NEEDS SPECS, NEEDS IMAGE | Exact model / source needed |
+| 2DS-0089 | O'Neal kids motorbike boots | NEEDS REVIEW, NEEDS SPECS, NEEDS IMAGE, NEEDS PRICE | Exact model / source needed |
 | 2DS-0090 | Red petrol chainsaw | NEEDS REVIEW, NEEDS SPECS, NEEDS IMAGE | Exact model / source needed |
 | 2DS-0092 | Blue high pressure washer | NEEDS REVIEW, NEEDS SPECS, NEEDS IMAGE | Exact model / source needed |
 | 2DS-0093 | Heavy duty bench grinder | NEEDS REVIEW, NEEDS SPECS, NEEDS IMAGE | Exact model / source needed |
 | 2DS-0094 | Silver bench grinder | NEEDS REVIEW, NEEDS SPECS, NEEDS IMAGE | Exact model / source needed |
 | 2DS-0095 | Toyang TY1068 bench grinder | NEEDS REVIEW, NEEDS SPECS, NEEDS IMAGE | Exact model / source needed |
 | 2DS-0096 | DCA 12V cordless ratchet wrench | NEEDS REVIEW, NEEDS SPECS, NEEDS IMAGE | Exact model / source needed |
-| 2DS-0097 | Ryobi 18V cordless impact drill with charger and three batteries | NEEDS PRICE, NEEDS REVIEW, NEEDS SPECS, NEEDS IMAGE | Exact model / source needed |
+| 2DS-0097 | Ryobi 18V cordless impact drill with charger and three batteries | NEEDS REVIEW, NEEDS SPECS, NEEDS IMAGE | Exact model / source needed |

@@ -32,6 +32,15 @@ async function main() {
     },
   });
 
+  const catalogue = JSON.parse(await readFile(join(process.cwd(), "data", "internal", "ezpawn-source-catalogue.json"), "utf8")) as {
+    products: Array<{ productId: string; ownerSellingPriceOverride?: number | null }>;
+  };
+  const ownerLocked = new Set(
+    catalogue.products
+      .filter((row) => typeof row.ownerSellingPriceOverride === "number" && row.ownerSellingPriceOverride > 0)
+      .map((row) => row.productId),
+  );
+
   const drafts = await prisma.product.findMany({
     where: {
       status: "DRAFT",
@@ -45,6 +54,10 @@ async function main() {
   const blocked: string[] = [];
 
   for (const draft of drafts) {
+    if (ownerLocked.has(draft.itemId)) {
+      blocked.push(`${draft.itemId} owner price kept`);
+      continue;
+    }
     const price = sellingPriceFromCost(draft.sourceCostCents, settings);
     if (price == null) {
       blocked.push(draft.itemId);
@@ -73,6 +86,7 @@ async function main() {
   };
   const costsBefore = intake.drafts.map((draft) => draft.sourceCostCents);
   for (const draft of intake.drafts) {
+    if (ownerLocked.has(draft.itemId) || /owner set the selling price/i.test(draft.markup)) continue;
     const price = sellingPriceFromCost(draft.sourceCostCents, settings);
     const tier = draft.sourceCostCents == null ? null : tierForCost(draft.sourceCostCents, settings.tiers);
     draft.sellingPriceCents = price ?? 0;

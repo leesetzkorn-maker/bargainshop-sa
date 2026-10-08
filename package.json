@@ -19,10 +19,11 @@
     "db:studio": "prisma studio",
     "setup": "prisma generate && prisma migrate deploy && npm run db:seed",
     "photos:clean": "tsx --require ./scripts/maintenance/_preload.cjs scripts/cleanup/remove-price-tags.ts",
-    "test": "tsx --test tests/money.test.ts tests/shipping.test.ts tests/pricing.test.ts tests/readiness.test.ts tests/payfast.test.ts tests/price-tag-removal.test.ts tests/storage-keys.test.ts tests/orders-stock.test.ts tests/price-blackout.test.ts tests/intake-price-read.test.ts tests/intake-identify.test.ts tests/intake-market.test.ts tests/intake-draft.test.ts tests/intake-photos.test.ts tests/intake-originals.test.ts",
+    "test": "tsx --test tests/money.test.ts tests/shipping.test.ts tests/pricing.test.ts tests/readiness.test.ts tests/payfast.test.ts tests/price-tag-removal.test.ts tests/storage-keys.test.ts tests/orders-stock.test.ts tests/price-blackout.test.ts tests/intake-price-read.test.ts tests/intake-identify.test.ts tests/intake-market.test.ts tests/intake-draft.test.ts tests/intake-photos.test.ts tests/intake-originals.test.ts tests/reviewed-photo-tags.test.ts tests/owner-testing.test.ts",
     "catalogue:audit": "tsx scripts/launch/launch-catalogue.ts",
     "catalogue:import": "tsx scripts/import/import-grok.ts",
-    "test:e2e": "node scripts/audit/test-store-e2e.cjs"
+    "test:e2e": "node scripts/audit/test-store-e2e.cjs",
+    "photos:clean-public": "tsx --require ./scripts/maintenance/_preload.cjs scripts/cleanup/clean-public-photos.ts"
   },
   "dependencies": {
     "@prisma/client": "6.19.3",

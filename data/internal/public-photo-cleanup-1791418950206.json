@@ -1,0 +1,814 @@
+{
+  "checkedOn": "2026-10-08T00:22:30.206Z",
+  "applied": false,
+  "reviewPath": "data/internal/public-photo-tag-review.json",
+  "outcomes": [
+    {
+      "imageId": "cmul6ntso0002tjycwu1yxqaz",
+      "itemId": "2DS-0045",
+      "url": "/uploads/products/2ds-0045-red-canister-vacuum-cleaner.webp",
+      "outcome": "clean",
+      "sourceHash": "3d1248e61329ac4985f8a9530e06e11ab6f33b90a4b96ff74715213a25ea5239",
+      "reason": "Visually checked for retailer price tags; manufacturer labels and condition retained."
+    },
+    {
+      "imageId": "cmuldtkzb003vtjd0d9d4uq4d",
+      "itemId": "2DS-0046",
+      "url": "/uploads/products/2ds-0046-redmi-a3x-64gb-smartphone-front.webp",
+      "outcome": "clean",
+      "sourceHash": "35706fbde633cae9c7d4cc25b211bd3008f1f8fa0319e8d60cd0ac9410b022bb",
+      "reason": "Visually checked for retailer price tags; manufacturer labels and condition retained."
+    },
+    {
+      "imageId": "cmul6nuij0005tjyci7hv5sx9",
+      "itemId": "2DS-0046",
+      "url": "/uploads/products/2ds-0046-redmi-a3x-64gb-smartphone.webp",
+      "outcome": "clean",
+      "sourceHash": "98715586ce08965b13ba331dd281830de391b34e21cc1dcfd8b10acbe0071fec",
+      "reason": "Visually checked for retailer price tags; manufacturer labels and condition retained."
+    },
+    {
+      "imageId": "cmul6nv350008tjycvj7rf707",
+      "itemId": "2DS-0047",
+      "url": "/uploads/products/2ds-0047-ipad-16gb-with-pouch-and-charger.webp",
+      "outcome": "clean",
+      "sourceHash": "ccad16e05e8ba4fee22f14767130feb72b8e29e4b24478ee9a7a0e4e131b4d45",
+      "reason": "Visually checked for retailer price tags; manufacturer labels and condition retained."
+    },
+    {
+      "imageId": "cmul6nvpn000btjyczdqwpgy4",
+      "itemId": "2DS-0048",
+      "url": "/uploads/products/2ds-0048-playstation-4-console-with-one-controller.webp",
+      "outcome": "clean",
+      "sourceHash": "8453d88115d98a9193aa31621088cff60bcef1b0f7616173f589a359c59795fc",
+      "reason": "Visually checked for retailer price tags; manufacturer labels and condition retained."
+    },
+    {
+      "imageId": "cmul6nwhq000etjyczfqyrmek",
+      "itemId": "2DS-0049",
+      "url": "/uploads/products/2ds-0049-titan-ps4-wireless-controller-and-wired-headset.webp",
+      "outcome": "clean",
+      "sourceHash": "64ae25487dcd2c9839263c0d2b8a9bad21930ef46f6aa40c3bf7633891090c7a",
+      "reason": "Visually checked for retailer price tags; manufacturer labels and condition retained."
+    },
+    {
+      "imageId": "cmul6nx6f000htjyc3xdbbs6b",
+      "itemId": "2DS-0050",
+      "url": "/uploads/products/2ds-0050-xbox-one-s-all-digital-with-controller-and-cables.webp",
+      "outcome": "clean",
+      "sourceHash": "aca11cdb54eadbfcde9eb3aa7722406b7710d82277c9b2452670f8885f0fc85a",
+      "reason": "Visually checked for retailer price tags; manufacturer labels and condition retained."
+    },
+    {
+      "imageId": "cmul6nxv4000ktjycp5ji6cur",
+      "itemId": "2DS-0051",
+      "url": "/uploads/products/2ds-0051-playstation-4-console-with-portrait-skin-and-one-controller.webp",
+      "outcome": "clean",
+      "sourceHash": "423af02df9a8112bd4a5a8f0ce9491dae5dd5726b7e20172063d6bdd724f476b",
+      "reason": "Visually checked for retailer price tags; manufacturer labels and condition retained."
+    },
+    {
+      "imageId": "cmul6nyj8000ntjycnr89f9bx",
+      "itemId": "2DS-0052",
+      "url": "/uploads/products/2ds-0052-xbox-one-console-with-two-controllers.webp",
+      "outcome": "clean",
+      "sourceHash": "ac81103ffa2bac9cf3cfa868206bbd88009e7143b8166fbead46db98ca5b99b9",
+      "reason": "Visually checked for retailer price tags; manufacturer labels and condition retained."
+    },
+    {
+      "imageId": "cmul6nz55000qtjycrgeepryc",
+      "itemId": "2DS-0053",
+      "url": "/uploads/products/2ds-0053-playstation-pulse-3d-wireless-headset.webp",
+      "outcome": "clean",
+      "sourceHash": "0852071be1c8e908b6b2d4f601ce4e9e744227e0778f4ca0684eac937f1c796b",
+      "reason": "Visually checked for retailer price tags; manufacturer labels and condition retained."
+    },
+    {
+      "imageId": "cmul6nzyu000ttjycet2imaln",
+      "itemId": "2DS-0054",
+      "url": "/uploads/products/2ds-0054-vankyo-leisure-495w-projector.webp",
+      "outcome": "clean",
+      "sourceHash": "91428f7f0a19b8d2257c46ab01c44dd2039e4bdaab187f6537f47958b4b23a5f",
+      "reason": "Visually checked for retailer price tags; manufacturer labels and condition retained."
+    },
+    {
+      "imageId": "cmul6o0l1000wtjycdwmhf94y",
+      "itemId": "2DS-0055",
+      "url": "/uploads/products/2ds-0055-dell-latitude-e7470-laptop-with-charger.webp",
+      "outcome": "clean",
+      "sourceHash": "08430e023ce5d5bff03574452ce30a4a5eea8e8b79b6c07572e039b041ae2033",
+      "reason": "Visually checked for retailer price tags; manufacturer labels and condition retained."
+    },
+    {
+      "imageId": "cmul6o19q000ztjycn67t09zf",
+      "itemId": "2DS-0056",
+      "url": "/uploads/products/2ds-0056-george-foreman-lean-mean-fat-grilling-machine.webp",
+      "outcome": "clean",
+      "sourceHash": "0ac7281e550cbe80f1cfa8cba8fa20ab2e86978e17b8c403989778ce03aaea65",
+      "reason": "Visually checked for retailer price tags; manufacturer labels and condition retained."
+    },
+    {
+      "imageId": "cmul6o20o0012tjychc7emyyp",
+      "itemId": "2DS-0057",
+      "url": "/uploads/products/2ds-0057-bosch-capsule-coffee-machine.webp",
+      "outcome": "clean",
+      "sourceHash": "9ec056d33ecc9868970d34be7fce9e1cc3dffe75aefdd09bdc6ddf749c61ad75",
+      "reason": "Visually checked for retailer price tags; manufacturer labels and condition retained."
+    },
+    {
+      "imageId": "cmul6o4pr0015tjyczww91plf",
+      "itemId": "2DS-0058",
+      "url": "/uploads/products/2ds-0058-silver-folding-knife.webp",
+      "outcome": "clean",
+      "sourceHash": "5c1aacf97c5d28b4d485ef6341019ed0a5c960e84bc0f2ce3d5ff8deb98262e7",
+      "reason": "Visually checked for retailer price tags; manufacturer labels and condition retained."
+    },
+    {
+      "imageId": "cmul6o4pr0016tjycckyp8exq",
+      "itemId": "2DS-0058",
+      "url": "/uploads/products/2ds-0058-silver-folding-knife-2.webp",
+      "outcome": "clean",
+      "sourceHash": "d3a88e6f96bc5b304a2a272ebe3092017cef3e946e0ec81522c88948215551eb",
+      "reason": "Visually checked for retailer price tags; manufacturer labels and condition retained."
+    },
+    {
+      "imageId": "cmul6o5br0019tjycyo5d9lyu",
+      "itemId": "2DS-0059",
+      "url": "/uploads/products/2ds-0059-black-puma-wristwatch.webp",
+      "outcome": "clean",
+      "sourceHash": "8a4794f3ebd262db3435ea72713e1536bcf3b7265f5df942cdc8520bf9c637a2",
+      "reason": "Visually checked for retailer price tags; manufacturer labels and condition retained."
+    },
+    {
+      "imageId": "cmuldq75e0002tjd0x1phoktr",
+      "itemId": "2DS-0060",
+      "url": "/uploads/products/2ds-0060-clean-40db8b719c2cf3f2.webp",
+      "outcome": "clean",
+      "sourceHash": "40db8b719c2cf3f2420318b366d7290e055e44fb95042b25ab212404ec93b71f",
+      "reason": "Visually checked for retailer price tags; manufacturer labels and condition retained."
+    },
+    {
+      "imageId": "cmuldq75e0003tjd0nru5nuot",
+      "itemId": "2DS-0060",
+      "url": "/uploads/products/2ds-0060-clean-aa882997bc36a263.webp",
+      "outcome": "clean",
+      "sourceHash": "aa882997bc36a26319a16d7be974af0475e350a08a43243b114b1e26f4209b0e",
+      "reason": "Visually checked for retailer price tags; manufacturer labels and condition retained."
+    },
+    {
+      "imageId": "cmuydlcf20001tjv02te1a18g",
+      "itemId": "2DS-0060",
+      "url": "/uploads/products/2ds-0060-tags-0e8ae926a8707b3f93e01532.webp",
+      "outcome": "clean",
+      "sourceHash": "0e8ae926a8707b3f93e015324f5a1c6b2a207a27ddc3f115e526cf2d66ae8ee2",
+      "outputHash": "0e8ae926a8707b3f93e015324f5a1c6b2a207a27ddc3f115e526cf2d66ae8ee2",
+      "newUrl": "/uploads/products/2ds-0060-tags-0e8ae926a8707b3f93e01532.webp",
+      "reason": "Reviewed tag masks already applied."
+    },
+    {
+      "imageId": "cmuldq9a20006tjd0fzaavxlc",
+      "itemId": "2DS-0061",
+      "url": "/uploads/products/2ds-0061-yellow-cordless-polisher-with-pad-and-battery.webp",
+      "outcome": "clean",
+      "sourceHash": "4a2071622bbd3499c9004611e6d291ef8f2fa4efd1f3fd7d94deeb79e98e061c",
+      "reason": "Visually checked for retailer price tags; manufacturer labels and condition retained."
+    },
+    {
+      "imageId": "cmuldqbd70009tjd0qkwuz946",
+      "itemId": "2DS-0062",
+      "url": "/uploads/products/2ds-0062-clean-c69174a97eea8c52.webp",
+      "outcome": "needs-review",
+      "sourceHash": "c69174a97eea8c529391a56f8b531cffc33eaa41c3fb53f58367464c5ed576e8",
+      "reason": "Tiny partly obscured background price label beside the yellow tool; needs closer review."
+    },
+    {
+      "imageId": "cmuydlcg20003tjv08dui1s20",
+      "itemId": "2DS-0062",
+      "url": "/uploads/products/2ds-0062-tags-f232018b91b7bb9b5a4bd0b6.webp",
+      "outcome": "clean",
+      "sourceHash": "f232018b91b7bb9b5a4bd0b6478996bce7b7c83dfce192a3f65db7b1a3c855a2",
+      "outputHash": "f232018b91b7bb9b5a4bd0b6478996bce7b7c83dfce192a3f65db7b1a3c855a2",
+      "newUrl": "/uploads/products/2ds-0062-tags-f232018b91b7bb9b5a4bd0b6.webp",
+      "reason": "Reviewed tag masks already applied."
+    },
+    {
+      "imageId": "cmuldqdkn000ctjd0c4fmvrau",
+      "itemId": "2DS-0063",
+      "url": "/uploads/products/2ds-0063-tags-303d2a5c8ebfdd31969d30ab.webp",
+      "outcome": "clean",
+      "sourceHash": "303d2a5c8ebfdd31969d30ab0de3c26cd934cc9dd2ec4b6c6dd0271234bb8a2c",
+      "outputHash": "303d2a5c8ebfdd31969d30ab0de3c26cd934cc9dd2ec4b6c6dd0271234bb8a2c",
+      "newUrl": "/uploads/products/2ds-0063-tags-303d2a5c8ebfdd31969d30ab.webp",
+      "reason": "Reviewed tag masks already applied."
+    },
+    {
+      "imageId": "cmuldqfhi000ftjd0l7wwqxt3",
+      "itemId": "2DS-0064",
+      "url": "/uploads/products/2ds-0064-tags-1367fa349ac827851e1b04ed.webp",
+      "outcome": "clean",
+      "sourceHash": "1367fa349ac827851e1b04ed6a25a53d557ee57b8f4972ce10e9393221838462",
+      "outputHash": "1367fa349ac827851e1b04ed6a25a53d557ee57b8f4972ce10e9393221838462",
+      "newUrl": "/uploads/products/2ds-0064-tags-1367fa349ac827851e1b04ed.webp",
+      "reason": "Reviewed tag masks already applied."
+    },
+    {
+      "imageId": "cmuldql5b000itjd0cqz7t0by",
+      "itemId": "2DS-0065",
+      "url": "/uploads/products/2ds-0065-ingco-20v-76mm-mini-angle-grinder.webp",
+      "outcome": "clean",
+      "sourceHash": "71e0b83aeb4c53b1643f998dad54b1f974fcd4e07f40638d81eb5e4b7c280c1a",
+      "reason": "Visually checked for retailer price tags; manufacturer labels and condition retained."
+    },
+    {
+      "imageId": "cmuldql5b000jtjd02qccqllt",
+      "itemId": "2DS-0065",
+      "url": "/uploads/products/2ds-0065-ingco-20v-76mm-mini-angle-grinder-2.webp",
+      "outcome": "clean",
+      "sourceHash": "ebd7bffa6d645128d2d86c399da11fe4cb365b52fe7bf06c80689f6056e2bea2",
+      "reason": "Visually checked for retailer price tags; manufacturer labels and condition retained."
+    },
+    {
+      "imageId": "cmuldql5b000ktjd0esss1x4u",
+      "itemId": "2DS-0065",
+      "url": "/uploads/products/2ds-0065-ingco-20v-76mm-mini-angle-grinder-3.webp",
+      "outcome": "clean",
+      "sourceHash": "b113ae6e88046ff03129e5966945ffbd5c329cfc661b49eb6a5b1a99f6c44f55",
+      "reason": "Visually checked for retailer price tags; manufacturer labels and condition retained."
+    },
+    {
+      "imageId": "cmuldqpbu000ntjd08y4uo55u",
+      "itemId": "2DS-0066",
+      "url": "/uploads/products/2ds-0066-clean-af7db7ccd9b0fd7b.webp",
+      "outcome": "clean",
+      "sourceHash": "af7db7ccd9b0fd7b5d58bcd6df9eb6977efa0e52bd23e95ce0dde38cc14404c1",
+      "reason": "Visually checked for retailer price tags; manufacturer labels and condition retained."
+    },
+    {
+      "imageId": "cmuldqpbu000otjd0zfyb2o1s",
+      "itemId": "2DS-0066",
+      "url": "/uploads/products/2ds-0066-aeg-bse-9-6-cordless-drill-2.webp",
+      "outcome": "clean",
+      "sourceHash": "b7ec51271cb40cb254458937cce51fc6546a19af11a169606bea87cebfaf87bb",
+      "reason": "Visually checked for retailer price tags; manufacturer labels and condition retained."
+    },
+    {
+      "imageId": "cmuydlchr0005tjv007278f8r",
+      "itemId": "2DS-0066",
+      "url": "/uploads/products/2ds-0066-tags-6a54211cc140b8815d73c43e.webp",
+      "outcome": "clean",
+      "sourceHash": "6a54211cc140b8815d73c43eecf6e2c228aec17b24d358ea8cba517c37c93757",
+      "outputHash": "6a54211cc140b8815d73c43eecf6e2c228aec17b24d358ea8cba517c37c93757",
+      "newUrl": "/uploads/products/2ds-0066-tags-6a54211cc140b8815d73c43e.webp",
+      "reason": "Reviewed tag masks already applied."
+    },
+    {
+      "imageId": "cmuldqt9p000rtjd0s3orbu5i",
+      "itemId": "2DS-0067",
+      "url": "/uploads/products/2ds-0067-clean-e537db348de074b8.webp",
+      "outcome": "clean",
+      "sourceHash": "e537db348de074b8b83fa49ee55bd99e55b786e94d78361a0a8f29437efd0397",
+      "reason": "Visually checked for retailer price tags; manufacturer labels and condition retained."
+    },
+    {
+      "imageId": "cmuldqt9p000stjd0zlueixha",
+      "itemId": "2DS-0067",
+      "url": "/uploads/products/2ds-0067-clean-1d276662bee8a9ac.webp",
+      "outcome": "clean",
+      "sourceHash": "1d276662bee8a9ac7670c7fb79e2fb60b909a47787466ef83a68b15c6143230f",
+      "reason": "Visually checked for retailer price tags; manufacturer labels and condition retained."
+    },
+    {
+      "imageId": "cmuydlcig0007tjv06ql3r2wq",
+      "itemId": "2DS-0067",
+      "url": "/uploads/products/2ds-0067-tags-d7603d931c295aa6af31d618.webp",
+      "outcome": "clean",
+      "sourceHash": "d7603d931c295aa6af31d618d4d4fb8c67473e65b2022047674aba3f29731ded",
+      "outputHash": "d7603d931c295aa6af31d618d4d4fb8c67473e65b2022047674aba3f29731ded",
+      "newUrl": "/uploads/products/2ds-0067-tags-d7603d931c295aa6af31d618.webp",
+      "reason": "Reviewed tag masks already applied."
+    },
+    {
+      "imageId": "cmuydlcih0009tjv0bo1sgaxc",
+      "itemId": "2DS-0067",
+      "url": "/uploads/products/2ds-0067-tags-58f46eb1fad817d00b59f72e.webp",
+      "outcome": "clean",
+      "sourceHash": "58f46eb1fad817d00b59f72e6176c3f5f22ad434df0319bf36c5d98825f0e2c5",
+      "outputHash": "58f46eb1fad817d00b59f72e6176c3f5f22ad434df0319bf36c5d98825f0e2c5",
+      "newUrl": "/uploads/products/2ds-0067-tags-58f46eb1fad817d00b59f72e.webp",
+      "reason": "Reviewed tag masks already applied."
+    },
+    {
+      "imageId": "cmuldqv93000vtjd0xkh8ww45",
+      "itemId": "2DS-0068",
+      "url": "/uploads/products/2ds-0068-clean-92a2c093e8167af0.webp",
+      "outcome": "clean",
+      "sourceHash": "92a2c093e8167af0656d08af28fbe12901fa88e5d3b8ecfae5d89da3901f5dcd",
+      "reason": "Visually checked for retailer price tags; manufacturer labels and condition retained."
+    },
+    {
+      "imageId": "cmuydlcj3000btjv0a3in3afi",
+      "itemId": "2DS-0068",
+      "url": "/uploads/products/2ds-0068-tags-e2bdab2d83526c43f959b99e.webp",
+      "outcome": "clean",
+      "sourceHash": "e2bdab2d83526c43f959b99ed0eb049158517d0c6d1e9c04094a2cd10004ce51",
+      "outputHash": "e2bdab2d83526c43f959b99ed0eb049158517d0c6d1e9c04094a2cd10004ce51",
+      "newUrl": "/uploads/products/2ds-0068-tags-e2bdab2d83526c43f959b99e.webp",
+      "reason": "Reviewed tag masks already applied."
+    },
+    {
+      "imageId": "cmuldqxfp000ytjd09q68drck",
+      "itemId": "2DS-0069",
+      "url": "/uploads/products/2ds-0069-tags-7817ba95914b9e81e41c779d.webp",
+      "outcome": "clean",
+      "sourceHash": "7817ba95914b9e81e41c779d5898819b91bc784f0493c811921c96e68c1688c8",
+      "outputHash": "7817ba95914b9e81e41c779d5898819b91bc784f0493c811921c96e68c1688c8",
+      "newUrl": "/uploads/products/2ds-0069-tags-7817ba95914b9e81e41c779d.webp",
+      "reason": "Reviewed tag masks already applied."
+    },
+    {
+      "imageId": "cmuldr1bb0011tjd0bn4equwy",
+      "itemId": "2DS-0070",
+      "url": "/uploads/products/2ds-0070-ryobi-hg-2000-heat-gun.webp",
+      "outcome": "needs-review",
+      "sourceHash": "c0527c1d250e7f3fea0bea30c18a7629845f75daa668404d5235a5075cbb7335",
+      "reason": "Partially obscured retailer-style labels behind the shelf; price extent cannot be verified."
+    },
+    {
+      "imageId": "cmuldr1bb0012tjd0ok7oyu8e",
+      "itemId": "2DS-0070",
+      "url": "/uploads/products/2ds-0070-ryobi-hg-2000-heat-gun-2.webp",
+      "outcome": "clean",
+      "sourceHash": "3cdeb13def4a345735a5cccc3ceea0a9584f1ed49103e883201581152814d5f4",
+      "reason": "Visually checked for retailer price tags; manufacturer labels and condition retained."
+    },
+    {
+      "imageId": "cmuldr5dt0015tjd0zlhvf2dy",
+      "itemId": "2DS-0071",
+      "url": "/uploads/products/2ds-0071-ryobi-hid-10-hammer-drill.webp",
+      "outcome": "needs-review",
+      "sourceHash": "e71d63168a9ba316b173f8ec08ee0091c8f08e13da6e187785f95c08bf30514e",
+      "reason": "Faint curved label on the background green tool; needs closer review before masking."
+    },
+    {
+      "imageId": "cmuldr5dt0016tjd0fxi2a21i",
+      "itemId": "2DS-0071",
+      "url": "/uploads/products/2ds-0071-clean-74546f890411bb20.webp",
+      "outcome": "clean",
+      "sourceHash": "74546f890411bb201d9aa3931a6ea40c217c09eb4a1178997bba77fb3d4f503e",
+      "reason": "Visually checked for retailer price tags; manufacturer labels and condition retained."
+    },
+    {
+      "imageId": "cmuydlcma000dtjv017oykixz",
+      "itemId": "2DS-0071",
+      "url": "/uploads/products/2ds-0071-tags-21397a52efeec1f56cd82eee.webp",
+      "outcome": "clean",
+      "sourceHash": "21397a52efeec1f56cd82eee502543e5d1c80e58246762600919873a6fa5665c",
+      "outputHash": "21397a52efeec1f56cd82eee502543e5d1c80e58246762600919873a6fa5665c",
+      "newUrl": "/uploads/products/2ds-0071-tags-21397a52efeec1f56cd82eee.webp",
+      "reason": "Reviewed tag masks already applied."
+    },
+    {
+      "imageId": "cmuldrb7r0019tjd017ouhp1y",
+      "itemId": "2DS-0072",
+      "url": "/uploads/products/2ds-0072-stramm-sheet-sander.webp",
+      "outcome": "clean",
+      "sourceHash": "89c73629f2b4e787282572aac1d56df69277030f739d68b4fccc18669202695c",
+      "reason": "Visually checked for retailer price tags; manufacturer labels and condition retained."
+    },
+    {
+      "imageId": "cmuldrb7r001atjd0p5hqn603",
+      "itemId": "2DS-0072",
+      "url": "/uploads/products/2ds-0072-stramm-sheet-sander-2.webp",
+      "outcome": "needs-review",
+      "sourceHash": "2dfb43bc5ba064205236e2450a79bdb6d6b96efb5e1fc80a39e7b01d0870d165",
+      "reason": "Clipped retailer-style paper at the top-right edge; no price visible in the remaining fragment."
+    },
+    {
+      "imageId": "cmuldrb7r001btjd07vh1g2zb",
+      "itemId": "2DS-0072",
+      "url": "/uploads/products/2ds-0072-clean-43bb240d6a1b93bc.webp",
+      "outcome": "clean",
+      "sourceHash": "43bb240d6a1b93bc5b2b912b83d335e683b0a1e9001cb64e9bc01c508a945bfc",
+      "reason": "Visually checked for retailer price tags; manufacturer labels and condition retained."
+    },
+    {
+      "imageId": "cmuydlcmw000ftjv0en6r2qeq",
+      "itemId": "2DS-0072",
+      "url": "/uploads/products/2ds-0072-tags-62928237a30dd625d162c632.webp",
+      "outcome": "clean",
+      "sourceHash": "62928237a30dd625d162c63224ddef9cc3ca5c79516c672c73abb21f199d5456",
+      "outputHash": "62928237a30dd625d162c63224ddef9cc3ca5c79516c672c73abb21f199d5456",
+      "newUrl": "/uploads/products/2ds-0072-tags-62928237a30dd625d162c632.webp",
+      "reason": "Reviewed tag masks already applied."
+    },
+    {
+      "imageId": "cmuldrf9g001etjd00irr2tbv",
+      "itemId": "2DS-0073",
+      "url": "/uploads/products/2ds-0073-tags-2a8462d728c8df49b6d4da45.webp",
+      "outcome": "clean",
+      "sourceHash": "2a8462d728c8df49b6d4da4524a2b3d9f56db81068e1499c1353afd78ed04a4c",
+      "outputHash": "2a8462d728c8df49b6d4da4524a2b3d9f56db81068e1499c1353afd78ed04a4c",
+      "newUrl": "/uploads/products/2ds-0073-tags-2a8462d728c8df49b6d4da45.webp",
+      "reason": "Reviewed tag masks already applied."
+    },
+    {
+      "imageId": "cmuldrf9g001ftjd0l0lolrgv",
+      "itemId": "2DS-0073",
+      "url": "/uploads/products/2ds-0073-tags-aa20ceb55cabf75b1e5b9400.webp",
+      "outcome": "clean",
+      "sourceHash": "aa20ceb55cabf75b1e5b940067fce1db46ed4e547331a2d5ce090780987b3ce8",
+      "outputHash": "aa20ceb55cabf75b1e5b940067fce1db46ed4e547331a2d5ce090780987b3ce8",
+      "newUrl": "/uploads/products/2ds-0073-tags-aa20ceb55cabf75b1e5b9400.webp",
+      "reason": "Reviewed tag masks already applied."
+    },
+    {
+      "imageId": "cmuldrnc4001itjd0qy6zsaiu",
+      "itemId": "2DS-0074",
+      "url": "/uploads/products/2ds-0074-clean-5e489880caf54b8f.webp",
+      "outcome": "clean",
+      "sourceHash": "5e489880caf54b8f71746660e1e788214de65b3372708f5933644be211e9972c",
+      "reason": "Visually checked for retailer price tags; manufacturer labels and condition retained."
+    },
+    {
+      "imageId": "cmuldrnc4001jtjd0wpi4fnic",
+      "itemId": "2DS-0074",
+      "url": "/uploads/products/2ds-0074-tags-86dd288d9756565aa111d5ce.webp",
+      "outcome": "clean",
+      "sourceHash": "86dd288d9756565aa111d5ce8f73a73cfc3333d45a7a78283a272304f78e692a",
+      "outputHash": "86dd288d9756565aa111d5ce8f73a73cfc3333d45a7a78283a272304f78e692a",
+      "newUrl": "/uploads/products/2ds-0074-tags-86dd288d9756565aa111d5ce.webp",
+      "reason": "Reviewed tag masks already applied."
+    },
+    {
+      "imageId": "cmuldrnc4001ktjd0sg306vz0",
+      "itemId": "2DS-0074",
+      "url": "/uploads/products/2ds-0074-ingco-180a-inverter-welder-with-cables-3.webp",
+      "outcome": "clean",
+      "sourceHash": "5c6000c3c1291a341d95b3bf72bec9f8df79e4b6ce300e834f8fb722ed4f0f2e",
+      "reason": "Visually checked for retailer price tags; manufacturer labels and condition retained."
+    },
+    {
+      "imageId": "cmuldrnc4001ltjd03a7o3dbe",
+      "itemId": "2DS-0074",
+      "url": "/uploads/products/2ds-0074-clean-68d526e654491c9a.webp",
+      "outcome": "clean",
+      "sourceHash": "68d526e654491c9ae8e9f89e9b18f46cb474a9b6b8d8cfd88b78cea1f7e8f757",
+      "reason": "Visually checked for retailer price tags; manufacturer labels and condition retained."
+    },
+    {
+      "imageId": "cmuydlcnz000htjv0lq4sdzyu",
+      "itemId": "2DS-0074",
+      "url": "/uploads/products/2ds-0074-ingco-180a-inverter-welder-with-cables.webp",
+      "outcome": "clean",
+      "sourceHash": "5e962543df67cf9f53dbfd3dd62c8a4adbc060e785ad571fb48bce72ad4ddb73",
+      "reason": "Blank torn sticker remnant retained as actual condition; no retailer price visible."
+    },
+    {
+      "imageId": "cmuydlco2000jtjv0aokkrxsf",
+      "itemId": "2DS-0074",
+      "url": "/uploads/products/2ds-0074-tags-47707832e59ede7ee82aea77.webp",
+      "outcome": "clean",
+      "sourceHash": "47707832e59ede7ee82aea779be81f09b23119c7dbea2886a2c46d688d330dc9",
+      "outputHash": "47707832e59ede7ee82aea779be81f09b23119c7dbea2886a2c46d688d330dc9",
+      "newUrl": "/uploads/products/2ds-0074-tags-47707832e59ede7ee82aea77.webp",
+      "reason": "Reviewed tag masks already applied."
+    },
+    {
+      "imageId": "cmuldrtfv001otjd0r8ksuhiw",
+      "itemId": "2DS-0075",
+      "url": "/uploads/products/2ds-0075-ryobi-ed-500-rotary-hammer-in-case.webp",
+      "outcome": "clean",
+      "sourceHash": "d2cf517f9396f74bfb29ea6dba9bb79c84b76a9c50de1b18d28bb75a601eb53b",
+      "reason": "Visually checked for retailer price tags; manufacturer labels and condition retained."
+    },
+    {
+      "imageId": "cmuldrtfv001ptjd09k2cap2e",
+      "itemId": "2DS-0075",
+      "url": "/uploads/products/2ds-0075-ryobi-ed-500-rotary-hammer-in-case-2.webp",
+      "outcome": "clean",
+      "sourceHash": "44e61c9edf54e800a84d9fc54cdb5ccf26bbbc16cfc94ea09106b05d392964f7",
+      "reason": "Visually checked for retailer price tags; manufacturer labels and condition retained."
+    },
+    {
+      "imageId": "cmuldrtfv001qtjd003ojkw6s",
+      "itemId": "2DS-0075",
+      "url": "/uploads/products/2ds-0075-clean-9a1cc4ac9673f763.webp",
+      "outcome": "clean",
+      "sourceHash": "9a1cc4ac9673f763221903328e16334c49cf9b8aebee2d48e4c6c96a0ec83f9c",
+      "reason": "Visually checked for retailer price tags; manufacturer labels and condition retained."
+    },
+    {
+      "imageId": "cmuydlcon000ltjv0095qmgcm",
+      "itemId": "2DS-0075",
+      "url": "/uploads/products/2ds-0075-tags-3f90d1ef076055ff88288e59.webp",
+      "outcome": "clean",
+      "sourceHash": "3f90d1ef076055ff88288e595dd574248542ca984fd56bf6c2bf52834c829edd",
+      "outputHash": "3f90d1ef076055ff88288e595dd574248542ca984fd56bf6c2bf52834c829edd",
+      "newUrl": "/uploads/products/2ds-0075-tags-3f90d1ef076055ff88288e59.webp",
+      "reason": "Reviewed tag masks already applied."
+    },
+    {
+      "imageId": "cmuldrxx8001ttjd0ndg3lfqb",
+      "itemId": "2DS-0076",
+      "url": "/uploads/products/2ds-0076-tags-3dd3c4dd03e8820afe6e9255.webp",
+      "outcome": "clean",
+      "sourceHash": "3dd3c4dd03e8820afe6e92556911683aad6d8ebd4adc340bfade1a0add1834e0",
+      "outputHash": "3dd3c4dd03e8820afe6e92556911683aad6d8ebd4adc340bfade1a0add1834e0",
+      "newUrl": "/uploads/products/2ds-0076-tags-3dd3c4dd03e8820afe6e9255.webp",
+      "reason": "Reviewed tag masks already applied."
+    },
+    {
+      "imageId": "cmuldrxx8001utjd0m12w0qwr",
+      "itemId": "2DS-0076",
+      "url": "/uploads/products/2ds-0076-tags-b6dee50b113bbcac9bff3e83.webp",
+      "outcome": "clean",
+      "sourceHash": "b6dee50b113bbcac9bff3e83d6981db993387286b4c22e46e733728926e5ae1d",
+      "outputHash": "b6dee50b113bbcac9bff3e83d6981db993387286b4c22e46e733728926e5ae1d",
+      "newUrl": "/uploads/products/2ds-0076-tags-b6dee50b113bbcac9bff3e83.webp",
+      "reason": "Reviewed tag masks already applied."
+    },
+    {
+      "imageId": "cmulds40u001xtjd0www0i1fp",
+      "itemId": "2DS-0077",
+      "url": "/uploads/products/2ds-0077-tags-e8970fcc95f3770c00439c3a.webp",
+      "outcome": "clean",
+      "sourceHash": "e8970fcc95f3770c00439c3a05b02b13e079a56247d7bcad099dcc39e813624f",
+      "outputHash": "e8970fcc95f3770c00439c3a05b02b13e079a56247d7bcad099dcc39e813624f",
+      "newUrl": "/uploads/products/2ds-0077-tags-e8970fcc95f3770c00439c3a.webp",
+      "reason": "Reviewed tag masks already applied."
+    },
+    {
+      "imageId": "cmulds40u001ytjd0jzlcmkvi",
+      "itemId": "2DS-0077",
+      "url": "/uploads/products/2ds-0077-tags-b44eaeba8a9dd381db1a8126.webp",
+      "outcome": "clean",
+      "sourceHash": "b44eaeba8a9dd381db1a8126b7e063342015e661d2f9472297b9a57c2a618966",
+      "outputHash": "b44eaeba8a9dd381db1a8126b7e063342015e661d2f9472297b9a57c2a618966",
+      "newUrl": "/uploads/products/2ds-0077-tags-b44eaeba8a9dd381db1a8126.webp",
+      "reason": "Reviewed tag masks already applied."
+    },
+    {
+      "imageId": "cmulds40u001ztjd0qa9z8exh",
+      "itemId": "2DS-0077",
+      "url": "/uploads/products/2ds-0077-tags-13b93881325553e20fc57fb1.webp",
+      "outcome": "clean",
+      "sourceHash": "13b93881325553e20fc57fb1a12d23f0fab7db81aa712e0bab5b6bfb2a52ef16",
+      "outputHash": "13b93881325553e20fc57fb1a12d23f0fab7db81aa712e0bab5b6bfb2a52ef16",
+      "newUrl": "/uploads/products/2ds-0077-tags-13b93881325553e20fc57fb1.webp",
+      "reason": "Reviewed tag masks already applied."
+    },
+    {
+      "imageId": "cmulds6340022tjd0pzidznb9",
+      "itemId": "2DS-0078",
+      "url": "/uploads/products/2ds-0078-tags-214a780ded4297cad6e4bcb7.webp",
+      "outcome": "clean",
+      "sourceHash": "214a780ded4297cad6e4bcb78b743b570abf7d379e969032a3f6e638ce9def07",
+      "outputHash": "214a780ded4297cad6e4bcb78b743b570abf7d379e969032a3f6e638ce9def07",
+      "newUrl": "/uploads/products/2ds-0078-tags-214a780ded4297cad6e4bcb7.webp",
+      "reason": "Reviewed tag masks already applied."
+    },
+    {
+      "imageId": "cmuldsa7y0025tjd0db77dzg2",
+      "itemId": "2DS-0079",
+      "url": "/uploads/products/2ds-0079-tags-2c42b5c4257c9a700efd0dd0.webp",
+      "outcome": "clean",
+      "sourceHash": "2c42b5c4257c9a700efd0dd0b3d37ba4013578bfdc918189d77935de6ecfdfe5",
+      "outputHash": "2c42b5c4257c9a700efd0dd0b3d37ba4013578bfdc918189d77935de6ecfdfe5",
+      "newUrl": "/uploads/products/2ds-0079-tags-2c42b5c4257c9a700efd0dd0.webp",
+      "reason": "Reviewed tag masks already applied."
+    },
+    {
+      "imageId": "cmuldsa7y0026tjd0h8ojabze",
+      "itemId": "2DS-0079",
+      "url": "/uploads/products/2ds-0079-tags-31cee24082a0713f4ea5d555.webp",
+      "outcome": "clean",
+      "sourceHash": "31cee24082a0713f4ea5d555f2f20e6c92f8c112a2252d42fef2f8d60c61c0e2",
+      "outputHash": "31cee24082a0713f4ea5d555f2f20e6c92f8c112a2252d42fef2f8d60c61c0e2",
+      "newUrl": "/uploads/products/2ds-0079-tags-31cee24082a0713f4ea5d555.webp",
+      "reason": "Reviewed tag masks already applied."
+    },
+    {
+      "imageId": "cmuldse710029tjd0e01oa6ed",
+      "itemId": "2DS-0080",
+      "url": "/uploads/products/2ds-0080-grip-toolbox-with-tools.webp",
+      "outcome": "clean",
+      "sourceHash": "6e8268dd3a82b5ccdd975439b9f42b9b060f03a5e9e3c7ca61446de6849b0bd1",
+      "reason": "Visually checked for retailer price tags; manufacturer labels and condition retained."
+    },
+    {
+      "imageId": "cmuldse71002atjd03g6dfl61",
+      "itemId": "2DS-0080",
+      "url": "/uploads/products/2ds-0080-tags-76a4bdde939ffd4b33d75d9f.webp",
+      "outcome": "clean",
+      "sourceHash": "76a4bdde939ffd4b33d75d9f2f100bf74d172aa686d2cce8d50a716bbd766348",
+      "outputHash": "76a4bdde939ffd4b33d75d9f2f100bf74d172aa686d2cce8d50a716bbd766348",
+      "newUrl": "/uploads/products/2ds-0080-tags-76a4bdde939ffd4b33d75d9f.webp",
+      "reason": "Reviewed tag masks already applied."
+    },
+    {
+      "imageId": "cmuldsiby002dtjd0qh7z2t43",
+      "itemId": "2DS-0081",
+      "url": "/uploads/products/2ds-0081-tags-e847a24f72098cc609ac03c0.webp",
+      "outcome": "clean",
+      "sourceHash": "e847a24f72098cc609ac03c029b852e69b9a76b71048b0f8a6d20fe23049739c",
+      "outputHash": "e847a24f72098cc609ac03c029b852e69b9a76b71048b0f8a6d20fe23049739c",
+      "newUrl": "/uploads/products/2ds-0081-tags-e847a24f72098cc609ac03c0.webp",
+      "reason": "Reviewed tag masks already applied."
+    },
+    {
+      "imageId": "cmuldsiby002etjd0azkfmvtw",
+      "itemId": "2DS-0081",
+      "url": "/uploads/products/2ds-0081-yohe-motorcycle-helmet-size-l-2.webp",
+      "outcome": "clean",
+      "sourceHash": "ebc9b58fbed442884624f250239c77ee70e0c72855f40455f27f3e6f9ff78b02",
+      "reason": "Visually checked for retailer price tags; manufacturer labels and condition retained."
+    },
+    {
+      "imageId": "cmuldsm7o002htjd0vmvs2s5f",
+      "itemId": "2DS-0082",
+      "url": "/uploads/products/2ds-0082-grey-motorcycle-helmet.webp",
+      "outcome": "clean",
+      "sourceHash": "d6f15c16c74d7790ffe4105cd2067ad4d0be59cd7255724d5212632d0727b351",
+      "reason": "Visually checked for retailer price tags; manufacturer labels and condition retained."
+    },
+    {
+      "imageId": "cmuldsm7o002itjd0zthox0ww",
+      "itemId": "2DS-0082",
+      "url": "/uploads/products/2ds-0082-grey-motorcycle-helmet-2.webp",
+      "outcome": "clean",
+      "sourceHash": "e912243777531d6950d8284298831c7e9e17ae9536dfd482d3c35379fbc915ee",
+      "reason": "Visually checked for retailer price tags; manufacturer labels and condition retained."
+    },
+    {
+      "imageId": "cmuldso9l002ltjd01lkthag3",
+      "itemId": "2DS-0083",
+      "url": "/uploads/products/2ds-0083-green-graphic-motorcycle-helmet.webp",
+      "outcome": "clean",
+      "sourceHash": "da8985e374fbbf9fe7375c535e34807779c917dc3be7b6e102b1034b5eb9aff5",
+      "reason": "Visually checked for retailer price tags; manufacturer labels and condition retained."
+    },
+    {
+      "imageId": "cmuldsqe4002otjd0nvveflmd",
+      "itemId": "2DS-0084",
+      "url": "/uploads/products/2ds-0084-tags-5bf550e4c19017176e9e15e6.webp",
+      "outcome": "clean",
+      "sourceHash": "5bf550e4c19017176e9e15e6633ecafeadab436cfb4c0cffb6c217c94ceab685",
+      "outputHash": "5bf550e4c19017176e9e15e6633ecafeadab436cfb4c0cffb6c217c94ceab685",
+      "newUrl": "/uploads/products/2ds-0084-tags-5bf550e4c19017176e9e15e6.webp",
+      "reason": "Reviewed tag masks already applied."
+    },
+    {
+      "imageId": "cmuldssf8002rtjd0zy7q5s1f",
+      "itemId": "2DS-0085",
+      "url": "/uploads/products/2ds-0085-tags-c87fb7786d3be26ee42f9d19.webp",
+      "outcome": "clean",
+      "sourceHash": "c87fb7786d3be26ee42f9d19c3ef6da221a41b65df2a628e22ea08039f6087b3",
+      "outputHash": "c87fb7786d3be26ee42f9d19c3ef6da221a41b65df2a628e22ea08039f6087b3",
+      "newUrl": "/uploads/products/2ds-0085-tags-c87fb7786d3be26ee42f9d19.webp",
+      "reason": "Reviewed tag masks already applied."
+    },
+    {
+      "imageId": "cmuldsuf3002utjd02ygejj3t",
+      "itemId": "2DS-0086",
+      "url": "/uploads/products/2ds-0086-black-motorcycle-helmet.webp",
+      "outcome": "clean",
+      "sourceHash": "96720a38b726dc0a3242f6dfe56ba367f27c6f6a6d08ac938cfce37c7a045003",
+      "reason": "Visually checked for retailer price tags; manufacturer labels and condition retained."
+    },
+    {
+      "imageId": "cmuldswbu002xtjd00cvdik3f",
+      "itemId": "2DS-0087",
+      "url": "/uploads/products/2ds-0087-tags-bbce834b95c1d2e31b709500.webp",
+      "outcome": "clean",
+      "sourceHash": "bbce834b95c1d2e31b709500cc4a8f1f9b9d9832fd502792c638cec6105c0647",
+      "outputHash": "bbce834b95c1d2e31b709500cc4a8f1f9b9d9832fd502792c638cec6105c0647",
+      "newUrl": "/uploads/products/2ds-0087-tags-bbce834b95c1d2e31b709500.webp",
+      "reason": "Reviewed tag masks already applied."
+    },
+    {
+      "imageId": "cmuldsya60030tjd0big440p4",
+      "itemId": "2DS-0088",
+      "url": "/uploads/products/2ds-0088-tags-bc0c4aac4f6730496b4879fc.webp",
+      "outcome": "clean",
+      "sourceHash": "bc0c4aac4f6730496b4879fc914544d3199aa9c7a9a11f39ae2b829e474d344e",
+      "outputHash": "bc0c4aac4f6730496b4879fc914544d3199aa9c7a9a11f39ae2b829e474d344e",
+      "newUrl": "/uploads/products/2ds-0088-tags-bc0c4aac4f6730496b4879fc.webp",
+      "reason": "Reviewed tag masks already applied."
+    },
+    {
+      "imageId": "cmuldt0980033tjd0suuhl7pk",
+      "itemId": "2DS-0089",
+      "url": "/uploads/products/2ds-0089-tags-baed4fa565d21c4283492656.webp",
+      "outcome": "clean",
+      "sourceHash": "baed4fa565d21c4283492656b5453e47a10f39e4cbfbe90234488e103a038924",
+      "outputHash": "baed4fa565d21c4283492656b5453e47a10f39e4cbfbe90234488e103a038924",
+      "newUrl": "/uploads/products/2ds-0089-tags-baed4fa565d21c4283492656.webp",
+      "reason": "Reviewed tag masks already applied."
+    },
+    {
+      "imageId": "cmuldt4680036tjd0onwf7x1u",
+      "itemId": "2DS-0090",
+      "url": "/uploads/products/2ds-0090-tags-ecdb31f5a0c5c57dee1ca163.webp",
+      "outcome": "clean",
+      "sourceHash": "ecdb31f5a0c5c57dee1ca163c896a6b986b7f01b6723e7d6147fa783ad558246",
+      "outputHash": "ecdb31f5a0c5c57dee1ca163c896a6b986b7f01b6723e7d6147fa783ad558246",
+      "newUrl": "/uploads/products/2ds-0090-tags-ecdb31f5a0c5c57dee1ca163.webp",
+      "reason": "Reviewed tag masks already applied."
+    },
+    {
+      "imageId": "cmuldt4680037tjd0h895zc6p",
+      "itemId": "2DS-0090",
+      "url": "/uploads/products/2ds-0090-tags-b229c57543eb3fc618fe0ba9.webp",
+      "outcome": "clean",
+      "sourceHash": "b229c57543eb3fc618fe0ba9614d1cd3eb3fba1ddf728cc4e76b5d01509ca3cd",
+      "outputHash": "b229c57543eb3fc618fe0ba9614d1cd3eb3fba1ddf728cc4e76b5d01509ca3cd",
+      "newUrl": "/uploads/products/2ds-0090-tags-b229c57543eb3fc618fe0ba9.webp",
+      "reason": "Reviewed tag masks already applied."
+    },
+    {
+      "imageId": "cmuldt65i003atjd07bf0vjef",
+      "itemId": "2DS-0091",
+      "url": "/uploads/products/2ds-0091-tags-fa049dd3fd60774492dd5c3e.webp",
+      "outcome": "clean",
+      "sourceHash": "fa049dd3fd60774492dd5c3e2bc4351f715ea4ff0aba0b4f7f807e1885e4772e",
+      "outputHash": "fa049dd3fd60774492dd5c3e2bc4351f715ea4ff0aba0b4f7f807e1885e4772e",
+      "newUrl": "/uploads/products/2ds-0091-tags-fa049dd3fd60774492dd5c3e.webp",
+      "reason": "Reviewed tag masks already applied."
+    },
+    {
+      "imageId": "cmuldt87v003dtjd01yh057jd",
+      "itemId": "2DS-0092",
+      "url": "/uploads/products/2ds-0092-blue-high-pressure-washer.webp",
+      "outcome": "clean",
+      "sourceHash": "d470d6ba9f299e4da7de44150247bc732f73d054d59d8490298b2ff7c8de031e",
+      "reason": "Visually checked for retailer price tags; manufacturer labels and condition retained."
+    },
+    {
+      "imageId": "cmusjr9sl0001tj081jpgpy5k",
+      "itemId": "2DS-0092",
+      "url": "/uploads/products/2ds-0092-tags-fa049dd3fd60774492dd5c3e.webp",
+      "outcome": "clean",
+      "sourceHash": "fa049dd3fd60774492dd5c3e2bc4351f715ea4ff0aba0b4f7f807e1885e4772e",
+      "outputHash": "fa049dd3fd60774492dd5c3e2bc4351f715ea4ff0aba0b4f7f807e1885e4772e",
+      "newUrl": "/uploads/products/2ds-0092-tags-fa049dd3fd60774492dd5c3e.webp",
+      "reason": "Reviewed tag masks already applied."
+    },
+    {
+      "imageId": "cmuldt97r003gtjd0rss1r03o",
+      "itemId": "2DS-0093",
+      "url": "/uploads/products/2ds-0093-tags-0f54f14a48b7209541314ea7.webp",
+      "outcome": "clean",
+      "sourceHash": "0f54f14a48b7209541314ea7480597fcdd912f36ae237562c0fcc32df92dc330",
+      "outputHash": "0f54f14a48b7209541314ea7480597fcdd912f36ae237562c0fcc32df92dc330",
+      "newUrl": "/uploads/products/2ds-0093-tags-0f54f14a48b7209541314ea7.webp",
+      "reason": "Reviewed tag masks already applied."
+    },
+    {
+      "imageId": "cmuldta6x003jtjd0gxsvjpsi",
+      "itemId": "2DS-0094",
+      "url": "/uploads/products/2ds-0094-tags-2c54270e922378d9394a500c.webp",
+      "outcome": "clean",
+      "sourceHash": "2c54270e922378d9394a500c9f5d94a2c6d06289e0bbce4059545d545aa347ce",
+      "outputHash": "2c54270e922378d9394a500c9f5d94a2c6d06289e0bbce4059545d545aa347ce",
+      "newUrl": "/uploads/products/2ds-0094-tags-2c54270e922378d9394a500c.webp",
+      "reason": "Reviewed tag masks already applied."
+    },
+    {
+      "imageId": "cmuldtb42003mtjd0rqpdpofq",
+      "itemId": "2DS-0095",
+      "url": "/uploads/products/2ds-0095-tags-e989a55772838441249a3962.webp",
+      "outcome": "clean",
+      "sourceHash": "e989a55772838441249a39626918b53687a1407174b460f59c28f05aaf74cd54",
+      "outputHash": "e989a55772838441249a39626918b53687a1407174b460f59c28f05aaf74cd54",
+      "newUrl": "/uploads/products/2ds-0095-tags-e989a55772838441249a3962.webp",
+      "reason": "Reviewed tag masks already applied."
+    },
+    {
+      "imageId": "cmuldtd40003ptjd090f50pve",
+      "itemId": "2DS-0096",
+      "url": "/uploads/products/2ds-0096-tags-3b3b7541c64fcdf35a643fb8.webp",
+      "outcome": "needs-review",
+      "sourceHash": "3b3b7541c64fcdf35a643fb8776318d3f6621f9d0ec65021b4f44d517d61a529",
+      "manualReview": "Dangling background label at the top edge; cannot determine whether it contains a price.",
+      "outputHash": "3b3b7541c64fcdf35a643fb8776318d3f6621f9d0ec65021b4f44d517d61a529",
+      "newUrl": "/uploads/products/2ds-0096-tags-3b3b7541c64fcdf35a643fb8.webp",
+      "reason": "Dangling background label at the top edge; cannot determine whether it contains a price."
+    },
+    {
+      "imageId": "cmuldthav003stjd08leogmfz",
+      "itemId": "2DS-0097",
+      "url": "/uploads/products/2ds-0097-ryobi-18v-cordless-impact-drill-with-charger-and-three-batteries.webp",
+      "outcome": "needs-review",
+      "sourceHash": "414d29ddf317bdcece002e1d6cb51eff004443fe1ff5431be5c574e1b797677f",
+      "reason": "Retailer item/reference label partly obscured by cables; no visible price to mask."
+    },
+    {
+      "imageId": "cmuldthav003ttjd0ao4bfnrv",
+      "itemId": "2DS-0097",
+      "url": "/uploads/products/2ds-0097-ryobi-18v-cordless-impact-drill-with-charger-and-three-batteries-2.webp",
+      "outcome": "needs-review",
+      "sourceHash": "c12da41e62f415aa9733ff22541cfaed750834a8a2b3063c75bd90f832851dc9",
+      "reason": "Retailer item/reference label partly obscured by cables; no visible price to mask."
+    }
+  ]
+}
