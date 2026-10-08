@@ -6,16 +6,6 @@ import { absoluteUrl } from "@/lib/brand";
 export const revalidate = 3600;
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
-  const [products, categories] = await Promise.all([
-    prisma.product.findMany({
-      where: { status: "ACTIVE", images: { some: { url: { startsWith: "/uploads/" } } } },
-      select: { slug: true, updatedAt: true },
-      orderBy: { updatedAt: "desc" },
-      take: 5000,
-    }),
-    getActiveCategories(),
-  ]);
-
   const staticRoutes: MetadataRoute.Sitemap = [
     { url: absoluteUrl("/"), changeFrequency: "daily", priority: 1 },
     { url: absoluteUrl("/shop"), changeFrequency: "hourly", priority: 0.9 },
@@ -29,18 +19,36 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     { url: absoluteUrl("/terms"), changeFrequency: "yearly", priority: 0.3 },
   ];
 
-  return [
-    ...staticRoutes,
-    ...categories.map((category) => ({
-      url: absoluteUrl(`/category/${category.slug}`),
-      changeFrequency: "daily" as const,
-      priority: 0.7,
-    })),
-    ...products.map((product) => ({
-      url: absoluteUrl(`/product/${product.slug}`),
-      lastModified: product.updatedAt,
-      changeFrequency: "weekly" as const,
-      priority: 0.8,
-    })),
-  ];
+  // A production database is not guaranteed to exist while the deployment
+  // image is being built. Keep sitemap generation build-safe: static routes
+  // remain available, and catalogue routes are added whenever the DB is ready.
+  try {
+    const [products, categories] = await Promise.all([
+      prisma.product.findMany({
+        where: { status: "ACTIVE", images: { some: { url: { startsWith: "/uploads/" } } } },
+        select: { slug: true, updatedAt: true },
+        orderBy: { updatedAt: "desc" },
+        take: 5000,
+      }),
+      getActiveCategories(),
+    ]);
+
+    return [
+      ...staticRoutes,
+      ...categories.map((category) => ({
+        url: absoluteUrl(`/category/${category.slug}`),
+        changeFrequency: "daily" as const,
+        priority: 0.7,
+      })),
+      ...products.map((product) => ({
+        url: absoluteUrl(`/product/${product.slug}`),
+        lastModified: product.updatedAt,
+        changeFrequency: "weekly" as const,
+        priority: 0.8,
+      })),
+    ];
+  } catch (error) {
+    console.warn("Sitemap catalogue routes skipped because the database is unavailable.", error);
+    return staticRoutes;
+  }
 }
