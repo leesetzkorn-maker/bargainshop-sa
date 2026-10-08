@@ -75,6 +75,46 @@ export function ProductForm({
   const images = state.imageUrls ?? product?.images.map((image) => image.url) ?? [];
   const featured = values ? values.isFeatured === "on" : Boolean(product?.isFeatured);
 
+  // Photo order has no field of its own: `saveProduct` writes `sortOrder` from
+  // the position of each checked `imageUrls` box, so the order they appear in
+  // IS the order that gets saved. The first photo is the main image — the
+  // server splices `mainImageUrl` to the front anyway, so picking one moves it
+  // to the front here rather than letting the two disagree.
+  const [imageOrder, setImageOrder] = useState<string[]>(() => product?.images.map((image) => image.url) ?? []);
+  const sourceImages = product?.images ?? [];
+  const byUrl = new Map(sourceImages.map((image) => [image.url, image]));
+  const kept = new Set<string>();
+  const orderedImages = imageOrder.flatMap((url) => {
+    const image = byUrl.get(url);
+    if (!image || kept.has(url)) return [];
+    kept.add(url);
+    return [image];
+  });
+  // Anything the saved order does not mention still has to render — appending
+  // keeps it visible instead of silently dropping the photo from the form.
+  for (const image of sourceImages) {
+    if (!kept.has(image.url)) {
+      kept.add(image.url);
+      orderedImages.push(image);
+    }
+  }
+
+  const moveImage = (url: string, delta: -1 | 1) => {
+    setImageOrder((current) => {
+      const next = [...current];
+      const from = next.indexOf(url);
+      if (from === -1) return current;
+      const to = from + delta;
+      if (to < 0 || to >= next.length) return next;
+      [next[from], next[to]] = [next[to], next[from]];
+      return next;
+    });
+  };
+
+  const makeMainImage = (url: string) => {
+    setImageOrder((current) => [url, ...current.filter((entry) => entry !== url)]);
+  };
+
   const [priceText, setPriceText] = useState(text("price", centsToInput(product?.priceCents ?? 0)));
   const [manualPrice, setManualPrice] = useState(values ? values.priceManualOverride === "on" : product?.priceManualOverride ?? false);
   const [costText, setCostText] = useState(text("sourceCost", centsToInput(product?.sourceCostCents)));
@@ -331,11 +371,15 @@ export function ProductForm({
       <section className="card space-y-4 p-5">
         <div>
           <h2 className="text-sm font-bold tracking-wide text-ink-500 uppercase">Images</h2>
-          <p className="mt-1 text-sm text-ink-600">JPEG, PNG, WebP or AVIF. Up to 12 photos, 8 MB each.</p>
+          <p className="mt-1 text-sm text-ink-600">
+            JPEG, PNG, WebP or AVIF. Up to 12 photos, 8 MB each. The first photo is the one
+            customers see first — use <strong>Earlier</strong> and <strong>Later</strong> to
+            change the order, or pick a different main image.
+          </p>
         </div>
         {product && product.images.length > 0 ? (
           <ul className="grid grid-cols-2 gap-3 sm:grid-cols-4">
-            {product.images.map((image) => (
+            {orderedImages.map((image, index) => (
               <li key={image.id} className="rounded-lg border border-ink-200 bg-white p-2">
                 {/* Admin thumbs include SVG placeholders, which next/image will not optimise. */}
                 {/* eslint-disable-next-line @next/next/no-img-element */}
@@ -344,7 +388,36 @@ export function ProductForm({
                   <input type="checkbox" name="imageUrls" value={image.url} defaultChecked={images.includes(image.url)} />
                   Keep
                 </label>
-                <label className="mt-2 flex items-center gap-2 text-xs"><input type="radio" name="mainImageUrl" value={image.url} defaultChecked={image.id === product.images[0]?.id} />Main image</label>
+                <label className="mt-2 flex items-center gap-2 text-xs">
+                  <input
+                    type="radio"
+                    name="mainImageUrl"
+                    value={image.url}
+                    checked={image.url === orderedImages[0]?.url}
+                    onChange={() => makeMainImage(image.url)}
+                  />
+                  Main image
+                </label>
+                <div className="mt-2 flex gap-2">
+                  <button
+                    type="button"
+                    className="btn btn-secondary min-h-0 flex-1 px-2 py-1.5 text-xs"
+                    onClick={() => moveImage(image.url, -1)}
+                    disabled={index === 0}
+                    aria-label={`Move ${image.alt || "photo"} earlier`}
+                  >
+                    Earlier
+                  </button>
+                  <button
+                    type="button"
+                    className="btn btn-secondary min-h-0 flex-1 px-2 py-1.5 text-xs"
+                    onClick={() => moveImage(image.url, 1)}
+                    disabled={index === orderedImages.length - 1}
+                    aria-label={`Move ${image.alt || "photo"} later`}
+                  >
+                    Later
+                  </button>
+                </div>
               </li>
             ))}
           </ul>

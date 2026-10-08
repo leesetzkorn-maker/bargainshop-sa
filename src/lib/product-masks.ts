@@ -1,6 +1,8 @@
 import { mkdir, readFile, writeFile } from "node:fs/promises";
 import { join } from "node:path";
 
+import { privateDataRoot } from "@/lib/data-paths";
+
 /**
  * Pristine base copies for the existing-product mask editor.
  *
@@ -16,10 +18,12 @@ import { join } from "node:path";
  *     or wherever else it lives is never read or written by this module.
  *
  * These are runtime state, not source: the directory exists purely to make the
- * mask operation safe and reversible and is ignored by git.
+ * mask operation safe and reversible and is ignored by git. It lives under
+ * `DATA_DIR` (src/lib/data-paths.ts) so it can sit on a persistent volume
+ * alongside the intake originals, and is never public.
  */
 
-export const MASK_CLEAN_DIR = join(process.cwd(), "data", "masks-clean");
+export const MASK_CLEAN_DIR = join(privateDataRoot(), "masks-clean");
 
 /** The extension is taken from the public URL so the base is byte-comparable. */
 export function maskCleanPath(imageId: string, url: string): string {

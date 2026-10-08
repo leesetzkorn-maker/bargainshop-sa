@@ -4,6 +4,7 @@ import { mkdir, readFile, unlink, writeFile } from "node:fs/promises";
 import { join, normalize, sep } from "node:path";
 import { randomBytes } from "node:crypto";
 import { storageDriver } from "@/lib/env";
+import { uploadsRoot } from "@/lib/data-paths";
 import { mintedKey, productImageKey } from "@/lib/storage-keys";
 
 /**
@@ -11,7 +12,8 @@ import { mintedKey, productImageKey } from "@/lib/storage-keys";
  *
  * Uploads go to ./public/uploads on the `local` driver. That is correct for a
  * VPS or any host with a persistent disk, but NOT for serverless platforms where
- * the filesystem is ephemeral. The interface is deliberately narrow so an
+ * the filesystem is ephemeral — set `UPLOADS_DIR` to a volume path there (see
+ * src/lib/data-paths.ts). The interface is deliberately narrow so an
  * S3/Blob adapter can be dropped in later without touching the admin UI.
  */
 
@@ -30,7 +32,19 @@ const EXT_BY_TYPE: Record<string, string> = {
   "image/avif": "avif",
 };
 
-export const UPLOAD_DIR = join(process.cwd(), "public", "uploads", "products");
+/**
+ * Where uploaded images live.
+ *
+ * Defaults to `./public/uploads`, which is correct for a machine with a
+ * persistent disk. On a platform whose container filesystem is disposable —
+ * Railway, and any other host that rebuilds on deploy — set `UPLOADS_DIR` to a
+ * path on the attached volume (e.g. `/data/uploads`). Nothing else changes: the
+ * URLs stay `/uploads/products/...` and `/uploads/ai/...`, and the route
+ * handlers under `src/app/uploads/` serve them from wherever this points, so
+ * photos survive a redeploy instead of vanishing with the container.
+ * See src/lib/data-paths.ts.
+ */
+export const UPLOAD_DIR = join(uploadsRoot(), "products");
 
 /**
  * AI edit candidates live in their own directory, apart from the product
@@ -39,7 +53,7 @@ export const UPLOAD_DIR = join(process.cwd(), "public", "uploads", "products");
  * picked up by the storefront, and cannot be deleted by the product-save
  * cleanup in `deleteStoredFile` (which is scoped to `/uploads/products/`).
  */
-export const AI_DIR = join(process.cwd(), "public", "uploads", "ai");
+export const AI_DIR = join(uploadsRoot(), "ai");
 
 /** Thrown for any rejected upload; the message is safe to show an admin. */
 export class UploadError extends Error {}

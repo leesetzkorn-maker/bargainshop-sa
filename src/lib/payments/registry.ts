@@ -4,6 +4,7 @@ import { paymentProviderKey } from "@/lib/env";
 import { offlineProvider } from "./providers/offline";
 import { payfastProvider } from "./providers/payfast";
 import { peachProvider } from "./providers/peach";
+import { yocoProvider } from "./providers/yoco";
 import type { PaymentProvider } from "./types";
 
 /**
@@ -17,6 +18,7 @@ const providers: Record<string, PaymentProvider> = {
   offline: offlineProvider,
   payfast: payfastProvider,
   peach: peachProvider,
+  yoco: yocoProvider,
 };
 
 /** Explicit opt-out. `PAYMENT_PROVIDER=none` closes checkout entirely. */

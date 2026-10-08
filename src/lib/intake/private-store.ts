@@ -11,7 +11,8 @@
  *      URL.
  *   2. The storefront only ever sees the public copy built from this file.
  *
- * So originals are kept outside `public/` entirely, under `data/intake/`, and
+ * So originals are kept outside `public/` entirely, under `data/intake/` (or
+ * `$DATA_DIR/intake` when that root is moved onto a persistent volume), and
  * are streamed only to an authenticated admin. Filesystem only — no Prisma, no
  * `server-only` — so the preservation guarantee is unit tested against real
  * bytes (tests/intake-originals.test.ts).
@@ -22,6 +23,8 @@ import { constants } from "node:fs";
 import { mkdir, readFile, unlink, writeFile, copyFile, access } from "node:fs/promises";
 import { join, sep } from "node:path";
 
+import { privateDataRoot } from "@/lib/data-paths";
+
 export class OriginalStoreError extends Error {}
 
 const KEY_PATTERN = /^[a-f0-9]{32}\.(jpg|jpeg|png|webp|avif)$/;
@@ -31,9 +34,14 @@ export function isSafeOriginalKey(key: string): boolean {
   return KEY_PATTERN.test(key);
 }
 
-/** `data/intake` under the app root. Overridable so tests can use a sandbox. */
+/**
+ * `data/intake` under the app root — or `$DATA_DIR/intake` when the private
+ * data root has been moved onto a persistent volume (src/lib/data-paths.ts).
+ *
+ * `baseDir` wins over both so tests can point at a sandbox.
+ */
 export function intakeRoot(baseDir?: string): string {
-  return baseDir ?? join(process.cwd(), "data", "intake");
+  return baseDir ?? join(privateDataRoot(), "intake");
 }
 
 function pendingDir(baseDir?: string): string {
