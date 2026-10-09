@@ -136,7 +136,7 @@ export function productReadinessIssues(product: ReadinessInput): ReadinessIssue[
 
   if (!product.itemReviewConfirmed) issues.push({ field: "review", message: "Confirm the actual item, stock, condition and included accessories before publishing." });
   if (!product.brand || !product.model || !/^https:\/\//.test(product.modelSourceUrl ?? "") || !product.specsConfirmed) issues.push({ field: "specs", message: "Exact model and source-backed specifications need review. Do not substitute a similar model." });
-  if (!product.cleanImageLicense?.trim()) issues.push({ field: "image", message: "NEEDS IMAGE EDIT: attach an exact-model clean image and record reuse permission; keep actual-item photographs." });
+  // Actual-item photos are sufficient. A separate clean image is optional.
   if (product.sourceCostCents == null) issues.push({ field: "price", message: "Source cost is missing; profit cannot be verified." });
   if (product.measurementSource !== "MEASURED") issues.push({ field: "dimensions", message: "Confirm the packed weight and outer parcel dimensions before publishing." });
 

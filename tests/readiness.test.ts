@@ -30,9 +30,10 @@ function fields(input: Partial<ReadinessInput>): string[] {
 }
 
 describe("productReadinessIssues", () => {
-  it("blocks unsupported model matches, unreviewed stock and unlicensed clean images", () => {
-    assert.deepEqual(new Set(catalogueFlags({ ...complete, modelSourceUrl: "", itemReviewConfirmed: false, cleanImageLicense: "" })), new Set(["NEEDS REVIEW", "NEEDS IMAGE", "NEEDS SPECS"]));
+  it("blocks unsupported model matches and unreviewed stock without requiring a separate clean image", () => {
+    assert.deepEqual(new Set(catalogueFlags({ ...complete, modelSourceUrl: "", itemReviewConfirmed: false, cleanImageLicense: "" })), new Set(["NEEDS REVIEW", "NEEDS SPECS"]));
     assert.deepEqual(catalogueFlags(complete), ["READY"]);
+    assert.deepEqual(productReadinessIssues({ ...complete, cleanImageLicense: "", imageCount: 1 }), []);
   });
   it("blocks missing costs and unmeasured parcels even with a selling price", () => {
     const flags = catalogueFlags({ ...complete, sourceCostCents: null, measurementSource: "ESTIMATED" });
