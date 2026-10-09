@@ -7,7 +7,7 @@ export const BUYING_STEPS = [
   },
   {
     title: "You pay online",
-    body: "You place your order on this website. The item price and the delivery cost are both shown before you confirm. A card gateway is not connected yet, so until one is, we contact you to take payment for the amount you already saw. We do not ask for a different figure.",
+    body: "You place your order on this website. The item price and the delivery cost are both shown before you confirm. You complete your payment securely on Yoco's payment page. Your order is confirmed once the payment succeeds.",
   },
   {
     title: "We check and secure it",
@@ -19,7 +19,7 @@ export const BUYING_STEPS = [
   },
   {
     title: "We ship it",
-    body: "Orders are processed within 2 business days. Once your order has been dispatched, you'll receive your shipping information so you can track your delivery. Smaller parcels can go to a locker. Heavier or larger items go by courier to your address.",
+    body: "Orders are processed within 2 business days. Once your order has been dispatched, you'll receive your shipping information so you can track your delivery. Available delivery methods and the full delivery price are shown at checkout. Choose your collection locker when using locker delivery.",
   },
   {
     title: "Enjoy your bargain",

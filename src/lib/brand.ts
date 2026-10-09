@@ -2,7 +2,7 @@
  * Brand configuration.
  *
  * Customer-facing name is 2DE BARGAINS. The preferred public domain is
- * 2debargains.co.za. The running origin stays in NEXT_PUBLIC_BRAND_URL so a
+ * bargainshop.co.za. The running origin stays in NEXT_PUBLIC_BRAND_URL so a
  * local preview does not pretend the domain is already live.
  *
  * Only values prefixed NEXT_PUBLIC_ live here — this module is imported by
@@ -17,7 +17,7 @@ export const brand = {
   url: (process.env.NEXT_PUBLIC_BRAND_URL || "http://localhost:3000").replace(/\/$/, ""),
 
   /** Preferred public domain. Not used as the live origin until the site is deployed there. */
-  preferredDomain: "2debargains.co.za",
+  preferredDomain: "bargainshop.co.za",
 
   /** Used on the homepage hero. */
   tagline: process.env.NEXT_PUBLIC_TAGLINE || "Tested bargains. Better prices.",
