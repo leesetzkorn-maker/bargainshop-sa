@@ -63,25 +63,25 @@ export default async function HomePage() {
     <>
       <section className="relative overflow-hidden bg-ink-950 text-white">
         <div aria-hidden="true" className="hero-glow pointer-events-none absolute inset-0" />
-        <div className="container-page relative grid items-center gap-10 py-12 sm:py-16 lg:grid-cols-[minmax(0,1.05fr)_minmax(0,0.95fr)] lg:py-20">
+        <div className="container-page relative grid items-center gap-6 py-6 sm:py-8 lg:grid-cols-[minmax(0,1.05fr)_minmax(0,0.95fr)] lg:py-8">
           <div>
-            <p className="mb-4 inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/10 px-3.5 py-1.5 text-xs font-semibold tracking-wide text-brand-100">
+            <p className="mb-3 inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/10 px-3.5 py-1.5 text-xs font-semibold tracking-wide text-brand-100">
               <span aria-hidden="true" className="h-1.5 w-1.5 rounded-full bg-accent-500" />
               South African second-hand. Independent store.
             </p>
 
-            <h1 className="heading-display text-4xl text-white sm:text-5xl lg:text-6xl">
+            <h1 className="heading-display text-3xl text-white sm:text-4xl lg:text-5xl">
               Tested bargains.
               <span className="mt-1 block text-accent-500">Better prices.</span>
             </h1>
 
-            <p className="mt-5 max-w-xl text-base leading-relaxed text-ink-200 sm:text-lg">
+            <p className="mt-3 max-w-xl text-base leading-relaxed text-ink-200 sm:text-lg">
               {brand.secondary} Shop tools, electronics, appliances and more — real second-hand finds,
               not a catalogue of stock photos.
             </p>
 
-            <div className="mt-8 flex flex-col gap-3 sm:flex-row">
-              <Link href="#latest" className="btn btn-accent btn-lg uppercase tracking-wide">
+            <div className="mt-4 flex flex-col gap-3 sm:flex-row">
+              <Link href="#products" className="btn btn-accent btn-lg uppercase tracking-wide">
                 Shop the latest bargains
                 <ArrowIcon className="h-4 w-4" />
               </Link>
@@ -93,7 +93,7 @@ export default async function HomePage() {
               </Link>
             </div>
 
-            <form action="/shop" method="get" role="search" className="mt-8 flex max-w-xl flex-col gap-2 sm:flex-row">
+            <form action="/shop" method="get" role="search" className="mt-4 flex max-w-xl flex-col gap-2 sm:flex-row">
               <label htmlFor="home-search" className="sr-only">
                 Search products
               </label>
@@ -110,70 +110,13 @@ export default async function HomePage() {
             </form>
           </div>
 
-          <HeroStage items={heroSpots} />
+          <div className="hidden lg:block">
+            <HeroStage items={heroSpots} />
+          </div>
         </div>
       </section>
 
-      <section className="border-b border-ink-200 bg-white" aria-label="Why shop here">
-        <ul className="container-page grid grid-cols-2 gap-x-4 gap-y-3 py-4 sm:grid-cols-3 lg:grid-cols-6">
-          {TRUST_POINTS.map((point) => (
-            <li key={point.title} className="min-w-0 py-1">
-              <p className="text-sm font-semibold text-ink-900">
-                <span aria-hidden="true" className="mr-1.5 text-brand-700">
-                  ✓
-                </span>
-                {point.title}
-              </p>
-              <p className="mt-0.5 text-xs leading-snug text-ink-500">{point.body}</p>
-            </li>
-          ))}
-        </ul>
-      </section>
-
-      <section className="container-page py-14 sm:py-16">
-        <SectionHeading
-          eyebrow="Browse"
-          title="Shop by what you need"
-          description={
-            photoPreview
-              ? "Photographs of the actual items. Second-hand, tested where the badge says so, and not affiliated with the product brands."
-              : "Real second-hand categories. The photographs show the kind of item — 2DE BARGAINS is not affiliated with any product brand."
-          }
-          action={
-            <Link href="/categories" className="btn btn-secondary btn-sm shrink-0">
-              All categories
-            </Link>
-          }
-        />
-        <div className="grid grid-cols-2 gap-3 lg:grid-cols-3 lg:gap-4">
-          {(tiles.length > 0 ? tiles : resolveShowcase(SHOWCASE_CATEGORIES, liveSlugs)).map((category) => (
-            <Link
-              key={category.id}
-              href={category.href}
-              className={`group relative aspect-[4/5] overflow-hidden rounded-2xl shadow-[var(--shadow-card)] sm:aspect-[4/3] ${
-                category.image.startsWith("/uploads/") ? "bg-white" : "bg-ink-900"
-              }`}
-            >
-              <Image
-                src={category.image}
-                alt={category.alt}
-                fill
-                sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 25vw"
-                className={
-                  category.image.startsWith("/uploads/")
-                    ? "object-contain bg-white p-4 transition-transform duration-500 group-hover:scale-105"
-                    : "object-cover transition-transform duration-500 group-hover:scale-105"
-                }
-              />
-              <div className="absolute inset-x-0 bottom-0 h-24 bg-gradient-to-t from-ink-950/90 to-transparent" />
-              <div className="absolute inset-x-0 bottom-0 p-3.5 sm:p-4">
-                <h3 className="font-display text-base font-bold text-white sm:text-lg">{category.label}</h3>
-              </div>
-            </Link>
-          ))}
-        </div>
-      </section>
-
+      <div id="products" className="scroll-mt-24">
       {photoPreview ? (
         <>
           <ProductRail
@@ -254,6 +197,144 @@ export default async function HomePage() {
           />
         </>
       ) : null}
+
+      {underFiveHundred.length > 0 ? (
+        <section className="container-page py-14 sm:py-16">
+          <SectionHeading
+            eyebrow="Everyday prices"
+            title="Under R500"
+            description={`Real listings at ${formatZAR(UNDER_FIVE_HUNDRED_CENTS)} or less. Most are one-off.`}
+            action={
+              <Link href="/shop?max=500&sort=price-asc" className="btn btn-secondary btn-sm shrink-0">
+                Everything under R500
+              </Link>
+            }
+          />
+          <div className="grid grid-cols-2 gap-3 sm:gap-4 lg:grid-cols-4">
+            {underFiveHundred.map((product) => (
+              <ProductCard key={product.id} product={product} />
+            ))}
+          </div>
+        </section>
+      ) : null}
+
+      {bargains.length > 0 ? (
+        <section className="border-y border-ink-200 bg-white py-14 sm:py-16">
+          <div className="container-page">
+            <SectionHeading
+              eyebrow="Lowest prices"
+              title="Featured bargains"
+              description="The lowest-priced second-hand finds currently listed. When a one-off is gone, it is gone."
+              action={
+                <Link href="/shop?sort=price-asc" className="btn btn-secondary btn-sm shrink-0">
+                  See all bargains
+                </Link>
+              }
+            />
+            <div className="grid grid-cols-2 gap-3 sm:gap-4 lg:grid-cols-4">
+              {bargains.map((product) => (
+                <ProductCard key={product.id} product={product} />
+              ))}
+            </div>
+          </div>
+        </section>
+      ) : null}
+
+      {featured.length > 0 ? (
+        <section className="container-page py-14 sm:py-16">
+          <SectionHeading
+            eyebrow="Picked out"
+            title="Worth a closer look"
+            description="Second-hand items with an honest condition grade. Each one is checked before it ships."
+          />
+          <div className="grid grid-cols-2 gap-3 sm:gap-4 lg:grid-cols-4">
+            {featured.map((product, index) => (
+              <ProductCard key={product.id} product={product} priority={index < 4} />
+            ))}
+          </div>
+        </section>
+      ) : null}
+
+      {recent.length > 0 ? (
+        <section className="container-page pb-14 sm:pb-16">
+          <SectionHeading
+            eyebrow="Just listed"
+            title="Recently added"
+            action={
+              <Link href="/shop?sort=newest" className="btn btn-secondary btn-sm shrink-0">
+                All new arrivals
+              </Link>
+            }
+          />
+          <div className="grid grid-cols-2 gap-3 sm:gap-4 lg:grid-cols-4">
+            {recent.map((product) => (
+              <ProductCard key={product.id} product={product} />
+            ))}
+          </div>
+        </section>
+      ) : null}
+
+      </div>
+
+      <section id="categories" className="container-page py-6 sm:py-8">
+        <SectionHeading
+          eyebrow="Browse"
+          title="Shop by what you need"
+          description={
+            photoPreview
+              ? "Photographs of the actual items. Second-hand, tested where the badge says so, and not affiliated with the product brands."
+              : "Real second-hand categories. The photographs show the kind of item — 2DE BARGAINS is not affiliated with any product brand."
+          }
+          action={
+            <Link href="/categories" className="btn btn-secondary btn-sm shrink-0">
+              All categories
+            </Link>
+          }
+        />
+        <div className="grid grid-cols-2 gap-3 lg:grid-cols-3 lg:gap-4">
+          {(tiles.length > 0 ? tiles : resolveShowcase(SHOWCASE_CATEGORIES, liveSlugs)).map((category) => (
+            <Link
+              key={category.id}
+              href={category.href}
+              className={`group relative aspect-[4/3] overflow-hidden rounded-2xl shadow-[var(--shadow-card)] sm:aspect-[16/9] ${
+                category.image.startsWith("/uploads/") ? "bg-white" : "bg-ink-900"
+              }`}
+            >
+              <Image
+                src={category.image}
+                alt={category.alt}
+                fill
+                sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 25vw"
+                className={
+                  category.image.startsWith("/uploads/")
+                    ? "object-contain bg-white p-4 transition-transform duration-500 group-hover:scale-105"
+                    : "object-cover transition-transform duration-500 group-hover:scale-105"
+                }
+              />
+              <div className="absolute inset-x-0 bottom-0 h-24 bg-gradient-to-t from-ink-950/90 to-transparent" />
+              <div className="absolute inset-x-0 bottom-0 p-3.5 sm:p-4">
+                <h3 className="font-display text-base font-bold text-white sm:text-lg">{category.label}</h3>
+              </div>
+            </Link>
+          ))}
+        </div>
+      </section>
+
+      <section className="border-b border-ink-200 bg-white" aria-label="Why shop here">
+        <ul className="container-page grid grid-cols-2 gap-x-4 gap-y-3 py-4 sm:grid-cols-3 lg:grid-cols-6">
+          {TRUST_POINTS.map((point) => (
+            <li key={point.title} className="min-w-0 py-1">
+              <p className="text-sm font-semibold text-ink-900">
+                <span aria-hidden="true" className="mr-1.5 text-brand-700">
+                  ✓
+                </span>
+                {point.title}
+              </p>
+              <p className="mt-0.5 text-xs leading-snug text-ink-500">{point.body}</p>
+            </li>
+          ))}
+        </ul>
+      </section>
 
       <section className="border-y border-ink-200 bg-white py-14 sm:py-16">
         <div className="container-page">
@@ -361,82 +442,6 @@ export default async function HomePage() {
           </ul>
         </div>
       </section>
-
-      {underFiveHundred.length > 0 ? (
-        <section className="container-page py-14 sm:py-16">
-          <SectionHeading
-            eyebrow="Everyday prices"
-            title="Under R500"
-            description={`Real listings at ${formatZAR(UNDER_FIVE_HUNDRED_CENTS)} or less. Most are one-off.`}
-            action={
-              <Link href="/shop?max=500&sort=price-asc" className="btn btn-secondary btn-sm shrink-0">
-                Everything under R500
-              </Link>
-            }
-          />
-          <div className="grid grid-cols-2 gap-3 sm:gap-4 lg:grid-cols-4">
-            {underFiveHundred.map((product) => (
-              <ProductCard key={product.id} product={product} />
-            ))}
-          </div>
-        </section>
-      ) : null}
-
-      {bargains.length > 0 ? (
-        <section className="border-y border-ink-200 bg-white py-14 sm:py-16">
-          <div className="container-page">
-            <SectionHeading
-              eyebrow="Lowest prices"
-              title="Featured bargains"
-              description="The lowest-priced second-hand finds currently listed. When a one-off is gone, it is gone."
-              action={
-                <Link href="/shop?sort=price-asc" className="btn btn-secondary btn-sm shrink-0">
-                  See all bargains
-                </Link>
-              }
-            />
-            <div className="grid grid-cols-2 gap-3 sm:gap-4 lg:grid-cols-4">
-              {bargains.map((product) => (
-                <ProductCard key={product.id} product={product} />
-              ))}
-            </div>
-          </div>
-        </section>
-      ) : null}
-
-      {featured.length > 0 ? (
-        <section className="container-page py-14 sm:py-16">
-          <SectionHeading
-            eyebrow="Picked out"
-            title="Worth a closer look"
-            description="Second-hand items with an honest condition grade. Each one is checked before it ships."
-          />
-          <div className="grid grid-cols-2 gap-3 sm:gap-4 lg:grid-cols-4">
-            {featured.map((product, index) => (
-              <ProductCard key={product.id} product={product} priority={index < 4} />
-            ))}
-          </div>
-        </section>
-      ) : null}
-
-      {recent.length > 0 ? (
-        <section className="container-page pb-14 sm:pb-16">
-          <SectionHeading
-            eyebrow="Just listed"
-            title="Recently added"
-            action={
-              <Link href="/shop?sort=newest" className="btn btn-secondary btn-sm shrink-0">
-                All new arrivals
-              </Link>
-            }
-          />
-          <div className="grid grid-cols-2 gap-3 sm:gap-4 lg:grid-cols-4">
-            {recent.map((product) => (
-              <ProductCard key={product.id} product={product} />
-            ))}
-          </div>
-        </section>
-      ) : null}
 
       <section className="border-t border-ink-200 bg-brand-50 py-14 sm:py-16">
         <div className="container-page">
