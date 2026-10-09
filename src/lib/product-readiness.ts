@@ -1,4 +1,4 @@
-/** Publishing requires sourced identity, actual-item review, photographs, pricing and measured parcel data. */
+/** Publishing requires actual-item review, photographs, pricing and populated parcel data. */
 
 /** The fields a listing needs before it can go live. */
 export interface ReadinessInput {
@@ -137,7 +137,10 @@ export function productReadinessIssues(product: ReadinessInput): ReadinessIssue[
   if (!product.itemReviewConfirmed) issues.push({ field: "review", message: "Confirm the actual item, stock, condition and included accessories before publishing." });
   // Actual-item photos are sufficient. A separate clean image is optional.
   if (product.sourceCostCents == null) issues.push({ field: "price", message: "Source cost is missing; profit cannot be verified." });
-  if (product.measurementSource !== "MEASURED") issues.push({ field: "dimensions", message: "Confirm the packed weight and outer parcel dimensions before publishing." });
+  // Estimates may be published without falsely recording them as measured.
+  if (product.measurementSource !== "MEASURED" && product.measurementSource !== "ESTIMATED") {
+    issues.push({ field: "dimensions", message: "Choose whether the parcel weight and dimensions are measured or estimated before publishing." });
+  }
 
   return issues;
 }

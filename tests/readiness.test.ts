@@ -36,10 +36,19 @@ describe("productReadinessIssues", () => {
     assert.deepEqual(productReadinessIssues({ ...complete, brand: "", model: "", modelSourceUrl: "", specsConfirmed: false }), []);
     assert.deepEqual(productReadinessIssues({ ...complete, cleanImageLicense: "", imageCount: 1 }), []);
   });
-  it("blocks missing costs and unmeasured parcels even with a selling price", () => {
+  it("blocks missing costs even with a selling price", () => {
     const flags = catalogueFlags({ ...complete, sourceCostCents: null, measurementSource: "ESTIMATED" });
     assert.ok(flags.includes("NEEDS PRICE"));
-    assert.ok(flags.includes("NEEDS REVIEW"));
+    assert.ok(!flags.includes("NEEDS REVIEW"));
+  });
+  it("allows populated estimates while keeping their source truthful", () => {
+    const product = { ...complete, measurementSource: "ESTIMATED" };
+    assert.deepEqual(productReadinessIssues(product), []);
+    assert.equal(product.measurementSource, "ESTIMATED");
+    assert.deepEqual(catalogueFlags(product), ["READY"]);
+    assert.ok(fields({ measurementSource: "ESTIMATED", productWeightGrams: 0 }).includes("weight"));
+    assert.ok(fields({ measurementSource: "ESTIMATED", packageHeightCm: 0 }).includes("dimensions"));
+    assert.ok(fields({ measurementSource: "" }).includes("dimensions"));
   });
   it("accepts a fully described listing", () => {
     assert.deepEqual(productReadinessIssues(complete), []);
