@@ -29,7 +29,7 @@ export interface CartView {
  * sitting in the cart is reported in `removed` so the UI can say so plainly
  * instead of silently shrinking the order.
  */
-export async function getCartView(preferredMethod?: ShippingMethod, destination?: { province?: string; postalCode?: string }): Promise<CartView> {
+export async function getCartView(preferredMethod?: ShippingMethod, _destination?: { province?: string; postalCode?: string }): Promise<CartView> {
   const entries = await readCart();
 
   if (entries.length === 0) {
@@ -72,7 +72,7 @@ export async function getCartView(preferredMethod?: ShippingMethod, destination?
 
   const quote =
     lines.length > 0
-      ? await quoteShipping(toParcelLines(lines), subtotalCents, preferredMethod, destination)
+      ? await quoteShipping(toParcelLines(lines), subtotalCents, preferredMethod)
       : null;
 
   return {

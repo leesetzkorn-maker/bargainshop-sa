@@ -1,0 +1,234 @@
+{
+  "createdAt": "2026-10-08T22:44:38.474306+00:00",
+  "backupDirectory": "C:\\Users\\leese\\Desktop\\online sec store\\backups\\railway-restore-20261008T224438Z",
+  "databases": [
+    {
+      "path": "C:\\Users\\leese\\Desktop\\online sec store\\prisma\\dev.db",
+      "bytes": 696320,
+      "counts": {
+        "Product": 97,
+        "Category": 19,
+        "ProductImage": 223,
+        "Order": 8
+      }
+    },
+    {
+      "path": "C:\\Users\\leese\\Desktop\\online sec store\\data\\internal\\photo-cleanup-review\\pre-cleanup.db",
+      "bytes": 688128,
+      "counts": {
+        "Product": 97,
+        "Category": 19,
+        "ProductImage": 223,
+        "Order": 8
+      }
+    },
+    {
+      "path": "C:\\Users\\leese\\Desktop\\online sec store\\data\\internal\\backups\\catalogue-1791041317857\\dev.db",
+      "bytes": 573440,
+      "counts": {
+        "Product": 97,
+        "Category": 19,
+        "ProductImage": 211,
+        "Order": 8
+      }
+    },
+    {
+      "path": "C:\\Users\\leese\\Desktop\\online sec store\\data\\internal\\backups\\catalogue-1791041946781\\dev.db",
+      "bytes": 647168,
+      "counts": {
+        "Product": 97,
+        "Category": 19,
+        "ProductImage": 212,
+        "Order": 8
+      }
+    },
+    {
+      "path": "C:\\Users\\leese\\Desktop\\online sec store\\data\\internal\\backups\\photo-release\\pre-1791046553992.db",
+      "bytes": 647168,
+      "counts": {
+        "Product": 97,
+        "Category": 19,
+        "ProductImage": 212,
+        "Order": 8
+      }
+    },
+    {
+      "path": "C:\\Users\\leese\\Desktop\\online sec store\\data\\internal\\backups\\photo-release\\pre-1791046564067.db",
+      "bytes": 647168,
+      "counts": {
+        "Product": 97,
+        "Category": 19,
+        "ProductImage": 212,
+        "Order": 8
+      }
+    },
+    {
+      "path": "C:\\Users\\leese\\Desktop\\online sec store\\data\\internal\\backups\\photo-release\\pre-1791047539573.db",
+      "bytes": 647168,
+      "counts": {
+        "Product": 97,
+        "Category": 19,
+        "ProductImage": 212,
+        "Order": 8
+      }
+    },
+    {
+      "path": "C:\\Users\\leese\\Desktop\\online sec store\\data\\internal\\backups\\photo-release\\pre-1791112437652.db",
+      "bytes": 647168,
+      "counts": {
+        "Product": 97,
+        "Category": 19,
+        "ProductImage": 212,
+        "Order": 8
+      }
+    },
+    {
+      "path": "C:\\Users\\leese\\Desktop\\online sec store\\data\\internal\\backups\\photo-release\\pre-1791112445436.db",
+      "bytes": 647168,
+      "counts": {
+        "Product": 97,
+        "Category": 19,
+        "ProductImage": 212,
+        "Order": 8
+      }
+    },
+    {
+      "path": "C:\\Users\\leese\\Desktop\\online sec store\\data\\internal\\backups\\photo-release\\pre-1791113189749.db",
+      "bytes": 647168,
+      "counts": {
+        "Product": 97,
+        "Category": 19,
+        "ProductImage": 212,
+        "Order": 8
+      }
+    },
+    {
+      "path": "C:\\Users\\leese\\Desktop\\online sec store\\data\\internal\\backups\\photo-release\\pre-1791113201599.db",
+      "bytes": 647168,
+      "counts": {
+        "Product": 97,
+        "Category": 19,
+        "ProductImage": 212,
+        "Order": 8
+      }
+    },
+    {
+      "path": "C:\\Users\\leese\\Desktop\\online sec store\\data\\internal\\backups\\photo-release\\pre-1791113212375.db",
+      "bytes": 647168,
+      "counts": {
+        "Product": 97,
+        "Category": 19,
+        "ProductImage": 212,
+        "Order": 8
+      }
+    },
+    {
+      "path": "C:\\Users\\leese\\Desktop\\online sec store\\data\\internal\\backups\\photo-release\\pre-1791113222036.db",
+      "bytes": 647168,
+      "counts": {
+        "Product": 97,
+        "Category": 19,
+        "ProductImage": 212,
+        "Order": 8
+      }
+    },
+    {
+      "path": "C:\\Users\\leese\\Desktop\\online sec store\\data\\internal\\backups\\photo-release\\pre-1791113231749.db",
+      "bytes": 647168,
+      "counts": {
+        "Product": 97,
+        "Category": 19,
+        "ProductImage": 212,
+        "Order": 8
+      }
+    },
+    {
+      "path": "C:\\Users\\leese\\Desktop\\online sec store\\data\\internal\\backups\\photo-release\\pre-1791113240471.db",
+      "bytes": 647168,
+      "counts": {
+        "Product": 97,
+        "Category": 19,
+        "ProductImage": 212,
+        "Order": 8
+      }
+    },
+    {
+      "path": "C:\\Users\\leese\\Desktop\\online sec store\\data\\internal\\backups\\photo-release\\pre-1791113250673.db",
+      "bytes": 647168,
+      "counts": {
+        "Product": 97,
+        "Category": 19,
+        "ProductImage": 212,
+        "Order": 8
+      }
+    },
+    {
+      "path": "C:\\Users\\leese\\Desktop\\online sec store\\data\\internal\\backups\\launch-1791393760785\\before.sqlite",
+      "bytes": 647168,
+      "counts": {
+        "Product": 97,
+        "Category": 19,
+        "ProductImage": 212,
+        "Order": 8
+      }
+    },
+    {
+      "path": "C:\\Users\\leese\\Desktop\\online sec store\\data\\internal\\backups\\launch-1791393977508\\before.sqlite",
+      "bytes": 679936,
+      "counts": {
+        "Product": 97,
+        "Category": 19,
+        "ProductImage": 223,
+        "Order": 8
+      }
+    },
+    {
+      "path": "C:\\Users\\leese\\Desktop\\online sec store\\data\\internal\\backups\\launch-1791394773866\\before.sqlite",
+      "bytes": 688128,
+      "counts": {
+        "Product": 97,
+        "Category": 19,
+        "ProductImage": 223,
+        "Order": 8
+      }
+    },
+    {
+      "path": "C:\\Users\\leese\\Desktop\\online sec store\\backups\\launch-20261007\\before-catalogue.sqlite",
+      "bytes": 688128,
+      "counts": {
+        "Product": 97,
+        "Category": 19,
+        "ProductImage": 223,
+        "Order": 8
+      }
+    }
+  ],
+  "storage": [
+    {
+      "source": "C:\\Users\\leese\\Desktop\\online sec store\\public\\uploads",
+      "label": "uploads",
+      "files": 130,
+      "bytes": 134148844
+    },
+    {
+      "source": "C:\\Users\\leese\\Desktop\\online sec store\\data\\internal\\photo-originals",
+      "label": "private-originals",
+      "files": 162,
+      "bytes": 106254677
+    },
+    {
+      "source": "C:\\Users\\leese\\Desktop\\online sec store\\data\\masks-clean",
+      "label": "mask-bases",
+      "files": 40,
+      "bytes": 8728200
+    },
+    {
+      "source": "C:\\Users\\leese\\Desktop\\ez pawn",
+      "label": "ez-pawn-originals",
+      "files": 66,
+      "bytes": 92333271
+    }
+  ],
+  "databaseBackupSha256": "88523f7a8f015aa93e3f162b8866a1140dbede00d4e23f4552d3ed46d3b973df",
+  "verifiedFiles": 398
+}

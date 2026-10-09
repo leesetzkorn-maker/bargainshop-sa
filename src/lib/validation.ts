@@ -11,6 +11,7 @@ import {
   TESTING_STATUSES,
   SHIPMENT_STATUSES,
   SHIPPING_METHODS,
+  isCollectionMethod,
   ZA_PROVINCE_CODES,
   USER_ROLES,
 } from "@/lib/enums";
@@ -83,12 +84,6 @@ export const paymentRecordStatusSchema = z.enum(PAYMENT_STATUS_VALUES);
 export const fulfillmentStatusSchema = z.enum(FULFILLMENT_STATUSES);
 export const shipmentStatusSchema = z.enum(SHIPMENT_STATUSES);
 export const userRoleSchema = z.enum(USER_ROLES);
-
-const centsSchema = z
-  .number({ message: "Enter an amount" })
-  .int("Amounts must be in cents")
-  .min(0, "Amount cannot be negative")
-  .max(100_000_000, "Amount is too large");
 
 /** Accepts a rand value from a form field and stores cents. */
 const centsInputSchema = z
@@ -246,7 +241,7 @@ export const checkoutSchema = z.object({
   orderNotes: optionalText(1000).optional(),
   /** Honeypot: real customers never fill this in. */
   website: z.string().max(0, "Rejected").optional().or(z.literal("")),
-}).refine((input) => input.deliveryMethod !== "LOCKER" || (input.pickupPoint?.trim().length ?? 0) >= 5, { message: "Enter the chosen Courier Guy locker name, location and reference.", path: ["pickupPoint"] });
+}).refine((input) => !isCollectionMethod(input.deliveryMethod) || Boolean(input.pickupPoint?.trim()), { message: "Enter the chosen locker or kiosk name, location and reference.", path: ["pickupPoint"] });
 export type CheckoutInput = z.infer<typeof checkoutSchema>;
 
 // ---------------------------------------------------------------------------
@@ -277,47 +272,50 @@ export type PricingSettingsInput = z.infer<typeof pricingSettingsSchema>;
 // Shipping configuration
 // ---------------------------------------------------------------------------
 export const shippingSettingsSchema = z.object({
-  volumetricDivisor: z.coerce.number().int().min(1000).max(10000).default(5000),
-  ratesConfirmed: z.boolean().default(false),
   isActive: z.coerce.boolean().default(true),
-  lockerEnabled: z.coerce.boolean().default(true),
-  lockerMaxWeightGrams: gramsSchema,
-  lockerMaxLengthCm: cmSchema,
-  lockerMaxWidthCm: cmSchema,
-  lockerMaxHeightCm: cmSchema,
-  lockerMaxSumCm: cmSchema,
-  courierEnabled: z.coerce.boolean().default(true),
-  deliverySurchargeCents: centsSchema.default(0),
-  freeShippingAboveCents: centsSchema.default(0),
-  handlingFeeCents: centsSchema.default(0),
+  ratesConfirmed: z.boolean().default(false),
+  doorFuelSurchargePercent: z.coerce
+    .number()
+    .min(0, "Fuel surcharge cannot be negative")
+    .max(100, "Fuel surcharge looks too high")
+    .default(0),
   dispatchPostalCode: postalCodeSchema,
   dispatchProvince: provinceSchema,
   dispatchCity: requiredText("Dispatch city", 2, 120),
-  lockerEtaMinDays: z.coerce.number().int().min(0).max(30).default(1),
-  lockerEtaMaxDays: z.coerce.number().int().min(0).max(60).default(3),
-  courierEtaMinDays: z.coerce.number().int().min(0).max(30).default(2),
-  courierEtaMaxDays: z.coerce.number().int().min(0).max(60).default(5),
+  etaMinDays: z.coerce.number().int().min(0).max(30).default(1),
+  etaMaxDays: z.coerce.number().int().min(0).max(60).default(3),
 });
 export type ShippingSettingsInput = z.infer<typeof shippingSettingsSchema>;
 
-export const shippingRuleSchema = z
+export const shippingTierSchema = z
   .object({
-    name: requiredText("Bracket name", 2, 80),
-    method: shippingMethodSchema,
-    minWeightGrams: gramsSchema,
-    maxWeightGrams: gramsSchema,
-    priceCents: centsInputSchema,
-    sortOrder: z.coerce.number().int().min(0).max(9999).default(0),
+    code: requiredText("Tier code", 1, 6).transform((value) => value.toUpperCase()),
+    name: requiredText("Tier name", 1, 40),
+    sortOrder: z.coerce.number().int().min(0).max(999).default(0),
     isActive: z.coerce.boolean().default(true),
+    maxLengthCm: cmSchema,
+    maxWidthCm: cmSchema,
+    maxHeightCm: cmSchema,
+    maxWeightGrams: gramsSchema,
+    lockerToLockerCents: centsInputSchema,
+    lockerToDoorCents: centsInputSchema,
+    lockerToKioskCents: centsInputSchema,
+    kioskToDoorCents: centsInputSchema,
     notes: optionalText(500).optional(),
-    provinceCodes: z.string().trim().max(100).default("").refine((value) => !value || value.split(",").every((code) => (ZA_PROVINCE_CODES as readonly string[]).includes(code.trim().toUpperCase())), "Enter valid comma-separated province codes"),
-    postalCodePrefixes: z.string().trim().max(300).default("").refine((value) => !value || value.split(",").every((prefix) => /^\d{1,4}$/.test(prefix.trim())), "Enter comma-separated postcode prefixes (1–4 digits)"),
   })
-  .refine((v) => v.maxWeightGrams === 0 || v.maxWeightGrams > v.minWeightGrams, {
-    message: "Maximum weight must be 0 (no limit) or greater than the minimum",
+  .refine((v) => v.maxLengthCm > 0 && v.maxWidthCm > 0 && v.maxHeightCm > 0, {
+    message: "Enter the box size for this tier.",
+    path: ["maxLengthCm"],
+  })
+  .refine((v) => v.maxWeightGrams > 0, {
+    message: "Enter the weight limit for this tier.",
     path: ["maxWeightGrams"],
-  }).refine((v) => !v.isActive || v.priceCents > 0, { message: "Active delivery tariffs must have a confirmed positive price.", path: ["priceCents"] });
-export type ShippingRuleInput = z.infer<typeof shippingRuleSchema>;
+  })
+  .refine((v) => !v.isActive || v.lockerToLockerCents > 0, {
+    message: "An active tier must have a confirmed positive locker-to-locker price.",
+    path: ["lockerToLockerCents"],
+  });
+export type ShippingTierInput = z.infer<typeof shippingTierSchema>;
 
 // ---------------------------------------------------------------------------
 // Order management (admin)

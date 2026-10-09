@@ -13,7 +13,9 @@ import {
   PAYMENT_STATUS_LABELS,
   SHIPMENT_STATUSES,
   SHIPMENT_STATUS_LABELS,
+  SHIPPING_METHOD_LABELS,
   provinceName,
+  type ShippingMethod,
 } from "@/lib/enums";
 import { getAdminOrder, orderProfitCents } from "@/lib/dal/admin";
 import {
@@ -107,7 +109,7 @@ export default async function AdminOrderPage({
         </p>
         <p className="mt-2 text-sm text-ink-700">
           {order.deliveryEmail} · {order.deliveryPhone} ·{" "}
-          {order.deliveryMethod === "LOCKER" ? "Locker delivery" : "Courier delivery"}
+          {SHIPPING_METHOD_LABELS[order.deliveryMethod as ShippingMethod] ?? order.deliveryMethod}
         </p>
       </section>
 

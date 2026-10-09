@@ -13,9 +13,8 @@ import {
   createAdminCategory,
   createAdminProduct,
   createAdminShipment,
-  createAdminShippingRule,
   deleteAdminCategory,
-  deleteAdminShippingRule,
+  deleteAdminShippingTier,
   getAdminOrder,
   markItemsUnavailable,
   refundAdminOrder,
@@ -25,8 +24,8 @@ import {
   updateAdminOrder,
   updateAdminProduct,
   updateAdminShipment,
-  updateAdminShippingRule,
   updateAdminShippingSettings,
+  upsertAdminShippingTier,
 } from "@/lib/dal/admin";
 import { UploadError, deleteAiCandidate, promoteAiCandidate, readStoredFile, storeProductImage } from "@/lib/storage";
 import { AiImageError } from "@/lib/ai/types";
@@ -45,7 +44,7 @@ import {
   productSchema,
   productStatusSchema,
   shipmentUpdateSchema,
-  shippingRuleSchema,
+  shippingTierSchema,
   shippingSettingsSchema,
   unavailableItemSchema,
   type FieldErrors,
@@ -526,39 +525,16 @@ export async function saveShippingSettingsAction(
 ): Promise<AdminFormState> {
   const admin = await guard();
   const values = snapshot(formData);
-  const surcharge = moneyField(formData, "deliverySurcharge");
-  const freeAbove = moneyField(formData, "freeShippingAbove");
-  const handling = moneyField(formData, "handlingFee");
-  if (surcharge === null || freeAbove === null || handling === null) {
-    return {
-      ok: false,
-      error: "Enter shipping amounts in rands, for example 99.00. Use 0 to turn a fee off.",
-      values,
-      stamp: Date.now(),
-    };
-  }
 
   const parsed = shippingSettingsSchema.safeParse({
-    volumetricDivisor: formData.get("volumetricDivisor"),
-    ratesConfirmed: formData.get("ratesConfirmed") === "on",
     isActive: formData.get("isActive") === "on",
-    lockerEnabled: formData.get("lockerEnabled") === "on",
-    lockerMaxWeightGrams: formData.get("lockerMaxWeightGrams"),
-    lockerMaxLengthCm: formData.get("lockerMaxLengthCm"),
-    lockerMaxWidthCm: formData.get("lockerMaxWidthCm"),
-    lockerMaxHeightCm: formData.get("lockerMaxHeightCm"),
-    lockerMaxSumCm: formData.get("lockerMaxSumCm"),
-    courierEnabled: formData.get("courierEnabled") === "on",
-    deliverySurchargeCents: surcharge,
-    freeShippingAboveCents: freeAbove,
-    handlingFeeCents: handling,
+    ratesConfirmed: formData.get("ratesConfirmed") === "on",
+    doorFuelSurchargePercent: formData.get("doorFuelSurchargePercent"),
     dispatchPostalCode: formData.get("dispatchPostalCode"),
     dispatchProvince: formData.get("dispatchProvince"),
     dispatchCity: formData.get("dispatchCity"),
-    lockerEtaMinDays: formData.get("lockerEtaMinDays"),
-    lockerEtaMaxDays: formData.get("lockerEtaMaxDays"),
-    courierEtaMinDays: formData.get("courierEtaMinDays"),
-    courierEtaMaxDays: formData.get("courierEtaMaxDays"),
+    etaMinDays: formData.get("etaMinDays"),
+    etaMaxDays: formData.get("etaMaxDays"),
   });
 
   if (!parsed.success) {
@@ -573,8 +549,8 @@ export async function saveShippingSettingsAction(
 
   const result = await updateAdminShippingSettings(parsed.data, admin.id);
   if (!result.ok) return { ok: false, error: result.error ?? "Shipping settings could not be saved.", values };
-refreshStore();
-  redirect(noted("/admin/pricing", "saved"));
+  refreshStore();
+  redirect(noted("/admin/shipping", "saved"));
 }
 
 // ---------------------------------------------------------------------------
@@ -718,36 +694,33 @@ export async function aiCandidateStillReadable(url: string): Promise<boolean> {
   return (await readStoredFile(url)) !== null;
 }
 
-export async function saveShippingRuleAction(formData: FormData): Promise<void> {
+export async function saveShippingTierAction(formData: FormData): Promise<void> {
   const admin = await guard();
   const id = String(formData.get("id") ?? "");
-  const parsed = shippingRuleSchema.safeParse({
+  const parsed = shippingTierSchema.safeParse({
+    code: formData.get("code"),
     name: formData.get("name"),
-    provinceCodes: formData.get("provinceCodes") ?? "",
-    postalCodePrefixes: formData.get("postalCodePrefixes") ?? "",
-    method: formData.get("method"),
-    minWeightGrams: formData.get("minWeightGrams") ?? "0",
-    maxWeightGrams: formData.get("maxWeightGrams") ?? "0",
-    priceCents: formData.get("price"),
     sortOrder: formData.get("sortOrder") ?? "0",
     isActive: formData.get("isActive") === "on",
+    maxLengthCm: formData.get("maxLengthCm"),
+    maxWidthCm: formData.get("maxWidthCm"),
+    maxHeightCm: formData.get("maxHeightCm"),
+    maxWeightGrams: formData.get("maxWeightGrams"),
+    lockerToLockerCents: formData.get("lockerToLocker"),
+    lockerToDoorCents: formData.get("lockerToDoor"),
+    lockerToKioskCents: formData.get("lockerToKiosk"),
+    kioskToDoorCents: formData.get("kioskToDoor"),
     notes: formData.get("notes") ?? "",
   });
   if (!parsed.success) redirect(noted("/admin/shipping", "error", firstError(parsed.error)));
-  const rule = {
-    ...parsed.data,
-    priceCents: parsed.data.priceCents,
-  };
-  const result = id
-    ? await updateAdminShippingRule(id, rule, admin.id)
-    : await createAdminShippingRule(rule, admin.id);
+  const result = await upsertAdminShippingTier(parsed.data, admin.id, id || undefined);
   refreshStore();
   redirect(result.ok ? noted("/admin/shipping", "saved") : noted("/admin/shipping", "error", result.error));
 }
 
-export async function deleteShippingRuleAction(formData: FormData): Promise<void> {
+export async function deleteShippingTierAction(formData: FormData): Promise<void> {
   const admin = await guard();
-  const result = await deleteAdminShippingRule(String(formData.get("id") ?? ""), admin.id);
+  const result = await deleteAdminShippingTier(String(formData.get("id") ?? ""), admin.id);
   refreshStore();
   redirect(result.ok ? noted("/admin/shipping", "saved") : noted("/admin/shipping", "error", result.error));
 }

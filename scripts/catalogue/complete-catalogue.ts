@@ -69,7 +69,7 @@ async function main() {
       const washer = await tx.product.findUniqueOrThrow({where:{itemId:"2DS-0092"},include:{images:true}});
       const ledger = intake.drafts.find(d=>d.itemId === "2DS-0092")!;
       for(const [index,url] of ledger.images.entries()) if(!washer.images.some(im=>im.url===url)) await tx.productImage.create({data:{productId:washer.id,url,sortOrder:index,alt:"Another view of the same used blue pressure washer"}});
-      await tx.shippingSetting.update({where:{id:1},data:{lockerEnabled:false,courierEnabled:true,courierEtaMinDays:1,courierEtaMaxDays:3}});
+      await tx.shippingSetting.update({where:{id:1},data:{isActive:true,ratesConfirmed:true,etaMinDays:1,etaMaxDays:3}});
     });
     console.log(`Backup: ${backup}`);
   }

@@ -3,7 +3,8 @@ import { prisma } from "@/lib/db";
 import { getActiveCategories } from "@/lib/dal/catalog";
 import { absoluteUrl } from "@/lib/brand";
 
-export const revalidate = 3600;
+// The Railway volume is mounted at runtime, never during image builds.
+export const dynamic = "force-dynamic";
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const staticRoutes: MetadataRoute.Sitemap = [

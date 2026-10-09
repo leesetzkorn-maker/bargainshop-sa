@@ -18,7 +18,7 @@ The trading name is a placeholder (`2de Store`) until a final brand is chosen. C
 - Node.js 20 or newer
 - npm
 
-The database is SQLite by default (`prisma/dev.db`). PostgreSQL can be used later by changing the Prisma datasource and `DATABASE_URL`.
+Local development uses SQLite at `prisma/dev.db`. Railway production uses the existing SQLite database at `/data/prod.db` on the existing persistent volume. See [Railway deployment and data-preservation instructions](docs/railway-deployment.md).
 
 ## Setup
 

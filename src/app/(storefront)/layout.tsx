@@ -2,6 +2,10 @@ import { StoreFooter, StoreHeader } from "@/components/store-chrome";
 import { getActiveCategories } from "@/lib/dal/catalog";
 import { readCart } from "@/lib/cart";
 
+// Catalogue queries require the mounted production volume. The cart already
+// makes these pages dynamic; declare it before any parallel database reads.
+export const dynamic = "force-dynamic";
+
 export default async function StorefrontLayout({ children }: LayoutProps<"/">) {
   const [categories, cart] = await Promise.all([getActiveCategories(), readCart()]);
 

@@ -20,7 +20,7 @@ async function main() {
   const products = await db.product.findMany({ where: { status: { not: "ARCHIVED" }, images: { some: { url: { startsWith: "/uploads/" } } } }, include: { images: { orderBy: { sortOrder: "asc" } } }, orderBy: { itemId: "asc" } });
   const settings = await db.pricingSetting.findUniqueOrThrow({ where: { id: 1 } });
   const pricing: PricingSettings = { ...settings, tiers: parsePricingTiers(JSON.parse(settings.tiersJson)), roundingMode: settings.roundingMode === "NEAREST" ? "NEAREST" : "UP" };
-  const before = { products, pricing: settings, shipping: await db.shippingSetting.findMany(), rules: await db.shippingRule.findMany() };
+  const before = { products, pricing: settings, shipping: await db.shippingSetting.findMany(), tiers: await db.shippingTier.findMany() };
   if (apply) {
     const dir = `data/internal/backups/launch-${Date.now()}`;
     await mkdir(dir, { recursive: true });
@@ -68,7 +68,7 @@ async function main() {
       for (const image of product.images.filter((image) => /-clean-/.test(image.url))) await tx.productImage.update({ where: { id: image.id }, data: { alt: "Edited actual-item photograph — price-label area reconstructed. See original photographs for condition." } });
     });
   }
-  if (apply) await db.shippingSetting.update({ where: { id: 1 }, data: { courierEtaMinDays: 1, courierEtaMaxDays: 3, freeShippingAboveCents: 0 } });
+  if (apply) await db.shippingSetting.update({ where: { id: 1 }, data: { etaMinDays: 1, etaMaxDays: 3 } });
   const counts: Record<string, number> = { "TOTAL PRODUCTS": rows.length, READY: 0, "NEEDS REVIEW": 0, "NEEDS IMAGE": 0, "NEEDS SPECS": 0, "NEEDS PRICE": 0 };
   for (const row of rows) for (const flag of row.flags) counts[flag]++;
   const report = { checkedOn: "2026-10-07", applied: apply, counts, flagsOverlap: true, manufacturerEntriesResearched: research.items.length, products: rows };

@@ -72,3 +72,4 @@ eng.traineddata
 # Local browser regression artifacts
 test-artifacts/
 audit-latest.json
+.railway/

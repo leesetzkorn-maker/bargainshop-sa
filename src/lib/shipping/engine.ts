@@ -1,12 +1,22 @@
 /**
  * Shipping engine — pure, dependency-free rate calculation.
  *
- * Nothing here touches the database. The caller (src/lib/dal/shipping.ts)
- * loads the active ShippingSetting + ShippingRule rows and passes them in, which
- * keeps the pricing rules unit-testable. Configured tariffs determine the customer-paid delivery price.
+ * Nothing here touches the database. The caller (src/lib/dal/shipping.ts) loads
+ * the active ShippingSetting and ShippingTier rows and passes them in, which
+ * keeps the pricing rules unit-testable.
+ *
+ * The rates are The Courier Guy's published locker tariff card (effective
+ * 2026-09-01, incl. VAT). A parcel is priced by matching it to the smallest
+ * locker-size tier it fits inside, then reading the price for the chosen
+ * service from that tier. We do not estimate, interpolate or invent a price:
+ * if no tier fits, the parcel cannot be quoted online.
  */
 
-import type { ShippingMethod } from "@/lib/enums";
+import {
+  SHIPPING_METHODS,
+  isDoorMethod,
+  type ShippingMethod,
+} from "@/lib/enums";
 
 /** A single product as it contributes to the parcel. */
 export interface ParcelLine {
@@ -27,12 +37,8 @@ export interface ParcelLine {
 
 /** The computed parcel, derived from the lines. */
 export interface Parcel {
-  /** Billable weight: sum of (product + packaging) per unit. Grams. */
+  /** Actual packed weight: sum of (product + packaging) per unit. Grams. */
   weightGrams: number;
-  /** Volumetric weight: L*W*H/5000 in grams, the divisor most SA couriers use. */
-  volumetricWeightGrams: number;
-  /** The greater of actual and volumetric weight — what couriers bill on. */
-  billableWeightGrams: number;
   lengthCm: number;
   widthCm: number;
   heightCm: number;
@@ -46,50 +52,41 @@ export interface Parcel {
 
 /** The subset of ShippingSetting the engine needs. */
 export interface ShippingSettings {
-  /** Owner-confirmed Courier Guy locker card; ignores legacy weight brackets. */
-  tcgLockerTariffs?: boolean;
-  /** Only set after confirming the current month's door fuel surcharge. */
-  doorFuelSurchargePercent?: number;
-  volumetricDivisor?: number;
   isActive: boolean;
-  lockerEnabled: boolean;
-  lockerMaxWeightGrams: number;
-  lockerMaxLengthCm: number;
-  lockerMaxWidthCm: number;
-  lockerMaxHeightCm: number;
-  lockerMaxSumCm: number;
-  courierEnabled: boolean;
-  deliverySurchargeCents: number;
-  freeShippingAboveCents: number;
-  handlingFeeCents: number;
-  lockerEtaMinDays: number;
-  lockerEtaMaxDays: number;
-  courierEtaMinDays: number;
-  courierEtaMaxDays: number;
+  /** Percent added to to-door services; 0 keeps them closed. */
+  doorFuelSurchargePercent: number;
+  etaMinDays: number;
+  etaMaxDays: number;
 }
 
-/** The subset of ShippingRule the engine needs. */
-export interface ShippingRule {
-  provinceCodes?: string[];
-  postalCodePrefixes?: string[];
+/** The subset of ShippingTier the engine needs. */
+export interface ShippingTier {
   id: string;
+  code: string;
   name: string;
-  method: ShippingMethod;
-  minWeightGrams: number;
-  maxWeightGrams: number; // 0 === no upper bound
-  priceCents: number;
   sortOrder: number;
   isActive: boolean;
+  maxLengthCm: number;
+  maxWidthCm: number;
+  maxHeightCm: number;
+  maxWeightGrams: number;
+  lockerToLockerCents: number;
+  lockerToDoorCents: number;
+  lockerToKioskCents: number;
+  kioskToDoorCents: number;
 }
 
 export interface MethodQuote {
   method: ShippingMethod;
   available: boolean;
+  /** Base tariff plus any fuel surcharge. */
   priceCents: number;
+  /** The fuel portion already included in priceCents (to-door only). */
+  fuelSurchargeCents: number;
   /** Why this method is unavailable, shown to the customer in plain language. */
   unavailableReason?: string;
-  matchedRuleId?: string;
-  matchedRuleName?: string;
+  matchedTierCode?: string;
+  matchedTierName?: string;
   etaMinDays: number;
   etaMaxDays: number;
 }
@@ -97,46 +94,30 @@ export interface MethodQuote {
 export interface ShippingQuote {
   parcel: Parcel;
   subtotalCents: number;
-  /** Price before free-shipping discount. */
-  baseShippingCents: number;
-  /** Negative when free shipping applied. */
-  discountCents: number;
-  /** baseShipping + surcharge + handling − discount, floored at 0. */
+  /** The service price for the selected method. Customer always pays it. */
   shippingCents: number;
-  handlingFeeCents: number;
-  deliverySurchargeCents: number;
-  freeShippingApplied: boolean;
-  freeShippingThresholdCents: number;
-  /** Remaining spend to unlock free shipping. 0 once unlocked. */
-  freeShippingRemainingCents: number;
   /** The method selected for checkout. */
   method: ShippingMethod;
-  /** Is this parcel small/light enough for a locker? */
-  lockerEligible: boolean;
-  /** Human-readable blockers when lockerEligible is false. */
-  lockerBlockers: string[];
+  matchedTierCode?: string;
+  matchedTierName?: string;
   methods: MethodQuote[];
   /** Present when no method can serve this parcel. */
   error?: string;
 }
 
-const VOLUMETRIC_DIVISOR = 5000;
+/**
+ * Services offered from a locker origin. Kiosk-to-door is defined in the rate
+ * card but not offered while we dispatch from a locker.
+ */
+export const OFFERED_SHIPPING_METHODS: ShippingMethod[] = [
+  "LOCKER_TO_LOCKER",
+  "LOCKER_TO_DOOR",
+  "LOCKER_TO_KIOSK",
+];
 
-/** VAT-inclusive card supplied by the owner, effective 1 September 2026. */
-export const TCG_LOCKER_SIZES = [
-  { size: "XS", dimensions: [60, 17, 8], maxWeightGrams: 2000, lockerCents: 5900, doorCents: 7900, kioskCents: 6900, kioskDoorCents: 9300 },
-  { size: "S", dimensions: [60, 41, 8], maxWeightGrams: 5000, lockerCents: 6900, doorCents: 8900, kioskCents: 7900, kioskDoorCents: 10500 },
-  { size: "M", dimensions: [60, 41, 19], maxWeightGrams: 10000, lockerCents: 7900, doorCents: 11900, kioskCents: 8900, kioskDoorCents: 13500 },
-  { size: "L", dimensions: [60, 41, 41], maxWeightGrams: 15000, lockerCents: 10900, doorCents: 17600, kioskCents: 12900, kioskDoorCents: 21000 },
-  { size: "XL", dimensions: [60, 41, 69], maxWeightGrams: 20000, lockerCents: 14900, doorCents: 23900, kioskCents: 16900, kioskDoorCents: 28000 },
-] as const;
-
-export function findTcgLockerSize(parcel: Parcel) {
-  const packed = [parcel.lengthCm, parcel.widthCm, parcel.heightCm].sort((a, b) => a - b);
-  return TCG_LOCKER_SIZES.find((entry) => {
-    const limits = [...entry.dimensions].sort((a, b) => a - b);
-    return parcel.weightGrams <= entry.maxWeightGrams && packed.every((dimension, index) => dimension <= limits[index]);
-  });
+/** Defensive check that the enum and this list never drift apart. */
+if (OFFERED_SHIPPING_METHODS.some((method) => !SHIPPING_METHODS.includes(method))) {
+  throw new Error("OFFERED_SHIPPING_METHODS contains a method missing from SHIPPING_METHODS");
 }
 
 export function isValidParcelLine(line: ParcelLine): boolean {
@@ -158,9 +139,10 @@ export function isValidParcelLine(line: ParcelLine): boolean {
  *
  * A multi-item order is shipped as a single parcel, so dimensions are the sum of
  * the per-item dimensions (conservative — a real consolidation would re-measure
- * the box). That errs toward courier, which is the safe direction.
+ * the box). That errs toward the next locker size up, which is the safe
+ * direction.
  */
-export function buildParcel(lines: ParcelLine[], volumetricDivisor = VOLUMETRIC_DIVISOR): Parcel {
+export function buildParcel(lines: ParcelLine[]): Parcel {
   let weightGrams = 0;
   let lengthCm = 0;
   let widthCm = 0;
@@ -177,18 +159,13 @@ export function buildParcel(lines: ParcelLine[], volumetricDivisor = VOLUMETRIC_
     heightCm += line.packageHeightCm * qty;
   }
 
-  // Never round a parcel down across a size boundary.
-  const length = Math.ceil(lengthCm * 10) / 10;
-  const width = Math.ceil(widthCm * 10) / 10;
-  const height = Math.ceil(heightCm * 10) / 10;
+  const length = round1(lengthCm);
+  const width = round1(widthCm);
+  const height = round1(heightCm);
   const volume = round1(length * width * height);
-  const volumetric = Math.ceil(volume / volumetricDivisor * 1000);
-  const actual = Math.max(0, Math.round(weightGrams));
 
   return {
-    weightGrams: actual,
-    volumetricWeightGrams: volumetric,
-    billableWeightGrams: Math.max(actual, volumetric),
+    weightGrams: Math.max(0, Math.round(weightGrams)),
     lengthCm: length,
     widthCm: width,
     heightCm: height,
@@ -200,66 +177,49 @@ export function buildParcel(lines: ParcelLine[], volumetricDivisor = VOLUMETRIC_
   };
 }
 
-/**
- * Locker eligibility. A parcel must clear every configured ceiling —
- * a parcel is never assumed to fit just because it is light.
- */
-export function checkLockerEligibility(
-  parcel: Parcel,
-  settings: ShippingSettings,
-): { eligible: boolean; blockers: string[] } {
-  const blockers: string[] = [];
-
-  if (!settings.lockerEnabled) {
-    return { eligible: false, blockers: ["Locker delivery is currently unavailable."] };
-  }
-  if (parcel.totalItems === 0) {
-    return { eligible: false, blockers: ["There is nothing in your cart yet."] };
-  }
-
-  if (parcel.weightGrams > settings.lockerMaxWeightGrams) {
-    blockers.push(
-      `Parcel weighs ${formatGrams(parcel.weightGrams)}, over the locker limit of ${formatGrams(settings.lockerMaxWeightGrams)}.`,
-    );
-  }
-  if (parcel.longestSideCm > settings.lockerMaxLengthCm) {
-    blockers.push(
-      `Longest side is ${parcel.longestSideCm} cm, over the locker limit of ${settings.lockerMaxLengthCm} cm.`,
-    );
-  }
-  if (parcel.widthCm > settings.lockerMaxWidthCm) {
-    blockers.push(
-      `Width is ${parcel.widthCm} cm, over the locker limit of ${settings.lockerMaxWidthCm} cm.`,
-    );
-  }
-  if (parcel.heightCm > settings.lockerMaxHeightCm) {
-    blockers.push(
-      `Height is ${parcel.heightCm} cm, over the locker limit of ${settings.lockerMaxHeightCm} cm.`,
-    );
-  }
-  if (parcel.sumCm > settings.lockerMaxSumCm) {
-    blockers.push(
-      `Combined dimensions are ${parcel.sumCm} cm, over the locker limit of ${settings.lockerMaxSumCm} cm.`,
-    );
-  }
-
-  return { eligible: blockers.length === 0, blockers };
+function sortedDesc(a: number, b: number, c: number): [number, number, number] {
+  const values = [a, b, c].sort((x, y) => y - x);
+  return [values[0], values[1], values[2]];
 }
 
-/** Find the active rule of `method` whose weight bracket contains the billable weight. */
-export function findRuleForWeight(
-  rules: ShippingRule[],
-  method: ShippingMethod,
-  weightGrams: number,
-  destination?: { province?: string; postalCode?: string },
-): ShippingRule | undefined {
-  return rules
-    .filter((rule) => rule.isActive && rule.method === method && rule.priceCents > 0)
-    .filter((rule) => !rule.provinceCodes?.length || rule.provinceCodes.includes(destination?.province ?? ""))
-    .filter((rule) => !rule.postalCodePrefixes?.length || rule.postalCodePrefixes.some((prefix) => destination?.postalCode?.startsWith(prefix)))
-    .filter((rule) => weightGrams >= rule.minWeightGrams)
-    .filter((rule) => rule.maxWeightGrams === 0 || weightGrams <= rule.maxWeightGrams)
-    .sort((a, b) => a.sortOrder - b.sortOrder || a.minWeightGrams - b.minWeightGrams)[0];
+/**
+ * Whether a parcel fits inside a tier. Dimensions are compared longest-to-
+ * longest so a parcel can be rotated into the box; weight is the actual packed
+ * weight (not a volumetric estimate).
+ */
+export function parcelFitsTier(parcel: Parcel, tier: ShippingTier): boolean {
+  if (parcel.weightGrams > tier.maxWeightGrams) return false;
+  const [pl, pw, ph] = sortedDesc(parcel.lengthCm, parcel.widthCm, parcel.heightCm);
+  const [tl, tw, th] = sortedDesc(tier.maxLengthCm, tier.maxWidthCm, tier.maxHeightCm);
+  return pl <= tl && pw <= tw && ph <= th;
+}
+
+/** The smallest active tier the parcel fits, or undefined when none do. */
+export function selectTier(parcel: Parcel, tiers: ShippingTier[]): ShippingTier | undefined {
+  return tiers
+    .filter((tier) => tier.isActive)
+    .slice()
+    .sort((a, b) => a.sortOrder - b.sortOrder || a.maxWeightGrams - b.maxWeightGrams)
+    .find((tier) => parcelFitsTier(parcel, tier));
+}
+
+/** The tariff-card price for a service on a given tier. */
+export function tierPriceCents(tier: ShippingTier, method: ShippingMethod): number {
+  switch (method) {
+    case "LOCKER_TO_LOCKER":
+      return tier.lockerToLockerCents;
+    case "LOCKER_TO_DOOR":
+      return tier.lockerToDoorCents;
+    case "LOCKER_TO_KIOSK":
+      return tier.lockerToKioskCents;
+    case "KIOSK_TO_DOOR":
+      return tier.kioskToDoorCents;
+  }
+}
+
+function doorSurchargeCents(baseCents: number, percent: number): number {
+  if (percent <= 0) return 0;
+  return Math.round((baseCents * percent) / 100);
 }
 
 /**
@@ -272,29 +232,18 @@ export function findRuleForWeight(
 export function calculateShipping(
   lines: ParcelLine[],
   settings: ShippingSettings,
-  rules: ShippingRule[],
-  options: { subtotalCents: number; preferredMethod?: ShippingMethod; destination?: { province?: string; postalCode?: string } } = {
-    subtotalCents: 0,
-  },
+  tiers: ShippingTier[],
+  options: { subtotalCents: number; preferredMethod?: ShippingMethod } = { subtotalCents: 0 },
 ): ShippingQuote {
   const { subtotalCents } = options;
   const preferred = options.preferredMethod;
-  const parcel = buildParcel(lines, settings.volumetricDivisor ?? VOLUMETRIC_DIVISOR);
+  const parcel = buildParcel(lines);
 
   const emptyQuote: ShippingQuote = {
     parcel,
     subtotalCents,
-    baseShippingCents: 0,
-    discountCents: 0,
     shippingCents: 0,
-    handlingFeeCents: 0,
-    deliverySurchargeCents: 0,
-    freeShippingApplied: false,
-    freeShippingThresholdCents: settings.freeShippingAboveCents,
-    freeShippingRemainingCents: 0,
-    method: preferred ?? "COURIER",
-    lockerEligible: false,
-    lockerBlockers: [],
+    method: preferred ?? "LOCKER_TO_LOCKER",
     methods: [],
     error: "Shipping is not available for this order.",
   };
@@ -306,7 +255,10 @@ export function calculateShipping(
     return { ...emptyQuote, error: "Your cart is empty." };
   }
   if (lines.some((line) => !isValidParcelLine(line))) {
-    return { ...emptyQuote, error: "An item is missing valid packed weight or dimensions. Please contact us for delivery." };
+    return {
+      ...emptyQuote,
+      error: "An item is missing valid packed weight or dimensions. Please contact us for delivery.",
+    };
   }
   if (parcel.weightGrams <= 0) {
     return {
@@ -315,153 +267,94 @@ export function calculateShipping(
     };
   }
 
-  if (settings.tcgLockerTariffs) {
-    const size = findTcgLockerSize(parcel);
-    const fits = Boolean(size);
-    const lockerAvailable = fits && lines.every((line) => line.lockerAllowed !== false);
-    const fuel = settings.doorFuelSurchargePercent;
-    const fuelConfirmed = fuel !== undefined && Number.isFinite(fuel) && fuel >= 0;
-    const courierAvailable = fits && fuelConfirmed && lines.every((line) => line.courierAllowed !== false);
-    const methods: MethodQuote[] = [
-      { method: "LOCKER", available: lockerAvailable, priceCents: lockerAvailable ? size!.lockerCents : 0,
-        matchedRuleName: size ? `The Courier Guy ${size.size} locker-to-locker` : undefined,
-        unavailableReason: !fits ? "This packed parcel exceeds the locker size or weight limits. Please request a delivery quote." : !lockerAvailable ? "An item cannot be sent to a locker." : undefined,
-        etaMinDays: settings.lockerEtaMinDays, etaMaxDays: settings.lockerEtaMaxDays },
-      { method: "COURIER", available: courierAvailable, priceCents: courierAvailable ? size!.doorCents + Math.ceil(size!.doorCents * fuel! / 100) : 0,
-        matchedRuleName: size ? `The Courier Guy ${size.size} locker-to-door` : undefined,
-        unavailableReason: !fits ? "This packed parcel needs a separate delivery quote." : !fuelConfirmed ? "Door delivery awaits confirmation of the current fuel surcharge. Choose locker delivery." : "An item cannot be delivered by courier.",
-        etaMinDays: settings.courierEtaMinDays, etaMaxDays: settings.courierEtaMaxDays },
-    ];
-    const available = methods.filter((entry) => entry.available);
-    const chosen = available.find((entry) => entry.method === preferred) ?? available[0];
-    const blockers = lockerAvailable ? [] : [methods[0].unavailableReason!];
-    if (!chosen) return { ...emptyQuote, methods, lockerBlockers: blockers, error: "No delivery option can carry this parcel. Please request a delivery quote." };
-    // Full customer-paid tariff. Legacy free shipping, handling and surcharges do not apply.
-    return { ...emptyQuote, error: undefined, methods, method: chosen.method, lockerEligible: lockerAvailable,
-      lockerBlockers: blockers, baseShippingCents: chosen.priceCents, shippingCents: chosen.priceCents,
-      freeShippingThresholdCents: 0 };
+  const activeTiers = tiers.filter((tier) => tier.isActive);
+  if (activeTiers.length === 0) {
+    return {
+      ...emptyQuote,
+      error: "Shipping prices have not been set up yet. Please contact us for a shipping quote.",
+    };
   }
 
-  const { eligible: lockerEligible, blockers } = checkLockerEligibility(parcel, settings);
-  const itemLockerAllowed = lines.every((line) => line.lockerAllowed !== false);
-  if (!itemLockerAllowed) blockers.push("An item in this parcel is not eligible for locker delivery.");
+  const tier = selectTier(parcel, activeTiers);
+  if (!tier) {
+    return {
+      ...emptyQuote,
+      error:
+        "This parcel is larger than our biggest locker or kiosk size, so we cannot quote it online. Please contact us for a delivery quote.",
+    };
+  }
 
-  const methods: MethodQuote[] = [];
+  const canCollect = lines.every((line) => line.lockerAllowed !== false);
+  const canDoor = lines.every((line) => line.courierAllowed !== false);
+  const doorConfirmed = settings.doorFuelSurchargePercent > 0;
 
-  // --- Locker ---
-  if (settings.lockerEnabled && lockerEligible && itemLockerAllowed) {
-    const rule = findRuleForWeight(rules, "LOCKER", parcel.weightGrams, options.destination);
-    methods.push({
-      method: "LOCKER",
-      available: rule !== undefined,
-      priceCents: rule?.priceCents ?? 0,
-      unavailableReason:
-        rule === undefined ? "No locker price bracket covers this parcel weight yet." : undefined,
-      matchedRuleId: rule?.id,
-      matchedRuleName: rule?.name,
-      etaMinDays: settings.lockerEtaMinDays,
-      etaMaxDays: settings.lockerEtaMaxDays,
-    });
-  } else {
-    methods.push({
-      method: "LOCKER",
+  const methods: MethodQuote[] = OFFERED_SHIPPING_METHODS.map((method) => {
+    const base = tierPriceCents(tier, method);
+    const door = isDoorMethod(method);
+
+    const quote: MethodQuote = {
+      method,
       available: false,
       priceCents: 0,
-      unavailableReason:
-        blockers[0] ??
-        "This parcel is too large or heavy for locker delivery.",
-      etaMinDays: settings.lockerEtaMinDays,
-      etaMaxDays: settings.lockerEtaMaxDays,
-    });
-  }
+      fuelSurchargeCents: 0,
+      matchedTierCode: tier.code,
+      matchedTierName: tier.name,
+      etaMinDays: settings.etaMinDays,
+      etaMaxDays: settings.etaMaxDays,
+    };
 
-  // --- Courier ---
-  if (settings.courierEnabled && lines.every((line) => line.courierAllowed !== false)) {
-    const rule = findRuleForWeight(rules, "COURIER", parcel.billableWeightGrams, options.destination);
-    methods.push({
-      method: "COURIER",
-      available: rule !== undefined,
-      priceCents: rule?.priceCents ?? 0,
-      unavailableReason:
-        rule === undefined
-          ? "No courier price bracket covers this parcel weight yet."
-          : undefined,
-      matchedRuleId: rule?.id,
-      matchedRuleName: rule?.name,
-      etaMinDays: settings.courierEtaMinDays,
-      etaMaxDays: settings.courierEtaMaxDays,
-    });
-  } else {
-    methods.push({
-      method: "COURIER",
-      available: false,
-      priceCents: 0,
-      unavailableReason: "Courier delivery is currently unavailable.",
-      etaMinDays: settings.courierEtaMinDays,
-      etaMaxDays: settings.courierEtaMaxDays,
-    });
-  }
+    if (base <= 0) {
+      return { ...quote, unavailableReason: "No price is set for this size and service yet." };
+    }
+    if (door && !canDoor) {
+      return { ...quote, unavailableReason: "An item in this parcel is not eligible for door delivery." };
+    }
+    if (!door && !canCollect) {
+      return { ...quote, unavailableReason: "An item in this parcel is not eligible for locker delivery." };
+    }
+    if (door && !doorConfirmed) {
+      return {
+        ...quote,
+        unavailableReason:
+          "To-door delivery is not available yet while we confirm The Courier Guy's monthly fuel surcharge. Choose a locker or kiosk collection point, or contact us.",
+      };
+    }
 
-  const available = methods.filter((m) => m.available);
+    const fuel = door ? doorSurchargeCents(base, settings.doorFuelSurchargePercent) : 0;
+    return {
+      ...quote,
+      available: true,
+      priceCents: base + fuel,
+      fuelSurchargeCents: fuel,
+    };
+  });
 
+  const available = methods.filter((entry) => entry.available);
   if (available.length === 0) {
-    const missing = rules.filter((r) => r.isActive).length === 0;
     return {
       ...emptyQuote,
       methods,
-      lockerEligible,
-      lockerBlockers: blockers,
-      error: !options.destination?.province && rules.some((rule) => rule.provinceCodes?.length || rule.postalCodePrefixes?.length)
-        ? "Enter your destination province and postal code at checkout to calculate delivery."
-        : missing
-        ? "Shipping prices have not been set up yet. Please contact us for a shipping quote."
-        : "No delivery option can carry this parcel. Please contact us for a quote.",
+      matchedTierCode: tier.code,
+      matchedTierName: tier.name,
+      error: "No delivery option is currently available for this parcel. Please contact us.",
     };
   }
 
   // Honour the customer's choice when it is still available, else fall back.
-  const chosen =
-    (preferred ? available.find((m) => m.method === preferred) : undefined) ??
-    available[0];
-
-  const baseShippingCents = chosen.priceCents;
-  const deliverySurchargeCents = settings.deliverySurchargeCents;
-  const handlingFeeCents = settings.handlingFeeCents;
-
-  const grossShippingCents = baseShippingCents + deliverySurchargeCents + handlingFeeCents;
-
-  const freeShippingApplied =
-    settings.freeShippingAboveCents > 0 && subtotalCents >= settings.freeShippingAboveCents;
-
-  // Free shipping waives the delivery charge only — never the handling fee,
-  // which is a real cost of packing the order.
-  const discountCents = freeShippingApplied ? baseShippingCents + deliverySurchargeCents : 0;
-  const shippingCents = Math.max(0, grossShippingCents - discountCents);
-
-  const freeShippingRemainingCents =
-    settings.freeShippingAboveCents > 0 && !freeShippingApplied
-      ? Math.max(0, settings.freeShippingAboveCents - subtotalCents)
-      : 0;
+  const chosen = (preferred ? available.find((entry) => entry.method === preferred) : undefined) ?? available[0];
 
   return {
     parcel,
     subtotalCents,
-    baseShippingCents,
-    discountCents,
-    shippingCents,
-    handlingFeeCents,
-    deliverySurchargeCents,
-    freeShippingApplied,
-    freeShippingThresholdCents: settings.freeShippingAboveCents,
-    freeShippingRemainingCents,
+    shippingCents: chosen.priceCents,
     method: chosen.method,
-    lockerEligible: lockerEligible && itemLockerAllowed,
-    lockerBlockers: blockers,
+    matchedTierCode: chosen.matchedTierCode,
+    matchedTierName: chosen.matchedTierName,
     methods,
   };
 }
 
-/** Total payable = items + shipping (handling/surcharge already inside shippingCents). */
+/** Total payable = items + shipping. */
 export function orderTotals(quote: ShippingQuote): {
   subtotalCents: number;
   shippingCents: number;
@@ -477,8 +370,4 @@ export function orderTotals(quote: ShippingQuote): {
 
 function round1(n: number): number {
   return Math.round(n * 10) / 10;
-}
-
-function formatGrams(grams: number): string {
-  return grams >= 1000 ? `${(grams / 1000).toFixed(2).replace(/\.?0+$/, "")} kg` : `${grams} g`;
 }

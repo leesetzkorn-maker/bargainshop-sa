@@ -3,13 +3,12 @@
 import { useActionState, useEffect, useState, useTransition } from "react";
 import Image from "next/image";
 import { submitCheckoutAction, type CheckoutState } from "@/app/actions/checkout";
-import { ZA_PROVINCES, type ShippingMethod } from "@/lib/enums";
+import { ZA_PROVINCES, isCollectionMethod, isDoorMethod, type ShippingMethod } from "@/lib/enums";
 import { formatZAR, formatWeight, formatDimensions } from "@/lib/money";
 import { Alert, ConditionBadge } from "@/components/ui";
 import { cn } from "@/lib/utils";
 import {
   DELIVERY_COURIER,
-  DELIVERY_ESTIMATE,
 } from "@/lib/shipping/policy";
 
 export interface QuoteResponse {
@@ -19,22 +18,40 @@ export interface QuoteResponse {
   method: ShippingMethod;
   shippingCents: number;
   totalCents: number;
-  freeShippingApplied: boolean;
-  freeShippingRemainingCents: number;
   error: string | null;
-  lockerEligible: boolean;
-  lockerBlockers: string[];
+  matchedTierCode: string | null;
+  matchedTierName: string | null;
   parcel: { weightGrams: number; lengthCm: number; widthCm: number; heightCm: number };
   methods: Array<{
     method: ShippingMethod;
     available: boolean;
     priceCents: number;
+    fuelSurchargeCents: number;
     unavailableReason: string | null;
     etaMinDays: number;
     etaMaxDays: number;
   }>;
   formatted: { subtotal: string; shipping: string; total: string };
 }
+
+const METHOD_COPY: Record<ShippingMethod, { title: string; description: string }> = {
+  LOCKER_TO_LOCKER: {
+    title: "Locker to locker",
+    description: "Collect from a The Courier Guy locker near you.",
+  },
+  LOCKER_TO_DOOR: {
+    title: "Locker to door",
+    description: "Delivered to your street address.",
+  },
+  LOCKER_TO_KIOSK: {
+    title: "Locker to kiosk",
+    description: "Collect from a The Courier Guy kiosk near you.",
+  },
+  KIOSK_TO_DOOR: {
+    title: "Kiosk to door",
+    description: "Delivered to your street address.",
+  },
+};
 
 export interface CheckoutItem {
   slug: string;
@@ -85,10 +102,7 @@ export function CheckoutForm({
         });
         if (!response.ok) throw new Error("Delivery could not be calculated. Check the address and try again.");
         const data = await response.json() as QuoteResponse;
-        if (!data.empty) {
-          setQuote(data);
-          if (!data.error && data.method !== method) setMethod(data.method);
-        }
+        if (!data.empty) setQuote(data);
         setQuoteError("");
       } catch (error) { if (!controller.signal.aborted) setQuoteError(error instanceof Error ? error.message : "Delivery unavailable"); }
       finally { if (!controller.signal.aborted) setQuoteLoading(false); }
@@ -262,8 +276,7 @@ export function CheckoutForm({
           {!quoteLoading && quote.error ? <p role="status" className="mb-3 text-sm text-ink-600">{quote.error}</p> : null}
           <input type="hidden" name="quotedShippingCents" value={quote.shippingCents} />
           <input type="hidden" name="quotedSubtotalCents" value={quote.subtotalCents} />
-          {method === "LOCKER" ? <div className="mb-4"><label className="label" htmlFor="pickupPoint">Chosen Courier Guy locker: name, location and reference</label><input id="pickupPoint" name="pickupPoint" className="input" required minLength={5} maxLength={300} placeholder="Locker name, full location and locker reference" /><p className="mt-2 text-xs text-ink-600">Choose an actual locker from <a href="https://thecourierguy.co.za/locker-courier-services/" target="_blank" rel="noopener noreferrer" className="font-semibold underline">The Courier Guy locker locations</a>. This is the collection locker, separate from your contact address. Kiosk delivery is not offered by this option.</p><p className="error-text">{fieldError("pickupPoint")}</p></div> : null}
-          {quote.methods.filter((entry) => !entry.available && entry.unavailableReason).map((entry) => <p key={entry.method} className="mb-3 text-sm text-ink-600">{entry.unavailableReason}</p>)}
+          {isCollectionMethod(method) ? <div className="mb-4"><label className="label" htmlFor="pickupPoint">Locker / kiosk name, location and reference</label><input id="pickupPoint" name="pickupPoint" className="input" required maxLength={300} /><p className="error-text">{fieldError("pickupPoint")}</p></div> : null}
           <p className="mb-4 text-sm text-ink-500">
             {DELIVERY_COURIER} delivery is paid by you, shown at checkout separately from item prices.{" "}
             <a href="/shipping" className="font-semibold text-brand-700 hover:underline">
@@ -273,8 +286,9 @@ export function CheckoutForm({
           </p>
 
           <div className="space-y-2.5">
-            {(quote.methods.filter((entry) => entry.available).map((entry) => entry.method) as ShippingMethod[]).map((option) => {
-              const optionQuote = quote.methods.find((entry) => entry.method === option);
+            {quote.methods.map((entry) => {
+              const option = entry.method;
+              const copy = METHOD_COPY[option];
               const selected = method === option;
 
               return (
@@ -282,8 +296,8 @@ export function CheckoutForm({
                   key={option}
                   className={cn(
                     "flex items-start gap-3 rounded-lg border p-3.5 transition-colors",
-                    !optionQuote?.available && "cursor-not-allowed border-ink-200 bg-ink-50 opacity-70",
-                    optionQuote?.available &&
+                    !entry.available && "cursor-not-allowed border-ink-200 bg-ink-50 opacity-70",
+                    entry.available &&
                       (selected
                         ? "cursor-pointer border-brand-600 bg-brand-50"
                         : "cursor-pointer border-ink-200 hover:border-ink-400"),
@@ -294,33 +308,34 @@ export function CheckoutForm({
                     name="deliveryMethod"
                     value={option}
                     checked={selected}
-                    disabled={!optionQuote?.available}
+                    disabled={!entry.available}
                     onChange={() => { setMethod(option); setQuoteLoading(true); }}
                     required
                     className="mt-1 accent-brand-700"
                   />
                   <div className="min-w-0 flex-1">
                     <div className="flex items-center justify-between gap-3">
-                      <span className="font-semibold text-ink-900">
-                        {option === "LOCKER" ? "Locker delivery" : DELIVERY_COURIER}
-                      </span>
-                      {optionQuote?.available ? (
+                      <span className="font-semibold text-ink-900">{copy.title}</span>
+                      {entry.available ? (
                         <span className="shrink-0 font-bold text-ink-900 tabular-nums">
-                          {formatZAR(optionQuote.priceCents)}
+                          {formatZAR(entry.priceCents)}
                         </span>
                       ) : null}
                     </div>
 
-                    {optionQuote?.available ? (
+                    {entry.available ? (
                       <p className="mt-0.5 text-xs text-ink-600">
-                        {option === "LOCKER"
-                          ? "Collect from a collection point near you."
-                          : "Delivered to your street address."}{" "}
-                        {option === "COURIER" ? DELIVERY_ESTIMATE : "Estimated delivery time shown before dispatch."}
+                        {copy.description}{" "}
+                        {quote.matchedTierName
+                          ? `Fits the ${quote.matchedTierName} parcel size (${entry.etaMinDays}–${entry.etaMaxDays} working days).`
+                          : `${entry.etaMinDays}–${entry.etaMaxDays} working days.`}
+                        {isDoorMethod(option) && entry.fuelSurchargeCents > 0
+                          ? ` Includes ${formatZAR(entry.fuelSurchargeCents)} fuel surcharge.`
+                          : ""}
                       </p>
                     ) : (
                       <p className="mt-0.5 text-xs text-ink-500">
-                        Not available: {optionQuote?.unavailableReason ?? "no price bracket set"}
+                        Not available: {entry.unavailableReason ?? "no price set for this size"}
                       </p>
                     )}
                   </div>
@@ -334,6 +349,7 @@ export function CheckoutForm({
               <span className="font-semibold text-ink-800">Parcel:</span>{" "}
               {formatWeight(quote.parcel.weightGrams)},{" "}
               {formatDimensions(quote.parcel.lengthCm, quote.parcel.widthCm, quote.parcel.heightCm)}
+              {quote.matchedTierName ? ` — ${quote.matchedTierName} size` : ""}
             </p>
           </div>
         </section>
@@ -396,21 +412,9 @@ export function CheckoutForm({
           <div className="space-y-2.5 border-t border-ink-100 p-5">
             <SummaryRow label="Items subtotal" value={formatZAR(quote.subtotalCents)} />
             <SummaryRow
-              label={`Delivery (${method === "LOCKER" ? "locker" : "courier"})`}
+              label={`Delivery (${METHOD_COPY[method].title.toLowerCase()})`}
               value={quoteLoading || isPending ? "Updating..." : quote.error || quoteError ? "Awaiting address / quote" : formatZAR(quote.shippingCents)}
             />
-
-            {quote.freeShippingApplied ? (
-              <p className="rounded-md bg-green-50 px-3 py-1.5 text-xs font-medium text-green-800">
-                Free delivery applied
-              </p>
-            ) : null}
-
-            {quote.freeShippingRemainingCents > 0 ? (
-              <p className="rounded-md bg-brand-50 px-3 py-1.5 text-xs text-brand-900">
-                Add {formatZAR(quote.freeShippingRemainingCents)} more for free delivery
-              </p>
-            ) : null}
 
             <div className="flex items-center justify-between border-t border-ink-200 pt-2.5">
               <span className="text-base font-bold text-ink-900">Total</span>

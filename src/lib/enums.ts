@@ -361,13 +361,41 @@ export const ORDER_STATUS_TO_FULFILLMENT: Partial<Record<OrderStatus, Fulfillmen
   DELIVERED: "DELIVERED",
 };
 
-export const SHIPPING_METHODS = ["LOCKER", "COURIER"] as const;
+/**
+ * The Courier Guy's locker services. We dispatch from a locker, so the three
+ * customer-facing choices are locker-to-locker, locker-to-door and
+ * locker-to-kiosk; kiosk-to-door is kept for a future kiosk origin.
+ */
+export const SHIPPING_METHODS = [
+  "LOCKER_TO_LOCKER",
+  "LOCKER_TO_DOOR",
+  "LOCKER_TO_KIOSK",
+  "KIOSK_TO_DOOR",
+] as const;
 export type ShippingMethod = (typeof SHIPPING_METHODS)[number];
 
 export const SHIPPING_METHOD_LABELS: Record<ShippingMethod, string> = {
-  LOCKER: "Locker delivery",
-  COURIER: "The Courier Guy",
+  LOCKER_TO_LOCKER: "Locker to locker",
+  LOCKER_TO_DOOR: "Locker to door",
+  LOCKER_TO_KIOSK: "Locker to kiosk",
+  KIOSK_TO_DOOR: "Kiosk to door",
 };
+
+/** Collection services hand the parcel over at a locker/kiosk, so the customer
+ *  must name the collection point. */
+export const SHIPPING_COLLECTION_METHODS = ["LOCKER_TO_LOCKER", "LOCKER_TO_KIOSK"] as const;
+
+/** To-door services are priced with the monthly fuel surcharge and are only
+ *  offered once that surcharge has been confirmed. */
+export const SHIPPING_DOOR_METHODS = ["LOCKER_TO_DOOR", "KIOSK_TO_DOOR"] as const;
+
+export function isCollectionMethod(method: ShippingMethod): boolean {
+  return (SHIPPING_COLLECTION_METHODS as readonly string[]).includes(method);
+}
+
+export function isDoorMethod(method: ShippingMethod): boolean {
+  return (SHIPPING_DOOR_METHODS as readonly string[]).includes(method);
+}
 
 export const PAYMENT_STATUS_VALUES = [
   "INITIATED",

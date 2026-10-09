@@ -57,9 +57,6 @@ const ASSUME_YES = process.argv.includes("--yes");
 const NO_PUBLISH = process.argv.includes("--no-publish");
 const DRY_RUN = !ASSUME_YES;
 
-/** No free-delivery threshold unless the owner explicitly configures one. */
-const FREE_SHIPPING_ABOVE_RANDS = Number(process.env.FREE_SHIPPING_ABOVE_RANDS ?? 0);
-
 /**
  * An item is demo stock if its photographs are the shared placeholder artwork.
  * That is the honest test — it is what the pictures are — rather than guessing
@@ -201,14 +198,8 @@ async function main() {
 
   // ------------------------------------------------------------ shipping ---
   if (!DRY_RUN) {
-    const setting = await prisma.shippingSetting.findUnique({ where: { id: 1 } });
-    if (setting && setting.freeShippingAboveCents === 0) {
-      await prisma.shippingSetting.update({
-        where: { id: 1 },
-        data: { freeShippingAboveCents: Math.round(FREE_SHIPPING_ABOVE_RANDS * 100) },
-      });
-      console.log(`\nshipping: free delivery set above R${FREE_SHIPPING_ABOVE_RANDS} (was 0)`);
-    }
+    const tiers = await prisma.shippingTier.count({ where: { isActive: true } });
+    console.log(`\nshipping: ${tiers} active locker tariff size(s) configured`);
   }
 
   // ------------------------------------------------------------- publish ---

@@ -20,12 +20,10 @@ async function main() {
   const pass = (check) => { report.checks.push(check); console.log('PASS '+check); };
   try {
     await db.user.create({ data: { email: 'ui-test@example.invalid', name: 'UI Test Owner', passwordHash: await bcrypt.hash('Test-only-password-123!', 10), role: 'OWNER' } });
-    await db.shippingSetting.update({ where: { id: 1 }, data: { isActive: true, ratesConfirmed: true, lockerEnabled: true, courierEnabled: true, freeShippingAboveCents: 0, handlingFeeCents: 0, deliverySurchargeCents: 0, dispatchPostalCode: '2000', lockerMaxSumCm: 100 } });
-    await db.shippingRule.updateMany({ data: { isActive: false } });
-    await db.shippingRule.createMany({ data: [
-      { name: 'QA locker tariff', method: 'LOCKER', priceCents: 6500, provinceCodes: 'GP' },
-      { name: 'QA Gauteng tariff', method: 'COURIER', priceCents: 9900, provinceCodes: 'GP' },
-      { name: 'QA Cape tariff', method: 'COURIER', priceCents: 14900, provinceCodes: 'WC' },
+    await db.shippingSetting.update({ where: { id: 1 }, data: { isActive: true, ratesConfirmed: true, doorFuelSurchargePercent: 0, dispatchPostalCode: '2000', dispatchProvince: 'GP', dispatchCity: 'Johannesburg', etaMinDays: 1, etaMaxDays: 3 } });
+    await db.shippingTier.deleteMany({});
+    await db.shippingTier.createMany({ data: [
+      { code: 'QA', name: 'QA test size', sortOrder: 10, maxLengthCm: 100, maxWidthCm: 100, maxHeightCm: 100, maxWeightGrams: 100000, lockerToLockerCents: 9900, lockerToDoorCents: 14900, lockerToKioskCents: 8900, kioskToDoorCents: 19900 },
     ] });
     const demo = await db.product.findFirst({where:{images:{every:{url:{startsWith:'/placeholder/'}}}},select:{slug:true}});
     const origin = 'http://127.0.0.1:3108';
@@ -72,10 +70,9 @@ async function main() {
     for(const [name,value] of [['fullName','QA Customer'],['email','qa-customer@example.invalid'],['phone','0821234567'],['line1','1 QA Road'],['suburb','QA Suburb'],['city','Johannesburg'],['postalCode','2000']]) await customer.locator(`[name=${name}]`).fill(value);
     await customer.locator('[name=province]').selectOption('GP');
     await expect.poll(async()=>customer.locator('[name=quotedShippingCents]').inputValue()).toBe('9900');
-    await customer.locator('[name=province]').selectOption('WC'); await customer.locator('[name=postalCode]').fill('8000'); await expect.poll(async()=>customer.locator('[name=quotedShippingCents]').inputValue()).toBe('14900'); pass('Destination-specific courier rates update checkout');
-    await customer.locator('[name=province]').selectOption('GP'); await customer.locator('[name=postalCode]').fill('2000'); await expect.poll(async()=>customer.locator('[name=quotedShippingCents]').inputValue()).toBe('9900');
-    await customer.locator('[name=deliveryMethod][value=LOCKER]').check(); await customer.locator('[name=pickupPoint]').fill('QA locker, QA Road, test-reference'); await expect.poll(async()=>customer.locator('[name=quotedShippingCents]').inputValue()).toBe('6500'); pass('Eligible locker selection and pickup reference');
-    await customer.locator('[name=deliveryMethod][value=COURIER]').check(); await expect.poll(async()=>customer.locator('[name=quotedShippingCents]').inputValue()).toBe('9900');
+    await customer.locator('[name=deliveryMethod][value=LOCKER_TO_KIOSK]').check(); await customer.locator('[name=pickupPoint]').fill('QA kiosk, QA Road, test-reference'); await expect.poll(async()=>customer.locator('[name=quotedShippingCents]').inputValue()).toBe('8900'); pass('Kiosk collection selection and pickup reference');
+    await customer.locator('[name=deliveryMethod][value=LOCKER_TO_LOCKER]').check(); await expect.poll(async()=>customer.locator('[name=quotedShippingCents]').inputValue()).toBe('9900');
+    await expect(customer.locator('[name=deliveryMethod][value=LOCKER_TO_DOOR]')).toBeDisabled(); pass('To-door stays closed until the fuel surcharge is confirmed');
     for(const route of ['/admin','/admin/products','/admin/pricing','/admin/shipping','/admin/categories','/admin/orders','/admin/customers']){const response=await page.goto(origin+route);assert.equal(response.status(),200,route);} pass('Admin dashboard and management routes');
     if(demo)assert.equal((await customer.request.get(origin+'/product/'+demo.slug)).status(),404); pass('Archived demo product URLs are not public');
     const routes=['/','/shop', '/product/'+product.slug, '/cart','/checkout','/contact','/shipping','/returns','/terms','/privacy','/admin/products/new'];

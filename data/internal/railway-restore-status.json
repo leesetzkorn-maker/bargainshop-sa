@@ -1,0 +1,144 @@
+{
+  "checkedOn": "2026-10-08T23:44:45.312Z",
+  "local": {
+    "database": "prisma/dev.db",
+    "products": 97,
+    "categories": 19,
+    "productImages": 223,
+    "orders": 8,
+    "currentRealProducts": 52,
+    "publishedRealProducts": 2,
+    "drafts": 50
+  },
+  "backupDirectory": "C:\\Users\\leese\\Desktop\\online sec store\\backups\\railway-restore-20261008T224438Z",
+  "backupIntegrity": "SQLite integrity check and 398 file hashes passed",
+  "transfer": {
+    "bundleDirectory": "C:\\Users\\leese\\Desktop\\online sec store\\backups\\railway-restore-20261008T224438Z\\transfer-bundle",
+    "products": 52,
+    "categories": 19,
+    "imageRows": 90,
+    "published": 2,
+    "drafts": 50,
+    "assets": 292,
+    "publicPhotos": 90,
+    "bytes": 238394483,
+    "excludes": [
+      "demo products",
+      "local orders/customer data",
+      "admin accounts",
+      "secrets",
+      "payment/shipping settings"
+    ]
+  },
+  "localVerification": {
+    "verifiedAt": "2026-10-08T22:53:46.645Z",
+    "before": {
+      "products": 45,
+      "orders": 8
+    },
+    "after": {
+      "products": 97,
+      "images": 223,
+      "orders": 8
+    },
+    "dryRunDidNotMutate": true,
+    "existingOrdersAndPaymentsUnchanged": true,
+    "repeatedApplyIdempotent": true,
+    "privateTestVolume": "C:\\Users\\leese\\AppData\\Local\\Temp\\2de-restore-verify-yU1qTm",
+    "bundle": "C:\\Users\\leese\\Desktop\\online sec store\\backups\\railway-restore-20261008T224438Z\\transfer-bundle",
+    "conflictProtectionVerified": true
+  },
+  "production": {
+    "project": "observant-blessing",
+    "environment": "production",
+    "service": "bargainshop-sa",
+    "database": "file:/data/prod.db",
+    "volumeMount": "/data",
+    "before": {
+      "products": 0,
+      "categories": 19,
+      "productImages": 0,
+      "orders": 0,
+      "users": 1
+    },
+    "after": {
+      "products": 52,
+      "categories": 19,
+      "productImages": 90,
+      "orders": 0,
+      "users": 1
+    },
+    "status": "RESTORED AND VERIFIED",
+    "filesTransferred": 292,
+    "publicPhotos": 90,
+    "privateOriginalAndMaskFiles": 202,
+    "allFileHashesVerified": true,
+    "protectedRecordsUnchanged": true,
+    "backups": [
+      "/data/backups/before-catalogue-restore-20261009/prod-before.db",
+      "/data/backups/restore-1791502737567/prod-before.db"
+    ],
+    "independentDownloadedBackup": "backups/railway-restore-20261008T224438Z/production/prod-before.db",
+    "deployment": "adb5f9e2-e326-480a-8085-18b05ef118ac",
+    "deploymentStatus": "SUCCESS",
+    "published": 2,
+    "drafts": 50,
+    "storageVariables": {
+      "UPLOADS_DIR": "/data/uploads",
+      "DATA_DIR": "/data/private"
+    },
+    "temporarySshRegistrationRemoved": true,
+    "liveResults": {
+      "checkedAt": "2026-10-08T23:43:50.014Z",
+      "origin": "https://bargainshop-sa-production.up.railway.app",
+      "photos": 90,
+      "photosPassed": 90,
+      "failures": [],
+      "routes": [
+        {
+          "route": "/",
+          "status": 200,
+          "hasHelmetPrice": true,
+          "visibleProducts": 2
+        },
+        {
+          "route": "/shop",
+          "status": 200,
+          "hasHelmetPrice": true,
+          "visibleProducts": 2
+        },
+        {
+          "route": "/categories",
+          "status": 200,
+          "hasHelmetPrice": false,
+          "visibleProducts": 0
+        },
+        {
+          "route": "/product/grey-motorcycle-helmet",
+          "status": 200,
+          "hasHelmetPrice": true,
+          "visibleProducts": 2
+        },
+        {
+          "route": "/product/black-motorcycle-helmet",
+          "status": 200,
+          "hasHelmetPrice": true,
+          "visibleProducts": 2
+        },
+        {
+          "route": "/category/other-bargains",
+          "status": 200,
+          "hasHelmetPrice": true,
+          "visibleProducts": 2
+        }
+      ]
+    }
+  },
+  "verification": {
+    "tests": "167 passed",
+    "typecheck": "passed",
+    "lint": "passed; 6 existing warnings",
+    "productionBuild": "verified previously locally; Railway redeployment SUCCESS"
+  },
+  "remainingManualReview": "50 drafts retain their existing review flags and are not automatically published."
+}

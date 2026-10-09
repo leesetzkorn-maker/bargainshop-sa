@@ -18,11 +18,11 @@ import {
   PRODUCT_CONDITION_BLURB,
   PRODUCT_CONDITION_LABELS,
   PRODUCT_CONDITIONS,
+  SHIPPING_METHOD_LABELS,
   conditionDescription,
   type ProductCondition,
 } from "@/lib/enums";
 import { quoteShipping, toParcelLines } from "@/lib/dal/shipping";
-import { DELIVERY_COURIER, DELIVERY_ESTIMATE } from "@/lib/shipping/policy";
 import { BreadcrumbJsonLd } from "@/components/json-ld";
 
 export async function generateMetadata({ params }: PageProps<"/product/[slug]">): Promise<Metadata> {
@@ -92,8 +92,8 @@ export default async function ProductPage({ params }: PageProps<"/product/[slug]
   ]);
 
   const parcel = quote.parcel;
-  const lockerQuote = quote.methods.find((m) => m.method === "LOCKER");
-  const courierQuote = quote.methods.find((m) => m.method === "COURIER");
+  const anyAvailable = quote.methods.some((m) => m.available);
+  const doorMethod = quote.methods.find((m) => m.method === "LOCKER_TO_DOOR");
 
   const jsonLd = buildProductJsonLd(product, {
     soldOut,
@@ -246,43 +246,32 @@ export default async function ProductPage({ params }: PageProps<"/product/[slug]
             </dl>
 
             <div className="mt-3 space-y-2 border-t border-ink-100 pt-3">
-              {lockerQuote?.available ? (
-                <div className="flex items-start justify-between gap-3">
+              {quote.methods.filter((entry) => entry.available).map((entry) => (
+                <div key={entry.method} className="flex items-start justify-between gap-3">
                   <div>
                     <p className="font-medium text-ink-900">
-                      Locker delivery{" "}
+                      {SHIPPING_METHOD_LABELS[entry.method]}{" "}
                       <span className="font-normal text-ink-500">
-                        (est. {lockerQuote.etaMinDays}–{lockerQuote.etaMaxDays} working days)
+                        (est. {entry.etaMinDays}–{entry.etaMaxDays} working days)
                       </span>
                     </p>
-                    <p className="text-xs text-ink-500">Collect from a locker near you</p>
-                  </div>
-                  <span className="shrink-0 font-semibold text-ink-900 tabular-nums">
-                    {formatZAR(lockerQuote.priceCents)}
-                  </span>
-                </div>
-              ) : null}
-
-              {courierQuote?.available ? (
-                <div className="flex items-start justify-between gap-3">
-                  <div>
-                    <p className="font-medium text-ink-900">
-                      {DELIVERY_COURIER}{" "}
-                      <span className="font-normal text-ink-500">
-                        — estimated 1–3 working days after dispatch
-                      </span>
+                    <p className="text-xs text-ink-500">
+                      {entry.method === "LOCKER_TO_LOCKER"
+                        ? "Collect from a locker near you"
+                        : entry.method === "LOCKER_TO_KIOSK"
+                          ? "Collect from a kiosk near you"
+                          : "Delivered to your street address"}
                     </p>
-                    <p className="text-xs text-ink-500">{DELIVERY_ESTIMATE}</p>
                   </div>
                   <span className="shrink-0 font-semibold text-ink-900 tabular-nums">
-                    {formatZAR(courierQuote.priceCents)}
+                    {formatZAR(entry.priceCents)}
                   </span>
                 </div>
-              ) : null}
+              ))}
 
-              {!lockerQuote?.available && !courierQuote?.available ? (
+              {!anyAvailable ? (
                 <p className="text-sm text-ink-600">
-                  {quote.error?.startsWith("Enter your destination") ? "Enter your delivery address at checkout for a shipping price." : "Delivery options for this item are not set up yet."}{" "}
+                  {quote.error ?? "Delivery options for this item are not set up yet."}{" "}
                   <Link href="/contact" className="font-semibold text-brand-700 hover:underline">
                     Contact us
                   </Link>{" "}
@@ -290,6 +279,9 @@ export default async function ProductPage({ params }: PageProps<"/product/[slug]
                 </p>
               ) : null}
 
+              {anyAvailable && doorMethod && !doorMethod.available ? (
+                <p className="text-xs text-ink-500">{doorMethod.unavailableReason}</p>
+              ) : null}
             </div>
 
             <Link

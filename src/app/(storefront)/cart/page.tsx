@@ -6,6 +6,7 @@ import { CartLine } from "@/components/cart-line";
 import { Alert, EmptyState } from "@/components/ui";
 import { formatZAR } from "@/lib/money";
 import { copy } from "@/lib/brand";
+import { SHIPPING_METHOD_LABELS } from "@/lib/enums";
 import { DELIVERY_COURIER, DELIVERY_ESTIMATE } from "@/lib/shipping/policy";
 
 export const metadata: Metadata = {
@@ -96,22 +97,10 @@ export default async function CartPage() {
 
               <div className="border-t border-dashed border-ink-200 pt-3">
                 <SummaryRow
-                  label="Delivery"
+                  label={quote && canShip ? `Delivery (${SHIPPING_METHOD_LABELS[quote.method].toLowerCase()})` : "Delivery"}
                   value={canShip ? formatZAR(shippingCents) : "Calculated at checkout"}
                 />
               </div>
-
-              {quote?.freeShippingApplied ? (
-                <p className="rounded-md bg-green-50 px-3 py-2 text-xs font-medium text-green-800">
-                  Free delivery applied to this order.
-                </p>
-              ) : null}
-
-              {quote && quote.freeShippingRemainingCents > 0 ? (
-                <p className="rounded-md bg-brand-50 px-3 py-2 text-xs text-brand-900">
-                  Spend {formatZAR(quote.freeShippingRemainingCents)} more to get free delivery.
-                </p>
-              ) : null}
 
               <p className="rounded-md bg-ink-50 px-3 py-2 text-xs text-ink-600">
                 All products ship with {DELIVERY_COURIER}. Delivery is paid by you, charged separately at checkout. {DELIVERY_ESTIMATE}

@@ -22,11 +22,9 @@
  *                                       MEASURED / ESTIMATED label
  *   scripts/launch/go-live.ts                 publishes what is genuinely ready
  *
- * This seed refuses to report success if the storefront is empty, because an
- * empty shop and a fake shop are both a broken shop. It never invents stock to
- * paper over the difference.
+ * Missing catalogue stock is never replaced with invented products.
  *
- * Idempotent: safe to re-run. Existing rows are updated, not duplicated.
+ * Idempotent: create missing configuration only. Existing rows are untouched.
  */
 
 import { PrismaClient } from "@prisma/client";
@@ -38,9 +36,6 @@ const prisma = new PrismaClient();
 
 const BRAND = process.env.NEXT_PUBLIC_BRAND_NAME || "2DE BARGAINS";
 
-/** Rands. Free delivery above this order value. See the note at the usage below. */
-const FREE_SHIPPING_ABOVE_RANDS = Number(process.env.FREE_SHIPPING_ABOVE_RANDS ?? 0);
-
 
 async function main() {
   console.log(`Seeding ${BRAND}...`);
@@ -50,29 +45,39 @@ async function main() {
   // Created once, then never touched by a re-run, so that a deliberate change
   // made in the admin area is not silently undone by `npm run db:seed`.
   //
-  // The locker limits below are the PNA size and weight limits. Delivery falls
-  // back to courier for anything heavier, longer or bulkier, and the customer is
-  // shown the courier price instead of being told a parcel is undeliverable.
+  // The prices below are The Courier Guy's published locker tariff card,
+  // effective 2026-09-01, including VAT. To-door prices exclude the monthly fuel
+  // surcharge, which stays at 0 here so checkout keeps to-door delivery closed
+  // until an admin enters the confirmed percentage.
   await prisma.shippingSetting.upsert({
     where: { id: 1 },
     update: {},
     create: {
       id: 1,
-      lockerEnabled: false,
-      ratesConfirmed: false,
-      lockerMaxWeightGrams: 2000,
-      lockerMaxLengthCm: 35,
-      lockerMaxWidthCm: 30,
-      lockerMaxHeightCm: 20,
-      lockerMaxSumCm: 60,
-      courierEnabled: true,
-      deliverySurchargeCents: 0,
-      freeShippingAboveCents: Math.round(FREE_SHIPPING_ABOVE_RANDS * 100),
-      handlingFeeCents: 0,
+      isActive: true,
+      ratesConfirmed: true,
+      doorFuelSurchargePercent: 0,
+      etaMinDays: 1,
+      etaMaxDays: 3,
+      dispatchCity: "Johannesburg",
+      dispatchProvince: "GP",
+      dispatchPostalCode: "2000",
     },
   });
 
-  // No example tariffs: the owner enters confirmed Courier Guy rates in admin.
+  // The locker tariff card. Sizes are matched smallest-first, so sortOrder
+  // doubles as the fit order.
+  const tiers = [
+    { code: "XS", name: "Extra small", sortOrder: 10, maxLengthCm: 60, maxWidthCm: 17, maxHeightCm: 8, maxWeightGrams: 2000, lockerToLockerCents: 5900, lockerToDoorCents: 7900, lockerToKioskCents: 6900, kioskToDoorCents: 9300 },
+    { code: "S", name: "Small", sortOrder: 20, maxLengthCm: 60, maxWidthCm: 41, maxHeightCm: 8, maxWeightGrams: 5000, lockerToLockerCents: 6900, lockerToDoorCents: 8900, lockerToKioskCents: 7900, kioskToDoorCents: 10500 },
+    { code: "M", name: "Medium", sortOrder: 30, maxLengthCm: 60, maxWidthCm: 41, maxHeightCm: 19, maxWeightGrams: 10000, lockerToLockerCents: 7900, lockerToDoorCents: 11900, lockerToKioskCents: 8900, kioskToDoorCents: 13500 },
+    { code: "L", name: "Large", sortOrder: 40, maxLengthCm: 60, maxWidthCm: 41, maxHeightCm: 41, maxWeightGrams: 15000, lockerToLockerCents: 10900, lockerToDoorCents: 17600, lockerToKioskCents: 12900, kioskToDoorCents: 21000 },
+    { code: "XL", name: "Extra large", sortOrder: 50, maxLengthCm: 60, maxWidthCm: 41, maxHeightCm: 69, maxWeightGrams: 20000, lockerToLockerCents: 14900, lockerToDoorCents: 23900, lockerToKioskCents: 16900, kioskToDoorCents: 28000 },
+  ];
+  for (const tier of tiers) {
+    await prisma.shippingTier.upsert({ where: { code: tier.code }, update: {}, create: tier });
+  }
+
   for (const [index, node] of CATEGORY_TREE.entries()) {
     const category = await prisma.category.upsert({ where: { slug: node.slug }, update: {}, create: { slug: node.slug, name: node.name, description: node.description, sortOrder: index * 10 } });
     for (const [childIndex, child] of node.children.entries()) {
@@ -81,11 +86,12 @@ async function main() {
   }
   const email = process.env.ADMIN_EMAIL?.trim().toLowerCase();
   const password = process.env.ADMIN_PASSWORD;
-  if (email && !(await prisma.user.findUnique({ where: { email } }))) {
+  const ownerExists = await prisma.user.findFirst({ where: { role: "OWNER" }, select: { id: true } });
+  if (!ownerExists && email && !(await prisma.user.findUnique({ where: { email } }))) {
     if (!password || password.length < 12 || /CHANGEME/i.test(password)) throw new Error("Set a unique ADMIN_PASSWORD of at least 12 characters before seeding the admin.");
     await prisma.user.create({ data: { email, name: process.env.ADMIN_NAME || "Store Owner", passwordHash: await bcrypt.hash(password, 12), role: "OWNER" } });
   }
-  console.log("Categories and settings ready; no products or shipping prices invented.");
+  console.log("Categories and settings ready; no products invented.");
 }
 
 main().catch((error) => { console.error(error); process.exitCode = 1; }).finally(() => prisma.$disconnect());

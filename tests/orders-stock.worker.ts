@@ -16,10 +16,10 @@ async function main() {
     specsConfirmed: true, itemReviewConfirmed: true, cleanImageLicense: "Fixture image",
     images: { create: [{ url: "/uploads/products/stock-test.webp" }, { url: "/uploads/products/stock-test-original.webp" }] },
   } });
-  await prisma.shippingSetting.upsert({ where: { id: 1 }, update: { isActive: true, ratesConfirmed: true, courierEnabled: true, lockerEnabled: false, freeShippingAboveCents: 0, deliverySurchargeCents: 0, handlingFeeCents: 0 }, create: { id: 1, ratesConfirmed: true } });
-  await prisma.shippingRule.updateMany({ data: { isActive: false } });
-  await prisma.shippingRule.create({ data: { name: "Confirmed test tariff", method: "COURIER", priceCents: 9900 } });
-  const input: CheckoutInput = { fullName: "Test Customer", email: "customer@example.invalid", phone: "0821234567", line1: "1 Test Road", suburb: "Test", city: "Johannesburg", province: "GP", postalCode: "2000", deliveryMethod: "COURIER", quotedShippingCents: 9900, quotedSubtotalCents: 10000 };
+  await prisma.shippingSetting.upsert({ where: { id: 1 }, update: { isActive: true, ratesConfirmed: true, doorFuelSurchargePercent: 0, etaMinDays: 1, etaMaxDays: 3 }, create: { id: 1, isActive: true, ratesConfirmed: true } });
+  await prisma.shippingTier.deleteMany({});
+  await prisma.shippingTier.create({ data: { code: "QA", name: "Confirmed test tariff", sortOrder: 10, maxLengthCm: 60, maxWidthCm: 41, maxHeightCm: 41, maxWeightGrams: 20000, lockerToLockerCents: 9900, lockerToDoorCents: 14900, lockerToKioskCents: 8900, kioskToDoorCents: 19900 } });
+  const input: CheckoutInput = { fullName: "Test Customer", email: "customer@example.invalid", phone: "0821234567", line1: "1 Test Road", suburb: "Test", city: "Johannesburg", province: "GP", postalCode: "2000", deliveryMethod: "LOCKER_TO_LOCKER", pickupPoint: "Test locker, 1 Test Road, ref-1", quotedShippingCents: 9900, quotedSubtotalCents: 10000 };
   const cart = [{ slug: product.slug, quantity: 1 }];
   const stale = await createOrderFromCheckout(cart, { ...input, quotedShippingCents: 100 });
   assert.equal(stale.ok, false);

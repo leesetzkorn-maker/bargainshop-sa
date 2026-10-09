@@ -5,10 +5,10 @@ import { randomBytes } from "node:crypto";
 import { prisma } from "@/lib/db";
 import { getPaymentProvider } from "@/lib/payments/registry";
 import { getCourierProvider } from "@/lib/courier/registry";
-import { getShippingSettings, getActiveShippingRules, toParcelLines } from "@/lib/dal/shipping";
+import { getShippingSettings, getActiveShippingTiers, toParcelLines } from "@/lib/dal/shipping";
 import { calculateShipping, orderTotals } from "@/lib/shipping/engine";
 import type { CheckoutInput } from "@/lib/validation";
-import { ORDER_PREFIX, type OrderStatus, type ShippingMethod } from "@/lib/enums";
+import { ORDER_PREFIX, isCollectionMethod, type OrderStatus, type ShippingMethod } from "@/lib/enums";
 import { FULFILLMENT_TO_ORDER_STATUS, PAID_PAYMENT_STATUSES } from "@/lib/enums";
 import { brand, absoluteUrl } from "@/lib/brand";
 
@@ -158,11 +158,10 @@ export async function createOrderFromCheckout(
     0,
   );
 
-  const [settings, rules] = await Promise.all([getShippingSettings(), getActiveShippingRules()]);
-  const quote = calculateShipping(toParcelLines(lines), settings, rules, {
+  const [settings, tiers] = await Promise.all([getShippingSettings(), getActiveShippingTiers()]);
+  const quote = calculateShipping(toParcelLines(lines), settings, tiers, {
     subtotalCents,
     preferredMethod,
-    destination: { province: input.province, postalCode: input.postalCode },
   });
 
   if (quote.error) {
@@ -239,7 +238,7 @@ export async function createOrderFromCheckout(
           deliveryPostalCode: input.postalCode,
           deliveryCountry: "ZA",
           deliveryMethod: chosenMethod,
-          deliveryNotes: [chosenMethod === "LOCKER" ? `Pickup point: ${input.pickupPoint}` : "", input.orderNotes].filter(Boolean).join("\n") || null,
+          deliveryNotes: [isCollectionMethod(chosenMethod) ? `Collection point: ${input.pickupPoint}` : "", input.orderNotes].filter(Boolean).join("\n") || null,
           subtotalCents: totals.subtotalCents,
           shippingCents: totals.shippingCents,
           totalCents: totals.totalCents,
@@ -253,14 +252,9 @@ export async function createOrderFromCheckout(
           shippingQuote: {
             parcel: { ...quote.parcel },
             method: quote.method,
-            baseShippingCents: quote.baseShippingCents,
-            deliverySurchargeCents: quote.deliverySurchargeCents,
-            handlingFeeCents: quote.handlingFeeCents,
-            discountCents: quote.discountCents,
-            freeShippingApplied: quote.freeShippingApplied,
-            lockerEligible: quote.lockerEligible,
-            matchedRule:
-              quote.methods.find((m) => m.method === chosenMethod)?.matchedRuleName ?? null,
+            shippingCents: quote.shippingCents,
+            matchedTierCode: quote.matchedTierCode ?? null,
+            matchedTierName: quote.matchedTierName ?? null,
             calculatedAt: new Date().toISOString(),
           } as object,
           items: {

@@ -4,207 +4,133 @@ import {
   calculateShipping,
   orderTotals,
   type ParcelLine,
-  type ShippingRule,
   type ShippingSettings,
+  type ShippingTier,
 } from "../src/lib/shipping/engine";
 
 const settings: ShippingSettings = {
   isActive: true,
-  lockerEnabled: true,
-  lockerMaxWeightGrams: 2000,
-  lockerMaxLengthCm: 35,
-  lockerMaxWidthCm: 30,
-  lockerMaxHeightCm: 20,
-  lockerMaxSumCm: 80,
-  courierEnabled: true,
-  deliverySurchargeCents: 0,
-  freeShippingAboveCents: 0,
-  handlingFeeCents: 0,
-  lockerEtaMinDays: 1,
-  lockerEtaMaxDays: 3,
-  courierEtaMinDays: 2,
-  courierEtaMaxDays: 5,
+  doorFuelSurchargePercent: 0,
+  etaMinDays: 1,
+  etaMaxDays: 3,
 };
 
-const rules: ShippingRule[] = [
-  {
-    id: "locker",
-    name: "Locker",
-    method: "LOCKER",
-    minWeightGrams: 0,
-    maxWeightGrams: 2000,
-    priceCents: 5900,
-    sortOrder: 0,
-    isActive: true,
-  },
-  {
-    id: "courier",
-    name: "Courier",
-    method: "COURIER",
-    minWeightGrams: 0,
-    maxWeightGrams: 0,
-    priceCents: 9900,
-    sortOrder: 0,
-    isActive: true,
-  },
+/** The Courier Guy locker tariff card, incl. VAT. */
+const tiers: ShippingTier[] = [
+  { id: "xs", code: "XS", name: "Extra small", sortOrder: 10, isActive: true, maxLengthCm: 60, maxWidthCm: 17, maxHeightCm: 8, maxWeightGrams: 2000, lockerToLockerCents: 5900, lockerToDoorCents: 7900, lockerToKioskCents: 6900, kioskToDoorCents: 9300 },
+  { id: "s", code: "S", name: "Small", sortOrder: 20, isActive: true, maxLengthCm: 60, maxWidthCm: 41, maxHeightCm: 8, maxWeightGrams: 5000, lockerToLockerCents: 6900, lockerToDoorCents: 8900, lockerToKioskCents: 7900, kioskToDoorCents: 10500 },
+  { id: "m", code: "M", name: "Medium", sortOrder: 30, isActive: true, maxLengthCm: 60, maxWidthCm: 41, maxHeightCm: 19, maxWeightGrams: 10000, lockerToLockerCents: 7900, lockerToDoorCents: 11900, lockerToKioskCents: 8900, kioskToDoorCents: 13500 },
+  { id: "l", code: "L", name: "Large", sortOrder: 40, isActive: true, maxLengthCm: 60, maxWidthCm: 41, maxHeightCm: 41, maxWeightGrams: 15000, lockerToLockerCents: 10900, lockerToDoorCents: 17600, lockerToKioskCents: 12900, kioskToDoorCents: 21000 },
+  { id: "xl", code: "XL", name: "Extra large", sortOrder: 50, isActive: true, maxLengthCm: 60, maxWidthCm: 41, maxHeightCm: 69, maxWeightGrams: 20000, lockerToLockerCents: 14900, lockerToDoorCents: 23900, lockerToKioskCents: 16900, kioskToDoorCents: 28000 },
 ];
 
 function line(overrides: Partial<ParcelLine> = {}): ParcelLine {
   return {
     productId: "p1",
     itemId: "2DE-1",
-    name: "Drill",
+    name: "Helmet",
     quantity: 1,
-    productWeightGrams: 800,
-    packageWeightGrams: 200,
-    packageLengthCm: 30,
-    packageWidthCm: 15,
-    packageHeightCm: 10,
+    productWeightGrams: 2100,
+    packageWeightGrams: 500,
+    packageLengthCm: 34,
+    packageWidthCm: 30,
+    packageHeightCm: 28,
     ...overrides,
   };
 }
 
 describe("shipping engine", () => {
-  it("prices the helmet by locker size, not weight alone, and charges the full tariff", () => {
-    const quote = calculateShipping([line({ productWeightGrams: 2400, packageWeightGrams: 200, packageLengthCm: 34, packageWidthCm: 30, packageHeightCm: 28 })], { ...settings, tcgLockerTariffs: true, lockerEnabled: false, freeShippingAboveCents: 100, handlingFeeCents: 500, deliverySurchargeCents: 700 }, [], { subtotalCents: 79900, preferredMethod: "COURIER" });
+  it("prices the acceptance example: 34x30x28cm 2.6kg helmet as size L", () => {
+    const quote = calculateShipping([line()], settings, tiers, {
+      subtotalCents: 79900,
+      preferredMethod: "LOCKER_TO_LOCKER",
+    });
     assert.equal(quote.error, undefined);
-    assert.equal(quote.method, "LOCKER");
+    assert.equal(quote.matchedTierCode, "L");
+    assert.equal(quote.method, "LOCKER_TO_LOCKER");
     assert.equal(quote.shippingCents, 10900);
-    assert.equal(orderTotals(quote).totalCents, 90800);
-    assert.equal(quote.freeShippingApplied, false);
-    assert.equal(quote.methods[1].available, false);
-    assert.match(quote.methods[1].unavailableReason!, /fuel surcharge/);
+    assert.equal(orderTotals(quote).totalCents, 79900 + 10900);
   });
-  it("rotates the packed parcel and checks exact locker limits and weight boundaries", () => {
-    const card = { ...settings, tcgLockerTariffs: true };
-    const quoteFor = (overrides: Partial<ParcelLine>) => calculateShipping([line({ productWeightGrams: 2000, packageWeightGrams: 0, packageLengthCm: 8, packageWidthCm: 60, packageHeightCm: 17, ...overrides })], card, []);
-    assert.equal(quoteFor({}).shippingCents, 5900);
-    assert.equal(quoteFor({ productWeightGrams: 2001 }).shippingCents, 6900);
-    assert.equal(quoteFor({ packageLengthCm: 8.1 }).shippingCents, 7900);
-    assert.equal(quoteFor({ packageLengthCm: 8.01 }).shippingCents, 7900);
-    assert.equal(quoteFor({ productWeightGrams: 20000, packageLengthCm: 69, packageWidthCm: 60, packageHeightCm: 41 }).shippingCents, 14900);
-    assert.ok(quoteFor({ productWeightGrams: 20001 }).error);
-    assert.ok(quoteFor({ packageWidthCm: 70 }).error);
+
+  it("allows rotation into the smallest fitting box", () => {
+    const quote = calculateShipping([line({ packageLengthCm: 41, packageWidthCm: 60, packageHeightCm: 8 })], settings, tiers, {
+      subtotalCents: 1000,
+    });
+    assert.equal(quote.matchedTierCode, "S");
   });
-  it("uses the combined cart parcel and refuses incomplete data or product exclusions", () => {
-    const card = { ...settings, tcgLockerTariffs: true };
-    const quote = calculateShipping([line({ quantity: 2, packageLengthCm: 20, packageWidthCm: 10, packageHeightCm: 5 })], card, [], { subtotalCents: 50000 });
-    assert.equal(quote.parcel.weightGrams, 2000);
-    assert.equal(quote.shippingCents, 7900);
-    assert.equal(orderTotals(quote).totalCents, 57900);
-    assert.ok(calculateShipping([line(), line({ packageHeightCm: 0 })], card, []).error);
-    assert.ok(calculateShipping([line({ lockerAllowed: false })], card, []).error);
+
+  it("prices each service from the matched tier", () => {
+    const base = calculateShipping([line()], { ...settings, doorFuelSurchargePercent: 12 }, tiers, { subtotalCents: 1000, preferredMethod: "LOCKER_TO_DOOR" });
+    assert.equal(base.matchedTierCode, "L");
+    assert.equal(base.shippingCents, 19712); // 17600 + 12%
+    const kiosk = calculateShipping([line()], { ...settings, doorFuelSurchargePercent: 12 }, tiers, { subtotalCents: 1000, preferredMethod: "LOCKER_TO_KIOSK" });
+    assert.equal(kiosk.shippingCents, 12900);
   });
-  it("includes a verified fuel surcharge in door delivery without free-shipping discounts", () => {
-    const quote = calculateShipping([line({ productWeightGrams: 2400, packageWeightGrams: 200, packageLengthCm: 34, packageWidthCm: 30, packageHeightCm: 28 })], { ...settings, tcgLockerTariffs: true, doorFuelSurchargePercent: 10, freeShippingAboveCents: 100 }, [], { subtotalCents: 79900, preferredMethod: "COURIER" });
-    assert.equal(quote.shippingCents, 19360);
-    assert.equal(orderTotals(quote).totalCents, 99260);
+
+  it("treats the whole cart as one parcel", () => {
+    const quote = calculateShipping([line({ productWeightGrams: 1600, packageWeightGrams: 400, packageLengthCm: 30, packageWidthCm: 15, packageHeightCm: 10 }), line({ productId: "p2", itemId: "2DE-2", productWeightGrams: 1600, packageWeightGrams: 400, packageLengthCm: 30, packageWidthCm: 15, packageHeightCm: 10 })], settings, tiers, { subtotalCents: 1000 });
+    assert.equal(quote.parcel.weightGrams, 4000);
+    assert.equal(quote.parcel.lengthCm, 60);
+    assert.equal(quote.parcel.widthCm, 30);
+    assert.equal(quote.parcel.heightCm, 20);
+    assert.equal(quote.matchedTierCode, "L");
   });
-  it("selects destination-specific tariffs and refuses uncovered destinations", () => {
-    const zones: ShippingRule[] = [{ ...rules[1], provinceCodes: ["GP"], postalCodePrefixes: ["20"], priceCents: 9900 }, { ...rules[1], id: "cape", provinceCodes: ["WC"], priceCents: 14900 }];
-    const options = { subtotalCents: 10000, preferredMethod: "COURIER" as const };
-    assert.equal(calculateShipping([line()], { ...settings, lockerEnabled: false }, zones, { ...options, destination: { province: "GP", postalCode: "2000" } }).shippingCents, 9900);
-    assert.equal(calculateShipping([line()], { ...settings, lockerEnabled: false }, zones, { ...options, destination: { province: "WC", postalCode: "8000" } }).shippingCents, 14900);
-    assert.ok(calculateShipping([line()], { ...settings, lockerEnabled: false }, zones, { ...options, destination: { province: "GP", postalCode: "2196" } }).error);
+
+  it("keeps to-door delivery closed until the fuel surcharge is confirmed", () => {
+    const quote = calculateShipping([line()], settings, tiers, { subtotalCents: 1000 });
+    const door = quote.methods.find((m) => m.method === "LOCKER_TO_DOOR");
+    assert.equal(door?.available, false);
+    assert.match(door?.unavailableReason ?? "", /fuel surcharge/i);
+    // A stale selection falls back to an available collection method.
+    const fallback = calculateShipping([line()], settings, tiers, { subtotalCents: 1000, preferredMethod: "LOCKER_TO_DOOR" });
+    assert.equal(fallback.method, "LOCKER_TO_LOCKER");
+    assert.equal(fallback.shippingCents, 10900);
   });
-  it("uses the configured service volumetric factor", () => {
-    const quote = calculateShipping([line({ packageLengthCm: 60, packageWidthCm: 40, packageHeightCm: 30 })], { ...settings, volumetricDivisor: 4000 }, rules);
-    assert.equal(quote.parcel.volumetricWeightGrams, 18000);
-  });
+
   it("refuses the entire parcel when one line has missing dimensions", () => {
-    const quote = calculateShipping([line(), line({ packageLengthCm: 0 })], settings, rules);
+    const quote = calculateShipping([line(), line({ packageLengthCm: 0 })], settings, tiers);
     assert.match(quote.error ?? "", /missing valid/);
     assert.equal(quote.methods.length, 0);
   });
-  it("respects item-specific delivery exclusions", () => {
-    const quote = calculateShipping([line({ lockerAllowed: false })], settings, rules, { subtotalCents: 20000 });
-    assert.equal(quote.lockerEligible, false);
-    assert.equal(quote.method, "COURIER");
-    const none = calculateShipping([line({ lockerAllowed: false, courierAllowed: false })], settings, rules);
-    assert.ok(none.error);
-  });
-  it("charges volumetric weight using the saved tariff rather than a flat courier constant", () => {
-    const brackets = [
-      { ...rules[1], id: "small", maxWeightGrams: 5000, priceCents: 12000 },
-      { ...rules[1], id: "large", minWeightGrams: 5001, priceCents: 35000 },
-    ];
-    const quote = calculateShipping([line({ packageLengthCm: 60, packageWidthCm: 40, packageHeightCm: 30 })], settings, brackets);
-    assert.equal(quote.parcel.volumetricWeightGrams, 14400);
-    assert.equal(quote.shippingCents, 35000);
-    assert.equal(orderTotals(quote).totalCents, 35000);
-  });
-  it("uses courier delivery when lockers are disabled, even for a small parcel", () => {
-    const quote = calculateShipping([line()], {
-      ...settings,
-      lockerEnabled: false,
-      courierEtaMinDays: 3,
-      courierEtaMaxDays: 3,
-    }, rules, { subtotalCents: 20000, preferredMethod: "LOCKER" });
-    assert.equal(quote.method, "COURIER");
-    assert.equal(quote.methods.find(method => method.method === "LOCKER")?.available, false);
-    assert.equal(quote.methods.find(method => method.method === "COURIER")?.etaMinDays, 3);
-  });
-  it("offers locker delivery only when the parcel fits every limit", () => {
-    const quote = calculateShipping([line()], settings, rules, {
-      subtotalCents: 20000,
-      preferredMethod: "LOCKER",
-    });
 
-    assert.equal(quote.lockerEligible, true);
-    assert.equal(quote.method, "LOCKER");
-    assert.equal(quote.shippingCents, 5900);
-    assert.equal(quote.error, undefined);
+  it("refuses a parcel heavier than the largest tier", () => {
+    const quote = calculateShipping([line({ productWeightGrams: 25000, packageWeightGrams: 0 })], settings, tiers);
+    assert.match(quote.error ?? "", /larger than our biggest locker/i);
   });
 
-  it("refuses a locker for a heavy parcel and falls back to courier", () => {
-    const quote = calculateShipping(
-      [line({ productWeightGrams: 4000, packageWeightGrams: 0 })],
-      settings,
-      rules,
-      { subtotalCents: 20000, preferredMethod: "LOCKER" },
-    );
-
-    assert.equal(quote.lockerEligible, false);
-    assert.ok(quote.lockerBlockers.length > 0);
-    assert.equal(quote.method, "COURIER");
-    assert.equal(quote.shippingCents, 9900);
+  it("refuses a parcel bigger than the largest tier", () => {
+    const quote = calculateShipping([line({ packageLengthCm: 130, packageWidthCm: 60, packageHeightCm: 60 })], settings, tiers);
+    assert.match(quote.error ?? "", /larger than our biggest locker/i);
   });
 
-  it("uses editable courier tariffs plus configured fees", () => {
-    const quote = calculateShipping(
-      [line(), line({ productId: "p2", itemId: "2DE-2" })],
-      { ...settings, lockerEnabled: false, deliverySurchargeCents: 500, handlingFeeCents: 1500 },
-      rules,
-      { subtotalCents: 20000, preferredMethod: "COURIER" },
-    );
-
-    assert.equal(quote.baseShippingCents, 9900);
-    assert.equal(quote.deliverySurchargeCents, 500);
-    assert.equal(quote.handlingFeeCents, 1500);
-    assert.equal(quote.shippingCents, 11900);
+  it("skips a size whose weight ceiling the parcel exceeds", () => {
+    const quote = calculateShipping([line({ productWeightGrams: 9000, packageWeightGrams: 0, packageLengthCm: 30, packageWidthCm: 15, packageHeightCm: 10 })], settings, tiers);
+    assert.equal(quote.matchedTierCode, "M");
   });
 
-  it("keeps the handling fee when free shipping waives delivery", () => {
-    const quote = calculateShipping([line()], { ...settings, freeShippingAboveCents: 50000, handlingFeeCents: 1500, deliverySurchargeCents: 500 }, rules, {
-      subtotalCents: 60000,
-      preferredMethod: "LOCKER",
-    });
-
-    assert.equal(quote.freeShippingApplied, true);
-    assert.equal(quote.shippingCents, 1500);
-    assert.equal(orderTotals(quote).totalCents, 61500);
+  it("respects item-specific collection exclusions", () => {
+    const quote = calculateShipping([line({ lockerAllowed: false })], { ...settings, doorFuelSurchargePercent: 10 }, tiers, { subtotalCents: 20000, preferredMethod: "LOCKER_TO_LOCKER" });
+    const collection = quote.methods.find((m) => m.method === "LOCKER_TO_LOCKER");
+    assert.equal(collection?.available, false);
+    assert.equal(quote.method, "LOCKER_TO_DOOR");
   });
 
   it("does not quote when shipping is switched off", () => {
-    const quote = calculateShipping([line()], { ...settings, isActive: false }, rules, {
-      subtotalCents: 1000,
-    });
+    const quote = calculateShipping([line()], { ...settings, isActive: false }, tiers);
     assert.match(quote.error ?? "", /unavailable/i);
   });
 
-  it("does not invent a price when no bracket matches", () => {
-    const quote = calculateShipping([line()], settings, [], { subtotalCents: 1000 });
+  it("does not invent a price when no size is configured", () => {
+    const quote = calculateShipping([line()], settings, []);
     assert.ok(quote.error);
-    assert.equal(quote.methods.some((method) => method.available), false);
+    assert.equal(quote.methods.some((m) => m.available), false);
+  });
+
+  it("does not invent a price for an unpriced size", () => {
+    const unpriced: ShippingTier[] = [{ ...tiers[3], lockerToLockerCents: 0, lockerToDoorCents: 0, lockerToKioskCents: 0, kioskToDoorCents: 0 }];
+    const quote = calculateShipping([line()], settings, unpriced);
+    const locker = quote.methods.find((m) => m.method === "LOCKER_TO_LOCKER");
+    assert.equal(locker?.available, false);
+    assert.ok(quote.error);
   });
 });

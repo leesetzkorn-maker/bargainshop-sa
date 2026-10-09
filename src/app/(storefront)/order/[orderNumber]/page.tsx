@@ -17,10 +17,13 @@ import {
   PAYMENT_STATUS_LABELS,
   provinceName,
   PRODUCT_CONDITION_LABELS,
+  SHIPPING_METHOD_LABELS,
+  isCollectionMethod,
   type FulfillmentStatus,
   type OrderStatus,
   type PaymentStatus,
   type ProductCondition,
+  type ShippingMethod,
 } from "@/lib/enums";
 
 export const metadata: Metadata = {
@@ -282,7 +285,7 @@ export default async function OrderPage({
         <div className="space-y-2 border-t border-ink-100 bg-ink-50 p-5">
           <TotalRow label="Items subtotal" value={formatZAR(order.subtotalCents)} />
           <TotalRow
-            label={`Delivery (${order.deliveryMethod === "LOCKER" ? "locker" : "courier"})`}
+            label={`Delivery (${(SHIPPING_METHOD_LABELS[order.deliveryMethod as ShippingMethod] ?? order.deliveryMethod).toLowerCase()})`}
             value={order.shippingCents === 0 ? "Free" : formatZAR(order.shippingCents)}
           />
           <div className="flex items-center justify-between border-t border-ink-200 pt-2.5">
@@ -344,7 +347,7 @@ export default async function OrderPage({
               Method
             </h3>
             <p className="text-sm text-ink-700">
-              {order.deliveryMethod === "LOCKER" ? "Locker collection" : "Courier to address"}
+              {isCollectionMethod(order.deliveryMethod as ShippingMethod) ? "Locker / kiosk collection" : "Courier to address"}
             </p>
           </div>
         </div>

@@ -5,7 +5,9 @@ import {
   ORDER_STATUS_LABELS,
   PAYMENT_STATUSES,
   PAYMENT_STATUS_LABELS,
+  SHIPPING_METHOD_LABELS,
   provinceName,
+  type ShippingMethod,
 } from "@/lib/enums";
 import { listAdminOrders } from "@/lib/dal/admin";
 import { formatWhen, one } from "@/components/admin/format";
@@ -108,7 +110,7 @@ export default async function AdminOrdersPage({
                   </td>
                   <td className="px-4 py-3">
                     {order.deliveryCity}, {provinceName(order.deliveryProvince)}
-                    <p className="text-xs text-ink-500">{order.deliveryMethod === "LOCKER" ? "Locker" : "Courier"}</p>
+                    <p className="text-xs text-ink-500">{SHIPPING_METHOD_LABELS[order.deliveryMethod as ShippingMethod] ?? order.deliveryMethod}</p>
                   </td>
                   <td className="px-4 py-3">
                     <StatusPill value={order.paymentStatus} />

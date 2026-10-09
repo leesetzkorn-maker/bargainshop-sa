@@ -32,7 +32,7 @@ import type {
   OrderUpdateInput,
   ShipmentUpdateInput,
   ShippingSettingsInput,
-  ShippingRuleInput,
+  ShippingTierInput,
 } from "@/lib/validation";
 import { slugify } from "@/lib/utils";
 import { restockOrder, syncOrderStatus } from "@/lib/dal/orders";
@@ -1787,79 +1787,71 @@ export async function updateAdminShippingSettings(
   return { ok: true };
 }
 
-export async function listAdminShippingRules() {
-  return prisma.shippingRule.findMany({
-    orderBy: [{ method: "asc" }, { sortOrder: "asc" }, { minWeightGrams: "asc" }],
+export async function listAdminShippingTiers() {
+  return prisma.shippingTier.findMany({
+    orderBy: [{ sortOrder: "asc" }, { maxWeightGrams: "asc" }],
     select: {
       id: true,
+      code: true,
       name: true,
-      method: true,
-      minWeightGrams: true,
-      maxWeightGrams: true,
-      priceCents: true,
       sortOrder: true,
       isActive: true,
+      maxLengthCm: true,
+      maxWidthCm: true,
+      maxHeightCm: true,
+      maxWeightGrams: true,
+      lockerToLockerCents: true,
+      lockerToDoorCents: true,
+      lockerToKioskCents: true,
+      kioskToDoorCents: true,
       notes: true,
-      provinceCodes: true, postalCodePrefixes: true,
     },
   });
 }
 
-export async function createAdminShippingRule(
-  input: ShippingRuleInput,
+export async function upsertAdminShippingTier(
+  input: ShippingTierInput,
   actorId: string,
+  id?: string,
 ): Promise<{ ok: boolean; id?: string; error?: string }> {
-  const rule = await prisma.shippingRule.create({
-    data: {
+  const data = {
+    code: input.code,
     name: input.name,
-      method: input.method,
-      minWeightGrams: input.minWeightGrams,
-      maxWeightGrams: input.maxWeightGrams,
-      priceCents: input.priceCents,
-      sortOrder: input.sortOrder,
-      isActive: input.isActive,
-      notes: input.notes || null,
-      provinceCodes: input.provinceCodes, postalCodePrefixes: input.postalCodePrefixes,
-    },
-    select: { id: true },
-  });
-  await audit(actorId, "shipping.rule_created", "shipping_rule", rule.id, { name: input.name });
-  return { ok: true, id: rule.id };
+    sortOrder: input.sortOrder,
+    isActive: input.isActive,
+    maxLengthCm: input.maxLengthCm,
+    maxWidthCm: input.maxWidthCm,
+    maxHeightCm: input.maxHeightCm,
+    maxWeightGrams: input.maxWeightGrams,
+    lockerToLockerCents: input.lockerToLockerCents,
+    lockerToDoorCents: input.lockerToDoorCents,
+    lockerToKioskCents: input.lockerToKioskCents,
+    kioskToDoorCents: input.kioskToDoorCents,
+    notes: input.notes || null,
+  };
+
+  if (id) {
+    const existing = await prisma.shippingTier.findUnique({ where: { id }, select: { id: true } });
+    if (!existing) return { ok: false, error: "That shipping tier no longer exists." };
+    await prisma.shippingTier.update({ where: { id }, data });
+    await audit(actorId, "shipping.tier_updated", "shipping_tier", id, { code: input.code });
+    return { ok: true, id };
+  }
+
+  const clash = await prisma.shippingTier.findUnique({ where: { code: input.code }, select: { id: true } });
+  if (clash) return { ok: false, error: `A tier with the code ${input.code} already exists.` };
+  const created = await prisma.shippingTier.create({ data, select: { id: true } });
+  await audit(actorId, "shipping.tier_created", "shipping_tier", created.id, { code: input.code });
+  return { ok: true, id: created.id };
 }
 
-export async function updateAdminShippingRule(
-  id: string,
-  input: ShippingRuleInput,
-  actorId: string,
-): Promise<{ ok: boolean; error?: string }> {
-  const existing = await prisma.shippingRule.findUnique({ where: { id }, select: { id: true } });
-  if (!existing) return { ok: false, error: "That shipping bracket no longer exists." };
-
-  await prisma.shippingRule.update({
-    where: { id },
-    data: {
-    name: input.name,
-      method: input.method,
-      minWeightGrams: input.minWeightGrams,
-      maxWeightGrams: input.maxWeightGrams,
-      priceCents: input.priceCents,
-      sortOrder: input.sortOrder,
-      isActive: input.isActive,
-      notes: input.notes || null,
-      provinceCodes: input.provinceCodes, postalCodePrefixes: input.postalCodePrefixes,
-    },
-  });
-  await audit(actorId, "shipping.rule_updated", "shipping_rule", id, { name: input.name });
-  return { ok: true };
-}
-
-export async function deleteAdminShippingRule(
+export async function deleteAdminShippingTier(
   id: string,
   actorId: string,
 ): Promise<{ ok: boolean; error?: string }> {
-  const rule = await prisma.shippingRule.findUnique({ where: { id }, select: { id: true, name: true } });
-  if (!rule) return { ok: false, error: "That shipping bracket no longer exists." };
-  await prisma.shippingRule.delete({ where: { id } });
-  await audit(actorId, "shipping.rule_deleted", "shipping_rule", id, { name: rule.name });
+  const tier = await prisma.shippingTier.findUnique({ where: { id }, select: { id: true, code: true } });
+  if (!tier) return { ok: false, error: "That shipping tier no longer exists." };
+  await prisma.shippingTier.delete({ where: { id } });
+  await audit(actorId, "shipping.tier_deleted", "shipping_tier", id, { code: tier.code });
   return { ok: true };
 }

@@ -5,8 +5,8 @@
   "description": "South African online second-hand bargain store",
   "scripts": {
     "dev": "next dev",
-    "build": "prisma generate && next build",
-    "start": "prisma migrate deploy && npm run db:seed && next start",
+    "build": "node scripts/runtime/build.cjs",
+    "start": "node scripts/runtime/start.cjs",
     "lint": "eslint .",
     "typecheck": "tsc --noEmit",
     "typegen": "next typegen",
@@ -19,13 +19,15 @@
     "db:studio": "prisma studio",
     "setup": "prisma generate && prisma migrate deploy && npm run db:seed",
     "photos:clean": "tsx --require ./scripts/maintenance/_preload.cjs scripts/cleanup/remove-price-tags.ts",
-    "test": "tsx --test tests/money.test.ts tests/shipping.test.ts tests/pricing.test.ts tests/readiness.test.ts tests/payfast.test.ts tests/yoco.test.ts tests/price-tag-removal.test.ts tests/storage-keys.test.ts tests/orders-stock.test.ts tests/price-blackout.test.ts tests/intake-price-read.test.ts tests/intake-identify.test.ts tests/intake-market.test.ts tests/intake-draft.test.ts tests/intake-photos.test.ts tests/intake-originals.test.ts tests/reviewed-photo-tags.test.ts tests/owner-testing.test.ts",
+    "test": "tsx --test tests/money.test.ts tests/shipping.test.ts tests/pricing.test.ts tests/readiness.test.ts tests/payfast.test.ts tests/yoco.test.ts tests/price-tag-removal.test.ts tests/storage-keys.test.ts tests/orders-stock.test.ts tests/price-blackout.test.ts tests/intake-price-read.test.ts tests/intake-identify.test.ts tests/intake-market.test.ts tests/intake-draft.test.ts tests/intake-photos.test.ts tests/intake-originals.test.ts tests/reviewed-photo-tags.test.ts tests/owner-testing.test.ts tests/railway-runtime.test.ts",
     "catalogue:audit": "tsx scripts/launch/launch-catalogue.ts",
     "catalogue:import": "tsx scripts/import/import-grok.ts",
     "test:e2e": "node scripts/audit/test-store-e2e.cjs",
-    "photos:clean-public": "tsx --require ./scripts/maintenance/_preload.cjs scripts/cleanup/clean-public-photos.ts"
+    "photos:clean-public": "tsx --require ./scripts/maintenance/_preload.cjs scripts/cleanup/clean-public-photos.ts",
+    "test:deployment": "node scripts/audit/test-deployment.cjs"
   },
   "dependencies": {
+    "@next/env": "16.3.6",
     "@prisma/client": "6.19.3",
     "bcryptjs": "^3.0.2",
     "next": "16.3.6",

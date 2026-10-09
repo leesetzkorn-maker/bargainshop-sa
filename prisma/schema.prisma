@@ -477,30 +477,14 @@ model PricingSetting {
 model ShippingSetting {
   id Int @id @default(1)
 
-  isActive Boolean @default(true)
+  isActive       Boolean @default(true)
   ratesConfirmed Boolean @default(false)
-  volumetricDivisor Int @default(5000)
 
-  lockerEnabled       Boolean @default(true)
-  /// Locker eligibility ceiling for a single parcel, in grams.
-  lockerMaxWeightGrams Int   @default(2000)
-  /// Longest single dimension allowed by the locker, cm.
-  lockerMaxLengthCm    Float  @default(35)
-  lockerMaxWidthCm     Float  @default(30)
-  lockerMaxHeightCm    Float  @default(20)
-  /// Sum of all three dimensions allowed by the locker, cm.
-  lockerMaxSumCm       Float  @default(60)
-
-  courierEnabled      Boolean @default(true)
-  /// Above this parcel weight the courier is mandatory (kg x 1000).
-  courierMinWeightForLockerBlockGrams Int @default(0)
-
-  /// Flat amount added to the shipping price at checkout.
-  deliverySurchargeCents Int @default(0)
-  /// Orders at or above this subtotal ship free. 0 disables.
-  freeShippingAboveCents Int @default(0)
-  /// Packing / handling fee, shown as its own line.
-  handlingFeeCents       Int @default(0)
+  /// Percent added to the to-door services for The Courier Guy's monthly fuel
+  /// surcharge. 0 means the surcharge has not been confirmed, so to-door
+  /// delivery stays closed rather than guessing a number that would mischarge
+  /// the customer. Admin sets this once the official figure is known.
+  doorFuelSurchargePercent Float @default(0)
 
   /// Where parcels are dispatched from (used for copy + future courier APIs).
   dispatchPostalCode String @default("0000")
@@ -508,43 +492,45 @@ model ShippingSetting {
   dispatchCity       String @default("Johannesburg")
 
   /// Estimated transit days, used purely for customer-facing copy.
-  lockerEtaMinDays   Int @default(1)
-  lockerEtaMaxDays   Int @default(3)
-  courierEtaMinDays  Int @default(2)
-  courierEtaMaxDays  Int @default(5)
+  etaMinDays Int @default(1)
+  etaMaxDays Int @default(3)
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 }
 
-/// One price bracket. A parcel matches the first ACTIVE rule of its method
-/// where minWeight <= weight <= maxWeight (maxWeight 0 means "no upper bound").
-model ShippingRule {
+/// One locker-size tier from The Courier Guy's published locker tariff card.
+/// A parcel matches the smallest ACTIVE tier whose three dimensions (compared
+/// longest-to-longest) and weight it fits inside. Prices are in cents and
+/// include VAT; to-door prices exclude the monthly fuel surcharge, which is
+/// applied at quote time.
+model ShippingTier {
   id   String @id @default(cuid())
+  /// XS | S | M | L | XL — the tariff-card label.
+  code String @unique
   name String
 
-  /// LOCKER | COURIER
-  method String
-
-  minWeightGrams Int  @default(0)
-  /// 0 = no upper bound.
-  maxWeightGrams Int  @default(0)
-
-  priceCents Int
-
-  /// Lower runs first. Ties resolve by this, then by creation time.
+  /// Display order; lower fits first.
   sortOrder Int     @default(0)
   isActive  Boolean @default(true)
 
+  maxLengthCm Float
+  maxWidthCm  Float
+  maxHeightCm Float
+  /// Weight ceiling for the whole parcel, grams.
+  maxWeightGrams Int
+
+  lockerToLockerCents Int
+  lockerToDoorCents   Int
+  lockerToKioskCents  Int
+  kioskToDoorCents    Int
+
   notes String?
-  provinceCodes String @default("")
-  postalCodePrefixes String @default("")
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
-  @@index([method, isActive, sortOrder])
-  @@index([method, minWeightGrams, maxWeightGrams])
+  @@index([isActive, sortOrder])
 }
 
 // ---------------------------------------------------------------------------
