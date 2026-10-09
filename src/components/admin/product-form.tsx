@@ -247,12 +247,12 @@ export function ProductForm({
 
       <section className="card space-y-4 p-5">
         <h2 className="font-bold">Catalogue verification</h2>
-        <p className="text-sm text-ink-600">Unknown details can stay blank in a draft. Publishing requires verified identity, specifications, actual-item review, measured parcel data and image permission.</p>
+        <p className="text-sm text-ink-600">Brand, exact model and source links are optional. Leave unknown details blank and describe only what you know about this item. Publishing still requires actual-item review, photos, price, stock and confirmed parcel measurements.</p>
         <div className="grid gap-4 sm:grid-cols-2">
-          {([ ["brand", "Brand"], ["model", "Exact model / model number"], ["modelSourceUrl", "Manufacturer / specification source URL"], ["cleanImageLicense", "Clean image source and reuse permission / owner-edited photo"] ] as const).map(([name,label]) => <Field label={label} key={name}><input className="input" name={name} defaultValue={text(name, product?.[name] ?? "")} /></Field>)}
+          {([ ["brand", "Brand (optional)"], ["model", "Exact model / model number (optional)"], ["modelSourceUrl", "Manufacturer / specification source URL (optional)"], ["cleanImageLicense", "Clean image source and reuse permission / owner-edited photo"] ] as const).map(([name,label]) => <Field label={label} key={name}><input className="input" name={name} defaultValue={text(name, product?.[name] ?? "")} /></Field>)}
         </div>
         <Field label="Research notes (private)"><textarea className="input min-h-24" name="researchNotes" defaultValue={text("researchNotes", product?.researchNotes ?? "")} /></Field>
-        <label className="flex gap-2 text-sm"><input name="specsConfirmed" type="checkbox" defaultChecked={values ? values.specsConfirmed === "on" : product?.specsConfirmed ?? false} />Exact model matches this item; description has only sourced specifications, with unknown dimensions, weight or variant details disclosed.</label>
+        <label className="flex gap-2 text-sm"><input name="specsConfirmed" type="checkbox" defaultChecked={values ? values.specsConfirmed === "on" : product?.specsConfirmed ?? false} />Optional research confirmation: any model-specific specifications entered match this item. Unknown details can remain blank.</label>
         <label className="flex gap-2 text-sm"><input name="itemReviewConfirmed" type="checkbox" defaultChecked={values ? values.itemReviewConfirmed === "on" : product?.itemReviewConfirmed ?? false} />Actual stock, condition, wear, accessories and any locks have been checked; actual-item photos remain attached and internal cost tags are covered before publication.</label>
       </section>
 
