@@ -246,7 +246,7 @@ export const checkoutSchema = z.object({
   orderNotes: optionalText(1000).optional(),
   /** Honeypot: real customers never fill this in. */
   website: z.string().max(0, "Rejected").optional().or(z.literal("")),
-}).refine((input) => input.deliveryMethod !== "LOCKER" || Boolean(input.pickupPoint?.trim()), { message: "Enter the chosen locker or pickup-point name, location and reference.", path: ["pickupPoint"] });
+}).refine((input) => input.deliveryMethod !== "LOCKER" || (input.pickupPoint?.trim().length ?? 0) >= 5, { message: "Enter the chosen Courier Guy locker name, location and reference.", path: ["pickupPoint"] });
 export type CheckoutInput = z.infer<typeof checkoutSchema>;
 
 // ---------------------------------------------------------------------------

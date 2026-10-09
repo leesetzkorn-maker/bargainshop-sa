@@ -23,6 +23,7 @@ export default async function AdminShippingPage({
       <div className="mb-4">
         <Notice error={one(query.error)} saved={one(query.saved) === "1"} />
       </div>
+      {process.env.SHIPPING_RATE_CARD === "tcg-locker-2026-09" ? <div className="card mb-4 p-4"><p className="font-semibold">Active: owner-confirmed Courier Guy locker card, 1 September 2026.</p><p className="mt-2 text-sm">XS R59, S R69, M R79, L R109, XL R149, selected by packed dimensions and weight. The legacy settings and weight brackets below do not change these prices. Door delivery requires TCG_DOOR_FUEL_SURCHARGE_PERCENT and TCG_DOOR_FUEL_SURCHARGE_MONTH for the current month. No free-shipping discount applies.</p></div> : null}
       <ShippingSettingsForm settings={settings} />
 
       <section className="mt-6 space-y-3">

@@ -12,12 +12,18 @@ import type { ShippingMethod } from "@/lib/enums";
 
 /** Load the singleton settings row, creating it with sane defaults on first run. */
 export async function getShippingSettings(): Promise<EngineSettings> {
+  const tcgLockerTariffs = process.env.SHIPPING_RATE_CARD === "tcg-locker-2026-09";
+  const fuelValue = process.env.TCG_DOOR_FUEL_SURCHARGE_PERCENT;
+  const currentMonth = new Date().toISOString().slice(0, 7);
+  const fuelConfirmed = process.env.TCG_DOOR_FUEL_SURCHARGE_MONTH === currentMonth && fuelValue !== undefined && fuelValue.trim() !== "" && Number.isFinite(Number(fuelValue)) && Number(fuelValue) >= 0;
   let row = await prisma.shippingSetting.findUnique({ where: { id: 1 } });
   if (!row) {
     row = await prisma.shippingSetting.create({ data: { id: 1 } });
   }
   return {
-    isActive: row.isActive && row.ratesConfirmed,
+    tcgLockerTariffs,
+    doorFuelSurchargePercent: fuelConfirmed ? Number(fuelValue) : undefined,
+    isActive: tcgLockerTariffs || (row.isActive && row.ratesConfirmed),
     volumetricDivisor: row.volumetricDivisor,
     lockerEnabled: row.lockerEnabled,
     lockerMaxWeightGrams: row.lockerMaxWeightGrams,

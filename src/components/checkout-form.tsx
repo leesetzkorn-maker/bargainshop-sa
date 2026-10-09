@@ -85,7 +85,10 @@ export function CheckoutForm({
         });
         if (!response.ok) throw new Error("Delivery could not be calculated. Check the address and try again.");
         const data = await response.json() as QuoteResponse;
-        if (!data.empty) setQuote(data);
+        if (!data.empty) {
+          setQuote(data);
+          if (!data.error && data.method !== method) setMethod(data.method);
+        }
         setQuoteError("");
       } catch (error) { if (!controller.signal.aborted) setQuoteError(error instanceof Error ? error.message : "Delivery unavailable"); }
       finally { if (!controller.signal.aborted) setQuoteLoading(false); }
@@ -259,7 +262,8 @@ export function CheckoutForm({
           {!quoteLoading && quote.error ? <p role="status" className="mb-3 text-sm text-ink-600">{quote.error}</p> : null}
           <input type="hidden" name="quotedShippingCents" value={quote.shippingCents} />
           <input type="hidden" name="quotedSubtotalCents" value={quote.subtotalCents} />
-          {method === "LOCKER" ? <div className="mb-4"><label className="label" htmlFor="pickupPoint">Locker / pickup-point name, address and reference</label><input id="pickupPoint" name="pickupPoint" className="input" required maxLength={300} /><p className="error-text">{fieldError("pickupPoint")}</p></div> : null}
+          {method === "LOCKER" ? <div className="mb-4"><label className="label" htmlFor="pickupPoint">Chosen Courier Guy locker: name, location and reference</label><input id="pickupPoint" name="pickupPoint" className="input" required minLength={5} maxLength={300} placeholder="Locker name, full location and locker reference" /><p className="mt-2 text-xs text-ink-600">Choose an actual locker from <a href="https://thecourierguy.co.za/locker-courier-services/" target="_blank" rel="noopener noreferrer" className="font-semibold underline">The Courier Guy locker locations</a>. This is the collection locker, separate from your contact address. Kiosk delivery is not offered by this option.</p><p className="error-text">{fieldError("pickupPoint")}</p></div> : null}
+          {quote.methods.filter((entry) => !entry.available && entry.unavailableReason).map((entry) => <p key={entry.method} className="mb-3 text-sm text-ink-600">{entry.unavailableReason}</p>)}
           <p className="mb-4 text-sm text-ink-500">
             {DELIVERY_COURIER} delivery is paid by you, shown at checkout separately from item prices.{" "}
             <a href="/shipping" className="font-semibold text-brand-700 hover:underline">

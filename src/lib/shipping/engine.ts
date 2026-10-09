@@ -46,6 +46,10 @@ export interface Parcel {
 
 /** The subset of ShippingSetting the engine needs. */
 export interface ShippingSettings {
+  /** Owner-confirmed Courier Guy locker card; ignores legacy weight brackets. */
+  tcgLockerTariffs?: boolean;
+  /** Only set after confirming the current month's door fuel surcharge. */
+  doorFuelSurchargePercent?: number;
   volumetricDivisor?: number;
   isActive: boolean;
   lockerEnabled: boolean;
@@ -118,6 +122,23 @@ export interface ShippingQuote {
 
 const VOLUMETRIC_DIVISOR = 5000;
 
+/** VAT-inclusive card supplied by the owner, effective 1 September 2026. */
+export const TCG_LOCKER_SIZES = [
+  { size: "XS", dimensions: [60, 17, 8], maxWeightGrams: 2000, lockerCents: 5900, doorCents: 7900, kioskCents: 6900, kioskDoorCents: 9300 },
+  { size: "S", dimensions: [60, 41, 8], maxWeightGrams: 5000, lockerCents: 6900, doorCents: 8900, kioskCents: 7900, kioskDoorCents: 10500 },
+  { size: "M", dimensions: [60, 41, 19], maxWeightGrams: 10000, lockerCents: 7900, doorCents: 11900, kioskCents: 8900, kioskDoorCents: 13500 },
+  { size: "L", dimensions: [60, 41, 41], maxWeightGrams: 15000, lockerCents: 10900, doorCents: 17600, kioskCents: 12900, kioskDoorCents: 21000 },
+  { size: "XL", dimensions: [60, 41, 69], maxWeightGrams: 20000, lockerCents: 14900, doorCents: 23900, kioskCents: 16900, kioskDoorCents: 28000 },
+] as const;
+
+export function findTcgLockerSize(parcel: Parcel) {
+  const packed = [parcel.lengthCm, parcel.widthCm, parcel.heightCm].sort((a, b) => a - b);
+  return TCG_LOCKER_SIZES.find((entry) => {
+    const limits = [...entry.dimensions].sort((a, b) => a - b);
+    return parcel.weightGrams <= entry.maxWeightGrams && packed.every((dimension, index) => dimension <= limits[index]);
+  });
+}
+
 export function isValidParcelLine(line: ParcelLine): boolean {
   return (
     Number.isInteger(line.quantity) && line.quantity > 0 &&
@@ -156,9 +177,10 @@ export function buildParcel(lines: ParcelLine[], volumetricDivisor = VOLUMETRIC_
     heightCm += line.packageHeightCm * qty;
   }
 
-  const length = round1(lengthCm);
-  const width = round1(widthCm);
-  const height = round1(heightCm);
+  // Never round a parcel down across a size boundary.
+  const length = Math.ceil(lengthCm * 10) / 10;
+  const width = Math.ceil(widthCm * 10) / 10;
+  const height = Math.ceil(heightCm * 10) / 10;
   const volume = round1(length * width * height);
   const volumetric = Math.ceil(volume / volumetricDivisor * 1000);
   const actual = Math.max(0, Math.round(weightGrams));
@@ -291,6 +313,33 @@ export function calculateShipping(
       ...emptyQuote,
       error: "This item is missing weight information, so shipping cannot be calculated.",
     };
+  }
+
+  if (settings.tcgLockerTariffs) {
+    const size = findTcgLockerSize(parcel);
+    const fits = Boolean(size);
+    const lockerAvailable = fits && lines.every((line) => line.lockerAllowed !== false);
+    const fuel = settings.doorFuelSurchargePercent;
+    const fuelConfirmed = fuel !== undefined && Number.isFinite(fuel) && fuel >= 0;
+    const courierAvailable = fits && fuelConfirmed && lines.every((line) => line.courierAllowed !== false);
+    const methods: MethodQuote[] = [
+      { method: "LOCKER", available: lockerAvailable, priceCents: lockerAvailable ? size!.lockerCents : 0,
+        matchedRuleName: size ? `The Courier Guy ${size.size} locker-to-locker` : undefined,
+        unavailableReason: !fits ? "This packed parcel exceeds the locker size or weight limits. Please request a delivery quote." : !lockerAvailable ? "An item cannot be sent to a locker." : undefined,
+        etaMinDays: settings.lockerEtaMinDays, etaMaxDays: settings.lockerEtaMaxDays },
+      { method: "COURIER", available: courierAvailable, priceCents: courierAvailable ? size!.doorCents + Math.ceil(size!.doorCents * fuel! / 100) : 0,
+        matchedRuleName: size ? `The Courier Guy ${size.size} locker-to-door` : undefined,
+        unavailableReason: !fits ? "This packed parcel needs a separate delivery quote." : !fuelConfirmed ? "Door delivery awaits confirmation of the current fuel surcharge. Choose locker delivery." : "An item cannot be delivered by courier.",
+        etaMinDays: settings.courierEtaMinDays, etaMaxDays: settings.courierEtaMaxDays },
+    ];
+    const available = methods.filter((entry) => entry.available);
+    const chosen = available.find((entry) => entry.method === preferred) ?? available[0];
+    const blockers = lockerAvailable ? [] : [methods[0].unavailableReason!];
+    if (!chosen) return { ...emptyQuote, methods, lockerBlockers: blockers, error: "No delivery option can carry this parcel. Please request a delivery quote." };
+    // Full customer-paid tariff. Legacy free shipping, handling and surcharges do not apply.
+    return { ...emptyQuote, error: undefined, methods, method: chosen.method, lockerEligible: lockerAvailable,
+      lockerBlockers: blockers, baseShippingCents: chosen.priceCents, shippingCents: chosen.priceCents,
+      freeShippingThresholdCents: 0 };
   }
 
   const { eligible: lockerEligible, blockers } = checkLockerEligibility(parcel, settings);

@@ -65,6 +65,41 @@ function line(overrides: Partial<ParcelLine> = {}): ParcelLine {
 }
 
 describe("shipping engine", () => {
+  it("prices the helmet by locker size, not weight alone, and charges the full tariff", () => {
+    const quote = calculateShipping([line({ productWeightGrams: 2400, packageWeightGrams: 200, packageLengthCm: 34, packageWidthCm: 30, packageHeightCm: 28 })], { ...settings, tcgLockerTariffs: true, lockerEnabled: false, freeShippingAboveCents: 100, handlingFeeCents: 500, deliverySurchargeCents: 700 }, [], { subtotalCents: 79900, preferredMethod: "COURIER" });
+    assert.equal(quote.error, undefined);
+    assert.equal(quote.method, "LOCKER");
+    assert.equal(quote.shippingCents, 10900);
+    assert.equal(orderTotals(quote).totalCents, 90800);
+    assert.equal(quote.freeShippingApplied, false);
+    assert.equal(quote.methods[1].available, false);
+    assert.match(quote.methods[1].unavailableReason!, /fuel surcharge/);
+  });
+  it("rotates the packed parcel and checks exact locker limits and weight boundaries", () => {
+    const card = { ...settings, tcgLockerTariffs: true };
+    const quoteFor = (overrides: Partial<ParcelLine>) => calculateShipping([line({ productWeightGrams: 2000, packageWeightGrams: 0, packageLengthCm: 8, packageWidthCm: 60, packageHeightCm: 17, ...overrides })], card, []);
+    assert.equal(quoteFor({}).shippingCents, 5900);
+    assert.equal(quoteFor({ productWeightGrams: 2001 }).shippingCents, 6900);
+    assert.equal(quoteFor({ packageLengthCm: 8.1 }).shippingCents, 7900);
+    assert.equal(quoteFor({ packageLengthCm: 8.01 }).shippingCents, 7900);
+    assert.equal(quoteFor({ productWeightGrams: 20000, packageLengthCm: 69, packageWidthCm: 60, packageHeightCm: 41 }).shippingCents, 14900);
+    assert.ok(quoteFor({ productWeightGrams: 20001 }).error);
+    assert.ok(quoteFor({ packageWidthCm: 70 }).error);
+  });
+  it("uses the combined cart parcel and refuses incomplete data or product exclusions", () => {
+    const card = { ...settings, tcgLockerTariffs: true };
+    const quote = calculateShipping([line({ quantity: 2, packageLengthCm: 20, packageWidthCm: 10, packageHeightCm: 5 })], card, [], { subtotalCents: 50000 });
+    assert.equal(quote.parcel.weightGrams, 2000);
+    assert.equal(quote.shippingCents, 7900);
+    assert.equal(orderTotals(quote).totalCents, 57900);
+    assert.ok(calculateShipping([line(), line({ packageHeightCm: 0 })], card, []).error);
+    assert.ok(calculateShipping([line({ lockerAllowed: false })], card, []).error);
+  });
+  it("includes a verified fuel surcharge in door delivery without free-shipping discounts", () => {
+    const quote = calculateShipping([line({ productWeightGrams: 2400, packageWeightGrams: 200, packageLengthCm: 34, packageWidthCm: 30, packageHeightCm: 28 })], { ...settings, tcgLockerTariffs: true, doorFuelSurchargePercent: 10, freeShippingAboveCents: 100 }, [], { subtotalCents: 79900, preferredMethod: "COURIER" });
+    assert.equal(quote.shippingCents, 19360);
+    assert.equal(orderTotals(quote).totalCents, 99260);
+  });
   it("selects destination-specific tariffs and refuses uncovered destinations", () => {
     const zones: ShippingRule[] = [{ ...rules[1], provinceCodes: ["GP"], postalCodePrefixes: ["20"], priceCents: 9900 }, { ...rules[1], id: "cape", provinceCodes: ["WC"], priceCents: 14900 }];
     const options = { subtotalCents: 10000, preferredMethod: "COURIER" as const };
