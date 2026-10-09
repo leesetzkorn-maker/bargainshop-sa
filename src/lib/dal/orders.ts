@@ -1,5 +1,5 @@
 import "server-only";
-import { productReadinessIssues, readinessSelect } from "@/lib/product-readiness";
+import { productCheckoutIssues, readinessSelect } from "@/lib/product-readiness";
 
 import { randomBytes } from "node:crypto";
 import { prisma } from "@/lib/db";
@@ -128,8 +128,8 @@ export async function createOrderFromCheckout(
       unavailable.push({ name: entry.slug, reason: "This item is no longer available." });
       continue;
     }
-    if (productReadinessIssues({ ...product, imageCount: product._count.images }).length) {
-      unavailable.push({ name: product.name, reason: "This item is awaiting listing verification." });
+    if (productCheckoutIssues({ ...product, imageCount: product._count.images }).length) {
+      unavailable.push({ name: product.name, reason: "This item is missing required listing or delivery details." });
       continue;
     }
     if (product.stockQty <= 0) {

@@ -2,6 +2,7 @@ import assert from "node:assert/strict";
 import { describe, it } from "node:test";
 import {
   productReadinessIssues,
+  productCheckoutIssues,
   catalogueFlags,
   summariseReadiness,
   type ReadinessInput,
@@ -130,5 +131,25 @@ describe("summariseReadiness", () => {
   it("uses the singular for exactly one remaining problem", () => {
     const issues = productReadinessIssues({ ...complete, productWeightGrams: 0, imageCount: 0 });
     assert.ok(summariseReadiness(issues).includes("1 more thing still needs attention"));
+  });
+});
+
+
+describe("checkout of already published listings", () => {
+  it("accepts actual photos and parcel data without internal research or image-edit fields", () => {
+    const published = { ...complete, brand: "", model: "", modelSourceUrl: "",
+      specsConfirmed: false, itemReviewConfirmed: false, cleanImageLicense: "",
+      sourceCostCents: null, measurementSource: "ESTIMATED", imageCount: 1 };
+    assert.deepEqual(productCheckoutIssues(published), []);
+    assert.ok(productReadinessIssues(published).length > 0);
+  });
+  it("still rejects missing selling price, stock, photos and parcel measurements", () => {
+    for (const [input, field] of [
+      [{ priceCents: 0 }, "price"], [{ stockQty: 0 }, "stock"],
+      [{ imageCount: 0 }, "image"], [{ productWeightGrams: 0 }, "weight"],
+      [{ packageHeightCm: 0 }, "dimensions"],
+    ] as const) {
+      assert.ok(productCheckoutIssues({ ...complete, ...input }).some(issue => issue.field === field));
+    }
   });
 });

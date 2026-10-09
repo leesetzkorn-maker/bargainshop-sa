@@ -71,7 +71,7 @@ export function isPreLaunchStatus(status: string): boolean {
  * Ordered so the price and the measurements come first: those are the two that
  * block a sale outright, and they are the two the owner has to go and measure.
  */
-export function productReadinessIssues(product: ReadinessInput): ReadinessIssue[] {
+export function productCheckoutIssues(product: ReadinessInput): ReadinessIssue[] {
   const issues: ReadinessIssue[] = [];
 
   if (product.priceCents <= 0) {
@@ -120,12 +120,18 @@ export function productReadinessIssues(product: ReadinessInput): ReadinessIssue[
       message: "No photograph. A second-hand item is sold on its photos, so at least one is required.",
     });
   }
-  if (product.cleanImageLicense?.trim() && product.imageCount === 1) {
-    issues.push({ field: "image", message: "Keep actual-item photographs alongside the clean image; at least two gallery images are required." });
-  }
-
   if (!product.categoryId) {
     issues.push({ field: "category", message: "No category is selected." });
+  }
+
+  return issues;
+}
+
+/** Additional owner checks apply when publishing, not when buying an ACTIVE listing. */
+export function productReadinessIssues(product: ReadinessInput): ReadinessIssue[] {
+  const issues = productCheckoutIssues(product);
+  if (product.cleanImageLicense?.trim() && product.imageCount === 1) {
+    issues.push({ field: "image", message: "Keep actual-item photographs alongside the clean image; at least two gallery images are required." });
   }
 
   if (!product.itemReviewConfirmed) issues.push({ field: "review", message: "Confirm the actual item, stock, condition and included accessories before publishing." });
