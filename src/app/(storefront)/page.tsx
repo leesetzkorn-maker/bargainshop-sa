@@ -16,7 +16,7 @@ import { SectionHeading } from "@/components/ui";
 import { HeroStage } from "@/components/hero-stage";
 import { brand, copy, hasAnyContact, hasWhatsapp, whatsappLink } from "@/lib/brand";
 import { ContactLinks } from "@/components/contact-links";
-import { HERO_SPOTLIGHTS, resolveShowcase, SHOWCASE_CATEGORIES, type Spotlight } from "@/lib/showcase";
+import { resolveShowcase, SHOWCASE_CATEGORIES, type Spotlight } from "@/lib/showcase";
 import { BUYING_STEPS, DISPATCH_PROMISE, TEST_CHECKS, TRUST_POINTS } from "@/lib/process";
 import { formatCustomerPrice, formatZAR } from "@/lib/money";
 
@@ -40,11 +40,19 @@ export default async function HomePage() {
   const liveSlugs = new Set(
     categoryTree.flatMap((main) => [main.slug, ...main.children.map((child) => child.slug)]),
   );
-  const catalogue = photoPreview ? await listCustomerCatalogue() : [];
+  const catalogue = await listCustomerCatalogue();
   const byId = new Map(catalogue.map((product) => [product.itemId, product]));
-  const heroItems = spotsFrom(byId, HERO_IDS);
-  const heroSpots = heroItems.length > 0 ? heroItems : resolveShowcase(HERO_SPOTLIGHTS, liveSlugs);
-  const tiles = photoTiles(byId);
+  const heroProducts = catalogue.filter((product) =>
+    product.stockQty > 0 && product.priceCents > 0 &&
+    product.images.some((image) => image.url.startsWith("/uploads/")),
+  );
+  const heroById = new Map(heroProducts.map((product) => [product.itemId, product]));
+  const heroIds = [
+    ...HERO_IDS.filter((id) => heroById.has(id)),
+    ...heroProducts.filter((product) => !HERO_IDS.includes(product.itemId)).map((product) => product.itemId),
+  ].slice(0, 8);
+  const heroSpots = spotsFrom(heroById, heroIds);
+  const tiles = photoPreview ? photoTiles(byId) : [];
   const priced = catalogue.filter((product) => product.priceCents > 0);
   const underFiveHundredPhotos = priced.filter((product) => product.priceCents <= UNDER_FIVE_HUNDRED_CENTS);
   const featuredPhotos = [...priced].sort((a, b) => a.priceCents - b.priceCents).slice(0, 8);
@@ -502,7 +510,7 @@ function pickIds(byId: Map<string, CatalogProduct>, ids: string[]): CatalogProdu
 
 function spotsFrom(byId: Map<string, CatalogProduct>, ids: string[]): Spotlight[] {
   return pickIds(byId, ids).flatMap((product) => {
-    const image = product.images[0];
+    const image = product.images.find((candidate) => candidate.url.startsWith("/uploads/"));
     if (!image) return [];
     return [
       {
