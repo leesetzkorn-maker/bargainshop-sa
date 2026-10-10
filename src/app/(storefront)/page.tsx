@@ -17,10 +17,9 @@ import { HeroStage } from "@/components/hero-stage";
 import { brand, copy, hasAnyContact, hasWhatsapp, whatsappLink } from "@/lib/brand";
 import { ContactLinks } from "@/components/contact-links";
 import { resolveShowcase, SHOWCASE_CATEGORIES, type Spotlight } from "@/lib/showcase";
-import { BUYING_STEPS, DISPATCH_PROMISE, TEST_CHECKS, TRUST_POINTS } from "@/lib/process";
+import { TRUST_POINTS } from "@/lib/process";
 import { formatCustomerPrice, formatZAR } from "@/lib/money";
 
-const HERO_IDS = ["2DS-0081", "2DS-0060", "2DS-0048", "2DS-0046", "2DS-0087", "2DS-0064", "2DS-0055", "2DS-0090"];
 const SECTION_IDS = {
   gaming: ["2DS-0048", "2DS-0049", "2DS-0050", "2DS-0051", "2DS-0052", "2DS-0053"],
   devices: ["2DS-0046", "2DS-0047", "2DS-0055", "2DS-0067"],
@@ -46,12 +45,29 @@ export default async function HomePage() {
     product.stockQty > 0 && product.priceCents > 0 &&
     product.images.some((image) => image.url.startsWith("/uploads/")),
   );
-  const heroById = new Map(heroProducts.map((product) => [product.itemId, product]));
-  const heroIds = [
-    ...HERO_IDS.filter((id) => heroById.has(id)),
-    ...heroProducts.filter((product) => !HERO_IDS.includes(product.itemId)).map((product) => product.itemId),
+  const rankedHero = [...heroProducts].sort((a, b) =>
+    Number(b.isFeatured) - Number(a.isFeatured) ||
+    Number(b.priceCents <= UNDER_FIVE_HUNDRED_CENTS) - Number(a.priceCents <= UNDER_FIVE_HUNDRED_CENTS) ||
+    Number(b.testingStatus === "TESTED_AND_WORKING") - Number(a.testingStatus === "TESTED_AND_WORKING") ||
+    b.createdAt.getTime() - a.createdAt.getTime() ||
+    a.priceCents - b.priceCents,
+  );
+  // Lead with a mix of categories, then fill remaining places with ranked deals.
+  const seenCategories = new Set<string>();
+  const categoryLeaders = rankedHero.filter((product) => {
+    if (seenCategories.has(product.category.slug)) return false;
+    seenCategories.add(product.category.slug);
+    return true;
+  });
+  const leaderIds = new Set(categoryLeaders.map((product) => product.itemId));
+  const selectedHero = [
+    ...categoryLeaders,
+    ...rankedHero.filter((product) => !leaderIds.has(product.itemId)),
   ].slice(0, 8);
-  const heroSpots = spotsFrom(heroById, heroIds);
+  const heroSpots = spotsFrom(
+    new Map(selectedHero.map((product) => [product.itemId, product])),
+    selectedHero.map((product) => product.itemId),
+  );
   const tiles = photoPreview ? photoTiles(byId) : [];
   const priced = catalogue.filter((product) => product.priceCents > 0);
   const underFiveHundredPhotos = priced.filter((product) => product.priceCents <= UNDER_FIVE_HUNDRED_CENTS);
@@ -344,110 +360,30 @@ export default async function HomePage() {
         </ul>
       </section>
 
-      <section className="border-y border-ink-200 bg-white py-14 sm:py-16">
+      <section className="border-y border-ink-200 bg-white py-8 sm:py-10">
         <div className="container-page">
-          <SectionHeading
-            eyebrow="The process"
-            title="How a 2DE bargain actually happens"
-            description={copy.whatWeDo}
-            action={
-              <Link href="/how-it-works" className="btn btn-secondary btn-sm shrink-0">
-                Full explanation
-              </Link>
-            }
-          />
-          <ol className="grid gap-4 md:grid-cols-2 xl:grid-cols-3">
-            {BUYING_STEPS.map((step, index) => (
-              <li key={step.title} className="card flex gap-4 p-5">
-                <span
-                  aria-hidden="true"
-                  className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-ink-900 font-display text-sm font-bold text-accent-500"
-                >
-                  {index + 1}
-                </span>
+          <SectionHeading eyebrow="Easy shopping" title="Find it. Order it. Enjoy it." />
+          <ol className="grid gap-4 md:grid-cols-3">
+            {[
+              { title: "Choose your bargain", body: "See the actual item, its price and its condition before you order." },
+              { title: "Order online", body: "Delivery is shown at checkout. We confirm availability and check your item before shipping." },
+              { title: "Delivered to you", body: "We pack your bargain and send tracking once it is dispatched." },
+            ].map((step, index) => (
+              <li key={step.title} className="flex gap-3 rounded-xl bg-ink-50 p-4">
+                <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-ink-900 text-sm font-bold text-accent-500">{index + 1}</span>
                 <div>
-                  <h3 className="font-display text-base font-bold text-ink-900">{step.title}</h3>
-                  <p className="mt-1.5 text-sm leading-relaxed text-ink-600">{step.body}</p>
+                  <h3 className="text-sm font-bold text-ink-900">{step.title}</h3>
+                  <p className="mt-1 text-sm text-ink-600">{step.body}</p>
                 </div>
               </li>
             ))}
           </ol>
-        </div>
-      </section>
-
-      <section className="container-page py-14 sm:py-16">
-        <SectionHeading
-          eyebrow="Fast dispatch"
-          title={DISPATCH_PROMISE.title}
-          description={DISPATCH_PROMISE.lead}
-        />
-        <div className="max-w-3xl space-y-4 text-base leading-relaxed text-ink-700">
-          <p>
-            <strong className="text-ink-900">{DISPATCH_PROMISE.processing}</strong> {DISPATCH_PROMISE.testing}
+          <p className="mt-5 text-xs leading-relaxed text-ink-600">
+            Second-hand items, sold in the condition described. Subject to availability; unavailable items are refunded.
+            Your statutory consumer rights apply. <Link href="/terms" className="font-semibold underline">Terms</Link>
+            {" · "}<Link href="/returns" className="font-semibold underline">Returns</Link>
+            {" · "}<Link href="/how-it-works" className="font-semibold underline">How it works</Link>
           </p>
-          <p>{DISPATCH_PROMISE.tracking}</p>
-          <p>{DISPATCH_PROMISE.stock}</p>
-        </div>
-        <Link href="/shop" className="btn btn-accent mt-6">
-          Shop now
-        </Link>
-        <ul className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
-          {TEST_CHECKS.map((row) => (
-            <li key={row.item} className="rounded-xl border border-ink-200 bg-white px-4 py-3">
-              <p className="text-sm font-semibold text-ink-900">{row.item}</p>
-              <p className="mt-1 text-sm text-ink-600">{row.check}</p>
-            </li>
-          ))}
-        </ul>
-
-        <div className="mt-6 grid gap-4 lg:grid-cols-3">
-          {[
-            {
-              label: "Tested",
-              body: "Every item is checked and confirmed working before it is prepared for shipping.",
-            },
-            {
-              label: "Not refurbished",
-              body: "A check is not a rebuild, a repair programme, or a promise that the item has been restored to like-new.",
-            },
-            {
-              label: "Not new",
-              body: "Nothing here is sold as new. Cosmetic wear described on the listing is normal for second-hand goods.",
-            },
-          ].map((card) => (
-            <div key={card.label} className="card p-5">
-              <p className="text-xs font-bold uppercase tracking-widest text-brand-700">{card.label}</p>
-              <p className="mt-2 text-sm leading-relaxed text-ink-700">{card.body}</p>
-            </div>
-          ))}
-        </div>
-      </section>
-
-      <section className="bg-ink-900 py-14 text-white sm:py-16">
-        <div className="container-page grid gap-8 lg:grid-cols-[1.1fr_0.9fr] lg:items-center">
-          <div>
-            <p className="mb-2 text-xs font-bold uppercase tracking-widest text-accent-500">
-              If we cannot secure it
-            </p>
-            <h2 className="heading-section text-2xl sm:text-3xl">
-              Genuine bargains can sell before we collect them
-            </h2>
-            <p className="mt-3 max-w-xl text-ink-300">{copy.whyItemsDisappear}</p>
-            <Link href="/returns" className="btn btn-accent mt-7">
-              Read the refund policy
-            </Link>
-          </div>
-          <ul className="space-y-3">
-            {[
-              "You are told the item could not be secured.",
-              "The order is cancelled.",
-              "Any payment is refunded according to our refund policy. Timing depends on the payment method — we do not promise an instant refund.",
-            ].map((line) => (
-              <li key={line} className="rounded-xl border border-white/10 bg-white/5 px-4 py-3 text-sm leading-relaxed text-ink-100">
-                {line}
-              </li>
-            ))}
-          </ul>
         </div>
       </section>
 
