@@ -20,6 +20,12 @@ import type { OrderMailContext } from "./types";
  * no web fonts, no external images.
  */
 
+const SECOND_HAND_TERMS = "Second-hand goods, sold in the condition described in the product listing. Disclosed wear and defects form part of that description. Your statutory consumer rights, including applicable returns and refunds, remain unchanged.";
+
+function receiptTerms(): string {
+  return `<tr><td style="padding:0 32px 20px;">${muted(`${esc(SECOND_HAND_TERMS)} <a href="${esc(brand.url)}/terms">Terms</a> · <a href="${esc(brand.url)}/returns">Returns</a>.`)}</td></tr>`;
+}
+
 const INK = "#16181d";
 const MUTED = "#5b6472";
 const LINE = "#e3e6eb";
@@ -265,6 +271,7 @@ export function orderReceivedCustomerEmail(ctx: OrderMailContext): {
   ${callout(`<strong>Next step.</strong> We confirm your order and arrange payment with you directly, then we check the item is still at the shop. ${esc(copy.whyItemsDisappear)}`)}
   ${itemsTable(ctx, true)}
   ${totalsBlock(ctx)}
+  ${receiptTerms()}
   ${addressBlock(ctx)}
   ${keyValues([
     ["Order number", ctx.orderNumber],
@@ -282,6 +289,9 @@ export function orderReceivedCustomerEmail(ctx: OrderMailContext): {
     "",
     `Thank you, ${first}. Your order is safely with us and the item is being held.`,
     `You do not need to do anything right now — we will confirm and arrange payment with you.`,
+    "",
+    SECOND_HAND_TERMS,
+    `Terms: ${brand.url}/terms | Returns: ${brand.url}/returns`,
     "",
     "WHAT YOU ORDERED",
     ...ctx.items.map(
@@ -488,6 +498,7 @@ export function orderConfirmedEmail(ctx: OrderMailContext): { subject: string; h
   ${callout(`<strong>What happens next:</strong> we check the item is still available at the shop, then buy it for you, pack it and send it out. <a href="${esc(brand.url)}/how-it-works" style="color:${BRAND_DARK};">How buying works</a>.`)}
   ${itemsTable(ctx, true)}
   ${totalsBlock(ctx)}
+  ${receiptTerms()}
   ${addressBlock(ctx)}
   ${keyValues([
     ["Order number", ctx.orderNumber],
@@ -526,6 +537,9 @@ export function orderConfirmedEmail(ctx: OrderMailContext): { subject: string; h
     `Order ${ctx.orderNumber} confirmed — thank you, ${ctx.customerName.split(" ")[0]}`,
     "",
     `We have your order and your payment of ${money(ctx.totalCents, ctx.currency)} is recorded.`,
+    "",
+    SECOND_HAND_TERMS,
+    `Terms: ${brand.url}/terms | Returns: ${brand.url}/returns`,
     "",
     "WHAT YOU ORDERED",
     ...ctx.items.map(
