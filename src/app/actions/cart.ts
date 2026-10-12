@@ -1,5 +1,6 @@
 "use server";
 
+import { recordStoreEvent } from "@/lib/analytics";
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 import { addToCartCookie, clearCart, readCart, setCartLine, writeCart } from "@/lib/cart";
@@ -70,6 +71,7 @@ export async function addToCartAction(
     await addToCartCookie(slug, quantity);
   }
 
+  await recordStoreEvent("add_to_cart", `/product/${slug}`);
   revalidatePath("/cart");
 
   if (buyNow) {

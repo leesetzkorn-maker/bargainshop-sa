@@ -7,6 +7,7 @@ import { cn } from "@/lib/utils";
 
 const LINKS: Array<{ href: string; label: string; exact?: boolean }> = [
   { href: "/admin", label: "Dashboard", exact: true },
+  { href: "/admin/analytics", label: "Analytics" },
   { href: "/admin/orders", label: "Orders" },
   { href: "/admin/products", label: "Products" },
   { href: "/admin/intake", label: "Intake" },

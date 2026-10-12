@@ -30,6 +30,9 @@ export default function PrivacyPage() {
                 method, kept against your order.
               </li>
               <li>
+                <strong>Store statistics:</strong> anonymous shopping sessions, pages viewed, referring website and mobile/desktop category. We do not record IP addresses or contact details in these statistics. Browser Do Not Track is respected.
+              </li>
+              <li>
                 <strong>Technical data:</strong> standard server logs such as IP address and
                 user-agent, kept for security and to investigate abuse.
               </li>
@@ -40,7 +43,7 @@ export default function PrivacyPage() {
           heading: "What we do not collect",
           body: (
             <ul className="list-disc space-y-1.5 pl-5">
-              <li>No advertising or tracking cookies.</li>
+              <li>No advertising cookies. A first-party anonymous visit cookie expires after 30 minutes and helps us count visits, product views and shopping steps.</li>
               <li>No third-party trackers, pixels or ad networks.</li>
               <li>No ID documents, no credit checks, no income verification.</li>
               <li>
@@ -55,8 +58,7 @@ export default function PrivacyPage() {
             <p>
               To do one job: get your order to you and tell you what is happening with it. That means
               packing the right item, posting it to the right address, and contacting you if something
-              goes wrong. There is no other purpose, because there is no advertising side to this
-              business.
+              goes wrong. We also use anonymous store statistics to identify shopping problems and improve checkout.
             </p>
           ),
         },

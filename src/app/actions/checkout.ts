@@ -1,5 +1,6 @@
 "use server";
 
+import { recordStoreEvent } from "@/lib/analytics";
 import { redirect } from "next/navigation";
 import { revalidatePath } from "next/cache";
 import { readCart, clearCart } from "@/lib/cart";
@@ -57,6 +58,7 @@ export async function submitCheckoutAction(
   });
 
   if (!parsed.success) {
+    await recordStoreEvent("checkout_error", "/checkout");
     return {
       ok: false,
       error: "Please correct the highlighted fields and try again.",
@@ -74,6 +76,7 @@ export async function submitCheckoutAction(
   const result = await createOrderFromCheckout(cart, input);
 
   if (!result.ok || !result.orderNumber || !result.orderId) {
+    await recordStoreEvent("checkout_error", "/checkout");
     return {
       ok: false,
       error: result.error ?? "We could not complete your order.",
@@ -81,6 +84,7 @@ export async function submitCheckoutAction(
     };
   }
 
+  await recordStoreEvent("payment_started", "/checkout", result.orderId);
   await clearCart();
   await grantOrderAccess(result.orderNumber);
 

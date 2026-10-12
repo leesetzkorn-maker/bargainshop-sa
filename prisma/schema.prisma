@@ -603,3 +603,18 @@ model AuditLog {
   @@index([entity, entityId])
   @@index([createdAt])
 }
+
+// First-party store analytics. No IP addresses or customer contact details.
+model AnalyticsEvent {
+  id String @id @default(cuid())
+  sessionId String
+  kind String
+  path String
+  source String @default("direct")
+  device String @default("desktop")
+  orderId String?
+  createdAt DateTime @default(now())
+
+  @@index([createdAt, kind])
+  @@index([sessionId, createdAt])
+}

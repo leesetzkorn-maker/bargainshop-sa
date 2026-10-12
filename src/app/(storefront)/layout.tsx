@@ -1,3 +1,4 @@
+import { StoreAnalytics } from "@/components/store-analytics";
 import { StoreFooter, StoreHeader } from "@/components/store-chrome";
 import { getActiveCategories } from "@/lib/dal/catalog";
 import { readCart } from "@/lib/cart";
@@ -13,6 +14,7 @@ export default async function StorefrontLayout({ children }: LayoutProps<"/">) {
 
   return (
     <>
+      <StoreAnalytics />
       <a
         href="#main"
         className="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-[100] focus:rounded-lg focus:bg-ink-900 focus:px-4 focus:py-2 focus:text-sm focus:font-semibold focus:text-white"
