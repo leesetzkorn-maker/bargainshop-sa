@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
+import { brand } from "@/lib/brand";
 import { randomUUID } from "node:crypto";
 import { prisma } from "@/lib/db";
 import { currentAdmin } from "@/lib/dal/admin";
@@ -7,7 +8,9 @@ import { safeAnalyticsPath, analyticsSource, analyticsDevice } from "@/lib/analy
 
 export async function POST(request: NextRequest) {
   const origin = request.headers.get("origin");
-  if (!origin || origin !== request.nextUrl.origin) return new NextResponse(null, { status: 403 });
+  // Railway terminates HTTPS; the internal Next URL can be http://localhost.
+  const allowedOrigins = [request.nextUrl.origin, brand.url, `https://${brand.preferredDomain}`, `https://www.${brand.preferredDomain}`];
+  if (!origin || !allowedOrigins.includes(origin)) return new NextResponse(null, { status: 403 });
   if (Number(request.headers.get("content-length") ?? 0) > 2048) return new NextResponse(null, { status: 413 });
   const ua = request.headers.get("user-agent") ?? "";
   if (/bot|crawler|spider|headless/i.test(ua) || request.headers.get("dnt") === "1") return new NextResponse(null, { status: 204 });
@@ -27,7 +30,7 @@ export async function POST(request: NextRequest) {
       await prisma.analyticsEvent.create({ data: { sessionId, kind: "page_view", path, source: previous?.source ?? analyticsSource(body.referrer, origin), device: previous?.device ?? analyticsDevice(ua) } });
     }
     const response = new NextResponse(null, { status: 204 });
-    response.cookies.set(ANALYTICS_COOKIE, sessionId, { httpOnly: true, secure: request.nextUrl.protocol === "https:", sameSite: "lax", path: "/", maxAge: 1800 });
+    response.cookies.set(ANALYTICS_COOKIE, sessionId, { httpOnly: true, secure: process.env.NODE_ENV === "production" || request.nextUrl.protocol === "https:", sameSite: "lax", path: "/", maxAge: 1800 });
     return response;
   } catch { return new NextResponse(null, { status: 204 }); }
 }
