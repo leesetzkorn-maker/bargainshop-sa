@@ -169,7 +169,7 @@ export async function createOrderFromCheckout(
   }
 
   // --- Server-side money
-  const subtotalCents = lines.reduce;
+  const subtotalCents = lines.reduce(
     (sum, { product, quantity }) => sum + product.priceCents * quantity,
     0,
   );
