@@ -3,6 +3,7 @@ import { z } from "zod";
 import { getCartView } from "@/lib/dal/cart-view";
 import { shippingMethodSchema, provinceSchema, postalCodeSchema } from "@/lib/validation";
 import { formatZAR } from "@/lib/money";
+import { customerDeliveryCents } from "@/lib/shipping/policy";
 
 const requestSchema = z.object({
   deliveryMethod: shippingMethodSchema.optional(),
@@ -30,8 +31,8 @@ export async function POST(request: Request) {
       itemCount: cart.itemCount,
       subtotalCents: cart.subtotalCents,
       method: quote.method,
-      shippingCents: quote.shippingCents,
-      totalCents: cart.subtotalCents + quote.shippingCents,
+      shippingCents: customerDeliveryCents(quote.shippingCents),
+      totalCents: cart.subtotalCents + customerDeliveryCents(quote.shippingCents),
       error: quote.error ?? null,
       matchedTierCode: quote.matchedTierCode ?? null,
       matchedTierName: quote.matchedTierName ?? null,
@@ -44,7 +45,7 @@ export async function POST(request: Request) {
       methods: quote.methods.map((method) => ({
         method: method.method,
         available: method.available,
-        priceCents: method.priceCents,
+        priceCents: customerDeliveryCents(method.priceCents),
         fuelSurchargeCents: method.fuelSurchargeCents,
         unavailableReason: method.unavailableReason ?? null,
         etaMinDays: method.etaMinDays,
@@ -52,8 +53,8 @@ export async function POST(request: Request) {
       })),
       formatted: {
         subtotal: formatZAR(cart.subtotalCents),
-        shipping: formatZAR(quote.shippingCents),
-        total: formatZAR(cart.subtotalCents + quote.shippingCents),
+        shipping: formatZAR(customerDeliveryCents(quote.shippingCents)),
+        total: formatZAR(cart.subtotalCents + customerDeliveryCents(quote.shippingCents)),
       },
     });
   } catch {
