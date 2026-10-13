@@ -9,6 +9,7 @@ import { Alert, ConditionBadge } from "@/components/ui";
 import { cn } from "@/lib/utils";
 import {
   DELIVERY_COURIER,
+  DELIVERY_INCLUDED_IN_PRICES,
 } from "@/lib/shipping/policy";
 
 export interface QuoteResponse {
@@ -278,7 +279,7 @@ export function CheckoutForm({
           <input type="hidden" name="quotedSubtotalCents" value={quote.subtotalCents} />
           {isCollectionMethod(method) ? <div className="mb-4"><label className="label" htmlFor="pickupPoint">Locker / kiosk name, location and reference</label><input id="pickupPoint" name="pickupPoint" className="input" required maxLength={300} /><p className="error-text">{fieldError("pickupPoint")}</p></div> : null}
           <p className="mb-4 text-sm text-ink-500">
-            {DELIVERY_COURIER} delivery is paid by you, shown at checkout separately from item prices.{" "}
+            {DELIVERY_INCLUDED_IN_PRICES ? `${DELIVERY_COURIER} delivery is included in the displayed price. No extra delivery fee at checkout.` : `${DELIVERY_COURIER} delivery is paid by you, shown at checkout separately from item prices.`}{" "}
             <a href="/shipping" className="font-semibold text-brand-700 hover:underline">
               How this is calculated
             </a>
@@ -318,7 +319,7 @@ export function CheckoutForm({
                       <span className="font-semibold text-ink-900">{copy.title}</span>
                       {entry.available ? (
                         <span className="shrink-0 font-bold text-ink-900 tabular-nums">
-                          {formatZAR(entry.priceCents)}
+                          {DELIVERY_INCLUDED_IN_PRICES ? "FREE" : formatZAR(entry.priceCents)}
                         </span>
                       ) : null}
                     </div>
@@ -413,7 +414,7 @@ export function CheckoutForm({
             <SummaryRow label="Items subtotal" value={formatZAR(quote.subtotalCents)} />
             <SummaryRow
               label={`Delivery (${METHOD_COPY[method].title.toLowerCase()})`}
-              value={quoteLoading || isPending ? "Updating..." : quote.error || quoteError ? "Awaiting address / quote" : formatZAR(quote.shippingCents)}
+              value={quoteLoading || isPending ? "Updating..." : quote.error || quoteError ? "Awaiting address / quote" : DELIVERY_INCLUDED_IN_PRICES ? "FREE" : formatZAR(quote.shippingCents)}
             />
 
             <div className="flex items-center justify-between border-t border-ink-200 pt-2.5">
