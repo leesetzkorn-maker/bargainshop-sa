@@ -8,6 +8,7 @@ import { formatZAR } from "@/lib/money";
 import { copy } from "@/lib/brand";
 import { SHIPPING_METHOD_LABELS } from "@/lib/enums";
 import { DELIVERY_COURIER, DELIVERY_ESTIMATE } from "@/lib/shipping/policy";
+import { CHECKOUT_TEST_SLUG } from "@/lib/checkout-test";
 
 export const metadata: Metadata = {
   title: "Your cart",
@@ -39,6 +40,7 @@ export default async function CartPage() {
   const shippingCents = quote?.shippingCents ?? 0;
   const totalCents = cart.subtotalCents + shippingCents;
   const canShip = Boolean(quote && !quote.error);
+  const paymentTest = cart.lines.length === 1 && cart.lines[0].product.slug === CHECKOUT_TEST_SLUG && cart.lines[0].quantity === 1;
 
   return (
     <div className="container-page py-8 sm:py-10">
@@ -103,7 +105,7 @@ export default async function CartPage() {
               </div>
 
               <p className="rounded-md bg-ink-50 px-3 py-2 text-xs text-ink-600">
-                All products ship with {DELIVERY_COURIER}. Delivery is paid by you, charged separately at checkout. {DELIVERY_ESTIMATE}
+                {paymentTest ? "R20 owner payment test — no physical product is supplied and no shipping is charged." : <>All products ship with {DELIVERY_COURIER}. Delivery is paid by you, charged separately at checkout. {DELIVERY_ESTIMATE}</>}
               </p>
 
               <div className="flex items-center justify-between border-t border-ink-200 pt-3">
@@ -114,7 +116,7 @@ export default async function CartPage() {
               </div>
 
               <p className="text-xs text-ink-500">
-                Delivery is charged separately from the item price.{" "}
+                {paymentTest ? "No shipping on the non-physical R20 checkout test." : "Delivery is charged separately from the item price."}{" "}
                 <Link href="/shipping" className="font-semibold text-brand-700 hover:underline">
                   How it is calculated
                 </Link>
