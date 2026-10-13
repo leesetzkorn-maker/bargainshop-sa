@@ -13,6 +13,7 @@ import {
   yocoTimestampIsFresh,
 } from "@/lib/payments/providers/yoco-core";
 import { yocoCredentials } from "@/lib/payments/providers/yoco";
+import { parseR20TestMetadata, recordVerifiedR20YocoEvent } from "@/lib/payments/r20-smoke";
 
 /**
  * Payment gateway notifications.
@@ -106,14 +107,29 @@ async function yocoNotify(request: Request): Promise<NextResponse> {
   const payload = event.payload;
   if (!payload || payload.type !== "payment") return yocoIgnore("not_a_payment_event", event.id);
 
+  // Admin-only R20 gateway smoke test, with a separate audit trail.
+  // This branch runs ONLY after verifying Yoco's cryptographic signature and timestamp.
+  // It does not alter real orders, stock, fulfilment, sales or profit.
+  const metadata = payload.metadata ?? {};
+  const orderId = typeof metadata.orderId === "string" ? metadata.orderId : "";
+  const orderNumber = typeof metadata.orderNumber === "string" ? metadata.orderNumber : "";
+  const paymentTestId = parseR20TestMetadata(orderId, orderNumber);
+  if (paymentTestId) {
+    const outcome = await recordVerifiedR20YocoEvent({
+      testId: paymentTestId,
+      type: event.type ?? "",
+      amount: payload.amount,
+      currency: payload.currency,
+      providerRef: payload.id,
+      eventId: event.id,
+    });
+    return NextResponse.json(outcome);
+  }
+
   // A failed card attempt is expected, not an error. It is reported so the
   // retry schedule stops, and it must never settle anything.
   if (event.type === "payment.failed") return yocoIgnore("payment_failed", event.id);
   if (event.type !== "payment.succeeded") return yocoIgnore("ignored_event_type", event.id);
-
-  const metadata = payload.metadata ?? {};
-  const orderId = typeof metadata.orderId === "string" ? metadata.orderId : "";
-  const orderNumber = typeof metadata.orderNumber === "string" ? metadata.orderNumber : "";
   if (!orderId && !orderNumber) return yocoIgnore("missing_order_metadata", event.id);
 
   const order = await prisma.order.findFirst({
