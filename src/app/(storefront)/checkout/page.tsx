@@ -6,6 +6,7 @@ import { CheckoutForm } from "@/components/checkout-form";
 import { getPaymentProvider, isCheckoutOpen } from "@/lib/payments/registry";
 import { formatZAR } from "@/lib/money";
 import { copy } from "@/lib/brand";
+import { customerDeliveryCents } from "@/lib/shipping/policy";
 
 export const metadata: Metadata = {
   title: "Checkout",
@@ -39,8 +40,8 @@ export default async function CheckoutPage({ searchParams }: PageProps<"/checkou
     itemCount: cart.itemCount,
     subtotalCents: cart.subtotalCents,
     method: quote.method,
-    shippingCents: quote.shippingCents,
-    totalCents: cart.subtotalCents + quote.shippingCents,
+    shippingCents: customerDeliveryCents(quote.shippingCents),
+    totalCents: cart.subtotalCents + customerDeliveryCents(quote.shippingCents),
     error: quote.error ?? null,
     matchedTierCode: quote.matchedTierCode ?? null,
     matchedTierName: quote.matchedTierName ?? null,
@@ -53,7 +54,7 @@ export default async function CheckoutPage({ searchParams }: PageProps<"/checkou
     methods: quote.methods.map((method) => ({
       method: method.method,
       available: method.available,
-      priceCents: method.priceCents,
+      priceCents: customerDeliveryCents(method.priceCents),
       fuelSurchargeCents: method.fuelSurchargeCents,
       unavailableReason: method.unavailableReason ?? null,
       etaMinDays: method.etaMinDays,
@@ -61,8 +62,8 @@ export default async function CheckoutPage({ searchParams }: PageProps<"/checkou
     })),
     formatted: {
       subtotal: formatZAR(cart.subtotalCents),
-      shipping: formatZAR(quote.shippingCents),
-      total: formatZAR(cart.subtotalCents + quote.shippingCents),
+      shipping: formatZAR(customerDeliveryCents(quote.shippingCents)),
+      total: formatZAR(cart.subtotalCents + customerDeliveryCents(quote.shippingCents)),
     },
   };
 
