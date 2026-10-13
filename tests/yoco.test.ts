@@ -157,12 +157,15 @@ describe("Yoco hosted checkout redirects", () => {
   it("accepts the two known HTTPS Yoco checkout hosts", () => {
     assert.equal(isTrustedYocoCheckoutUrl("https://pay.yoco.com/r/abc123"), true);
     assert.equal(isTrustedYocoCheckoutUrl("https://checkout.yoco.com/checkout_123"), true);
+    assert.equal(isTrustedYocoCheckoutUrl("https://payments.yoco.com/checkout/123"), true);
+    assert.equal(isTrustedYocoCheckoutUrl("https://hosted-checkout.yoco.com/checkout/123"), true);
   });
 
   it("rejects non-Yoco links and hosts pretending to belong to Yoco", () => {
     assert.equal(isTrustedYocoCheckoutUrl("https://pay.yoco.com.evil.example/r/123"), false);
     assert.equal(isTrustedYocoCheckoutUrl("https://not-yoco.example/r/123"), false);
     assert.equal(isTrustedYocoCheckoutUrl("https://my-yoco.com/r/123"), false);
+    assert.equal(isTrustedYocoCheckoutUrl("https://yoco.com.evil.example/checkout"), false);
   });
 
   it("rejects insecure, malformed or credential-bearing payment URLs", () => {
