@@ -8,6 +8,7 @@ import {
   yocoSignaturesMatch,
   yocoTimestampIsFresh,
 } from "../src/lib/payments/providers/yoco-core";
+import { isTrustedYocoCheckoutUrl } from "../src/lib/payments/yoco-redirect";
 
 /**
  * The known vector below was produced independently of this module — HMAC-SHA256
@@ -149,5 +150,25 @@ describe("yocoCredentialsFrom", () => {
     assert.equal(yocoCredentialsFrom("sk_test_abc", "whsec_x")?.mode, "test");
     assert.equal(yocoCredentialsFrom("sk_live_abc", "whsec_x")?.mode, "live");
     assert.equal(yocoCredentialsFrom("something-else", "whsec_x")?.mode, "test");
+  });
+});
+
+describe("Yoco hosted checkout redirects", () => {
+  it("accepts the two known HTTPS Yoco checkout hosts", () => {
+    assert.equal(isTrustedYocoCheckoutUrl("https://pay.yoco.com/r/abc123"), true);
+    assert.equal(isTrustedYocoCheckoutUrl("https://checkout.yoco.com/checkout_123"), true);
+  });
+
+  it("rejects non-Yoco links and hosts pretending to belong to Yoco", () => {
+    assert.equal(isTrustedYocoCheckoutUrl("https://pay.yoco.com.evil.example/r/123"), false);
+    assert.equal(isTrustedYocoCheckoutUrl("https://not-yoco.example/r/123"), false);
+    assert.equal(isTrustedYocoCheckoutUrl("https://my-yoco.com/r/123"), false);
+  });
+
+  it("rejects insecure, malformed or credential-bearing payment URLs", () => {
+    assert.equal(isTrustedYocoCheckoutUrl("http://pay.yoco.com/r/123"), false);
+    assert.equal(isTrustedYocoCheckoutUrl("https://user:pass@pay.yoco.com/r/123"), false);
+    assert.equal(isTrustedYocoCheckoutUrl("https://pay.yoco.com:8443/r/123"), false);
+    assert.equal(isTrustedYocoCheckoutUrl("not-a-url"), false);
   });
 });
