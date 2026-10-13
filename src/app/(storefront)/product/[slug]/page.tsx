@@ -24,6 +24,7 @@ import {
 } from "@/lib/enums";
 import { quoteShipping, toParcelLines } from "@/lib/dal/shipping";
 import { BreadcrumbJsonLd } from "@/components/json-ld";
+import { CHECKOUT_TEST_SLUG } from "@/lib/checkout-test";
 
 export async function generateMetadata({ params }: PageProps<"/product/[slug]">): Promise<Metadata> {
   const { slug } = await params;
@@ -45,7 +46,7 @@ export async function generateMetadata({ params }: PageProps<"/product/[slug]">)
       : `${product.name} — sold out`,
     description,
     alternates: { canonical: `/product/${product.slug}` },
-    robots: available ? undefined : { index: false, follow: true },
+    robots: product.slug === CHECKOUT_TEST_SLUG ? { index: false, follow: false } : available ? undefined : { index: false, follow: true },
     openGraph: {
       type: "website",
       url: `/product/${product.slug}`,
@@ -206,7 +207,7 @@ export default async function ProductPage({ params }: PageProps<"/product/[slug]
             {priceLabel ?? "Price to be confirmed"}
           </p>
           <p className="mt-1 text-xs text-ink-500">
-            Delivery is calculated separately and shown before you pay.
+            {product.slug === CHECKOUT_TEST_SLUG ? "R20 TOTAL. Real payment through ordinary checkout; no product or parcel will be shipped." : "Delivery is calculated separately and shown before you pay."}
           </p>
 
           {product.brand || product.model ? <p className="mt-3 text-sm text-ink-600">{[product.brand, product.model].filter(Boolean).join(" / ")}</p> : null}
@@ -216,7 +217,7 @@ export default async function ProductPage({ params }: PageProps<"/product/[slug]
             {forSale ? (
               <AddToCartPanel
                 slug={product.slug}
-                stockQty={product.stockQty}
+                stockQty={product.slug === CHECKOUT_TEST_SLUG ? 1 : product.stockQty}
                 status={product.status}
               />
             ) : (
@@ -228,9 +229,9 @@ export default async function ProductPage({ params }: PageProps<"/product/[slug]
 
           {/* ------------------------------------------------- DELERY ESTIMATE */}
           <section className="card mt-6 p-4">
-            <h2 className="mb-3 text-sm font-bold text-ink-900">Delivery for this item</h2>
+            <h2 className="mb-3 text-sm font-bold text-ink-900">{product.slug === CHECKOUT_TEST_SLUG ? "Payment test — no physical shipping" : "Delivery for this item"}</h2>
 
-            <dl className="space-y-2 text-sm">
+            {product.slug === CHECKOUT_TEST_SLUG ? <p className="mb-3 text-sm text-ink-600">Owner payment gateway test only. The ordinary store order and Yoco payment confirmation will be tested. No goods or courier delivery will take place.</p> : <dl className="space-y-2 text-sm">
               <div className="flex justify-between gap-4">
                 <dt className="text-ink-600">Parcel weight</dt>
                 <dd className="font-medium text-ink-900">
@@ -243,9 +244,9 @@ export default async function ProductPage({ params }: PageProps<"/product/[slug]
                   {formatDimensions(parcel.lengthCm, parcel.widthCm, parcel.heightCm)}
                 </dd>
               </div>
-            </dl>
+            </dl>}
 
-            <div className="mt-3 space-y-2 border-t border-ink-100 pt-3">
+            {product.slug !== CHECKOUT_TEST_SLUG ? <div className="mt-3 space-y-2 border-t border-ink-100 pt-3">
               {quote.methods.filter((entry) => entry.available).map((entry) => (
                 <div key={entry.method} className="flex items-start justify-between gap-3">
                   <div>
@@ -282,14 +283,14 @@ export default async function ProductPage({ params }: PageProps<"/product/[slug]
               {anyAvailable && doorMethod && !doorMethod.available ? (
                 <p className="text-xs text-ink-500">{doorMethod.unavailableReason}</p>
               ) : null}
-            </div>
+            </div> : null}
 
-            <Link
+            {product.slug !== CHECKOUT_TEST_SLUG ? <Link
               href="/shipping"
               className="mt-3 inline-block text-xs font-semibold text-brand-700 hover:underline"
             >
               How delivery pricing works →
-            </Link>
+            </Link> : null}
           </section>
 
           {hasWhatsapp() ? (
