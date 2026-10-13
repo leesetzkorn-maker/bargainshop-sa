@@ -7,6 +7,7 @@ import { prisma } from "@/lib/db";
 import { brand } from "@/lib/brand";
 import { getPaymentProvider, isCheckoutOpen } from "@/lib/payments/registry";
 import { yocoCredentials } from "@/lib/payments/providers/yoco";
+import { isTrustedYocoCheckoutUrl } from "@/lib/payments/yoco-redirect";
 import { R20_PAYMENT_TEST_CENTS, R20_PAYMENT_TEST_META_PREFIX, R20_PAYMENT_TEST_PREFIX } from "@/lib/payments/r20-smoke";
 
 export type R20TestState = { error: string };
