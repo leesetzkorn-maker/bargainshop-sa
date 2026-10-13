@@ -52,6 +52,14 @@ describe("shipping engine", () => {
     assert.equal(orderTotals(quote).totalCents, 79900 + 10900);
   });
 
+  it("retains internal courier expense even with no customer delivery charge", () => {
+    const quote = calculateShipping([line()], settings, tiers, { subtotalCents: 79900 });
+    assert.equal(quote.shippingCents, 10900);
+    assert.deepEqual(orderTotals(quote, true), {
+      subtotalCents: 79900, shippingCents: 0, totalCents: 79900,
+    });
+  });
+
   it("allows rotation into the smallest fitting box", () => {
     const quote = calculateShipping([line({ packageLengthCm: 41, packageWidthCm: 60, packageHeightCm: 8 })], settings, tiers, {
       subtotalCents: 1000,
