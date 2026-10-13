@@ -1,10 +1,10 @@
 import type { Metadata } from "next";
 import { InfoPage, PolicyLinks } from "@/components/info-page";
-import { DELIVERY_COURIER, DELIVERY_ESTIMATE } from "@/lib/shipping/policy";
+import { DELIVERY_COURIER, DELIVERY_ESTIMATE, DELIVERY_INCLUDED_IN_PRICES } from "@/lib/shipping/policy";
 
 export const metadata: Metadata = {
   title: "Delivery & shipping",
-  description: "Customer-paid The Courier Guy locker delivery, charged separately at checkout.",
+  description: DELIVERY_INCLUDED_IN_PRICES ? "Courier delivery included in eligible product prices, with no checkout delivery fee." : "Customer-paid The Courier Guy locker delivery, charged separately at checkout.",
   alternates: { canonical: "/shipping" },
 };
 
@@ -23,13 +23,13 @@ export default async function ShippingPage() {
     <InfoPage
       title="Delivery & shipping"
       breadcrumbs={[{ label: "Delivery" }]}
-      intro={`We dispatch from a The Courier Guy locker. Delivery is charged at cost from The Courier Guy's published locker tariff card and is shown separately before you pay.`}
+      intro={DELIVERY_INCLUDED_IN_PRICES ? "Eligible orders have delivery included in their product prices. Choose from available delivery methods at checkout without a separate delivery charge." : "We dispatch from a The Courier Guy locker. Delivery is charged at cost from The Courier Guy's published locker tariff card and is shown separately before you pay."}
       sections={[
         {
           heading: "How your delivery price is worked out",
           body: (
             <>
-              <p>Your whole order is packed and sent as a single parcel. We match that parcel to the smallest locker size (XS to XL) whose inner dimensions and weight limit it fits into, allowing for rotation of the box. You are then charged the published price for the service you choose at that size.</p>
+              <p>Your whole order is packed and sent as a single parcel. We match that parcel to the smallest locker size (XS to XL) whose inner dimensions and weight limit it fits into, allowing for rotation of the box. {DELIVERY_INCLUDED_IN_PRICES ? "We cover the courier cost for the available service you select; it is not added to the checkout total." : "You are then charged the published price for the service you choose at that size."}</p>
               <p>We do not estimate, round up or invent a price. The weight and box size come from the item&apos;s own recorded measurements.</p>
             </>
           ),
@@ -89,7 +89,7 @@ export default async function ShippingPage() {
         },
         {
           heading: "Dispatch and tracking",
-          body: <p>Processing time can apply before dispatch. Tracking details are added to your order once dispatched, and shipping is charged separately from the item price. All parcels are sent with {DELIVERY_COURIER}.</p>,
+          body: <p>Processing time can apply before dispatch. Tracking details are added to your order once dispatched, and {DELIVERY_INCLUDED_IN_PRICES ? "no separate courier fee is charged on eligible orders." : "shipping is charged separately from the item price."} All parcels are sent with {DELIVERY_COURIER}.</p>,
         },
       ]}
     >
