@@ -6,6 +6,7 @@ import { CheckoutForm } from "@/components/checkout-form";
 import { getPaymentProvider, isCheckoutOpen } from "@/lib/payments/registry";
 import { formatZAR } from "@/lib/money";
 import { copy } from "@/lib/brand";
+import { CHECKOUT_TEST_SLUG } from "@/lib/checkout-test";
 
 export const metadata: Metadata = {
   title: "Checkout",
@@ -22,6 +23,7 @@ export default async function CheckoutPage({ searchParams }: PageProps<"/checkou
   }
 
   const quote = cart.quote;
+  const paymentTest = cart.lines.length === 1 && cart.lines[0].product.slug === CHECKOUT_TEST_SLUG && cart.lines[0].quantity === 1;
   const provider = getPaymentProvider();
 
   const items = cart.lines.map((line) => ({
@@ -88,7 +90,7 @@ export default async function CheckoutPage({ searchParams }: PageProps<"/checkou
 
       <h1 className="heading-section mb-2 text-2xl text-ink-900 sm:text-3xl">Checkout</h1>
       <p className="mb-6 text-sm text-ink-600">
-        {copy.whatWeDo} Placing the order takes the listing off the site. We still have to secure the physical item before it can ship.
+        {paymentTest ? "STORE OWNER TEST: You are using the same checkout as regular customers. Your card will be charged R20 if you complete the live Yoco payment. This test does not include goods or shipping." : <>{copy.whatWeDo} Placing the order takes the listing off the site. We still have to secure the physical item before it can ship.</>}
       </p>
 
       {cancelled ? (
@@ -106,6 +108,7 @@ export default async function CheckoutPage({ searchParams }: PageProps<"/checkou
         initialQuote={initialQuote}
         checkoutOpen={isCheckoutOpen()}
         paymentLabel={provider.label}
+        isPaymentTest={paymentTest}
       />
     </div>
   );

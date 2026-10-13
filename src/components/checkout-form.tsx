@@ -68,11 +68,13 @@ export function CheckoutForm({
   initialQuote,
   checkoutOpen,
   paymentLabel,
+  isPaymentTest = false,
 }: {
   items: CheckoutItem[];
   initialQuote: QuoteResponse;
   checkoutOpen: boolean;
   paymentLabel: string;
+  isPaymentTest?: boolean;
 }) {
   const [state, formAction, pending] = useActionState<CheckoutState, FormData>(
     submitCheckoutAction,
@@ -270,7 +272,7 @@ export function CheckoutForm({
         </section>
 
         <section className="card p-5 sm:p-6">
-          <h2 className="heading-section mb-1 text-lg text-ink-900">Delivery method</h2>
+          <h2 className="heading-section mb-1 text-lg text-ink-900">{isPaymentTest ? "No delivery — R20 checkout test" : "Delivery method"}</h2>
           {quoteLoading ? <p role="status" className="text-sm">Updating delivery for your destination...</p> : null}
           {quoteError ? <p role="alert" className="error-text">{quoteError}</p> : null}
           {!quoteLoading && quote.error ? <p role="status" className="mb-3 text-sm text-ink-600">{quote.error}</p> : null}
@@ -278,11 +280,7 @@ export function CheckoutForm({
           <input type="hidden" name="quotedSubtotalCents" value={quote.subtotalCents} />
           {isCollectionMethod(method) ? <div className="mb-4"><label className="label" htmlFor="pickupPoint">Locker / kiosk name, location and reference</label><input id="pickupPoint" name="pickupPoint" className="input" required maxLength={300} /><p className="error-text">{fieldError("pickupPoint")}</p></div> : null}
           <p className="mb-4 text-sm text-ink-500">
-            {DELIVERY_COURIER} delivery is paid by you, shown at checkout separately from item prices.{" "}
-            <a href="/shipping" className="font-semibold text-brand-700 hover:underline">
-              How this is calculated
-            </a>
-            .
+            {isPaymentTest ? "This is a real R20 test payment. No physical product is supplied and no courier will be booked." : <>{DELIVERY_COURIER} delivery is paid by you, shown at checkout separately from item prices.{" "}<a href="/shipping" className="font-semibold text-brand-700 hover:underline">How this is calculated</a>.</>}
           </p>
 
           <div className="space-y-2.5">
@@ -315,7 +313,7 @@ export function CheckoutForm({
                   />
                   <div className="min-w-0 flex-1">
                     <div className="flex items-center justify-between gap-3">
-                      <span className="font-semibold text-ink-900">{copy.title}</span>
+                      <span className="font-semibold text-ink-900">{isPaymentTest ? "No physical delivery" : copy.title}</span>
                       {entry.available ? (
                         <span className="shrink-0 font-bold text-ink-900 tabular-nums">
                           {formatZAR(entry.priceCents)}
@@ -325,10 +323,10 @@ export function CheckoutForm({
 
                     {entry.available ? (
                       <p className="mt-0.5 text-xs text-ink-600">
-                        {copy.description}{" "}
-                        {quote.matchedTierName
+                        {isPaymentTest ? "Owner test only; no parcel is sent." : copy.description}{" "}
+                        {!isPaymentTest && (quote.matchedTierName
                           ? `Fits the ${quote.matchedTierName} parcel size (${entry.etaMinDays}–${entry.etaMaxDays} working days).`
-                          : `${entry.etaMinDays}–${entry.etaMaxDays} working days.`}
+                          : `${entry.etaMinDays}–${entry.etaMaxDays} working days.`)}
                         {isDoorMethod(option) && entry.fuelSurchargeCents > 0
                           ? ` Includes ${formatZAR(entry.fuelSurchargeCents)} fuel surcharge.`
                           : ""}
@@ -412,7 +410,7 @@ export function CheckoutForm({
           <div className="space-y-2.5 border-t border-ink-100 p-5">
             <SummaryRow label="Items subtotal" value={formatZAR(quote.subtotalCents)} />
             <SummaryRow
-              label={`Delivery (${METHOD_COPY[method].title.toLowerCase()})`}
+              label={isPaymentTest ? "Delivery (not required)" : `Delivery (${METHOD_COPY[method].title.toLowerCase()})`}
               value={quoteLoading || isPending ? "Updating..." : quote.error || quoteError ? "Awaiting address / quote" : formatZAR(quote.shippingCents)}
             />
 
@@ -453,7 +451,7 @@ export function CheckoutForm({
             </p>
 
             <p className="text-center text-xs text-ink-500">
-              We only use your details to deliver this order. See our{" "}
+              {isPaymentTest ? "Your details are collected for the real payment and receipt. No shipment is made." : "We only use your details to deliver this order."} See our{" "}
               <a href="/privacy" className="underline hover:text-ink-700">
                 privacy policy
               </a>

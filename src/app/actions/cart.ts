@@ -6,6 +6,8 @@ import { redirect } from "next/navigation";
 import { addToCartCookie, clearCart, readCart, setCartLine, writeCart } from "@/lib/cart";
 import { addToCartSchema, updateCartLineSchema } from "@/lib/validation";
 import { getProductBySlug } from "@/lib/dal/catalog";
+import { getAdminSession } from "@/lib/auth/session";
+import { CHECKOUT_TEST_SLUG } from "@/lib/checkout-test";
 
 export interface CartActionState {
   ok: boolean;
@@ -50,6 +52,19 @@ export async function addToCartAction(
   }
 
   const cart = await readCart();
+  const isTest = slug === CHECKOUT_TEST_SLUG;
+  if (isTest) {
+    const session = await getAdminSession();
+    if (!session || session.role !== "OWNER") {
+      return { ok: false, message: "Only the store owner can run the R20 payment test." };
+    }
+    if (quantity !== 1) return { ok: false, message: "Buy one R20 payment test at a time." };
+    if (!buyNow && cart.some((line) => line.slug !== CHECKOUT_TEST_SLUG)) {
+      return { ok: false, message: "Use Buy Now for the standalone R20 test. It cannot be mixed with other products." };
+    }
+  } else if (!buyNow && cart.some((line) => line.slug === CHECKOUT_TEST_SLUG)) {
+    return { ok: false, message: "Remove the R20 checkout test from your cart before buying physical products." };
+  }
   const existing = cart.find((entry) => entry.slug === slug);
   const alreadyInCart = existing?.quantity ?? 0;
   const wanted = buyNow ? quantity : alreadyInCart + quantity;

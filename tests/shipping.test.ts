@@ -7,6 +7,7 @@ import {
   type ShippingSettings,
   type ShippingTier,
 } from "../src/lib/shipping/engine";
+import { CHECKOUT_TEST_ITEM_ID, CHECKOUT_TEST_NAME } from "../src/lib/checkout-test";
 
 const settings: ShippingSettings = {
   isActive: true,
@@ -40,6 +41,20 @@ function line(overrides: Partial<ParcelLine> = {}): ParcelLine {
 }
 
 describe("shipping engine", () => {
+  it("charges exactly R20 through the normal order total for the owner non-physical test", () => {
+    const test = line({ itemId: CHECKOUT_TEST_ITEM_ID, name: CHECKOUT_TEST_NAME, productWeightGrams: 1, packageWeightGrams: 0, packageLengthCm: 1, packageWidthCm: 1, packageHeightCm: 1 });
+    const quote = calculateShipping([test], settings, tiers, { subtotalCents: 2000 });
+    assert.equal(quote.shippingCents, 0);
+    assert.equal(quote.method, "LOCKER_TO_DOOR");
+    assert.equal(quote.error, undefined);
+    assert.equal(orderTotals(quote).totalCents, 2000);
+    // Normal products and mixed carts NEVER receive the R20 shipping exemption.
+    const normal = calculateShipping([line()], settings, tiers, { subtotalCents: 2000 });
+    assert.equal(normal.shippingCents, 10900);
+    const mixed = calculateShipping([test, line()], settings, tiers, { subtotalCents: 2000 });
+    assert.notEqual(mixed.shippingCents, 0);
+  });
+
   it("prices the acceptance example: 34x30x28cm 2.6kg helmet as size L", () => {
     const quote = calculateShipping([line()], settings, tiers, {
       subtotalCents: 79900,

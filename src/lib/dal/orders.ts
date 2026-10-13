@@ -4,6 +4,8 @@ import { productCheckoutIssues, readinessSelect } from "@/lib/product-readiness"
 import { randomBytes } from "node:crypto";
 import { prisma } from "@/lib/db";
 import { getPaymentProvider } from "@/lib/payments/registry";
+import { getAdminSession } from "@/lib/auth/session";
+import { CHECKOUT_TEST_ITEM_ID, CHECKOUT_TEST_PRICE_CENTS, CHECKOUT_TEST_SLUG } from "@/lib/checkout-test";
 import { getCourierProvider } from "@/lib/courier/registry";
 import { getShippingSettings, getActiveShippingTiers, toParcelLines } from "@/lib/dal/shipping";
 import { calculateShipping, orderTotals } from "@/lib/shipping/engine";
@@ -152,8 +154,22 @@ export async function createOrderFromCheckout(
     };
   }
 
+  // The one non-physical owner test uses the SAME normal order & payment path,
+  // but is never permitted inside an actual goods order.
+  if (lines.some(({ product }) => product.itemId === CHECKOUT_TEST_ITEM_ID)) {
+    const admin = await getAdminSession();
+    if (!admin || admin.role !== "OWNER" ||
+        lines.length !== 1 ||
+        lines[0].product.slug !== CHECKOUT_TEST_SLUG ||
+        lines[0].product.priceCents !== CHECKOUT_TEST_PRICE_CENTS ||
+        lines[0].quantity !== 1 ||
+        cartEntries.length !== 1) {
+      return { ok: false, error: "This R20 owner checkout test must be purchased alone, while signed in as store owner." };
+    }
+  }
+
   // --- Server-side money
-  const subtotalCents = lines.reduce(
+  const subtotalCents = lines.reduce;
     (sum, { product, quantity }) => sum + product.priceCents * quantity,
     0,
   );
@@ -342,17 +358,32 @@ export async function createOrderFromCheckout(
     } catch (error) {
       // Never fail the order because a payment module misbehaved; flag it loudly
       // in the audit trail instead.
-      await prisma.auditLog.create({
-        data: {
-          action: "payment.session_failed",
-          entity: "order",
-          entityId: result.id,
-          meta: {
-            provider: provider.key,
-            message: error instanceof Error ? error.message : "Unknown error",
+      try {
+        await prisma.auditLog.create({
+          data: {
+            action: "payment.session_failed",
+            entity: "order",
+            entityId: result.id,
+            meta: {
+              provider: provider.key,
+              message: error instanceof Error ? error.message : "Unknown error",
+            },
           },
-        },
-      });
+        });
+      } catch (auditError) {
+        console.error("payment: failure audit could not be written", auditError);
+      }
+      // The customer has NOT reached the provider. Do not claim the order
+      // succeeded, silently swallow the error, or keep one-off stock reserved.
+      // Their cart stays intact, so they can retry normally.
+      try {
+        await restockOrder(result.id, null);
+      } catch (rollbackError) {
+        console.error("payment: order stock rollback failed; admin must review", {
+          orderNumber: result.orderNumber, rollbackError,
+        });
+      }
+      return { ok: false, error: "We could not open secure payment. No payment was taken. Your cart is still here, please try again or contact us." };
     }
 
     return {

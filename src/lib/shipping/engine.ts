@@ -12,6 +12,8 @@
  * if no tier fits, the parcel cannot be quoted online.
  */
 
+import { isExactR20TestParcel } from "@/lib/checkout-test";
+
 import {
   SHIPPING_METHODS,
   isDoorMethod,
@@ -247,6 +249,27 @@ export function calculateShipping(
     methods: [],
     error: "Shipping is not available for this order.",
   };
+
+  // A single R20 payment-test item has no parcel to send. Keep the ordinary
+  // cart/checkout/order/Yoco paths, but DO NOT charge a courier fee or book a
+  // shipment for this explicit non-physical test. Normal items are unchanged.
+  if (isExactR20TestParcel(lines, subtotalCents)) {
+    const method: ShippingMethod = "LOCKER_TO_DOOR";
+    return {
+      parcel,
+      subtotalCents,
+      shippingCents: 0,
+      method,
+      methods: [{
+        method,
+        available: true,
+        priceCents: 0,
+        fuelSurchargeCents: 0,
+        etaMinDays: 0,
+        etaMaxDays: 0,
+      }],
+    };
+  }
 
   if (!settings.isActive) {
     return { ...emptyQuote, error: "Online shipping is temporarily unavailable." };
