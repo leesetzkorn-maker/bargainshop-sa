@@ -89,10 +89,14 @@ export function StoreHeader({
       {/* Announcement bar — sets expectations immediately */}
       <div className="bg-ink-900 text-white">
         <div className="container-page flex items-center justify-center gap-2 py-2 text-center text-xs font-medium sm:text-[13px]">
-          <span className="hidden sm:inline">
-            The Courier Guy delivery — estimated 1–3 working days depending on destination and service.
-          </span>
-          <span className="sm:hidden">The Courier Guy — estimated 1–3 working days.</span>
+          {process.env.NEXT_PUBLIC_DELIVERY_INCLUDED_IN_PRICES === "true" ? (
+            <span>FREE delivery on eligible orders — already included in the displayed item price.</span>
+          ) : (
+            <>
+              <span className="hidden sm:inline">The Courier Guy delivery — estimated 1–3 working days depending on destination and service.</span>
+              <span className="sm:hidden">The Courier Guy — estimated 1–3 working days.</span>
+            </>
+          )}
         </div>
       </div>
 
