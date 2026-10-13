@@ -7,7 +7,7 @@ import { Alert, EmptyState } from "@/components/ui";
 import { formatZAR } from "@/lib/money";
 import { copy } from "@/lib/brand";
 import { SHIPPING_METHOD_LABELS } from "@/lib/enums";
-import { DELIVERY_COURIER, DELIVERY_ESTIMATE } from "@/lib/shipping/policy";
+import { DELIVERY_COURIER, DELIVERY_ESTIMATE, DELIVERY_INCLUDED_IN_PRICES, customerDeliveryCents } from "@/lib/shipping/policy";
 
 export const metadata: Metadata = {
   title: "Your cart",
@@ -36,7 +36,7 @@ export default async function CartPage() {
   }
 
   const quote = cart.quote;
-  const shippingCents = quote?.shippingCents ?? 0;
+  const shippingCents = customerDeliveryCents(quote?.shippingCents ?? 0);
   const totalCents = cart.subtotalCents + shippingCents;
   const canShip = Boolean(quote && !quote.error);
 
@@ -98,12 +98,12 @@ export default async function CartPage() {
               <div className="border-t border-dashed border-ink-200 pt-3">
                 <SummaryRow
                   label={quote && canShip ? `Delivery (${SHIPPING_METHOD_LABELS[quote.method].toLowerCase()})` : "Delivery"}
-                  value={canShip ? formatZAR(shippingCents) : "Calculated at checkout"}
+                  value={canShip ? (DELIVERY_INCLUDED_IN_PRICES ? "FREE" : formatZAR(shippingCents)) : "Calculated at checkout"}
                 />
               </div>
 
               <p className="rounded-md bg-ink-50 px-3 py-2 text-xs text-ink-600">
-                All products ship with {DELIVERY_COURIER}. Delivery is paid by you, charged separately at checkout. {DELIVERY_ESTIMATE}
+                All products ship with {DELIVERY_COURIER}. {DELIVERY_INCLUDED_IN_PRICES ? "Delivery is included in the item prices, with no extra fee at checkout." : "Delivery is paid by you, charged separately at checkout."} {DELIVERY_ESTIMATE}
               </p>
 
               <div className="flex items-center justify-between border-t border-ink-200 pt-3">
@@ -114,7 +114,7 @@ export default async function CartPage() {
               </div>
 
               <p className="text-xs text-ink-500">
-                Delivery is charged separately from the item price.{" "}
+                {DELIVERY_INCLUDED_IN_PRICES ? "No additional delivery fee is charged." : "Delivery is charged separately from the item price."}{" "}
                 <Link href="/shipping" className="font-semibold text-brand-700 hover:underline">
                   How it is calculated
                 </Link>

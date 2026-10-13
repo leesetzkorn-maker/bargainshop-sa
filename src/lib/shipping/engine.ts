@@ -355,17 +355,14 @@ export function calculateShipping(
 }
 
 /** Total payable = items + shipping. */
-export function orderTotals(quote: ShippingQuote): {
+export function orderTotals(quote: ShippingQuote, deliveryIncludedInPrices = false): {
   subtotalCents: number;
   shippingCents: number;
   totalCents: number;
 } {
   const subtotalCents = Math.max(0, quote.subtotalCents);
-  return {
-    subtotalCents,
-    shippingCents: Math.max(0, quote.shippingCents),
-    totalCents: subtotalCents + Math.max(0, quote.shippingCents),
-  };
+  const shippingCents = deliveryIncludedInPrices ? 0 : Math.max(0, quote.shippingCents);
+  return { subtotalCents, shippingCents, totalCents: subtotalCents + shippingCents };
 }
 
 function round1(n: number): number {

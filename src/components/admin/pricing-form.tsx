@@ -31,7 +31,7 @@ export function PricingForm({ settings }: { settings: PricingSettings }) {
       </label>
       <p className="text-sm text-ink-600">
         Each band sets a profit target as a percentage of source cost. Allowances and estimated payment fees are covered first. This is markup, not gross margin. Customers never
-        see the cost or the percent. Shipping stays a separate charge.
+        see the cost or the percent. Shipping is currently a separate charge until the delivery-included rollout is explicitly enabled after reviewing live prices.
       </p>
       <div className="grid gap-4 sm:grid-cols-2">
         {([

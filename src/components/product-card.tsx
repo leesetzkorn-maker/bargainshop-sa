@@ -4,6 +4,7 @@ import { cn } from "@/lib/utils";
 import { ConditionBadge, StockBadge } from "@/components/ui";
 import { TestingBadge } from "@/components/testing-badge";
 import { formatCustomerPrice } from "@/lib/money";
+import { DELIVERY_INCLUDED_IN_PRICES } from "@/lib/shipping/policy";
 import type { CatalogProduct } from "@/lib/dal/catalog";
 
 /**
@@ -92,6 +93,9 @@ export function ProductCard({
           </Link>
         </h3>
 
+        {product.status === "ACTIVE" && DELIVERY_INCLUDED_IN_PRICES ? (
+          <p className="mt-auto text-xs font-semibold text-brand-700">FREE delivery • included in price</p>
+        ) : null}
         {product.status === "ACTIVE" ? (
           <div className="mt-auto flex justify-end">
             <StockBadge stockQty={product.stockQty} status={product.status} />
