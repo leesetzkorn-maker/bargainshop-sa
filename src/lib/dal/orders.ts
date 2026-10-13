@@ -4,6 +4,8 @@ import { productCheckoutIssues, readinessSelect } from "@/lib/product-readiness"
 import { randomBytes } from "node:crypto";
 import { prisma } from "@/lib/db";
 import { getPaymentProvider } from "@/lib/payments/registry";
+import { getAdminSession } from "@/lib/auth/session";
+import { CHECKOUT_TEST_ITEM_ID, CHECKOUT_TEST_PRICE_CENTS, CHECKOUT_TEST_SLUG } from "@/lib/checkout-test";
 import { getCourierProvider } from "@/lib/courier/registry";
 import { getShippingSettings, getActiveShippingTiers, toParcelLines } from "@/lib/dal/shipping";
 import { calculateShipping, orderTotals } from "@/lib/shipping/engine";
@@ -152,8 +154,22 @@ export async function createOrderFromCheckout(
     };
   }
 
+  // The one non-physical owner test uses the SAME normal order & payment path,
+  // but is never permitted inside an actual goods order.
+  if (lines.some(({ product }) => product.itemId === CHECKOUT_TEST_ITEM_ID)) {
+    const admin = await getAdminSession();
+    if (!admin || admin.role !== "OWNER" ||
+        lines.length !== 1 ||
+        lines[0].product.slug !== CHECKOUT_TEST_SLUG ||
+        lines[0].product.priceCents !== CHECKOUT_TEST_PRICE_CENTS ||
+        lines[0].quantity !== 1 ||
+        cartEntries.length !== 1) {
+      return { ok: false, error: "This R20 owner checkout test must be purchased alone, while signed in as store owner." };
+    }
+  }
+
   // --- Server-side money
-  const subtotalCents = lines.reduce(
+  const subtotalCents = lines.reduce;
     (sum, { product, quantity }) => sum + product.priceCents * quantity,
     0,
   );
