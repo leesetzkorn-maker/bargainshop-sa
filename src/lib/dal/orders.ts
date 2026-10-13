@@ -358,17 +358,32 @@ export async function createOrderFromCheckout(
     } catch (error) {
       // Never fail the order because a payment module misbehaved; flag it loudly
       // in the audit trail instead.
-      await prisma.auditLog.create({
-        data: {
-          action: "payment.session_failed",
-          entity: "order",
-          entityId: result.id,
-          meta: {
-            provider: provider.key,
-            message: error instanceof Error ? error.message : "Unknown error",
+      try {
+        await prisma.auditLog.create({
+          data: {
+            action: "payment.session_failed",
+            entity: "order",
+            entityId: result.id,
+            meta: {
+              provider: provider.key,
+              message: error instanceof Error ? error.message : "Unknown error",
+            },
           },
-        },
-      });
+        });
+      } catch (auditError) {
+        console.error("payment: failure audit could not be written", auditError);
+      }
+      // The customer has NOT reached the provider. Do not claim the order
+      // succeeded, silently swallow the error, or keep one-off stock reserved.
+      // Their cart stays intact, so they can retry normally.
+      try {
+        await restockOrder(result.id, null);
+      } catch (rollbackError) {
+        console.error("payment: order stock rollback failed; admin must review", {
+          orderNumber: result.orderNumber, rollbackError,
+        });
+      }
+      return { ok: false, error: "We could not open secure payment. No payment was taken. Your cart is still here, please try again or contact us." };
     }
 
     return {
