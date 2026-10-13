@@ -60,7 +60,12 @@ export async function startR20PaymentTest(_previous: R20TestState, _formData: Fo
     });
     if (!result.redirectUrl) throw new Error("Yoco did not return a checkout URL.");
     if (!isTrustedYocoCheckoutUrl(result.redirectUrl)) {
-      throw new Error("The checkout URL was not hosted by Yoco.");
+      // Show ONLY the rejected hostname to the signed-in owner for diagnosis.
+      // Never expose the full checkout URL, checkout token or payment credentials.
+      let host = "invalid URL";
+      try { host = new URL(result.redirectUrl).hostname.slice(0, 120); } catch { /* malformed URL */ }
+      console.warn("r20-payment-test: rejected checkout host", { host });
+      throw new Error(`Yoco returned an unrecognized checkout host (${host}). No payment was started.`);
     }
     redirectUrl = result.redirectUrl;
     providerRef = result.providerRef;
