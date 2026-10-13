@@ -3,6 +3,7 @@ import "server-only";
 import { cache } from "react";
 import { prisma } from "@/lib/db";
 import { PUBLICLY_REACHABLE_PRODUCT_STATUSES } from "@/lib/enums";
+import { CHECKOUT_TEST_ITEM_ID } from "@/lib/checkout-test";
 
 /**
  * CUSTOMER-FACING reads.
@@ -102,12 +103,13 @@ export function storefrontShowsPhotoDrafts(): boolean {
  */
 function customerCatalogueWhere() {
   if (!storefrontShowsPhotoDrafts()) {
-    return { status: visibleStatus, images: { some: { url: { startsWith: "/uploads/" } } } };
+    return { status: visibleStatus, itemId: { not: CHECKOUT_TEST_ITEM_ID }, images: { some: { url: { startsWith: "/uploads/" } } } };
   }
   return {
     OR: [
       {
         status: visibleStatus,
+        itemId: { not: CHECKOUT_TEST_ITEM_ID },
         images: { some: { url: { startsWith: "/uploads/" } } },
       },
       {
@@ -364,7 +366,7 @@ export async function getProductSlugsForSitemap(): Promise<
   Array<{ slug: string; updatedAt: Date; images: { url: string }[] }>
 > {
   return prisma.product.findMany({
-    where: { status: visibleStatus },
+    where: { status: visibleStatus, itemId: { not: CHECKOUT_TEST_ITEM_ID } },
     select: { slug: true, updatedAt: true, images: { select: { url: true } } },
     orderBy: { updatedAt: "desc" },
   });
