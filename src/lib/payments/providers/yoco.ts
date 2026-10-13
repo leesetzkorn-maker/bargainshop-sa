@@ -2,6 +2,7 @@ import "server-only";
 
 import { gatewayCredential } from "@/lib/env";
 import { yocoCredentialsFrom, type YocoCredentials } from "./yoco-core";
+import { isTrustedYocoCheckoutUrl } from "@/lib/payments/yoco-redirect";
 import type {
   CreatePaymentInput,
   CreatePaymentResult,
@@ -113,6 +114,10 @@ export const yocoProvider: PaymentProvider = {
 
     if (!checkout.id || !checkout.redirectUrl) {
       throw new Error("Yoco returned a checkout without an id or a redirect URL.");
+    }
+    // Apply the same safe checkout host validation to REAL customer payments.
+    if (!isTrustedYocoCheckoutUrl(checkout.redirectUrl)) {
+      throw new Error("The gateway provided an unsupported hosted checkout address.");
     }
 
     return {
