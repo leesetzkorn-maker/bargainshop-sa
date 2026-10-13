@@ -4,7 +4,7 @@
  * Creates: the admin account, the category tree, and the shipping configuration
  * the store needs before the first order arrives.
  *
- * IT DOES NOT CREATE PRODUCTS. An earlier version of this file invented 44
+ * Creates no physical/demo stock. A single owner-requested R20 non-physical\n * payment-checkout test item is an explicit exception. An earlier version of this file invented 44
  * demo listings — plausible-looking drills and appliances with descriptions
  * written from imagination, generic placeholder artwork and no connection to any
  * real item. That is exactly the thing this store must not sell: a customer
@@ -29,6 +29,18 @@
 
 import { PrismaClient } from "@prisma/client";
 import bcrypt from "bcryptjs";
+import sharp from "sharp";
+import { mkdir } from "node:fs/promises";
+import { join } from "node:path";
+import { uploadsRoot } from "../src/lib/data-paths";
+import {
+  CHECKOUT_TEST_ITEM_ID,
+  CHECKOUT_TEST_SKU,
+  CHECKOUT_TEST_SLUG,
+  CHECKOUT_TEST_NAME,
+  CHECKOUT_TEST_PRICE_CENTS,
+  CHECKOUT_TEST_IMAGE_URL,
+} from "../src/lib/checkout-test";
 import { CATEGORY_TREE } from "../src/lib/category-tree";
 
 
@@ -84,6 +96,62 @@ async function main() {
       await prisma.category.upsert({ where: { slug: child.slug }, update: {}, create: { slug: child.slug, name: child.name, parentId: category.id, sortOrder: childIndex } });
     }
   }
+  // ONE owner-requested exception to the no-demo-products policy:
+  // a clearly labeled NON-PHYSICAL R20 payment test, not a pretend bargain.
+  // The normal storefront checkout and Yoco webhook process this purchase.
+  // It stays out of public browse/search/sitemap; owner opens the direct link.
+  const testCategory = await prisma.category.findUnique({
+    where: { slug: "other-bargains" }, select: { id: true },
+  });
+  if (!testCategory) throw new Error("Required category for the payment test does not exist.");
+
+  const testPicturePath = join(uploadsRoot(), "products", "r20-checkout-test.png");
+  await mkdir(join(uploadsRoot(), "products"), { recursive: true });
+  const testSvg = `<svg xmlns="http://www.w3.org/2000/svg" width="800" height="800" viewBox="0 0 800 800">
+    <rect width="800" height="800" fill="#122e29"/>
+    <rect x="32" y="32" width="736" height="736" rx="50" fill="#f7f7f0"/>
+    <text x="400" y="265" font-family="Arial,sans-serif" font-size="76" font-weight="bold" text-anchor="middle" fill="#122e29">R20</text>
+    <text x="400" y="345" font-family="Arial,sans-serif" font-size="46" font-weight="bold" text-anchor="middle" fill="#122e29">PAYMENT TEST</text>
+    <line x1="120" y1="390" x2="680" y2="390" stroke="#122e29" stroke-width="4"/>
+    <text x="400" y="470" font-family="Arial,sans-serif" font-size="30" text-anchor="middle" fill="#333">Real checkout and payment</text>
+    <text x="400" y="525" font-family="Arial,sans-serif" font-size="30" text-anchor="middle" fill="#333">No physical goods shipped</text>
+    <text x="400" y="670" font-family="Arial,sans-serif" font-size="32" font-weight="bold" text-anchor="middle" fill="#122e29">2DE BARGAINS</text>
+  </svg>`;
+  await sharp(Buffer.from(testSvg)).png().toFile(testPicturePath);
+  if (!(await prisma.product.findUnique({ where: { sku: CHECKOUT_TEST_SKU }, select: { id: true } }))) {
+    await prisma.product.create({
+      data: {
+        itemId: CHECKOUT_TEST_ITEM_ID,
+        sku: CHECKOUT_TEST_SKU,
+        slug: CHECKOUT_TEST_SLUG,
+        name: CHECKOUT_TEST_NAME,
+        description: "OWNER CHECKOUT TEST ONLY. This is a REAL R20 card payment using the same shopping cart, checkout, Yoco gateway and payment confirmation as regular products. No physical goods, delivery, or shipment are included. Only purchase if you own the store and intend to test the payments.",
+        categoryId: testCategory.id,
+        condition: "GOOD",
+        conditionNote: "Not a physical second-hand item. Gateway testing only.",
+        itemReviewConfirmed: true,
+        sourceCostCents: 0,
+        testingStatus: "NOT_TESTED",
+        priceCents: CHECKOUT_TEST_PRICE_CENTS,
+        priceManualOverride: true,
+        productWeightGrams: 1,
+        packageWeightGrams: 0,
+        packageLengthCm: 1,
+        packageWidthCm: 1,
+        packageHeightCm: 1,
+        measurementSource: "ESTIMATED",
+        lockerAllowed: false,
+        courierAllowed: false,
+        stockQty: 10,
+        status: "ACTIVE",
+        isFeatured: false,
+        adminNotes: "Owner R20 full-checkout smoke test. Real money; no goods, courier, or physical fulfilment. Do not dispatch.",
+        images: { create: { url: CHECKOUT_TEST_IMAGE_URL, alt: "R20 owner payment checkout test — no goods supplied", sortOrder: 0 } },
+      },
+    });
+    console.log("Owner R20 checkout test item created; no real stock was invented.");
+  }
+
   const email = process.env.ADMIN_EMAIL?.trim().toLowerCase();
   const password = process.env.ADMIN_PASSWORD;
   const ownerExists = await prisma.user.findFirst({ where: { role: "OWNER" }, select: { id: true } });
@@ -91,7 +159,7 @@ async function main() {
     if (!password || password.length < 12 || /CHANGEME/i.test(password)) throw new Error("Set a unique ADMIN_PASSWORD of at least 12 characters before seeding the admin.");
     await prisma.user.create({ data: { email, name: process.env.ADMIN_NAME || "Store Owner", passwordHash: await bcrypt.hash(password, 12), role: "OWNER" } });
   }
-  console.log("Categories and settings ready; no products invented.");
+  console.log("Categories and settings ready; no physical demo products invented.");
 }
 
 main().catch((error) => { console.error(error); process.exitCode = 1; }).finally(() => prisma.$disconnect());
