@@ -12,7 +12,7 @@ export function isTrustedYocoCheckoutUrl(value: string): boolean {
       !url.username &&
       !url.password &&
       !url.port &&
-      (host === "pay.yoco.com" || host === "checkout.yoco.com");
+      host.endsWith(".yoco.com");
   } catch {
     return false;
   }
