@@ -12,6 +12,7 @@ import { ConditionBadge, SectionHeading } from "@/components/ui";
 import { TestingBadge } from "@/components/testing-badge";
 import { ProductCard } from "@/components/product-card";
 import { formatCustomerPrice, formatZAR, formatWeight, formatDimensions } from "@/lib/money";
+import { DELIVERY_INCLUDED_IN_PRICES } from "@/lib/shipping/policy";
 import { excerpt, cn } from "@/lib/utils";
 import { brand, absoluteUrl, hasWhatsapp, whatsappLink } from "@/lib/brand";
 import {
@@ -206,7 +207,7 @@ export default async function ProductPage({ params }: PageProps<"/product/[slug]
             {priceLabel ?? "Price to be confirmed"}
           </p>
           <p className="mt-1 text-xs text-ink-500">
-            Delivery is calculated separately and shown before you pay.
+            {DELIVERY_INCLUDED_IN_PRICES ? "FREE delivery on eligible orders — included in the displayed price." : "Delivery is calculated separately and shown before you pay."}
           </p>
 
           {product.brand || product.model ? <p className="mt-3 text-sm text-ink-600">{[product.brand, product.model].filter(Boolean).join(" / ")}</p> : null}
@@ -264,7 +265,7 @@ export default async function ProductPage({ params }: PageProps<"/product/[slug]
                     </p>
                   </div>
                   <span className="shrink-0 font-semibold text-ink-900 tabular-nums">
-                    {formatZAR(entry.priceCents)}
+                    {DELIVERY_INCLUDED_IN_PRICES ? "FREE" : formatZAR(entry.priceCents)}
                   </span>
                 </div>
               ))}
