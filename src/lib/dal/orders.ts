@@ -7,6 +7,7 @@ import { getPaymentProvider } from "@/lib/payments/registry";
 import { getCourierProvider } from "@/lib/courier/registry";
 import { getShippingSettings, getActiveShippingTiers, toParcelLines } from "@/lib/dal/shipping";
 import { calculateShipping, orderTotals } from "@/lib/shipping/engine";
+import { DELIVERY_INCLUDED_IN_PRICES, customerDeliveryCents } from "@/lib/shipping/policy";
 import type { CheckoutInput } from "@/lib/validation";
 import { ORDER_PREFIX, isCollectionMethod, type OrderStatus, type ShippingMethod } from "@/lib/enums";
 import { FULFILLMENT_TO_ORDER_STATUS, PAID_PAYMENT_STATUSES } from "@/lib/enums";
@@ -168,12 +169,12 @@ export async function createOrderFromCheckout(
     return { ok: false, error: quote.error, unavailable };
   }
   if (quote.method !== preferredMethod ||
-      (input.quotedShippingCents != null && input.quotedShippingCents !== quote.shippingCents) ||
+      (input.quotedShippingCents != null && input.quotedShippingCents !== customerDeliveryCents(quote.shippingCents)) ||
       (input.quotedSubtotalCents != null && input.quotedSubtotalCents !== subtotalCents)) {
     return { ok: false, error: "Your delivery option or price changed. Refresh checkout and review the new total before placing your order." };
   }
 
-  const totals = orderTotals(quote);
+  const totals = orderTotals(quote, DELIVERY_INCLUDED_IN_PRICES);
   const chosenMethod = quote.method;
 
   // --- Transaction: reserve stock, create customer, order, items, payment, shipment.
