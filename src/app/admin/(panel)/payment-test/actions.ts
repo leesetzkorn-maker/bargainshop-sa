@@ -59,8 +59,7 @@ export async function startR20PaymentTest(_previous: R20TestState, _formData: Fo
       notifyUrl: new URL("/api/payments/yoco/notify", brand.url).toString(),
     });
     if (!result.redirectUrl) throw new Error("Yoco did not return a checkout URL.");
-    const target = new URL(result.redirectUrl);
-    if (target.protocol !== "https:" || !["pay.yoco.com", "checkout.yoco.com"].includes(target.hostname)) {
+    if (!isTrustedYocoCheckoutUrl(result.redirectUrl)) {
       throw new Error("The checkout URL was not hosted by Yoco.");
     }
     redirectUrl = result.redirectUrl;
