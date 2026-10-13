@@ -15,6 +15,7 @@ const LINKS: Array<{ href: string; label: string; exact?: boolean }> = [
   { href: "/admin/customers", label: "Customers" },
   { href: "/admin/pricing", label: "Pricing" },
   { href: "/admin/shipping", label: "Shipping" },
+  { href: "/admin/payment-test", label: "R20 Test" },
 ];
 
 export function AdminNav() {
