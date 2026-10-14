@@ -20,6 +20,45 @@ function run(args) {
   });
 }
 
+
+// Make one consistent, daily recovery copy of the *existing* SQLite database
+// before migrations or seed activity. SQLite VACUUM INTO includes WAL changes;
+// copying the live .db file directly would not be safe.
+async function makeRecoveryBackup(db, database) {
+  const folder = path.join(path.dirname(database), 'backups');
+  fs.mkdirSync(folder, { recursive: true });
+  const destination = path.join(folder, `recovery-${new Date().toISOString().slice(0, 10)}.db`);
+  const headerIsValid = file => {
+    if (!fs.existsSync(file) || fs.statSync(file).size < 4096) return false;
+    const fd = fs.openSync(file, 'r');
+    try {
+      const header = Buffer.alloc(16);
+      return fs.readSync(fd, header, 0, 16, 0) === 16 &&
+        header.equals(Buffer.from('SQLite format 3' + String.fromCharCode(0)));
+    } finally { fs.closeSync(fd); }
+  };
+  if (fs.existsSync(destination)) {
+    if (!headerIsValid(destination)) throw new Error('Existing recovery backup failed header/size verification; refusing to overwrite it.');
+    console.log(`Recovery SQLite backup already present and readable: ${destination}`);
+    return;
+  }
+  const space = fs.statfsSync(folder);
+  const available = Number(space.bavail) * Number(space.bsize);
+  if (available < fs.statSync(database).size * 2 + 8 * 1024 * 1024) {
+    throw new Error('Insufficient free persistent storage for a safe SQLite recovery backup.');
+  }
+  const temporary = path.join(folder, `.recovery-${Date.now()}-${process.pid}.tmp`);
+  try {
+    await db.$executeRawUnsafe(`VACUUM INTO '${temporary.replaceAll("'", "''")}'`);
+    if (!headerIsValid(temporary)) throw new Error('New recovery SQLite backup failed header/size verification.');
+    fs.renameSync(temporary, destination);
+    console.log(`Recovery SQLite backup created and verified: ${destination} (${fs.statSync(destination).size} bytes)`);
+  } catch (error) {
+    try { if (fs.existsSync(temporary)) fs.unlinkSync(temporary); } catch {}
+    throw error;
+  }
+}
+
 async function main() {
   process.env.NODE_ENV = 'production';
   loadEnvConfig(process.cwd());
@@ -43,6 +82,10 @@ async function main() {
   try {
     const integrity = await db.$queryRawUnsafe('PRAGMA quick_check');
     if (integrity.some(row => Object.values(row)[0] !== 'ok')) throw new Error('SQLite integrity check failed; restore from backup, do not reset.');
+    // Do not put the store at risk if the snapshot fails: report it, then
+    // keep existing startup safeguards and the migration-specific backup.
+    try { await makeRecoveryBackup(db, database); }
+    catch (error) { console.error('RECOVERY BACKUP FAILED: ' + error.message); }
     let applied;
     try {
       applied = await db.$queryRawUnsafe('SELECT migration_name, finished_at, rolled_back_at FROM _prisma_migrations');
