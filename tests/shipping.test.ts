@@ -48,11 +48,13 @@ describe("shipping engine", () => {
     assert.equal(quote.method, "LOCKER_TO_DOOR");
     assert.equal(quote.error, undefined);
     assert.equal(orderTotals(quote).totalCents, 2000);
-    // Normal products and mixed carts NEVER receive the R20 shipping exemption.
+    // Normal products and mixed carts now have R0 extra delivery, but still incur actual courier costs.
     const normal = calculateShipping([line()], settings, tiers, { subtotalCents: 2000 });
-    assert.equal(normal.shippingCents, 10900);
+    assert.equal(normal.shippingCents, 0);
+    assert.equal(normal.courierCostCents, 10900);
     const mixed = calculateShipping([test, line()], settings, tiers, { subtotalCents: 2000 });
-    assert.notEqual(mixed.shippingCents, 0);
+    assert.equal(mixed.shippingCents, 0);
+    assert.ok((mixed.courierCostCents ?? 0) > 0);
   });
 
   it("prices the acceptance example: 34x30x28cm 2.6kg helmet as size L", () => {
@@ -63,8 +65,10 @@ describe("shipping engine", () => {
     assert.equal(quote.error, undefined);
     assert.equal(quote.matchedTierCode, "L");
     assert.equal(quote.method, "LOCKER_TO_LOCKER");
-    assert.equal(quote.shippingCents, 10900);
-    assert.equal(orderTotals(quote).totalCents, 79900 + 10900);
+    assert.equal(quote.shippingCents, 0);
+    assert.equal(quote.courierCostCents, 10900);
+    assert.equal(quote.methods.find((m) => m.method === "LOCKER_TO_LOCKER")?.priceCents, 0);
+    assert.equal(orderTotals(quote).totalCents, 79900);
   });
 
   it("allows rotation into the smallest fitting box", () => {
@@ -77,9 +81,11 @@ describe("shipping engine", () => {
   it("prices each service from the matched tier", () => {
     const base = calculateShipping([line()], { ...settings, doorFuelSurchargePercent: 12 }, tiers, { subtotalCents: 1000, preferredMethod: "LOCKER_TO_DOOR" });
     assert.equal(base.matchedTierCode, "L");
-    assert.equal(base.shippingCents, 19712); // 17600 + 12%
+    assert.equal(base.shippingCents, 0);
+    assert.equal(base.courierCostCents, 19712); // R176 + 12% paid by store
     const kiosk = calculateShipping([line()], { ...settings, doorFuelSurchargePercent: 12 }, tiers, { subtotalCents: 1000, preferredMethod: "LOCKER_TO_KIOSK" });
-    assert.equal(kiosk.shippingCents, 12900);
+    assert.equal(kiosk.shippingCents, 0);
+    assert.equal(kiosk.courierCostCents, 12900);
   });
 
   it("treats the whole cart as one parcel", () => {
@@ -99,7 +105,8 @@ describe("shipping engine", () => {
     // A stale selection falls back to an available collection method.
     const fallback = calculateShipping([line()], settings, tiers, { subtotalCents: 1000, preferredMethod: "LOCKER_TO_DOOR" });
     assert.equal(fallback.method, "LOCKER_TO_LOCKER");
-    assert.equal(fallback.shippingCents, 10900);
+    assert.equal(fallback.shippingCents, 0);
+    assert.equal(fallback.courierCostCents, 10900);
   });
 
   it("refuses the entire parcel when one line has missing dimensions", () => {
