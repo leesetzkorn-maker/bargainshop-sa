@@ -77,6 +77,13 @@ function yocoIgnore(reason: string, eventId?: string): NextResponse {
  * server-side, never from anything the browser sent.
  */
 async function yocoNotify(request: Request): Promise<NextResponse> {
+  // Yoco still retries a retired subscription pointing to our former Railway
+  // hostname. Acknowledge only THAT hostname without processing any payment.
+  // The live bargainshop.co.za webhook continues to require a valid signature.
+  const requestedHost = (request.headers.get("host") ?? "").toLowerCase().split(":")[0];
+  if (requestedHost === "bargainshop-sa-production.up.railway.app") {
+    return NextResponse.json({ received: true, settled: false, reason: "retired_hostname" }, { status: 200 });
+  }
   const creds = yocoCredentials();
   if (!creds) return yocoReject(401, "provider_not_configured");
 
