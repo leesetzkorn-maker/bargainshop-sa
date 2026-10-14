@@ -3,6 +3,8 @@ import type { NextConfig } from "next";
 const nextConfig: NextConfig = {
   reactStrictMode: true,
   poweredByHeader: false,
+  // Bound the in-memory Next server cache on Railway (default is 50 MB).
+  cacheMaxMemorySize: 16 * 1024 * 1024,
   experimental: { serverActions: { bodySizeLimit: "100mb" } },
 
   serverExternalPackages: ["@prisma/client", "bcryptjs"],
