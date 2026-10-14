@@ -164,6 +164,13 @@ export async function getDashboardStats(): Promise<DashboardStats> {
     }
   }
 
+  // Include courier costs paid by the store, captured with paid orders.
+  const paidQuotes = await prisma.order.findMany({
+    where: { ...paidFilter, placedAt: { gte: thirtyDaysAgo } },
+    select: { shippingQuote: true },
+  });
+  for (const row of paidQuotes) costCents += privateCourierCostCents(row.shippingQuote);
+
   const revenueCents = paidAgg._sum.totalCents ?? 0;
   const profitCents = revenueCents - costCents;
 
@@ -465,9 +472,17 @@ function paymentRecordStatusFor(orderPaymentStatus: string): string | null {
   }
 }
 
-/** Per-order profit, derived from the cost snapshot on each line. */
+/** Private estimated courier expense recorded when the order was placed. */
+function privateCourierCostCents(shippingQuote: unknown): number {
+  if (!shippingQuote || typeof shippingQuote !== "object" || Array.isArray(shippingQuote)) return 0;
+  const cost = (shippingQuote as { courierCostCents?: unknown }).courierCostCents;
+  return typeof cost === "number" && Number.isSafeInteger(cost) && cost >= 0 ? cost : 0;
+}
+
+/** Estimated order profit after source and courier expenses (before other costs). */
 export function orderProfitCents(
   items: Array<{ quantity: number; unitSourceCostCents: number | null; lineTotalCents: number }>,
+  shippingQuote?: unknown,
 ): { revenueCents: number; costCents: number; profitCents: number } | null {
   const anyCost = items.some((i) => i.unitSourceCostCents != null);
   if (!anyCost) return null;
@@ -478,6 +493,7 @@ export function orderProfitCents(
     if (item.unitSourceCostCents != null) costCents += item.unitSourceCostCents * item.quantity;
     revenueCents += item.lineTotalCents;
   }
+  costCents += privateCourierCostCents(shippingQuote);
   return { revenueCents, costCents, profitCents: revenueCents - costCents };
 }
 
