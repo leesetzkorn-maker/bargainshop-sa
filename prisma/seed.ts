@@ -159,26 +159,6 @@ async function main() {
     if (!password || password.length < 12 || /CHANGEME/i.test(password)) throw new Error("Set a unique ADMIN_PASSWORD of at least 12 characters before seeding the admin.");
     await prisma.user.create({ data: { email, name: process.env.ADMIN_NAME || "Store Owner", passwordHash: await bcrypt.hash(password, 12), role: "OWNER" } });
   }
-  // One-off owner-requested inventory status change, 14 October 2026.
-  // Identify the exact photographed Ryobi drill by its unique item number and
-  // the price/name shown on the public product page; do not touch other stock.
-  const soldRyobi = await prisma.product.findUnique({
-    where: { itemId: "2DS-0097" },
-    select: { id: true, name: true, priceCents: true, status: true, stockQty: true },
-  });
-  if (!soldRyobi || soldRyobi.priceCents !== 146800 ||
-      !soldRyobi.name.toLowerCase().includes("ryobi 18v cordless impact drill")) {
-    console.warn("Sold-item request 2DS-0097: no exact item/name/price match; inventory unchanged.");
-  } else if (soldRyobi.status === "SOLD_OUT" && soldRyobi.stockQty === 0) {
-    console.log("Sold-item request 2DS-0097: already SOLD_OUT with zero stock.");
-  } else {
-    await prisma.product.update({
-      where: { id: soldRyobi.id },
-      data: { status: "SOLD_OUT", stockQty: 0, soldAt: new Date() },
-    });
-    console.log("Sold-item request 2DS-0097: marked SOLD_OUT, stock zero; other items unchanged.");
-  }
-
   console.log("Categories and settings ready; no physical demo products invented.");
 }
 
