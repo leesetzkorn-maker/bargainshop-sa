@@ -269,6 +269,7 @@ export async function createOrderFromCheckout(
             parcel: { ...quote.parcel },
             method: quote.method,
             shippingCents: quote.shippingCents,
+            courierCostCents: quote.courierCostCents ?? 0,
             matchedTierCode: quote.matchedTierCode ?? null,
             matchedTierName: quote.matchedTierName ?? null,
             calculatedAt: new Date().toISOString(),
