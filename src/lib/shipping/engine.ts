@@ -81,9 +81,11 @@ export interface ShippingTier {
 export interface MethodQuote {
   method: ShippingMethod;
   available: boolean;
-  /** Base tariff plus any fuel surcharge. */
+  /** Customer-facing delivery charge (included in the product price). */
   priceCents: number;
-  /** The fuel portion already included in priceCents (to-door only). */
+  /** Actual Courier Guy tariff including fuel, for internal cost accounting only. */
+  courierCostCents?: number;
+  /** Customer-facing fuel charge; never added at checkout. */
   fuelSurchargeCents: number;
   /** Why this method is unavailable, shown to the customer in plain language. */
   unavailableReason?: string;
@@ -96,8 +98,10 @@ export interface MethodQuote {
 export interface ShippingQuote {
   parcel: Parcel;
   subtotalCents: number;
-  /** The service price for the selected method. Customer always pays it. */
+  /** No additional customer delivery fee for available methods. */
   shippingCents: number;
+  /** Internal courier expense (not added to the customer's total). */
+  courierCostCents?: number;
   /** The method selected for checkout. */
   method: ShippingMethod;
   matchedTierCode?: string;
@@ -252,7 +256,7 @@ export function calculateShipping(
 
   // A single R20 payment-test item has no parcel to send. Keep the ordinary
   // cart/checkout/order/Yoco paths, but DO NOT charge a courier fee or book a
-  // shipment for this explicit non-physical test. Normal items are unchanged.
+  // shipment for this explicit non-physical test. Physical items still have internal courier costs.
   if (isExactR20TestParcel(lines, subtotalCents)) {
     const method: ShippingMethod = "LOCKER_TO_DOOR";
     return {
@@ -347,8 +351,9 @@ export function calculateShipping(
     return {
       ...quote,
       available: true,
-      priceCents: base + fuel,
-      fuelSurchargeCents: fuel,
+      priceCents: 0,
+      courierCostCents: base + fuel,
+      fuelSurchargeCents: 0,
     };
   });
 
@@ -369,7 +374,8 @@ export function calculateShipping(
   return {
     parcel,
     subtotalCents,
-    shippingCents: chosen.priceCents,
+    shippingCents: 0,
+    courierCostCents: chosen.courierCostCents ?? 0,
     method: chosen.method,
     matchedTierCode: chosen.matchedTierCode,
     matchedTierName: chosen.matchedTierName,
@@ -377,7 +383,7 @@ export function calculateShipping(
   };
 }
 
-/** Total payable = items + shipping. */
+/** Total payable = listed item prices, with no extra customer delivery fee. */
 export function orderTotals(quote: ShippingQuote): {
   subtotalCents: number;
   shippingCents: number;
