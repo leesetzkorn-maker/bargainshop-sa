@@ -280,7 +280,7 @@ export function CheckoutForm({
           <input type="hidden" name="quotedSubtotalCents" value={quote.subtotalCents} />
           {isCollectionMethod(method) ? <div className="mb-4"><label className="label" htmlFor="pickupPoint">Locker / kiosk name, location and reference</label><input id="pickupPoint" name="pickupPoint" className="input" required maxLength={300} /><p className="error-text">{fieldError("pickupPoint")}</p></div> : null}
           <p className="mb-4 text-sm text-ink-500">
-            {isPaymentTest ? "This is a real R20 test payment. No physical product is supplied and no courier will be booked." : <>{DELIVERY_COURIER} delivery is paid by you, shown at checkout separately from item prices.{" "}<a href="/shipping" className="font-semibold text-brand-700 hover:underline">How this is calculated</a>.</>}
+            {isPaymentTest ? "This is a real R20 test payment. No physical product is supplied and no courier will be booked." : <>{DELIVERY_COURIER} delivery is included in the listed product price for available delivery methods. No extra delivery fee is added at checkout.{" "}<a href="/shipping" className="font-semibold text-brand-700 hover:underline">How delivery works</a>.</>}
           </p>
 
           <div className="space-y-2.5">
