@@ -66,7 +66,7 @@ export default async function AdminOrderPage({
   const closed = ORDER_STATUSES_CLOSED.includes(order.status as never);
   const paid = order.paymentStatus === "PAID";
   const actions = nextActions(order.status, paid);
-  const profit = orderProfitCents(order.items);
+  const profit = orderProfitCents(order.items, order.shippingQuote);
   const shipment = order.shipments[0];
   const address = [
     order.deliveryLine1,
