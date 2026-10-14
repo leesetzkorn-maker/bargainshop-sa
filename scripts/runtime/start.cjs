@@ -59,6 +59,40 @@ async function makeRecoveryBackup(db, database) {
   }
 }
 
+
+/**
+ * Keep recovery copies current even when there are no new deployments.
+ * The first copy is taken synchronously at startup; repeat every six hours
+ * so a running service makes one verified copy for each UTC calendar day.
+ * The snapshots remain on /data and are NOT a substitute for an external
+ * full-volume backup of photos, uploads and the database.
+ */
+function scheduleRecoveryBackups(database) {
+  if (!onRailway(process.env)) return;
+  const { PrismaClient } = require('@prisma/client');
+  let running = false;
+  const timer = setInterval(() => {
+    if (running) return;
+    running = true;
+    void (async () => {
+      const client = new PrismaClient();
+      try {
+        const integrity = await client.$queryRawUnsafe('PRAGMA quick_check');
+        if (integrity.some(row => Object.values(row)[0] !== 'ok')) {
+          throw new Error('Live SQLite integrity check failed; backup skipped.');
+        }
+        await makeRecoveryBackup(client, database);
+      } catch (error) {
+        console.error('PERIODIC RECOVERY BACKUP FAILED: ' + (error?.message || String(error)));
+      } finally {
+        await client.$disconnect().catch(error => console.error('Backup client disconnect failed: ' + error.message));
+        running = false;
+      }
+    })();
+  }, 6 * 60 * 60 * 1000);
+  timer.unref();
+}
+
 async function main() {
   process.env.NODE_ENV = 'production';
   loadEnvConfig(process.cwd());
@@ -108,6 +142,7 @@ async function main() {
   await run([require.resolve('prisma/build/index.js'), 'migrate', 'deploy']);
   await run([require.resolve('tsx/cli'), 'prisma/seed.ts']);
   console.log(`Persistent SQLite ready: ${database}`);
+  scheduleRecoveryBackups(database);
   // Run safe, non-blocking cleanup of the obsolete Yoco subscription. Payment
   // startup never depends on Yoco's management API being available.
   void require('./retire-legacy-yoco-webhook.cjs').retireLegacyYocoWebhook()
