@@ -107,7 +107,7 @@ export function mailFrom(): string {
 
 /** Where new-order alerts go. Defaults to the public contact address. */
 export function ownerNotificationEmail(): string | undefined {
-  return optional("OWNER_NOTIFICATION_EMAIL") || optional("NEXT_PUBLIC_CONTACT_EMAIL");
+  return optional("OWNER_NOTIFICATION_EMAIL") || optional("NEXT_PUBLIC_CONTACT_EMAIL") || optional("ADMIN_EMAIL");
 }
 
 // ---------------------------------------------------------------------------

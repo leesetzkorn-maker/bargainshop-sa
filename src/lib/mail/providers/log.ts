@@ -15,20 +15,11 @@ export const logProvider: MailProvider = {
   isConfigured: false,
 
   async send(message: MailMessage): Promise<MailSendResult> {
-    // Keep the log readable: subject, recipient and the body only.
-    const preview = [
-      "",
-      "─".repeat(72),
-      `MAIL NOT SENT — no email provider configured (MAIL_PROVIDER=log)`,
-      `To:      ${message.to}`,
-      `Subject: ${message.subject}`,
-      "─".repeat(72),
-      message.text,
-      "─".repeat(72),
-      "",
-    ].join("\n");
+    // Production logs may be accessible to support staff and log processors.
+    // Never print email bodies, names, addresses or signed order-access URLs.
+    // The database EmailLog records the actual non-delivery outcome.
+    console.warn("MAIL NOT SENT: no outbound mail provider configured. Check the private admin EmailLog.");
 
-    console.info(preview);
     return {
       status: "SKIPPED_NOT_CONFIGURED",
       error: "No email provider is configured. Set MAIL_PROVIDER and its credentials.",
