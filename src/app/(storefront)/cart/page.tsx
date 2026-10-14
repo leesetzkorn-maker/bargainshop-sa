@@ -105,7 +105,7 @@ export default async function CartPage() {
               </div>
 
               <p className="rounded-md bg-ink-50 px-3 py-2 text-xs text-ink-600">
-                {paymentTest ? "R20 owner payment test — no physical product is supplied and no shipping is charged." : <>All products ship with {DELIVERY_COURIER}. Delivery is paid by you, charged separately at checkout. {DELIVERY_ESTIMATE}</>}
+                {paymentTest ? "R20 owner payment test — no physical product is supplied and no shipping is charged." : <>All products ship with {DELIVERY_COURIER}. Delivery is included in listed product prices for available delivery methods. {DELIVERY_ESTIMATE}</>}
               </p>
 
               <div className="flex items-center justify-between border-t border-ink-200 pt-3">
@@ -116,7 +116,7 @@ export default async function CartPage() {
               </div>
 
               <p className="text-xs text-ink-500">
-                {paymentTest ? "No shipping on the non-physical R20 checkout test." : "Delivery is charged separately from the item price."}{" "}
+                {paymentTest ? "No shipping on the non-physical R20 checkout test." : "No additional delivery fee is charged for available delivery methods."}{" "}
                 <Link href="/shipping" className="font-semibold text-brand-700 hover:underline">
                   How it is calculated
                 </Link>
