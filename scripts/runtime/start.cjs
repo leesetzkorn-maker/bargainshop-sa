@@ -65,6 +65,10 @@ async function main() {
   await run([require.resolve('prisma/build/index.js'), 'migrate', 'deploy']);
   await run([require.resolve('tsx/cli'), 'prisma/seed.ts']);
   console.log(`Persistent SQLite ready: ${database}`);
+  // Run safe, non-blocking cleanup of the obsolete Yoco subscription. Payment
+  // startup never depends on Yoco's management API being available.
+  void require('./retire-legacy-yoco-webhook.cjs').retireLegacyYocoWebhook()
+    .catch(error => console.warn('Yoco webhook cleanup skipped: ' + error.message));
   await run([require.resolve('next/dist/bin/next'), 'start', '--hostname', '0.0.0.0', '--port', process.env.PORT || '3000']);
 }
 
