@@ -34,7 +34,7 @@ async function makeRecoveryBackup(db, database) {
     try {
       const header = Buffer.alloc(16);
       return fs.readSync(fd, header, 0, 16, 0) === 16 &&
-        header.equals(Buffer.from('SQLite format 3\\0'));
+        header.equals(Buffer.from('SQLite format 3' + String.fromCharCode(0)));
     } finally { fs.closeSync(fd); }
   };
   if (fs.existsSync(destination)) {
