@@ -13,7 +13,9 @@ const nextConfig: NextConfig = {
     // Product images are self-hosted by default (uploads land in /public/uploads).
     // Add remotePatterns here when you move media to a CDN / object storage.
     remotePatterns: [],
-    formats: ["image/avif", "image/webp"],
+    // AVIF conversion can allocate large native memory under simultaneous image requests.
+    // WebP serves the exact same uploaded images without changing the originals or layout.
+    formats: ["image/webp"],
     // Next 16 restricts the default allow-list to [75]; opt the common set back in.
     qualities: [50, 75, 100],
     deviceSizes: [360, 480, 640, 750, 828, 1080, 1200, 1920],
